@@ -1,0 +1,60 @@
+#wrapper{
+    padding: 20px 80px;
+}
+
+#navbar {
+    background-color : white;
+    height: 80px;
+    align-items:center;
+    margin-top:50px;
+    padding: 0 50px;
+}
+
+#navbar_content_wrapper{
+    display:flex;
+    justify-content:space-between;
+}
+
+#navbar_content_wrapper #navbar_content_left{
+    display:flex;
+}
+
+#navbar_content_wrapper #navbar_content_right{
+    margin:auto 0;
+    display:flex;   
+    vertical-align:middle;
+}
+#navbar_content_left #main_logo_text{
+    font-size: 50px;
+    color:#3ab54a;
+    font-family: "Jalnan";
+}
+#navbar_content_wrapper .navbar_a_text{
+    color: #666666;
+    font-size: 28px;
+    text-decoration: none;
+    font-weight:900;
+}
+#navbar .vertical_line{
+    border-left: 2px solid #666666;
+    margin: auto 60px;
+    height: 30px;
+    border-radius: 10%;
+}
+
+#slide_wrapper{
+    padding: 40px;
+}
+
+#slide_wrapper .slide{
+    display:flex;
+    justify-content: center;
+    width: 1300px;
+    border-radius: 50px;
+}
+
+#slide_wrapper .slide_img{
+    margin: 0 auto;
+    width: 1300px;
+    border-radius: 50px;
+}
