@@ -87,7 +87,7 @@ const Signup = () => {
             <label className="input_label">비밀번호 확인</label>
             <input
               className="text_input"
-              type="password_confirm"
+              type="password"
               value={password_confirm}
               onChange={onChangePasswordConfirm}
               placeholder="PASSWORD CONFIRM"
@@ -106,7 +106,29 @@ const Signup = () => {
             ></input>
           </div>
           <div id="submit_container">
-            <button id="submit_button" type="submit">
+            <button
+              id="submit_button"
+              type="submit"
+              onClick={() => {
+                const userData = {
+                  id: id,
+                  password: password,
+                  email: email,
+                  name: name,
+                };
+                fetch("/signup", {
+                  method: "post",
+                  headers: {
+                    "content-type": "application/json",
+                  },
+                  body: JSON.stringify(userData),
+                })
+                  .then((res) => res.json)
+                  .then((json) => {
+                    //handle results.
+                  });
+              }}
+            >
               완료 ➤
             </button>
           </div>
