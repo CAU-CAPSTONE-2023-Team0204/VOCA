@@ -43,7 +43,7 @@ def plt_imshow(title='image', img=None, figsize=(8 ,5)):
         plt.show()
 
 # 로컬 이미지 파일의 경로
-image_path = 'dataset/box2.png'
+image_path = 'test.png'
 
 # 이미지 파일을 읽어옵니다.
 org_image = cv2.imread(image_path,cv2.IMREAD_COLOR) 
