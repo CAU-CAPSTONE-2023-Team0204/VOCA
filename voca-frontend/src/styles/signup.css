@@ -1,0 +1,76 @@
+#wrapper{
+    margin: 0 auto;
+    display:flex;
+    justify-content: center;
+}
+#inner_wrapper{
+    width: 800px;
+    height: auto;
+    padding: 72px 10px;
+    align-items: center;
+}
+.title{
+    display:flex;
+    margin: 12px auto 50px auto;
+    width: auto;
+    font-size:52px;
+    color:#3ab54a;
+    font-family:"Jalnan";
+}
+.description{
+    margin: 0 auto;
+    color: #666666;
+    font-size:28px;
+    margin: 10px 0;
+}
+
+.input_container{
+    margin: 75px 0;
+    height: 60px;
+    display:flex;
+}
+
+.input_container  .input_label{
+    border-top: solid 5px;
+    border-color:#3ab54a;
+    border-radius: 1px;
+    padding: 10px 0;
+    flex-basis: 25%;
+    color:#3ab54a;
+    font-weight: 800;
+    font-size: 24px;
+    margin: 0 25px 0 0;
+}
+
+.input_container input::placeholder{
+    color:#c4dd9f;
+    opacity:1;
+}
+
+.input_container .text_input{
+    flex-basis: 75%;
+    background-color: #eef6e3;
+    border: 0px;
+    border-radius: 15px;
+    padding-left: 25px;
+    font-size: 24px;
+    color:#6fa125;
+}
+
+#submit_container{
+    width: auto;
+    border-top-color: #333333 !important;
+    margin: 0 15px;
+    border-top: solid 1px;
+    border-radius: 1px;
+    padding: 50px;
+    display:flex;
+    justify-content: space-around;
+}
+
+#submit_container #submit_button{
+    background-color: white;
+    border: none;
+    font-size: 32px;
+    color: #3ab54a;
+}
