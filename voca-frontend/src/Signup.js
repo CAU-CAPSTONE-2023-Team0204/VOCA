@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./styles/signup.css";
 
 const Signup = () => {
@@ -8,19 +8,38 @@ const Signup = () => {
   var [password_confirm, setPasswordConfirm] = useState("");
   var [name, setName] = useState("");
 
+  useEffect(() => {
+    var element = document.getElementById("id_error_msg");
+    if (id.length == 0) element.innerText = "";
+    else if (!validateId(id))
+      element.innerText = "아이디는 영어 대소문자 8~12자로 구성되어야합니다.";
+    else element.innerText = "";
+  }, [id]);
+  useEffect(() => {
+    var element = document.getElementById("email_error_msg");
+    if (email.length == 0) element.innerText = "";
+    else if (!validateEmail(email))
+      element.innerText = "이메일 형식이 맞지 않습니다.";
+    else element.innerText = "";
+  }, [email]);
+  useEffect(() => {
+    var element = document.getElementById("password_error_msg");
+    if (password.length == 0) element.innerText = "";
+    else if (!validatePassword(password))
+      element.innerText = "비밀번호는 영어 대소문자 8~12자로 구성되어야합니다.";
+    else element.innerText = "";
+  }, [password]);
+  useEffect(() => {
+    var element = document.getElementById("password_confirm_error_msg");
+    if (password_confirm.length == 0) element.innerText = "";
+    else if (!validatePasswordConfirm(password_confirm))
+      element.innerText = "비밀번호와 일치하지 않습니다.";
+    else element.innerText = "";
+  }, [password_confirm]);
+
   const onChangeEmail = (event) => {
-    email = event.currentTarget.value;
-    setEmail(email.toLowerCase());
-    // var valEmail = validateEmail(email);
+    setEmail(event.currentTarget.value);
   };
-
-  const validateEmail = (email) => {
-    return true;
-    // return email
-    //   .toLowerCase()
-    //   .match(/([\w-.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/);
-  };
-
   const onChangeId = (event) => {
     setId(event.currentTarget.value);
   };
@@ -33,6 +52,24 @@ const Signup = () => {
   const onChangeName = (event) => {
     setName(event.currentTarget.value);
   };
+
+  const validateEmail = (email) => {
+    var regExp =
+      /([\w-.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+    return regExp.test(email);
+  };
+  const validateId = (id) => {
+    var regExp = /^[a-zA-z0-9]{8,12}$/;
+    return regExp.test(id);
+  };
+  const validatePassword = (password) => {
+    var regExp = /^[a-zA-z0-9]{8,12}$/;
+    return regExp.test(password);
+  };
+  const validatePasswordConfirm = (password_confirm) => {
+    return password === password_confirm;
+  };
+
   return (
     <div id="wrapper">
       <div id="inner_wrapper">
@@ -57,8 +94,9 @@ const Signup = () => {
               onChange={onChangeId}
               placeholder="ID"
             ></input>
-            <div className="input_error_message"></div>
           </div>
+          <div id="id_error_msg"></div>
+
           <div className="input_container">
             <label className="input_label">이메일</label>
             <input
@@ -68,8 +106,8 @@ const Signup = () => {
               onChange={onChangeEmail}
               placeholder="EMAIL"
             ></input>
-            <div className="input_error_message"></div>
           </div>
+          <div id="email_error_msg"></div>
 
           <div className="input_container">
             <label className="input_label">비밀번호</label>
@@ -80,8 +118,8 @@ const Signup = () => {
               onChange={onChangePassword}
               placeholder="PASSWORD"
             ></input>
-            <div className="input_error_message"></div>
           </div>
+          <div id="password_error_msg"></div>
 
           <div className="input_container">
             <label className="input_label">비밀번호 확인</label>
@@ -92,8 +130,8 @@ const Signup = () => {
               onChange={onChangePasswordConfirm}
               placeholder="PASSWORD CONFIRM"
             ></input>
-            <div className="input_error_message"></div>
           </div>
+          <div id="password_confirm_error_msg"></div>
 
           <div className="input_container">
             <label className="input_label">이름</label>
@@ -105,11 +143,17 @@ const Signup = () => {
               placeholder="NAME"
             ></input>
           </div>
-          <div id="submit_container">
-            <button
-              id="submit_button"
-              type="submit"
-              onClick={() => {
+        </form>
+        <div id="submit_container">
+          <button
+            id="submit_button"
+            onClick={() => {
+              if (
+                validateId(id) &&
+                validatePassword(password) &&
+                validatePasswordConfirm(password_confirm) &&
+                validateEmail(email)
+              ) {
                 const userData = {
                   id: id,
                   password: password,
@@ -127,12 +171,14 @@ const Signup = () => {
                   .then((json) => {
                     //handle results.
                   });
-              }}
-            >
-              완료 ➤
-            </button>
-          </div>
-        </form>
+              } else {
+                console.log("user data contains error");
+              }
+            }}
+          >
+            완료 ➤
+          </button>
+        </div>
       </div>
     </div>
   );

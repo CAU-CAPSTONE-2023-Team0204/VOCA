@@ -11,14 +11,14 @@ import "swiper/css/effect-coverflow";
 
 const MainPage = () => {
   return (
-    <div id="wrapper">
+    <div id="page_container">
       <div id="navbar">
         <div id="navbar_content_wrapper">
           <div id="navbar_content_left">
             <div id="main_logo_text">채점해드림</div>
           </div>
           <div id="navbar_content_right">
-            <a href="" className="navbar_a_text">
+            <a href="signup" className="navbar_a_text">
               회원가입
             </a>
             <div className="vertical_line"></div>
