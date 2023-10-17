@@ -71,7 +71,7 @@ const Signup = () => {
   };
 
   return (
-    <div id="wrapper">
+    <div id="signup_page_container">
       <div id="inner_wrapper">
         <a herf="/main" className="title">
           채점해드림
