@@ -25,11 +25,16 @@ const Signin = () => {
               placeholder="PASSWORD"
             ></input>
           </div>
-
-          <div className="input_container">
-            <button id="submit_button">로그인</button>
-          </div>
         </form>
+
+        <div id="button_container">
+          <button className="submit_button">로그인</button>
+        </div>
+        <div id="signin_container">
+          <a id="signin_a" href="/signup">
+            회원가입
+          </a>
+        </div>
       </div>
     </div>
   );
