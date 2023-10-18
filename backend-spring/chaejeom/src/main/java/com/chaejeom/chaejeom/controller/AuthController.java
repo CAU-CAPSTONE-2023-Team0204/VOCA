@@ -34,7 +34,7 @@ public class AuthController {
     public ResponseEntity<TokenDto> reissue(@RequestBody TokenRequestDto tokenRequestDto) {
         return ResponseEntity.ok(authService.reissue(tokenRequestDto));
     }
-    @GetMapping("/logout")
+    @GetMapping("/logout") // 로그아웃 시 토큰 처리 필요하다.
     public String logout(HttpServletRequest request, HttpServletResponse response){
         new SecurityContextLogoutHandler().logout(request, response, SecurityContextHolder.getContext().getAuthentication());
         return "logout";

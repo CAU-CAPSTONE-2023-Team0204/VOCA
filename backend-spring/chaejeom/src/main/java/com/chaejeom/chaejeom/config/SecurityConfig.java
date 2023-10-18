@@ -12,7 +12,6 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import static org.springframework.boot.autoconfigure.security.servlet.PathRequest.toH2Console;
 
@@ -29,11 +28,14 @@ public class SecurityConfig {
     }
 
     // h2 database 테스트가 원활하도록 관련 API 들은 전부 무시
+    // swagger 문서 관련 전부 무시
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
         return (web) -> web.ignoring()
                 .requestMatchers(toH2Console())
-                .requestMatchers(new AntPathRequestMatcher("/favicon.ico"));
+                .requestMatchers("/favicon.ico")
+                .requestMatchers("/swagger-ui/**", "/swagger-resources/**","/v3/api-docs/**")
+                .requestMatchers("/error");
     }
 
     @Bean
