@@ -6,6 +6,7 @@ import com.chaejeom.chaejeom.jwt.TokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -64,6 +65,10 @@ public class SecurityConfig {
                 .authenticationEntryPoint(jwtAuthenticationEntryPoint) // 인증이 안되었을때
                 .accessDeniedHandler(jwtAccessDeniedHandler) // 인가가 없을때
 
+                //corsConfigurationSource 적용
+                .and()
+                .cors().configurationSource(corsConfigurationSource())
+
                 // h2-console 을 위한 설정을 추가
                 .and()
                 .headers()
@@ -80,10 +85,11 @@ public class SecurityConfig {
                 .and()
                 .authorizeRequests()
                 .requestMatchers("/", "/login", "/signup", "/auth/**").permitAll()
+                .requestMatchers(HttpMethod.OPTIONS,"**/*").permitAll()
                 .requestMatchers("/students/**").hasRole("STUDENT") // 학생은 학생 페이지에 접근가능
                 .requestMatchers("/teachers/**").hasRole("TEACHER") // 교사는 교사 페이지에 접근가능
                 .requestMatchers("/api/**").permitAll() // api 요청 모두 가능(개발)
-                .anyRequest().authenticated() // 나머지는 전부 인증 필요
+                .anyRequest().authenticated()// 나머지는 전부 인증 필요
 
 
                 // JwtFilter 를 addFilterBefore 로 등록했던 JwtSecurityConfig 클래스를 적용
