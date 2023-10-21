@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./styles/main_page.css";
+import "../styles/main_page.css";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectCoverflow, Navigation, Pagination } from "swiper/modules";
 

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import "./styles/signup.css";
-import axios from "./api/axios";
+import "../styles/signup.css";
+import axios from "../api/axios";
 
 const SIGNUP_URL = "auth/signup";
 
