@@ -3,6 +3,7 @@ package com.chaejeom.chaejeom.domain;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 // class 라는 명칭은 자바의 클래스와 겹쳐서 UserClass로 변경하였음
@@ -22,11 +23,12 @@ public class UserClass {
     private String name;
 
     @OneToMany(mappedBy = "userClass")
-    private List<MemberClass> memberClassList;
+    private List<MemberClass> memberClassList = new ArrayList<>();
 
     @Builder
-    public UserClass(String name){
+    public UserClass(String name, List<MemberClass> memberClassList){
         this.name = name;
+        this.memberClassList = memberClassList;
     }
 
     // 클래스에 맴버 등록//
