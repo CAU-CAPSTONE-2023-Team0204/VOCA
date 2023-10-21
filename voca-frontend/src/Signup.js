@@ -1,5 +1,9 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "./styles/signup.css";
+import axios from "./api/axios";
+
+const SIGNUP_URL = "auth/signup";
 
 const Signup = () => {
   var [id, setId] = useState("");
@@ -7,6 +11,9 @@ const Signup = () => {
   var [password, setPassword] = useState("");
   var [password_confirm, setPasswordConfirm] = useState("");
   var [name, setName] = useState("");
+  var [role, setRole] = useState("");
+
+  let navigate = useNavigate();
 
   useEffect(() => {
     var element = document.getElementById("id_error_msg");
@@ -52,6 +59,9 @@ const Signup = () => {
   const onChangeName = (event) => {
     setName(event.currentTarget.value);
   };
+  const onChangeRole = (event) => {
+    setRole(event.currentTarget.value);
+  };
 
   const validateEmail = (email) => {
     var regExp =
@@ -69,6 +79,52 @@ const Signup = () => {
   const validatePasswordConfirm = (password_confirm) => {
     return password === password_confirm;
   };
+  const validateRole = (role) => {
+    if (role === "ROLE_TEACHER" || role === "ROLE_STUDENT") return true;
+    else return false;
+  };
+
+  const validateAll = () => {
+    if (
+      validateEmail(email) &&
+      validateId(id) &&
+      validatePassword(password) &&
+      validatePasswordConfirm(password_confirm) &&
+      validateRole(role)
+    )
+      return true;
+    else return false;
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault(); //prevents reload
+    if (!validateAll()) {
+      //input contains error
+      const err_msg = document.getElementById("overall_err_msg");
+      err_msg.innerText = "정보를 다시 확인해주세요!";
+      return;
+    }
+    try {
+      const response = await axios.post(
+        SIGNUP_URL,
+        JSON.stringify({
+          username: id,
+          password: password,
+          name: name,
+          email: email,
+          role: role,
+        }),
+        {
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+      console.log(JSON.stringify(response));
+
+      navigate("/signin");
+    } catch (err) {
+      console.log("UNEXPECTED ERROR");
+    }
+  };
 
   return (
     <div id="signup_page_container">
@@ -83,7 +139,7 @@ const Signup = () => {
           단어학습에 대한 종합적 서비스를 제공해드립니다.
         </div>
 
-        <form>
+        <form onSubmit={handleSubmit}>
           {/* 아이디, 비밀번호, 비밀번호 확인, 이메일, 이름, 닉네임, 선생/학생 */}
           <div className="input_container">
             <label className="input_label">아이디</label>
@@ -143,42 +199,40 @@ const Signup = () => {
               placeholder="NAME"
             ></input>
           </div>
+
+          <div className="role_input_container">
+            <div id="radio_container">
+              <label className="role_label">
+                <input
+                  className="role_radio"
+                  type="radio"
+                  value={"ROLE_TEACHER"}
+                  checked={role === "ROLE_TEACHER"}
+                  onChange={onChangeRole}
+                ></input>
+                <div className="role_span_wrapper">
+                  <span className="role_span_span">선생님</span>
+                </div>
+              </label>
+              <label className="role_label">
+                <input
+                  className="role_radio"
+                  type="radio"
+                  value={"ROLE_STUDENT"}
+                  checked={role === "ROLE_STUDENT"}
+                  onChange={onChangeRole}
+                ></input>
+                <div className="role_span_wrapper">
+                  <span className="role_span_span">학생</span>
+                </div>
+              </label>
+            </div>
+          </div>
+          <div id="overall_err_msg"></div>
+          <div id="submit_container">
+            <button id="submit_button">완료 ➤</button>
+          </div>
         </form>
-        <div id="submit_container">
-          <button
-            id="submit_button"
-            onClick={() => {
-              if (
-                validateId(id) &&
-                validatePassword(password) &&
-                validatePasswordConfirm(password_confirm) &&
-                validateEmail(email)
-              ) {
-                const userData = {
-                  id: id,
-                  password: password,
-                  email: email,
-                  name: name,
-                };
-                fetch("/signup", {
-                  method: "post",
-                  headers: {
-                    "content-type": "application/json",
-                  },
-                  body: JSON.stringify(userData),
-                })
-                  .then((res) => res.json)
-                  .then((json) => {
-                    //handle results.
-                  });
-              } else {
-                console.log("user data contains error");
-              }
-            }}
-          >
-            완료 ➤
-          </button>
-        </div>
       </div>
     </div>
   );
