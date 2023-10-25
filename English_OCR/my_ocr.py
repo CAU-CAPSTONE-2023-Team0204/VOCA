@@ -1,9 +1,11 @@
 import matplotlib.pyplot as plt
+from pytesseract import Output
 import pytesseract
 import imutils
 import cv2
 import json
-import korean_data
+import numpy as np
+
 #url 사용시 필요
 #import requests
 #import numpy as np
@@ -43,11 +45,15 @@ def plt_imshow(title='image', img=None, figsize=(8 ,5)):
         plt.xticks([]), plt.yticks([])
         plt.show()
 
+def sort_np(arr):
+    print(arr.shape())
+     
+
 # 로컬 이미지 파일의 경로
-image_path = 'handwriting1.jpg'
+image_path = 'c:/Users/SH/Desktop/CAU-CAPSTONE/VOCA/English_OCR/handwriting1.jpg'
 
 # 이미지 파일을 읽어옵니다.
-org_image = cv2.imread(image_path,cv2.IMREAD_COLOR) 
+org_image = cv2.imread(image_path,cv2.IMREAD_COLOR)
 
 # url 이미지 경로
 # url = 'https://user-images.githubusercontent.com/69428232/148330274-237d9b23-4a79-4416-8ef1-bb7b2b52edc4.jpg'
@@ -93,50 +99,63 @@ cv2.drawContours(output, Cnt, -1, (0, 255, 0), 2)
 
 plt_imshow("Outline", output)
 
+sorted_Cnt = sorted(Cnt, key=lambda x: x[0][0][1])
+print(sorted_Cnt)
+
 border = 7
-ret = []
+ret_json = []
 english_config = r'--oem 3 --psm 6 -c tessedit_char_whitelist=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
-for contour in Cnt:
+for contour in sorted_Cnt:
     x, y, w, h = cv2.boundingRect(contour)
     if(w<30 or h < 30):
          continue
     cropped_image = image[y + border:y + h - border, x + border : x + w - border]
-    gray1 = cv2.cvtColor(cropped_image, cv2.COLOR_BGR2GRAY)
-    blurred1 = cv2.GaussianBlur(gray1, (5, 5,), 0)
-    edged1 = cv2.Canny(blurred1, 75, 200)
+    gray_image = cv2.cvtColor(cropped_image, cv2.COLOR_BGR2GRAY)
+    gray_enlarge = cv2.resize(gray_image, (2*w, 2*h), interpolation=cv2.INTER_LINEAR)
+    denoised = cv2.fastNlMeansDenoising(gray_enlarge, h=10, searchWindowSize=21, templateWindowSize=7)
+
+    gray_pin = 196
+    ret, thresh = cv2.threshold(denoised, gray_pin, 255, cv2.THRESH_BINARY)
+    thresh[260:2090] = ~thresh[260:2090]
+    result_image = np.hstack((gray_enlarge, thresh))
 
     if (x<100):
 
-        result = pytesseract.image_to_string(cropped_image.copy(), config=english_config, lang='eng',output_type=pytesseract.Output.STRING)
-        print(result)
-        
-        # bounding_box = [x,y,w,h]
-        # ret.append({'bounding_box': bounding_box, 'confidence': 0, 'text': text})
-        # plt_imshow("Outline", cropped_image)  
+        result = pytesseract.image_to_data(denoised.copy(), config=english_config, lang='eng',output_type=pytesseract.Output.DICT)
+        #print(result)
+        text = result['text']
+        confidences = result['conf']
+        print(text)
+        print(confidences)
+
+        detected_text = result['text'][4]
+        if(len(result['text'])>5):
+            for i in range(5,len(result['text'])):
+                detected_text += result['text'][i]
+        bounding_box = [x,y,w,h]
+        ret_json.append({'bounding_box': bounding_box, 'text': detected_text, 'confidence':min(result['conf'][4:])})
+
+        plt_imshow("Outline", denoised)  
         
     else:
-        result = pytesseract.image_to_string(cropped_image.copy(), config='--psm 6', lang='kor')
-        detected_text = result['detected_text']
-        confidences = result['confidences']
-        print(detected_text)
+        result = pytesseract.image_to_data(denoised.copy(), config='--psm 6', lang='kor',output_type=pytesseract.Output.DICT)
+
+        #print(result)
+        text = result['text']
+        confidences = result['conf']
+        print(text)
         print(confidences)
+
+        detected_text = result['text'][4]
+        if(len(result['text'])>5):
+            for i in range(5,len(result['text'])):
+                detected_text += result['text'][i]
         bounding_box = [x,y,w,h]
-        ret.append({'bounding_box': bounding_box, 'confidence': 0, 'text': detected_text})
+        ret_json.append({'bounding_box': bounding_box, 'text': detected_text, 'confidence':min(result['conf'][4:])})
+        #bounding_box = [x,y,w,h]
+        #ret_json.append({'bounding_box': bounding_box, 'text': detected_text})
 
-        plt_imshow("Outline", gray1)  
+        plt_imshow("Outline", denoised)  
 
-print(ret)
 with open('test.json', 'w', encoding='utf-8') as make_file:
-        json.dump(ret, make_file, ensure_ascii=False, indent="\t")
-
-# 원본 이미지에 찾은 윤곽을 기준으로 이미지를 보정
-#receipt = four_point_transform(org_image, receiptCnt.reshape(4, 2) * ratio)
-#plt_imshow("Receipt Transform", receipt)
-
-
- 
-# OCR결과 출력
-# print("[INFO] OCR결과:")
-# print("==================")
-# print(text)
-# print("\n")
+        json.dump(ret_json, make_file, ensure_ascii=False, indent="\t")
