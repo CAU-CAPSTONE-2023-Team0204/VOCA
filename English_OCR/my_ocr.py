@@ -2,7 +2,8 @@ import matplotlib.pyplot as plt
 import pytesseract
 import imutils
 import cv2
-
+import json
+import korean_data
 #url 사용시 필요
 #import requests
 #import numpy as np
@@ -43,7 +44,7 @@ def plt_imshow(title='image', img=None, figsize=(8 ,5)):
         plt.show()
 
 # 로컬 이미지 파일의 경로
-image_path = 'test.png'
+image_path = 'handwriting1.jpg'
 
 # 이미지 파일을 읽어옵니다.
 org_image = cv2.imread(image_path,cv2.IMREAD_COLOR) 
@@ -93,7 +94,8 @@ cv2.drawContours(output, Cnt, -1, (0, 255, 0), 2)
 plt_imshow("Outline", output)
 
 border = 7
-
+ret = []
+english_config = r'--oem 3 --psm 6 -c tessedit_char_whitelist=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
 for contour in Cnt:
     x, y, w, h = cv2.boundingRect(contour)
     if(w<30 or h < 30):
@@ -102,10 +104,30 @@ for contour in Cnt:
     gray1 = cv2.cvtColor(cropped_image, cv2.COLOR_BGR2GRAY)
     blurred1 = cv2.GaussianBlur(gray1, (5, 5,), 0)
     edged1 = cv2.Canny(blurred1, 75, 200)
-    detected_text = pytesseract.image_to_string(gray1.copy(), config='--psm 6', lang='eng+kor')
-    plt_imshow("Outline", gray1)
-    print(detected_text)
 
+    if (x<100):
+
+        result = pytesseract.image_to_string(cropped_image.copy(), config=english_config, lang='eng',output_type=pytesseract.Output.STRING)
+        print(result)
+        
+        # bounding_box = [x,y,w,h]
+        # ret.append({'bounding_box': bounding_box, 'confidence': 0, 'text': text})
+        # plt_imshow("Outline", cropped_image)  
+        
+    else:
+        result = pytesseract.image_to_string(cropped_image.copy(), config='--psm 6', lang='kor')
+        detected_text = result['detected_text']
+        confidences = result['confidences']
+        print(detected_text)
+        print(confidences)
+        bounding_box = [x,y,w,h]
+        ret.append({'bounding_box': bounding_box, 'confidence': 0, 'text': detected_text})
+
+        plt_imshow("Outline", gray1)  
+
+print(ret)
+with open('test.json', 'w', encoding='utf-8') as make_file:
+        json.dump(ret, make_file, ensure_ascii=False, indent="\t")
 
 # 원본 이미지에 찾은 윤곽을 기준으로 이미지를 보정
 #receipt = four_point_transform(org_image, receiptCnt.reshape(4, 2) * ratio)
