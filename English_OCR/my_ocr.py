@@ -5,7 +5,7 @@ import imutils
 import cv2
 import json
 import numpy as np
-
+import read_json
 #url 사용시 필요
 #import requests
 #import numpy as np
@@ -118,45 +118,65 @@ for contour in sorted_Cnt:
     thresh[260:2090] = ~thresh[260:2090]
     result_image = np.hstack((denoised, thresh))
 
-    if (x<100):
+
+    if (x<100): #영어 OCR
 
         result = pytesseract.image_to_data(denoised.copy(), config=english_config, lang='eng',output_type=pytesseract.Output.DICT)
-        #print(result)
-        plt_imshow("Outline", denoised)  
-        text = result['text']
-        confidences = result['conf']
-        print(text)
-        print(confidences)
+         
 
         detected_text = result['text'][4]
         if(len(result['text'])>5):
             for i in range(5,len(result['text'])):
                 detected_text += result['text'][i]
         bounding_box = [x,y,w,h]
-        ret_json.append({'bounding_box': bounding_box, 'text': detected_text, 'confidence':min(result['conf'][4:])})
-
+        confidence = min(result['conf'][4:])
+        ret_json.append({'bounding_box': bounding_box, 'text': detected_text.lower(), 'confidence':confidence})
+        print(f"detected_text = {detected_text} , confidence = {confidence}")
+        plt_imshow("Outline", denoised) 
         
         
-    else:
+    else:   #한글 OCR
         result = pytesseract.image_to_data(denoised.copy(), config='--psm 6', lang='kor',output_type=pytesseract.Output.DICT)
+        
 
         #print(result)
         plt_imshow("Outline", denoised) 
-        text = result['text']
-        confidences = result['conf']
-        print(text)
-        print(confidences)
 
         detected_text = result['text'][4]
         if(len(result['text'])>5):
             for i in range(5,len(result['text'])):
                 detected_text += result['text'][i]
         bounding_box = [x,y,w,h]
-        ret_json.append({'bounding_box': bounding_box, 'text': detected_text, 'confidence':min(result['conf'][4:])})
-        #bounding_box = [x,y,w,h]
-        #ret_json.append({'bounding_box': bounding_box, 'text': detected_text})
-
-        plt_imshow("Outline", denoised)  
+        confidence = min(result['conf'][4:])
+        ret_json.append({'bounding_box': bounding_box, 'text': detected_text.lower(), 'confidence':confidence})
+        print(f"detected_text = {detected_text} , confidence = {confidence}")
+        plt_imshow("Outline", denoised) 
 
 with open('test.json', 'w', encoding='utf-8') as make_file:
         json.dump(ret_json, make_file, ensure_ascii=False, indent="\t")
+
+
+
+answer = read_json.read_input()
+my_answer = []
+try:
+    with open('c:/Users/SH/Desktop/CAU-CAPSTONE/VOCA/English_OCR/test.json',encoding='UTF8') as file:
+        datas = json.load(file)
+
+    for data in datas:
+        my_answer.append(data['text'])
+
+    for i in range(12):
+        print(f"answer : {answer[i]:<10}, my_answer : {my_answer[i]:<10} -> ",end="")
+        if(answer[i] == my_answer[i].lower()):
+            print("O")
+        else:
+             print("X")
+    print(my_answer)
+except FileNotFoundError:
+    print("File not found")
+
+except json.JSONDecodeError:
+    print("올바른 JSON 형식이 아닙니다.")
+
+

@@ -1,0 +1,122 @@
+[
+	{
+		"bounding_box": [
+			88,
+			94,
+			148,
+			48
+		],
+		"text": "apple",
+		"confidence": 77
+	},
+	{
+		"bounding_box": [
+			300,
+			97,
+			148,
+			48
+		],
+		"text": "사과",
+		"confidence": 57
+	},
+	{
+		"bounding_box": [
+			88,
+			183,
+			148,
+			48
+		],
+		"text": "coffee",
+		"confidence": 95
+	},
+	{
+		"bounding_box": [
+			299,
+			185,
+			148,
+			48
+		],
+		"text": "커피",
+		"confidence": 48
+	},
+	{
+		"bounding_box": [
+			90,
+			279,
+			149,
+			47
+		],
+		"text": "student",
+		"confidence": 96
+	},
+	{
+		"bounding_box": [
+			302,
+			281,
+			148,
+			48
+		],
+		"text": "학생",
+		"confidence": 96
+	},
+	{
+		"bounding_box": [
+			91,
+			363,
+			148,
+			48
+		],
+		"text": "bread",
+		"confidence": 40
+	},
+	{
+		"bounding_box": [
+			302,
+			366,
+			148,
+			48
+		],
+		"text": "빵",
+		"confidence": 92
+	},
+	{
+		"bounding_box": [
+			87,
+			453,
+			149,
+			48
+		],
+		"text": "Piano",
+		"confidence": 93
+	},
+	{
+		"bounding_box": [
+			299,
+			456,
+			148,
+			48
+		],
+		"text": "피아노",
+		"confidence": 94
+	},
+	{
+		"bounding_box": [
+			86,
+			547,
+			148,
+			48
+		],
+		"text": "exam",
+		"confidence": 75
+	},
+	{
+		"bounding_box": [
+			297,
+			550,
+			148,
+			48
+		],
+		"text": "시험",
+		"confidence": 74
+	}
+]

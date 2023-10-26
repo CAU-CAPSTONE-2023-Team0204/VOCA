@@ -1,0 +1,59 @@
+{
+    "testInfo" : {
+        "testID" : "1234",
+        "problemNo" : 12,
+        "Answer" : [
+            "apple",
+            "사과",
+            "coffee",
+            "커피",
+            "student",
+            "학생",
+            "bread",
+            "빵",
+            "piano",
+            "피아노",
+            "exam",
+            "시험"
+        ],
+        "testType" : 1
+    },
+
+    "classInfo" : {
+        "classID" : "ClassA",
+        "teacherID" : "1111",
+        "studentNum" : "10",
+        "student" : [
+            {
+                "studentID" : "20190101",
+                "studentName" : "sehwan",
+                "test_paper" : "url",
+                "Answer" : {
+                    "1" : "apple" 
+                },
+                "OX" : {
+                    "1" : "O" 
+                }
+            },
+            {
+                "studentID" : "20190101",
+                "studentName" : "sehwan",
+                "test_paper" : "url"
+            },
+            {
+                "studentID" : "20190101",
+                "studentName" : "sehwan",
+                "test_paper" : "url"
+            },
+            {
+                "studentID" : "20190101",
+                "studentName" : "sehwan",
+                "test_paper" : "url"
+            },
+            {
+                "studentID" : "20190101",
+                "studentName" : "sehwan",
+                "test_paper" : "url"
+            }]
+    } 
+}
