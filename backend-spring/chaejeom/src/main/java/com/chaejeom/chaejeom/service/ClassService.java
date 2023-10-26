@@ -5,13 +5,19 @@ import com.chaejeom.chaejeom.domain.MemberClass;
 import com.chaejeom.chaejeom.domain.UserClass;
 import com.chaejeom.chaejeom.dto.ClassRequestDto;
 import com.chaejeom.chaejeom.dto.ClassResponseDto;
+import com.chaejeom.chaejeom.dto.GetClassesResponseDto;
+import com.chaejeom.chaejeom.dto.MemberResponseDto;
 import com.chaejeom.chaejeom.repository.ClassRepository;
 import com.chaejeom.chaejeom.repository.MemberClassRepository;
 import com.chaejeom.chaejeom.repository.MemberRepository;
+import com.chaejeom.chaejeom.util.SecurityUtil;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @Transactional
@@ -23,7 +29,6 @@ public class ClassService {
     private final MemberClassRepository memberClassRepository;
 
 
-
     // 처음 클래스를 생성하는 Service. 생성하고자 하는 클래스의 이름과 학생 id 명단이 request body
     //클래스 정보를 담은 requestDto 를 통해 클래스를 db에 저장하고, responseDto에 담아 클라이언트에 반환//
     // request dto 에는 클래스의 이름과 학생들의 id 명단이 전달된다.
@@ -31,11 +36,10 @@ public class ClassService {
     // memberClass 도 학생 수만큼 새로이 생성됨
     // 생성된 memberClass는 userClass와 member 객체의 memberClassList 에도 추가되어야함.
     // 테스트 필요하다.
-    public ClassResponseDto add(ClassRequestDto request){
+    public ClassResponseDto create(ClassRequestDto request){
         // name 에 따라 UserClass 생성 후 저장
         UserClass userclass = UserClass.builder().name(request.getName()).build();
         ClassResponseDto classResponseDto = ClassResponseDto.of(classRepository.save(userclass));
-
 
         // 학생들의 id 명단만큼 memberClass 생성, id로 member 검색 후 memberClass에 넣기.
         // 이후 userClass 도 넣고 DB에 memberClass 를 저장한다.
@@ -43,14 +47,25 @@ public class ClassService {
             MemberClass memberClass = new MemberClass();
             Member member1= memberRepository.findByUsername(member)
                     .orElseThrow(() -> new UsernameNotFoundException(member + " -> 데이터베이스에서 찾을 수 없습니다."));
-            memberClass.setUserClass(userclass);
-            memberClass.setMember(member1);
 
+            userclass.addMemberClass(memberClass);
+            member1.addMemberClass(memberClass);
             memberClassRepository.save(memberClass);
         }
 
         // 학생 수만큼 memberClass 생성.
-
         return classResponseDto;
+    }
+    public GetClassesResponseDto getClassesInfo(){
+        Member member = memberRepository.findById(SecurityUtil.getCurrentMemberId()).orElseThrow(()->new RuntimeException("로그인 정보가 없습니다."));
+        List<MemberClass> memberClassList = member.getMemberClassList();
+        List<UserClass> userClassList = new ArrayList<>();
+
+        for(int i = 0; i<memberClassList.size();i++){
+            userClassList.add(memberClassList.get(i).getUserClass());
+        }
+        GetClassesResponseDto getClassesResponseDto = new GetClassesResponseDto(userClassList);
+        return getClassesResponseDto;
+
     }
 }

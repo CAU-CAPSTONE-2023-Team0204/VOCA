@@ -1,5 +1,6 @@
 package com.chaejeom.chaejeom.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -33,6 +34,7 @@ public class Member{
     @Column(nullable = false, length = 30)
     private Role role; // 권한 -> ROLE_STUDENT, ROLE_TEACHER
 
+    @JsonBackReference
     @OneToMany(mappedBy = "member")
     private List<MemberClass> memberClassList = new ArrayList<MemberClass>();
 

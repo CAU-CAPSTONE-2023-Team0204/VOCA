@@ -15,7 +15,8 @@ public class ClassRequestDto {
 
     private String name;
     private List<String> members;
-    private String teacher_id;
+
+    //private String teacher_id;
 
     public UserClass toClass() {
         return UserClass.builder()

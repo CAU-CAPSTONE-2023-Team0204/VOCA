@@ -1,5 +1,6 @@
 package com.chaejeom.chaejeom.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -22,13 +23,14 @@ public class UserClass {
     @Column(nullable = false, length = 30, unique = true)
     private String name;
 
+    @JsonBackReference
     @OneToMany(mappedBy = "userClass")
     private List<MemberClass> memberClassList = new ArrayList<>();
 
     @Builder
-    public UserClass(String name, List<MemberClass> memberClassList){
+    public UserClass(String name){
         this.name = name;
-        this.memberClassList = memberClassList;
+        memberClassList = new ArrayList<>();
     }
 
     // 클래스에 맴버 등록//

@@ -26,8 +26,8 @@ public class MemberController {
         return ResponseEntity.ok(memberService.findMemberInfoByEmail(email));
     }
 
-    @GetMapping("/{username}")
+   /* @GetMapping("/{username}")
     public ResponseEntity<MemberResponseDto> findMemberInfoByUsername(@PathVariable String username) {
         return ResponseEntity.ok(memberService.findMemberInfoByUsername(username));
-    }
+    }*/
 }
