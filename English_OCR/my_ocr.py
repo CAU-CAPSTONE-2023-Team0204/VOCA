@@ -97,7 +97,6 @@ cv2.drawContours(output, Cnt, -1, (0, 255, 0), 2)
 plt_imshow("Outline", output)
 
 sorted_Cnt = sorted(Cnt, key=lambda x: x[0][0][1])
-print(sorted_Cnt)
 
 border = 7
 ret_json = []
@@ -123,7 +122,6 @@ for contour in sorted_Cnt:
 
         result = pytesseract.image_to_data(denoised.copy(), config=english_config, lang='eng',output_type=pytesseract.Output.DICT)
          
-
         detected_text = result['text'][4]
         if(len(result['text'])>5):
             for i in range(5,len(result['text'])):
@@ -137,10 +135,6 @@ for contour in sorted_Cnt:
         
     else:   #한글 OCR
         result = pytesseract.image_to_data(denoised.copy(), config='--psm 6', lang='kor',output_type=pytesseract.Output.DICT)
-        
-
-        #print(result)
-        plt_imshow("Outline", denoised) 
 
         detected_text = result['text'][4]
         if(len(result['text'])>5):
@@ -159,6 +153,7 @@ with open('test.json', 'w', encoding='utf-8') as make_file:
 
 answer = read_json.read_input()
 my_answer = []
+cnt = 0
 try:
     with open('c:/Users/SH/Desktop/CAU-CAPSTONE/VOCA/English_OCR/test.json',encoding='UTF8') as file:
         datas = json.load(file)
@@ -170,9 +165,10 @@ try:
         print(f"answer : {answer[i]:<10}, my_answer : {my_answer[i]:<10} -> ",end="")
         if(answer[i] == my_answer[i].lower()):
             print("O")
+            cnt+=1
         else:
              print("X")
-    print(my_answer)
+    print(f"score = {cnt / 12 * 100}")
 except FileNotFoundError:
     print("File not found")
 
