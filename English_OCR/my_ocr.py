@@ -45,16 +45,13 @@ def plt_imshow(title='image', img=None, figsize=(8 ,5)):
         plt.xticks([]), plt.yticks([])
         plt.show()
 
-def sort_np(arr):
-    print(arr.shape())
-     
 
 # 로컬 이미지 파일의 경로
-image_path = 'c:/Users/SH/Desktop/CAU-CAPSTONE/VOCA/English_OCR/handwriting1.jpg'
+image_path = 'c:/Users/SH/Desktop/CAU-CAPSTONE/VOCA/English_OCR/handwriting5.jpeg'
 
 # 이미지 파일을 읽어옵니다.
 org_image = cv2.imread(image_path,cv2.IMREAD_COLOR)
-
+org_image = org_image[20:-20, 20: -20]
 # url 이미지 경로
 # url = 'https://user-images.githubusercontent.com/69428232/148330274-237d9b23-4a79-4416-8ef1-bb7b2b52edc4.jpg'
  
@@ -108,7 +105,9 @@ english_config = r'--oem 3 --psm 6 -c tessedit_char_whitelist=ABCDEFGHIJKLMNOPQR
 for contour in sorted_Cnt:
     x, y, w, h = cv2.boundingRect(contour)
     if(w<30 or h < 30):
-         continue
+        continue
+    if(h>500):
+        continue
     cropped_image = image[y + border:y + h - border, x + border : x + w - border]
     gray_image = cv2.cvtColor(cropped_image, cv2.COLOR_BGR2GRAY)
     gray_enlarge = cv2.resize(gray_image, (2*w, 2*h), interpolation=cv2.INTER_LINEAR)
@@ -117,12 +116,13 @@ for contour in sorted_Cnt:
     gray_pin = 196
     ret, thresh = cv2.threshold(denoised, gray_pin, 255, cv2.THRESH_BINARY)
     thresh[260:2090] = ~thresh[260:2090]
-    result_image = np.hstack((gray_enlarge, thresh))
+    result_image = np.hstack((denoised, thresh))
 
     if (x<100):
 
         result = pytesseract.image_to_data(denoised.copy(), config=english_config, lang='eng',output_type=pytesseract.Output.DICT)
         #print(result)
+        plt_imshow("Outline", denoised)  
         text = result['text']
         confidences = result['conf']
         print(text)
@@ -135,12 +135,13 @@ for contour in sorted_Cnt:
         bounding_box = [x,y,w,h]
         ret_json.append({'bounding_box': bounding_box, 'text': detected_text, 'confidence':min(result['conf'][4:])})
 
-        plt_imshow("Outline", denoised)  
+        
         
     else:
         result = pytesseract.image_to_data(denoised.copy(), config='--psm 6', lang='kor',output_type=pytesseract.Output.DICT)
 
         #print(result)
+        plt_imshow("Outline", denoised) 
         text = result['text']
         confidences = result['conf']
         print(text)
