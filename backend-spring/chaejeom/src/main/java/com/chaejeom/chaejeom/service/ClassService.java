@@ -3,10 +3,7 @@ package com.chaejeom.chaejeom.service;
 import com.chaejeom.chaejeom.domain.Member;
 import com.chaejeom.chaejeom.domain.MemberClass;
 import com.chaejeom.chaejeom.domain.UserClass;
-import com.chaejeom.chaejeom.dto.ClassRequestDto;
-import com.chaejeom.chaejeom.dto.ClassResponseDto;
-import com.chaejeom.chaejeom.dto.GetClassesResponseDto;
-import com.chaejeom.chaejeom.dto.MemberResponseDto;
+import com.chaejeom.chaejeom.dto.*;
 import com.chaejeom.chaejeom.repository.ClassRepository;
 import com.chaejeom.chaejeom.repository.MemberClassRepository;
 import com.chaejeom.chaejeom.repository.MemberRepository;
@@ -66,6 +63,31 @@ public class ClassService {
         }
         GetClassesResponseDto getClassesResponseDto = new GetClassesResponseDto(userClassList);
         return getClassesResponseDto;
+    }
 
+    public GetStudentResponseDto getStudentInfoById(Long id){
+        UserClass userClass = classRepository.findById(id).orElseThrow(()-> new RuntimeException("클래스 정보가 없습니다."));
+        List<MemberClass> memberClassList = userClass.getMemberClassList();
+        List<Member> memberList = new ArrayList<>();
+
+        for(MemberClass memberClass : memberClassList){
+            memberList.add(memberClass.getMember());
+        }
+        GetStudentResponseDto getStudentResponseDto = new GetStudentResponseDto(memberList);
+        return getStudentResponseDto;
+    }
+
+    public MemberResponseDto deleteMemberInClass(Long class_id, Long user_id){
+        UserClass userClass = classRepository.findById(class_id).orElseThrow(()-> new RuntimeException("클래스 정보가 없습니다."));
+        Member member = memberRepository.findById(user_id).orElseThrow(()-> new RuntimeException("유저 정보가 없습니다."));
+        MemberClass memberClass = memberClassRepository.findByMemberAndUserClass(member, userClass).orElseThrow(()-> new RuntimeException("해당 클래스에 해당 유저 정보가 없습니다."));
+
+        member.getMemberClassList().remove(memberClass);
+        userClass.getMemberClassList().remove(memberClass);
+
+        MemberResponseDto memberResponseDto = MemberResponseDto.of(member);
+
+        memberClassRepository.delete(memberClass);
+        return memberResponseDto;
     }
 }

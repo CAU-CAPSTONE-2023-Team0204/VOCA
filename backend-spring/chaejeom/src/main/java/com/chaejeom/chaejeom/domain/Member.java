@@ -1,6 +1,7 @@
 package com.chaejeom.chaejeom.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -22,6 +23,7 @@ public class Member{
     @Column(nullable = false, length = 30, unique = true)
     private String username; // 유저가 설정한 id
 
+    @JsonIgnore // password는 json 직렬화 하지 않는다.
     private String password; // 비밀번호
 
     @Column(nullable = false, length = 30)
