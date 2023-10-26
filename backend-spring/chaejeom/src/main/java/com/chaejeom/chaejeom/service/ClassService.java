@@ -50,7 +50,6 @@ public class ClassService {
             memberClassRepository.save(memberClass);
         }
 
-        // 학생 수만큼 memberClass 생성.
         return classResponseDto;
     }
     public GetClassesResponseDto getClassesInfo(){
@@ -88,6 +87,40 @@ public class ClassService {
         MemberResponseDto memberResponseDto = MemberResponseDto.of(member);
 
         memberClassRepository.delete(memberClass);
+        return memberResponseDto;
+    }
+
+    public GetClassesResponseDto getAllClass(){
+        List<UserClass> userClassList = classRepository.findAll();
+        GetClassesResponseDto getClassesResponseDto = new GetClassesResponseDto(userClassList);
+
+        return getClassesResponseDto;
+    }
+
+    public GetOneClassResponseDto getOneClass(Long class_id){
+        UserClass userClass = classRepository.findById(class_id).orElseThrow(()-> new RuntimeException("클래스 정보가 없습니다."));
+        List<MemberClass> memberClassList = userClass.getMemberClassList();
+        List<Member> memberList = new ArrayList<>();
+
+        for(MemberClass memberClass : memberClassList){
+            memberList.add(memberClass.getMember());
+        }
+        GetOneClassResponseDto getOneClassResponseDto = new GetOneClassResponseDto(userClass.getId(), userClass.getName(), memberList);
+
+        return getOneClassResponseDto;
+    }
+
+    public MemberResponseDto addStudentById(Long class_id, Long user_id){
+        UserClass userClass = classRepository.findById(class_id).orElseThrow(()-> new RuntimeException("클래스 정보가 없습니다."));
+        Member member = memberRepository.findById(user_id).orElseThrow(()-> new RuntimeException("유저 정보가 없습니다."));
+        if(memberClassRepository.existsByMemberAndUserClass(member, userClass)) throw new RuntimeException("이미 유저가 해당 클래스에 존재합니다.");
+
+        MemberClass memberClass = new MemberClass();
+        userClass.addMemberClass(memberClass);
+        member.addMemberClass(memberClass);
+        memberClassRepository.save(memberClass);
+        MemberResponseDto memberResponseDto = MemberResponseDto.of(member);
+
         return memberResponseDto;
     }
 }

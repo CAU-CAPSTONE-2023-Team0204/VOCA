@@ -45,4 +45,27 @@ public class ClassController {
         return ResponseEntity.ok(classService.deleteMemberInClass(class_id,user_id));
     }
 
+    @Operation(
+            summary = "모든 클래스 조회"
+    )
+    @GetMapping("/classes")
+    public ResponseEntity<GetClassesResponseDto> findAllClass(){
+        return ResponseEntity.ok(classService.getAllClass());
+    }
+
+    @Operation(
+            summary = "특정 클래스 id 로 조회"
+    )
+    @GetMapping("/classes/{class_id}")
+    public ResponseEntity<GetOneClassResponseDto> findOneClass(@PathVariable Long class_id){
+        return ResponseEntity.ok(classService.getOneClass(class_id));
+    }
+
+    @Operation(
+            summary = "클래스에 학생 추가"
+    )
+    @PostMapping("/classes/{class_id}/{user_id}")
+    public ResponseEntity<MemberResponseDto> addStudent(@PathVariable("class_id")Long class_id, @PathVariable("user_id") Long user_id){
+        return ResponseEntity.ok(classService.addStudentById(class_id,user_id));
+    }
 }

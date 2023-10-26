@@ -11,5 +11,6 @@ import java.util.Optional;
 @Repository
 public interface MemberClassRepository extends JpaRepository<MemberClass, Long> {
     Optional<MemberClass> findByMemberAndUserClass(Member member, UserClass userClass);
+    boolean existsByMemberAndUserClass(Member member, UserClass userClass);
 
 }
