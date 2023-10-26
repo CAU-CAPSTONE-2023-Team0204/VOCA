@@ -722,6 +722,35 @@
     }
   }
 };
+            defs["GetOneClassResponseDto"] = {
+  "type" : "object",
+  "properties" : {
+    "id" : {
+      "type" : "integer",
+      "format" : "int64"
+    },
+    "name" : {
+      "type" : "string"
+    },
+    "memberList" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/components/schemas/Member"
+      }
+    }
+  }
+};
+            defs["GetStudentResponseDto"] = {
+  "type" : "object",
+  "properties" : {
+    "memberList" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/components/schemas/Member"
+      }
+    }
+  }
+};
             defs["Member"] = {
   "type" : "object",
   "properties" : {
@@ -730,9 +759,6 @@
       "format" : "int64"
     },
     "username" : {
-      "type" : "string"
-    },
-    "password" : {
       "type" : "string"
     },
     "name" : {
@@ -884,18 +910,33 @@
                       <a href="#api-AuthController-signup">signup</a>
                     </li>
                   <li class="nav-header" data-group="ClassController"><a href="#api-ClassController">API Methods - ClassController</a></li>
+                    <li data-group="ClassController" data-name="addStudent" class="">
+                      <a href="#api-ClassController-addStudent">addStudent</a>
+                    </li>
                     <li data-group="ClassController" data-name="createClass" class="">
                       <a href="#api-ClassController-createClass">createClass</a>
+                    </li>
+                    <li data-group="ClassController" data-name="deleteMemberById" class="">
+                      <a href="#api-ClassController-deleteMemberById">deleteMemberById</a>
+                    </li>
+                    <li data-group="ClassController" data-name="findAllClass" class="">
+                      <a href="#api-ClassController-findAllClass">findAllClass</a>
                     </li>
                     <li data-group="ClassController" data-name="findClassesByMe" class="">
                       <a href="#api-ClassController-findClassesByMe">findClassesByMe</a>
                     </li>
-                  <li class="nav-header" data-group="MemberController"><a href="#api-MemberController">API Methods - MemberController</a></li>
-                    <li data-group="MemberController" data-name="findMemberInfoByEmail" class="">
-                      <a href="#api-MemberController-findMemberInfoByEmail">findMemberInfoByEmail</a>
+                    <li data-group="ClassController" data-name="findOneClass" class="">
+                      <a href="#api-ClassController-findOneClass">findOneClass</a>
                     </li>
+                    <li data-group="ClassController" data-name="findStudentByClass" class="">
+                      <a href="#api-ClassController-findStudentByClass">findStudentByClass</a>
+                    </li>
+                  <li class="nav-header" data-group="MemberController"><a href="#api-MemberController">API Methods - MemberController</a></li>
                     <li data-group="MemberController" data-name="findMemberInfoById" class="">
                       <a href="#api-MemberController-findMemberInfoById">findMemberInfoById</a>
+                    </li>
+                    <li data-group="MemberController" data-name="findMemberInfoByUsername" class="">
+                      <a href="#api-MemberController-findMemberInfoByUsername">findMemberInfoByUsername</a>
                     </li>
           </ul>
         </nav>
@@ -2101,6 +2142,333 @@ except ApiException as e:
                   </section>
                 <section id="api-ClassController">
                   <h1>ClassController</h1>
+                    <div id="api-ClassController-addStudent">
+                      <article id="api-ClassController-addStudent-0" data-group="User" data-name="addStudent" data-version="0">
+                        <div class="pull-left">
+                          <h1>addStudent</h1>
+                          <p>클래스에 학생 추가</p>
+                        </div>
+                        <div class="pull-right"></div>
+                        <div class="clearfix"></div>
+                        <p></p>
+                        <p class="marked"></p>
+                        <p></p>
+                        <br />
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/api/classes/{class_id}/{user_id}</span></code></pre>
+                        <p>
+                          <h3>Usage and SDK Samples</h3>
+                        </p>
+                        <ul class="nav nav-tabs nav-tabs-examples">
+                          <li class="active"><a href="#examples-ClassController-addStudent-0-curl">Curl</a></li>
+                          <li class=""><a href="#examples-ClassController-addStudent-0-java">Java</a></li>
+                          <li class=""><a href="#examples-ClassController-addStudent-0-android">Android</a></li>
+                          <!--<li class=""><a href="#examples-ClassController-addStudent-0-groovy">Groovy</a></li>-->
+                          <li class=""><a href="#examples-ClassController-addStudent-0-objc">Obj-C</a></li>
+                          <li class=""><a href="#examples-ClassController-addStudent-0-javascript">JavaScript</a></li>
+                          <!--<li class=""><a href="#examples-ClassController-addStudent-0-angular">Angular</a></li>-->
+                          <li class=""><a href="#examples-ClassController-addStudent-0-csharp">C#</a></li>
+                          <li class=""><a href="#examples-ClassController-addStudent-0-php">PHP</a></li>
+                          <li class=""><a href="#examples-ClassController-addStudent-0-perl">Perl</a></li>
+                          <li class=""><a href="#examples-ClassController-addStudent-0-python">Python</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-ClassController-addStudent-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
+-H "Accept: application/json"\
+"http://localhost:8080/api/classes/{class_id}/{user_id}"</code></pre>
+                          </div>
+                          <div class="tab-pane" id="examples-ClassController-addStudent-0-java">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
+import io.swagger.client.auth.*;
+import io.swagger.client.model.*;
+import io.swagger.client.api.ClassControllerApi;
+
+import java.io.File;
+import java.util.*;
+
+public class ClassControllerApiExample {
+
+    public static void main(String[] args) {
+        
+        ClassControllerApi apiInstance = new ClassControllerApi();
+        Long classId = 789; // Long | 
+        Long userId = 789; // Long | 
+        try {
+            MemberResponseDto result = apiInstance.addStudent(classId, userId);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling ClassControllerApi#addStudent");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+
+                          <div class="tab-pane" id="examples-ClassController-addStudent-0-android">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.api.ClassControllerApi;
+
+public class ClassControllerApiExample {
+
+    public static void main(String[] args) {
+        ClassControllerApi apiInstance = new ClassControllerApi();
+        Long classId = 789; // Long | 
+        Long userId = 789; // Long | 
+        try {
+            MemberResponseDto result = apiInstance.addStudent(classId, userId);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling ClassControllerApi#addStudent");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+  <!--
+  <div class="tab-pane" id="examples-ClassController-addStudent-0-groovy">
+  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+  </div> -->
+                            <div class="tab-pane" id="examples-ClassController-addStudent-0-objc">
+                              <pre class="prettyprint"><code class="language-cpp">Long *classId = 789; // 
+Long *userId = 789; // 
+
+ClassControllerApi *apiInstance = [[ClassControllerApi alloc] init];
+
+// 클래스에 학생 추가
+[apiInstance addStudentWith:classId
+    userId:userId
+              completionHandler: ^(MemberResponseDto output, NSError* error) {
+                            if (output) {
+                                NSLog(@"%@", output);
+                            }
+                            if (error) {
+                                NSLog(@"Error: %@", error);
+                            }
+                        }];
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-ClassController-addStudent-0-javascript">
+                              <pre class="prettyprint"><code class="language-js">var Api_ = require('_api_');
+
+var api = new Api_.ClassControllerApi()
+var classId = 789; // {{Long}} 
+var userId = 789; // {{Long}} 
+
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+api.addStudent(classId, userId, callback);
+</code></pre>
+                            </div>
+
+                            <!--<div class="tab-pane" id="examples-ClassController-addStudent-0-angular">
+              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+            </div>-->
+                            <div class="tab-pane" id="examples-ClassController-addStudent-0-csharp">
+                              <pre class="prettyprint"><code class="language-cs">using System;
+using System.Diagnostics;
+using IO.Swagger.Api;
+using IO.Swagger.Client;
+using IO.Swagger.Model;
+
+namespace Example
+{
+    public class addStudentExample
+    {
+        public void main()
+        {
+
+            var apiInstance = new ClassControllerApi();
+            var classId = 789;  // Long | 
+            var userId = 789;  // Long | 
+
+            try
+            {
+                // 클래스에 학생 추가
+                MemberResponseDto result = apiInstance.addStudent(classId, userId);
+                Debug.WriteLine(result);
+            }
+            catch (Exception e)
+            {
+                Debug.Print("Exception when calling ClassControllerApi.addStudent: " + e.Message );
+            }
+        }
+    }
+}
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-ClassController-addStudent-0-php">
+                              <pre class="prettyprint"><code class="language-php"><&#63;php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+$api_instance = new Swagger\Client\ApiClassControllerApi();
+$classId = 789; // Long | 
+$userId = 789; // Long | 
+
+try {
+    $result = $api_instance->addStudent($classId, $userId);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling ClassControllerApi->addStudent: ', $e->getMessage(), PHP_EOL;
+}
+?></code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-ClassController-addStudent-0-perl">
+                              <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
+use WWW::SwaggerClient::Configuration;
+use WWW::SwaggerClient::ClassControllerApi;
+
+my $api_instance = WWW::SwaggerClient::ClassControllerApi->new();
+my $classId = 789; # Long | 
+my $userId = 789; # Long | 
+
+eval { 
+    my $result = $api_instance->addStudent(classId => $classId, userId => $userId);
+    print Dumper($result);
+};
+if ($@) {
+    warn "Exception when calling ClassControllerApi->addStudent: $@\n";
+}</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-ClassController-addStudent-0-python">
+                              <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
+import time
+import swagger_client
+from swagger_client.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = swagger_client.ClassControllerApi()
+classId = 789 # Long | 
+userId = 789 # Long | 
+
+try: 
+    # 클래스에 학생 추가
+    api_response = api_instance.add_student(classId, userId)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling ClassControllerApi->addStudent: %s\n" % e)</code></pre>
+                            </div>
+                          </div>
+
+                          <h2>Parameters</h2>
+
+                            <div class="methodsubtabletitle">Path parameters</div>
+                            <table id="methodsubtable">
+                                <tr>
+                                  <th width="150px">Name</th>
+                                  <th>Description</th>
+                                </tr>
+                                  <tr><td style="width:150px;">class_id*</td>
+                                  <td>
+                                  
+                                  
+                                      <div id="d2e199_addStudent_classId">
+                                          <div class="json-schema-view">
+                                              <div class="primitive">
+                                                  <span class="type">
+                                                      Long
+                                                  </span>
+                                                      <span class="format">
+                                                          (int64)
+                                                      </span>
+                                  
+                                              </div>
+                                                  <div class="inner required">
+                                                      Required
+                                                  </div>
+                                          </div>
+                                      </div>
+                                  </td>
+                                  </tr>
+                                  <tr><td style="width:150px;">user_id*</td>
+                                  <td>
+                                  
+                                  
+                                      <div id="d2e199_addStudent_userId">
+                                          <div class="json-schema-view">
+                                              <div class="primitive">
+                                                  <span class="type">
+                                                      Long
+                                                  </span>
+                                                      <span class="format">
+                                                          (int64)
+                                                      </span>
+                                  
+                                              </div>
+                                                  <div class="inner required">
+                                                      Required
+                                                  </div>
+                                          </div>
+                                      </div>
+                                  </td>
+                                  </tr>
+                            </table>
+
+
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-addStudent-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-addStudent-200-schema">
+                                  <div id='responses-addStudent-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/MemberResponseDto"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-addStudent-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-addStudent-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-addStudent-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                      <hr>
                     <div id="api-ClassController-createClass">
                       <article id="api-ClassController-createClass-0" data-group="User" data-name="createClass" data-version="0">
                         <div class="pull-left">
@@ -2412,11 +2780,596 @@ except ApiException as e:
                         </article>
                       </div>
                       <hr>
+                    <div id="api-ClassController-deleteMemberById">
+                      <article id="api-ClassController-deleteMemberById-0" data-group="User" data-name="deleteMemberById" data-version="0">
+                        <div class="pull-left">
+                          <h1>deleteMemberById</h1>
+                          <p>해당 유저를 클래스에서 삭제</p>
+                        </div>
+                        <div class="pull-right"></div>
+                        <div class="clearfix"></div>
+                        <p></p>
+                        <p class="marked"></p>
+                        <p></p>
+                        <br />
+                        <pre class="prettyprint language-html prettyprinted" data-type="delete"><code><span class="pln">/api/classes/{class_id}/{user_id}</span></code></pre>
+                        <p>
+                          <h3>Usage and SDK Samples</h3>
+                        </p>
+                        <ul class="nav nav-tabs nav-tabs-examples">
+                          <li class="active"><a href="#examples-ClassController-deleteMemberById-0-curl">Curl</a></li>
+                          <li class=""><a href="#examples-ClassController-deleteMemberById-0-java">Java</a></li>
+                          <li class=""><a href="#examples-ClassController-deleteMemberById-0-android">Android</a></li>
+                          <!--<li class=""><a href="#examples-ClassController-deleteMemberById-0-groovy">Groovy</a></li>-->
+                          <li class=""><a href="#examples-ClassController-deleteMemberById-0-objc">Obj-C</a></li>
+                          <li class=""><a href="#examples-ClassController-deleteMemberById-0-javascript">JavaScript</a></li>
+                          <!--<li class=""><a href="#examples-ClassController-deleteMemberById-0-angular">Angular</a></li>-->
+                          <li class=""><a href="#examples-ClassController-deleteMemberById-0-csharp">C#</a></li>
+                          <li class=""><a href="#examples-ClassController-deleteMemberById-0-php">PHP</a></li>
+                          <li class=""><a href="#examples-ClassController-deleteMemberById-0-perl">Perl</a></li>
+                          <li class=""><a href="#examples-ClassController-deleteMemberById-0-python">Python</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-ClassController-deleteMemberById-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X DELETE\
+-H "Accept: application/json"\
+"http://localhost:8080/api/classes/{class_id}/{user_id}"</code></pre>
+                          </div>
+                          <div class="tab-pane" id="examples-ClassController-deleteMemberById-0-java">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
+import io.swagger.client.auth.*;
+import io.swagger.client.model.*;
+import io.swagger.client.api.ClassControllerApi;
+
+import java.io.File;
+import java.util.*;
+
+public class ClassControllerApiExample {
+
+    public static void main(String[] args) {
+        
+        ClassControllerApi apiInstance = new ClassControllerApi();
+        Long classId = 789; // Long | 
+        Long userId = 789; // Long | 
+        try {
+            MemberResponseDto result = apiInstance.deleteMemberById(classId, userId);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling ClassControllerApi#deleteMemberById");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+
+                          <div class="tab-pane" id="examples-ClassController-deleteMemberById-0-android">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.api.ClassControllerApi;
+
+public class ClassControllerApiExample {
+
+    public static void main(String[] args) {
+        ClassControllerApi apiInstance = new ClassControllerApi();
+        Long classId = 789; // Long | 
+        Long userId = 789; // Long | 
+        try {
+            MemberResponseDto result = apiInstance.deleteMemberById(classId, userId);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling ClassControllerApi#deleteMemberById");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+  <!--
+  <div class="tab-pane" id="examples-ClassController-deleteMemberById-0-groovy">
+  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+  </div> -->
+                            <div class="tab-pane" id="examples-ClassController-deleteMemberById-0-objc">
+                              <pre class="prettyprint"><code class="language-cpp">Long *classId = 789; // 
+Long *userId = 789; // 
+
+ClassControllerApi *apiInstance = [[ClassControllerApi alloc] init];
+
+// 해당 유저를 클래스에서 삭제
+[apiInstance deleteMemberByIdWith:classId
+    userId:userId
+              completionHandler: ^(MemberResponseDto output, NSError* error) {
+                            if (output) {
+                                NSLog(@"%@", output);
+                            }
+                            if (error) {
+                                NSLog(@"Error: %@", error);
+                            }
+                        }];
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-ClassController-deleteMemberById-0-javascript">
+                              <pre class="prettyprint"><code class="language-js">var Api_ = require('_api_');
+
+var api = new Api_.ClassControllerApi()
+var classId = 789; // {{Long}} 
+var userId = 789; // {{Long}} 
+
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+api.deleteMemberById(classId, userId, callback);
+</code></pre>
+                            </div>
+
+                            <!--<div class="tab-pane" id="examples-ClassController-deleteMemberById-0-angular">
+              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+            </div>-->
+                            <div class="tab-pane" id="examples-ClassController-deleteMemberById-0-csharp">
+                              <pre class="prettyprint"><code class="language-cs">using System;
+using System.Diagnostics;
+using IO.Swagger.Api;
+using IO.Swagger.Client;
+using IO.Swagger.Model;
+
+namespace Example
+{
+    public class deleteMemberByIdExample
+    {
+        public void main()
+        {
+
+            var apiInstance = new ClassControllerApi();
+            var classId = 789;  // Long | 
+            var userId = 789;  // Long | 
+
+            try
+            {
+                // 해당 유저를 클래스에서 삭제
+                MemberResponseDto result = apiInstance.deleteMemberById(classId, userId);
+                Debug.WriteLine(result);
+            }
+            catch (Exception e)
+            {
+                Debug.Print("Exception when calling ClassControllerApi.deleteMemberById: " + e.Message );
+            }
+        }
+    }
+}
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-ClassController-deleteMemberById-0-php">
+                              <pre class="prettyprint"><code class="language-php"><&#63;php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+$api_instance = new Swagger\Client\ApiClassControllerApi();
+$classId = 789; // Long | 
+$userId = 789; // Long | 
+
+try {
+    $result = $api_instance->deleteMemberById($classId, $userId);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling ClassControllerApi->deleteMemberById: ', $e->getMessage(), PHP_EOL;
+}
+?></code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-ClassController-deleteMemberById-0-perl">
+                              <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
+use WWW::SwaggerClient::Configuration;
+use WWW::SwaggerClient::ClassControllerApi;
+
+my $api_instance = WWW::SwaggerClient::ClassControllerApi->new();
+my $classId = 789; # Long | 
+my $userId = 789; # Long | 
+
+eval { 
+    my $result = $api_instance->deleteMemberById(classId => $classId, userId => $userId);
+    print Dumper($result);
+};
+if ($@) {
+    warn "Exception when calling ClassControllerApi->deleteMemberById: $@\n";
+}</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-ClassController-deleteMemberById-0-python">
+                              <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
+import time
+import swagger_client
+from swagger_client.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = swagger_client.ClassControllerApi()
+classId = 789 # Long | 
+userId = 789 # Long | 
+
+try: 
+    # 해당 유저를 클래스에서 삭제
+    api_response = api_instance.delete_member_by_id(classId, userId)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling ClassControllerApi->deleteMemberById: %s\n" % e)</code></pre>
+                            </div>
+                          </div>
+
+                          <h2>Parameters</h2>
+
+                            <div class="methodsubtabletitle">Path parameters</div>
+                            <table id="methodsubtable">
+                                <tr>
+                                  <th width="150px">Name</th>
+                                  <th>Description</th>
+                                </tr>
+                                  <tr><td style="width:150px;">class_id*</td>
+                                  <td>
+                                  
+                                  
+                                      <div id="d2e199_deleteMemberById_classId">
+                                          <div class="json-schema-view">
+                                              <div class="primitive">
+                                                  <span class="type">
+                                                      Long
+                                                  </span>
+                                                      <span class="format">
+                                                          (int64)
+                                                      </span>
+                                  
+                                              </div>
+                                                  <div class="inner required">
+                                                      Required
+                                                  </div>
+                                          </div>
+                                      </div>
+                                  </td>
+                                  </tr>
+                                  <tr><td style="width:150px;">user_id*</td>
+                                  <td>
+                                  
+                                  
+                                      <div id="d2e199_deleteMemberById_userId">
+                                          <div class="json-schema-view">
+                                              <div class="primitive">
+                                                  <span class="type">
+                                                      Long
+                                                  </span>
+                                                      <span class="format">
+                                                          (int64)
+                                                      </span>
+                                  
+                                              </div>
+                                                  <div class="inner required">
+                                                      Required
+                                                  </div>
+                                          </div>
+                                      </div>
+                                  </td>
+                                  </tr>
+                            </table>
+
+
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-deleteMemberById-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-deleteMemberById-200-schema">
+                                  <div id='responses-deleteMemberById-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/MemberResponseDto"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-deleteMemberById-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-deleteMemberById-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-deleteMemberById-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                      <hr>
+                    <div id="api-ClassController-findAllClass">
+                      <article id="api-ClassController-findAllClass-0" data-group="User" data-name="findAllClass" data-version="0">
+                        <div class="pull-left">
+                          <h1>findAllClass</h1>
+                          <p>모든 클래스 조회</p>
+                        </div>
+                        <div class="pull-right"></div>
+                        <div class="clearfix"></div>
+                        <p></p>
+                        <p class="marked"></p>
+                        <p></p>
+                        <br />
+                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/api/classes</span></code></pre>
+                        <p>
+                          <h3>Usage and SDK Samples</h3>
+                        </p>
+                        <ul class="nav nav-tabs nav-tabs-examples">
+                          <li class="active"><a href="#examples-ClassController-findAllClass-0-curl">Curl</a></li>
+                          <li class=""><a href="#examples-ClassController-findAllClass-0-java">Java</a></li>
+                          <li class=""><a href="#examples-ClassController-findAllClass-0-android">Android</a></li>
+                          <!--<li class=""><a href="#examples-ClassController-findAllClass-0-groovy">Groovy</a></li>-->
+                          <li class=""><a href="#examples-ClassController-findAllClass-0-objc">Obj-C</a></li>
+                          <li class=""><a href="#examples-ClassController-findAllClass-0-javascript">JavaScript</a></li>
+                          <!--<li class=""><a href="#examples-ClassController-findAllClass-0-angular">Angular</a></li>-->
+                          <li class=""><a href="#examples-ClassController-findAllClass-0-csharp">C#</a></li>
+                          <li class=""><a href="#examples-ClassController-findAllClass-0-php">PHP</a></li>
+                          <li class=""><a href="#examples-ClassController-findAllClass-0-perl">Perl</a></li>
+                          <li class=""><a href="#examples-ClassController-findAllClass-0-python">Python</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-ClassController-findAllClass-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X GET\
+-H "Accept: application/json"\
+"http://localhost:8080/api/classes"</code></pre>
+                          </div>
+                          <div class="tab-pane" id="examples-ClassController-findAllClass-0-java">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
+import io.swagger.client.auth.*;
+import io.swagger.client.model.*;
+import io.swagger.client.api.ClassControllerApi;
+
+import java.io.File;
+import java.util.*;
+
+public class ClassControllerApiExample {
+
+    public static void main(String[] args) {
+        
+        ClassControllerApi apiInstance = new ClassControllerApi();
+        try {
+            GetClassesResponseDto result = apiInstance.findAllClass();
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling ClassControllerApi#findAllClass");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+
+                          <div class="tab-pane" id="examples-ClassController-findAllClass-0-android">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.api.ClassControllerApi;
+
+public class ClassControllerApiExample {
+
+    public static void main(String[] args) {
+        ClassControllerApi apiInstance = new ClassControllerApi();
+        try {
+            GetClassesResponseDto result = apiInstance.findAllClass();
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling ClassControllerApi#findAllClass");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+  <!--
+  <div class="tab-pane" id="examples-ClassController-findAllClass-0-groovy">
+  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+  </div> -->
+                            <div class="tab-pane" id="examples-ClassController-findAllClass-0-objc">
+                              <pre class="prettyprint"><code class="language-cpp">
+ClassControllerApi *apiInstance = [[ClassControllerApi alloc] init];
+
+// 모든 클래스 조회
+[apiInstance findAllClassWithCompletionHandler: 
+              ^(GetClassesResponseDto output, NSError* error) {
+                            if (output) {
+                                NSLog(@"%@", output);
+                            }
+                            if (error) {
+                                NSLog(@"Error: %@", error);
+                            }
+                        }];
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-ClassController-findAllClass-0-javascript">
+                              <pre class="prettyprint"><code class="language-js">var Api_ = require('_api_');
+
+var api = new Api_.ClassControllerApi()
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+api.findAllClass(callback);
+</code></pre>
+                            </div>
+
+                            <!--<div class="tab-pane" id="examples-ClassController-findAllClass-0-angular">
+              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+            </div>-->
+                            <div class="tab-pane" id="examples-ClassController-findAllClass-0-csharp">
+                              <pre class="prettyprint"><code class="language-cs">using System;
+using System.Diagnostics;
+using IO.Swagger.Api;
+using IO.Swagger.Client;
+using IO.Swagger.Model;
+
+namespace Example
+{
+    public class findAllClassExample
+    {
+        public void main()
+        {
+
+            var apiInstance = new ClassControllerApi();
+
+            try
+            {
+                // 모든 클래스 조회
+                GetClassesResponseDto result = apiInstance.findAllClass();
+                Debug.WriteLine(result);
+            }
+            catch (Exception e)
+            {
+                Debug.Print("Exception when calling ClassControllerApi.findAllClass: " + e.Message );
+            }
+        }
+    }
+}
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-ClassController-findAllClass-0-php">
+                              <pre class="prettyprint"><code class="language-php"><&#63;php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+$api_instance = new Swagger\Client\ApiClassControllerApi();
+
+try {
+    $result = $api_instance->findAllClass();
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling ClassControllerApi->findAllClass: ', $e->getMessage(), PHP_EOL;
+}
+?></code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-ClassController-findAllClass-0-perl">
+                              <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
+use WWW::SwaggerClient::Configuration;
+use WWW::SwaggerClient::ClassControllerApi;
+
+my $api_instance = WWW::SwaggerClient::ClassControllerApi->new();
+
+eval { 
+    my $result = $api_instance->findAllClass();
+    print Dumper($result);
+};
+if ($@) {
+    warn "Exception when calling ClassControllerApi->findAllClass: $@\n";
+}</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-ClassController-findAllClass-0-python">
+                              <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
+import time
+import swagger_client
+from swagger_client.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = swagger_client.ClassControllerApi()
+
+try: 
+    # 모든 클래스 조회
+    api_response = api_instance.find_all_class()
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling ClassControllerApi->findAllClass: %s\n" % e)</code></pre>
+                            </div>
+                          </div>
+
+                          <h2>Parameters</h2>
+
+
+
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-findAllClass-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-findAllClass-200-schema">
+                                  <div id='responses-findAllClass-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/GetClassesResponseDto"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-findAllClass-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-findAllClass-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-findAllClass-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                      <hr>
                     <div id="api-ClassController-findClassesByMe">
                       <article id="api-ClassController-findClassesByMe-0" data-group="User" data-name="findClassesByMe" data-version="0">
                         <div class="pull-left">
                           <h1>findClassesByMe</h1>
-                          <p>접속한 회원의 클래스 목록 반환</p>
+                          <p>접속한 회원의 모든 클래스 정보 반환</p>
                         </div>
                         <div class="pull-right"></div>
                         <div class="clearfix"></div>
@@ -2498,7 +3451,7 @@ public class ClassControllerApiExample {
                               <pre class="prettyprint"><code class="language-cpp">
 ClassControllerApi *apiInstance = [[ClassControllerApi alloc] init];
 
-// 접속한 회원의 클래스 목록 반환
+// 접속한 회원의 모든 클래스 정보 반환
 [apiInstance findClassesByMeWithCompletionHandler: 
               ^(GetClassesResponseDto output, NSError* error) {
                             if (output) {
@@ -2547,7 +3500,7 @@ namespace Example
 
             try
             {
-                // 접속한 회원의 클래스 목록 반환
+                // 접속한 회원의 모든 클래스 정보 반환
                 GetClassesResponseDto result = apiInstance.findClassesByMe();
                 Debug.WriteLine(result);
             }
@@ -2603,7 +3556,7 @@ from pprint import pprint
 api_instance = swagger_client.ClassControllerApi()
 
 try: 
-    # 접속한 회원의 클래스 목록 반환
+    # 접속한 회원의 모든 클래스 정보 반환
     api_response = api_instance.find_classes_by_me()
     pprint(api_response)
 except ApiException as e:
@@ -2670,14 +3623,11 @@ except ApiException as e:
                         </article>
                       </div>
                       <hr>
-                  </section>
-                <section id="api-MemberController">
-                  <h1>MemberController</h1>
-                    <div id="api-MemberController-findMemberInfoByEmail">
-                      <article id="api-MemberController-findMemberInfoByEmail-0" data-group="User" data-name="findMemberInfoByEmail" data-version="0">
+                    <div id="api-ClassController-findOneClass">
+                      <article id="api-ClassController-findOneClass-0" data-group="User" data-name="findOneClass" data-version="0">
                         <div class="pull-left">
-                          <h1>findMemberInfoByEmail</h1>
-                          <p></p>
+                          <h1>findOneClass</h1>
+                          <p>특정 클래스 id 로 조회</p>
                         </div>
                         <div class="pull-right"></div>
                         <div class="clearfix"></div>
@@ -2685,85 +3635,86 @@ except ApiException as e:
                         <p class="marked"></p>
                         <p></p>
                         <br />
-                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/api/member/{email}</span></code></pre>
+                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/api/classes/{class_id}</span></code></pre>
                         <p>
                           <h3>Usage and SDK Samples</h3>
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
-                          <li class="active"><a href="#examples-MemberController-findMemberInfoByEmail-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-MemberController-findMemberInfoByEmail-0-java">Java</a></li>
-                          <li class=""><a href="#examples-MemberController-findMemberInfoByEmail-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-MemberController-findMemberInfoByEmail-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-MemberController-findMemberInfoByEmail-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-MemberController-findMemberInfoByEmail-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-MemberController-findMemberInfoByEmail-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-MemberController-findMemberInfoByEmail-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-MemberController-findMemberInfoByEmail-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-MemberController-findMemberInfoByEmail-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-MemberController-findMemberInfoByEmail-0-python">Python</a></li>
+                          <li class="active"><a href="#examples-ClassController-findOneClass-0-curl">Curl</a></li>
+                          <li class=""><a href="#examples-ClassController-findOneClass-0-java">Java</a></li>
+                          <li class=""><a href="#examples-ClassController-findOneClass-0-android">Android</a></li>
+                          <!--<li class=""><a href="#examples-ClassController-findOneClass-0-groovy">Groovy</a></li>-->
+                          <li class=""><a href="#examples-ClassController-findOneClass-0-objc">Obj-C</a></li>
+                          <li class=""><a href="#examples-ClassController-findOneClass-0-javascript">JavaScript</a></li>
+                          <!--<li class=""><a href="#examples-ClassController-findOneClass-0-angular">Angular</a></li>-->
+                          <li class=""><a href="#examples-ClassController-findOneClass-0-csharp">C#</a></li>
+                          <li class=""><a href="#examples-ClassController-findOneClass-0-php">PHP</a></li>
+                          <li class=""><a href="#examples-ClassController-findOneClass-0-perl">Perl</a></li>
+                          <li class=""><a href="#examples-ClassController-findOneClass-0-python">Python</a></li>
                         </ul>
 
                         <div class="tab-content">
-                          <div class="tab-pane active" id="examples-MemberController-findMemberInfoByEmail-0-curl">
+                          <div class="tab-pane active" id="examples-ClassController-findOneClass-0-curl">
                            <pre class="prettyprint"><code class="language-bsh">curl -X GET\
 -H "Accept: application/json"\
-"http://localhost:8080/api/member/{email}"</code></pre>
+"http://localhost:8080/api/classes/{class_id}"</code></pre>
                           </div>
-                          <div class="tab-pane" id="examples-MemberController-findMemberInfoByEmail-0-java">
+                          <div class="tab-pane" id="examples-ClassController-findOneClass-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
 import io.swagger.client.auth.*;
 import io.swagger.client.model.*;
-import io.swagger.client.api.MemberControllerApi;
+import io.swagger.client.api.ClassControllerApi;
 
 import java.io.File;
 import java.util.*;
 
-public class MemberControllerApiExample {
+public class ClassControllerApiExample {
 
     public static void main(String[] args) {
         
-        MemberControllerApi apiInstance = new MemberControllerApi();
-        String email = email_example; // String | 
+        ClassControllerApi apiInstance = new ClassControllerApi();
+        Long classId = 789; // Long | 
         try {
-            MemberResponseDto result = apiInstance.findMemberInfoByEmail(email);
+            GetOneClassResponseDto result = apiInstance.findOneClass(classId);
             System.out.println(result);
         } catch (ApiException e) {
-            System.err.println("Exception when calling MemberControllerApi#findMemberInfoByEmail");
+            System.err.println("Exception when calling ClassControllerApi#findOneClass");
             e.printStackTrace();
         }
     }
 }</code></pre>
                           </div>
 
-                          <div class="tab-pane" id="examples-MemberController-findMemberInfoByEmail-0-android">
-                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.api.MemberControllerApi;
+                          <div class="tab-pane" id="examples-ClassController-findOneClass-0-android">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.api.ClassControllerApi;
 
-public class MemberControllerApiExample {
+public class ClassControllerApiExample {
 
     public static void main(String[] args) {
-        MemberControllerApi apiInstance = new MemberControllerApi();
-        String email = email_example; // String | 
+        ClassControllerApi apiInstance = new ClassControllerApi();
+        Long classId = 789; // Long | 
         try {
-            MemberResponseDto result = apiInstance.findMemberInfoByEmail(email);
+            GetOneClassResponseDto result = apiInstance.findOneClass(classId);
             System.out.println(result);
         } catch (ApiException e) {
-            System.err.println("Exception when calling MemberControllerApi#findMemberInfoByEmail");
+            System.err.println("Exception when calling ClassControllerApi#findOneClass");
             e.printStackTrace();
         }
     }
 }</code></pre>
                           </div>
   <!--
-  <div class="tab-pane" id="examples-MemberController-findMemberInfoByEmail-0-groovy">
+  <div class="tab-pane" id="examples-ClassController-findOneClass-0-groovy">
   <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
   </div> -->
-                            <div class="tab-pane" id="examples-MemberController-findMemberInfoByEmail-0-objc">
-                              <pre class="prettyprint"><code class="language-cpp">String *email = email_example; // 
+                            <div class="tab-pane" id="examples-ClassController-findOneClass-0-objc">
+                              <pre class="prettyprint"><code class="language-cpp">Long *classId = 789; // 
 
-MemberControllerApi *apiInstance = [[MemberControllerApi alloc] init];
+ClassControllerApi *apiInstance = [[ClassControllerApi alloc] init];
 
-[apiInstance findMemberInfoByEmailWith:email
-              completionHandler: ^(MemberResponseDto output, NSError* error) {
+// 특정 클래스 id 로 조회
+[apiInstance findOneClassWith:classId
+              completionHandler: ^(GetOneClassResponseDto output, NSError* error) {
                             if (output) {
                                 NSLog(@"%@", output);
                             }
@@ -2774,11 +3725,11 @@ MemberControllerApi *apiInstance = [[MemberControllerApi alloc] init];
 </code></pre>
                             </div>
 
-                            <div class="tab-pane" id="examples-MemberController-findMemberInfoByEmail-0-javascript">
+                            <div class="tab-pane" id="examples-ClassController-findOneClass-0-javascript">
                               <pre class="prettyprint"><code class="language-js">var Api_ = require('_api_');
 
-var api = new Api_.MemberControllerApi()
-var email = email_example; // {{String}} 
+var api = new Api_.ClassControllerApi()
+var classId = 789; // {{Long}} 
 
 var callback = function(error, data, response) {
   if (error) {
@@ -2787,14 +3738,14 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-api.findMemberInfoByEmail(email, callback);
+api.findOneClass(classId, callback);
 </code></pre>
                             </div>
 
-                            <!--<div class="tab-pane" id="examples-MemberController-findMemberInfoByEmail-0-angular">
+                            <!--<div class="tab-pane" id="examples-ClassController-findOneClass-0-angular">
               <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
             </div>-->
-                            <div class="tab-pane" id="examples-MemberController-findMemberInfoByEmail-0-csharp">
+                            <div class="tab-pane" id="examples-ClassController-findOneClass-0-csharp">
                               <pre class="prettyprint"><code class="language-cs">using System;
 using System.Diagnostics;
 using IO.Swagger.Api;
@@ -2803,22 +3754,23 @@ using IO.Swagger.Model;
 
 namespace Example
 {
-    public class findMemberInfoByEmailExample
+    public class findOneClassExample
     {
         public void main()
         {
 
-            var apiInstance = new MemberControllerApi();
-            var email = email_example;  // String | 
+            var apiInstance = new ClassControllerApi();
+            var classId = 789;  // Long | 
 
             try
             {
-                MemberResponseDto result = apiInstance.findMemberInfoByEmail(email);
+                // 특정 클래스 id 로 조회
+                GetOneClassResponseDto result = apiInstance.findOneClass(classId);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
             {
-                Debug.Print("Exception when calling MemberControllerApi.findMemberInfoByEmail: " + e.Message );
+                Debug.Print("Exception when calling ClassControllerApi.findOneClass: " + e.Message );
             }
         }
     }
@@ -2826,40 +3778,40 @@ namespace Example
 </code></pre>
                             </div>
 
-                            <div class="tab-pane" id="examples-MemberController-findMemberInfoByEmail-0-php">
+                            <div class="tab-pane" id="examples-ClassController-findOneClass-0-php">
                               <pre class="prettyprint"><code class="language-php"><&#63;php
 require_once(__DIR__ . '/vendor/autoload.php');
 
-$api_instance = new Swagger\Client\ApiMemberControllerApi();
-$email = email_example; // String | 
+$api_instance = new Swagger\Client\ApiClassControllerApi();
+$classId = 789; // Long | 
 
 try {
-    $result = $api_instance->findMemberInfoByEmail($email);
+    $result = $api_instance->findOneClass($classId);
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling MemberControllerApi->findMemberInfoByEmail: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling ClassControllerApi->findOneClass: ', $e->getMessage(), PHP_EOL;
 }
 ?></code></pre>
                             </div>
 
-                            <div class="tab-pane" id="examples-MemberController-findMemberInfoByEmail-0-perl">
+                            <div class="tab-pane" id="examples-ClassController-findOneClass-0-perl">
                               <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
 use WWW::SwaggerClient::Configuration;
-use WWW::SwaggerClient::MemberControllerApi;
+use WWW::SwaggerClient::ClassControllerApi;
 
-my $api_instance = WWW::SwaggerClient::MemberControllerApi->new();
-my $email = email_example; # String | 
+my $api_instance = WWW::SwaggerClient::ClassControllerApi->new();
+my $classId = 789; # Long | 
 
 eval { 
-    my $result = $api_instance->findMemberInfoByEmail(email => $email);
+    my $result = $api_instance->findOneClass(classId => $classId);
     print Dumper($result);
 };
 if ($@) {
-    warn "Exception when calling MemberControllerApi->findMemberInfoByEmail: $@\n";
+    warn "Exception when calling ClassControllerApi->findOneClass: $@\n";
 }</code></pre>
                             </div>
 
-                            <div class="tab-pane" id="examples-MemberController-findMemberInfoByEmail-0-python">
+                            <div class="tab-pane" id="examples-ClassController-findOneClass-0-python">
                               <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
 import time
 import swagger_client
@@ -2867,14 +3819,15 @@ from swagger_client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
-api_instance = swagger_client.MemberControllerApi()
-email = email_example # String | 
+api_instance = swagger_client.ClassControllerApi()
+classId = 789 # Long | 
 
 try: 
-    api_response = api_instance.find_member_info_by_email(email)
+    # 특정 클래스 id 로 조회
+    api_response = api_instance.find_one_class(classId)
     pprint(api_response)
 except ApiException as e:
-    print("Exception when calling MemberControllerApi->findMemberInfoByEmail: %s\n" % e)</code></pre>
+    print("Exception when calling ClassControllerApi->findOneClass: %s\n" % e)</code></pre>
                             </div>
                           </div>
 
@@ -2886,16 +3839,19 @@ except ApiException as e:
                                   <th width="150px">Name</th>
                                   <th>Description</th>
                                 </tr>
-                                  <tr><td style="width:150px;">email*</td>
+                                  <tr><td style="width:150px;">class_id*</td>
                                   <td>
                                   
                                   
-                                      <div id="d2e199_findMemberInfoByEmail_email">
+                                      <div id="d2e199_findOneClass_classId">
                                           <div class="json-schema-view">
                                               <div class="primitive">
                                                   <span class="type">
-                                                      String
+                                                      Long
                                                   </span>
+                                                      <span class="format">
+                                                          (int64)
+                                                      </span>
                                   
                                               </div>
                                                   <div class="inner required">
@@ -2916,14 +3872,14 @@ except ApiException as e:
 
                             <ul class="nav nav-tabs nav-tabs-examples" >
                                 <li class="active">
-                                  <a data-toggle="tab" href="#responses-findMemberInfoByEmail-200-schema">Schema</a>
+                                  <a data-toggle="tab" href="#responses-findOneClass-200-schema">Schema</a>
                                 </li>
 
                             </ul>
 
                             <div class="tab-content" style='margin-bottom: 10px;'>
-                                <div class="tab-pane active" id="responses-findMemberInfoByEmail-200-schema">
-                                  <div id='responses-findMemberInfoByEmail-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                <div class="tab-pane active" id="responses-findOneClass-200-schema">
+                                  <div id='responses-findOneClass-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
                                     <script>
                                       $(document).ready(function() {
                                         var schemaWrapper = {
@@ -2931,7 +3887,7 @@ except ApiException as e:
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/MemberResponseDto"
+        "$ref" : "#/components/schemas/GetOneClassResponseDto"
       }
     }
   }
@@ -2949,20 +3905,319 @@ except ApiException as e:
 
                                         //console.log(JSON.stringify(schema));
                                         var view = new JSONSchemaView(schema, 3);
-                                        $('#responses-findMemberInfoByEmail-200-schema-data').val(stringify(schema));
-                                        var result = $('#responses-findMemberInfoByEmail-200-schema-200');
+                                        $('#responses-findOneClass-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-findOneClass-200-schema-200');
                                         result.empty();
                                         result.append(view.render());
                                       });
                                     </script>
                                   </div>
-                                  <input id='responses-findMemberInfoByEmail-200-schema-data' type='hidden' value=''></input>
+                                  <input id='responses-findOneClass-200-schema-data' type='hidden' value=''></input>
                                 </div>
                             </div>
 
                         </article>
                       </div>
                       <hr>
+                    <div id="api-ClassController-findStudentByClass">
+                      <article id="api-ClassController-findStudentByClass-0" data-group="User" data-name="findStudentByClass" data-version="0">
+                        <div class="pull-left">
+                          <h1>findStudentByClass</h1>
+                          <p>클래스 id로 클래스에 속한 사용자 정보 반환</p>
+                        </div>
+                        <div class="pull-right"></div>
+                        <div class="clearfix"></div>
+                        <p></p>
+                        <p class="marked"></p>
+                        <p></p>
+                        <br />
+                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/api/classes/user/{class_id}</span></code></pre>
+                        <p>
+                          <h3>Usage and SDK Samples</h3>
+                        </p>
+                        <ul class="nav nav-tabs nav-tabs-examples">
+                          <li class="active"><a href="#examples-ClassController-findStudentByClass-0-curl">Curl</a></li>
+                          <li class=""><a href="#examples-ClassController-findStudentByClass-0-java">Java</a></li>
+                          <li class=""><a href="#examples-ClassController-findStudentByClass-0-android">Android</a></li>
+                          <!--<li class=""><a href="#examples-ClassController-findStudentByClass-0-groovy">Groovy</a></li>-->
+                          <li class=""><a href="#examples-ClassController-findStudentByClass-0-objc">Obj-C</a></li>
+                          <li class=""><a href="#examples-ClassController-findStudentByClass-0-javascript">JavaScript</a></li>
+                          <!--<li class=""><a href="#examples-ClassController-findStudentByClass-0-angular">Angular</a></li>-->
+                          <li class=""><a href="#examples-ClassController-findStudentByClass-0-csharp">C#</a></li>
+                          <li class=""><a href="#examples-ClassController-findStudentByClass-0-php">PHP</a></li>
+                          <li class=""><a href="#examples-ClassController-findStudentByClass-0-perl">Perl</a></li>
+                          <li class=""><a href="#examples-ClassController-findStudentByClass-0-python">Python</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-ClassController-findStudentByClass-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X GET\
+-H "Accept: application/json"\
+"http://localhost:8080/api/classes/user/{class_id}"</code></pre>
+                          </div>
+                          <div class="tab-pane" id="examples-ClassController-findStudentByClass-0-java">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
+import io.swagger.client.auth.*;
+import io.swagger.client.model.*;
+import io.swagger.client.api.ClassControllerApi;
+
+import java.io.File;
+import java.util.*;
+
+public class ClassControllerApiExample {
+
+    public static void main(String[] args) {
+        
+        ClassControllerApi apiInstance = new ClassControllerApi();
+        Long classId = 789; // Long | 
+        try {
+            GetStudentResponseDto result = apiInstance.findStudentByClass(classId);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling ClassControllerApi#findStudentByClass");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+
+                          <div class="tab-pane" id="examples-ClassController-findStudentByClass-0-android">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.api.ClassControllerApi;
+
+public class ClassControllerApiExample {
+
+    public static void main(String[] args) {
+        ClassControllerApi apiInstance = new ClassControllerApi();
+        Long classId = 789; // Long | 
+        try {
+            GetStudentResponseDto result = apiInstance.findStudentByClass(classId);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling ClassControllerApi#findStudentByClass");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+  <!--
+  <div class="tab-pane" id="examples-ClassController-findStudentByClass-0-groovy">
+  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+  </div> -->
+                            <div class="tab-pane" id="examples-ClassController-findStudentByClass-0-objc">
+                              <pre class="prettyprint"><code class="language-cpp">Long *classId = 789; // 
+
+ClassControllerApi *apiInstance = [[ClassControllerApi alloc] init];
+
+// 클래스 id로 클래스에 속한 사용자 정보 반환
+[apiInstance findStudentByClassWith:classId
+              completionHandler: ^(GetStudentResponseDto output, NSError* error) {
+                            if (output) {
+                                NSLog(@"%@", output);
+                            }
+                            if (error) {
+                                NSLog(@"Error: %@", error);
+                            }
+                        }];
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-ClassController-findStudentByClass-0-javascript">
+                              <pre class="prettyprint"><code class="language-js">var Api_ = require('_api_');
+
+var api = new Api_.ClassControllerApi()
+var classId = 789; // {{Long}} 
+
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+api.findStudentByClass(classId, callback);
+</code></pre>
+                            </div>
+
+                            <!--<div class="tab-pane" id="examples-ClassController-findStudentByClass-0-angular">
+              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+            </div>-->
+                            <div class="tab-pane" id="examples-ClassController-findStudentByClass-0-csharp">
+                              <pre class="prettyprint"><code class="language-cs">using System;
+using System.Diagnostics;
+using IO.Swagger.Api;
+using IO.Swagger.Client;
+using IO.Swagger.Model;
+
+namespace Example
+{
+    public class findStudentByClassExample
+    {
+        public void main()
+        {
+
+            var apiInstance = new ClassControllerApi();
+            var classId = 789;  // Long | 
+
+            try
+            {
+                // 클래스 id로 클래스에 속한 사용자 정보 반환
+                GetStudentResponseDto result = apiInstance.findStudentByClass(classId);
+                Debug.WriteLine(result);
+            }
+            catch (Exception e)
+            {
+                Debug.Print("Exception when calling ClassControllerApi.findStudentByClass: " + e.Message );
+            }
+        }
+    }
+}
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-ClassController-findStudentByClass-0-php">
+                              <pre class="prettyprint"><code class="language-php"><&#63;php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+$api_instance = new Swagger\Client\ApiClassControllerApi();
+$classId = 789; // Long | 
+
+try {
+    $result = $api_instance->findStudentByClass($classId);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling ClassControllerApi->findStudentByClass: ', $e->getMessage(), PHP_EOL;
+}
+?></code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-ClassController-findStudentByClass-0-perl">
+                              <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
+use WWW::SwaggerClient::Configuration;
+use WWW::SwaggerClient::ClassControllerApi;
+
+my $api_instance = WWW::SwaggerClient::ClassControllerApi->new();
+my $classId = 789; # Long | 
+
+eval { 
+    my $result = $api_instance->findStudentByClass(classId => $classId);
+    print Dumper($result);
+};
+if ($@) {
+    warn "Exception when calling ClassControllerApi->findStudentByClass: $@\n";
+}</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-ClassController-findStudentByClass-0-python">
+                              <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
+import time
+import swagger_client
+from swagger_client.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = swagger_client.ClassControllerApi()
+classId = 789 # Long | 
+
+try: 
+    # 클래스 id로 클래스에 속한 사용자 정보 반환
+    api_response = api_instance.find_student_by_class(classId)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling ClassControllerApi->findStudentByClass: %s\n" % e)</code></pre>
+                            </div>
+                          </div>
+
+                          <h2>Parameters</h2>
+
+                            <div class="methodsubtabletitle">Path parameters</div>
+                            <table id="methodsubtable">
+                                <tr>
+                                  <th width="150px">Name</th>
+                                  <th>Description</th>
+                                </tr>
+                                  <tr><td style="width:150px;">class_id*</td>
+                                  <td>
+                                  
+                                  
+                                      <div id="d2e199_findStudentByClass_classId">
+                                          <div class="json-schema-view">
+                                              <div class="primitive">
+                                                  <span class="type">
+                                                      Long
+                                                  </span>
+                                                      <span class="format">
+                                                          (int64)
+                                                      </span>
+                                  
+                                              </div>
+                                                  <div class="inner required">
+                                                      Required
+                                                  </div>
+                                          </div>
+                                      </div>
+                                  </td>
+                                  </tr>
+                            </table>
+
+
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-findStudentByClass-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-findStudentByClass-200-schema">
+                                  <div id='responses-findStudentByClass-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/GetStudentResponseDto"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-findStudentByClass-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-findStudentByClass-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-findStudentByClass-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                      <hr>
+                  </section>
+                <section id="api-MemberController">
+                  <h1>MemberController</h1>
                     <div id="api-MemberController-findMemberInfoById">
                       <article id="api-MemberController-findMemberInfoById-0" data-group="User" data-name="findMemberInfoById" data-version="0">
                         <div class="pull-left">
@@ -3212,6 +4467,296 @@ except ApiException as e:
                                     </script>
                                   </div>
                                   <input id='responses-findMemberInfoById-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                      <hr>
+                    <div id="api-MemberController-findMemberInfoByUsername">
+                      <article id="api-MemberController-findMemberInfoByUsername-0" data-group="User" data-name="findMemberInfoByUsername" data-version="0">
+                        <div class="pull-left">
+                          <h1>findMemberInfoByUsername</h1>
+                          <p></p>
+                        </div>
+                        <div class="pull-right"></div>
+                        <div class="clearfix"></div>
+                        <p></p>
+                        <p class="marked"></p>
+                        <p></p>
+                        <br />
+                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/api/member/{username}</span></code></pre>
+                        <p>
+                          <h3>Usage and SDK Samples</h3>
+                        </p>
+                        <ul class="nav nav-tabs nav-tabs-examples">
+                          <li class="active"><a href="#examples-MemberController-findMemberInfoByUsername-0-curl">Curl</a></li>
+                          <li class=""><a href="#examples-MemberController-findMemberInfoByUsername-0-java">Java</a></li>
+                          <li class=""><a href="#examples-MemberController-findMemberInfoByUsername-0-android">Android</a></li>
+                          <!--<li class=""><a href="#examples-MemberController-findMemberInfoByUsername-0-groovy">Groovy</a></li>-->
+                          <li class=""><a href="#examples-MemberController-findMemberInfoByUsername-0-objc">Obj-C</a></li>
+                          <li class=""><a href="#examples-MemberController-findMemberInfoByUsername-0-javascript">JavaScript</a></li>
+                          <!--<li class=""><a href="#examples-MemberController-findMemberInfoByUsername-0-angular">Angular</a></li>-->
+                          <li class=""><a href="#examples-MemberController-findMemberInfoByUsername-0-csharp">C#</a></li>
+                          <li class=""><a href="#examples-MemberController-findMemberInfoByUsername-0-php">PHP</a></li>
+                          <li class=""><a href="#examples-MemberController-findMemberInfoByUsername-0-perl">Perl</a></li>
+                          <li class=""><a href="#examples-MemberController-findMemberInfoByUsername-0-python">Python</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-MemberController-findMemberInfoByUsername-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X GET\
+-H "Accept: application/json"\
+"http://localhost:8080/api/member/{username}"</code></pre>
+                          </div>
+                          <div class="tab-pane" id="examples-MemberController-findMemberInfoByUsername-0-java">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
+import io.swagger.client.auth.*;
+import io.swagger.client.model.*;
+import io.swagger.client.api.MemberControllerApi;
+
+import java.io.File;
+import java.util.*;
+
+public class MemberControllerApiExample {
+
+    public static void main(String[] args) {
+        
+        MemberControllerApi apiInstance = new MemberControllerApi();
+        String username = username_example; // String | 
+        try {
+            MemberResponseDto result = apiInstance.findMemberInfoByUsername(username);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling MemberControllerApi#findMemberInfoByUsername");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+
+                          <div class="tab-pane" id="examples-MemberController-findMemberInfoByUsername-0-android">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.api.MemberControllerApi;
+
+public class MemberControllerApiExample {
+
+    public static void main(String[] args) {
+        MemberControllerApi apiInstance = new MemberControllerApi();
+        String username = username_example; // String | 
+        try {
+            MemberResponseDto result = apiInstance.findMemberInfoByUsername(username);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling MemberControllerApi#findMemberInfoByUsername");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+  <!--
+  <div class="tab-pane" id="examples-MemberController-findMemberInfoByUsername-0-groovy">
+  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+  </div> -->
+                            <div class="tab-pane" id="examples-MemberController-findMemberInfoByUsername-0-objc">
+                              <pre class="prettyprint"><code class="language-cpp">String *username = username_example; // 
+
+MemberControllerApi *apiInstance = [[MemberControllerApi alloc] init];
+
+[apiInstance findMemberInfoByUsernameWith:username
+              completionHandler: ^(MemberResponseDto output, NSError* error) {
+                            if (output) {
+                                NSLog(@"%@", output);
+                            }
+                            if (error) {
+                                NSLog(@"Error: %@", error);
+                            }
+                        }];
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-MemberController-findMemberInfoByUsername-0-javascript">
+                              <pre class="prettyprint"><code class="language-js">var Api_ = require('_api_');
+
+var api = new Api_.MemberControllerApi()
+var username = username_example; // {{String}} 
+
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+api.findMemberInfoByUsername(username, callback);
+</code></pre>
+                            </div>
+
+                            <!--<div class="tab-pane" id="examples-MemberController-findMemberInfoByUsername-0-angular">
+              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+            </div>-->
+                            <div class="tab-pane" id="examples-MemberController-findMemberInfoByUsername-0-csharp">
+                              <pre class="prettyprint"><code class="language-cs">using System;
+using System.Diagnostics;
+using IO.Swagger.Api;
+using IO.Swagger.Client;
+using IO.Swagger.Model;
+
+namespace Example
+{
+    public class findMemberInfoByUsernameExample
+    {
+        public void main()
+        {
+
+            var apiInstance = new MemberControllerApi();
+            var username = username_example;  // String | 
+
+            try
+            {
+                MemberResponseDto result = apiInstance.findMemberInfoByUsername(username);
+                Debug.WriteLine(result);
+            }
+            catch (Exception e)
+            {
+                Debug.Print("Exception when calling MemberControllerApi.findMemberInfoByUsername: " + e.Message );
+            }
+        }
+    }
+}
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-MemberController-findMemberInfoByUsername-0-php">
+                              <pre class="prettyprint"><code class="language-php"><&#63;php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+$api_instance = new Swagger\Client\ApiMemberControllerApi();
+$username = username_example; // String | 
+
+try {
+    $result = $api_instance->findMemberInfoByUsername($username);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling MemberControllerApi->findMemberInfoByUsername: ', $e->getMessage(), PHP_EOL;
+}
+?></code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-MemberController-findMemberInfoByUsername-0-perl">
+                              <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
+use WWW::SwaggerClient::Configuration;
+use WWW::SwaggerClient::MemberControllerApi;
+
+my $api_instance = WWW::SwaggerClient::MemberControllerApi->new();
+my $username = username_example; # String | 
+
+eval { 
+    my $result = $api_instance->findMemberInfoByUsername(username => $username);
+    print Dumper($result);
+};
+if ($@) {
+    warn "Exception when calling MemberControllerApi->findMemberInfoByUsername: $@\n";
+}</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-MemberController-findMemberInfoByUsername-0-python">
+                              <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
+import time
+import swagger_client
+from swagger_client.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = swagger_client.MemberControllerApi()
+username = username_example # String | 
+
+try: 
+    api_response = api_instance.find_member_info_by_username(username)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling MemberControllerApi->findMemberInfoByUsername: %s\n" % e)</code></pre>
+                            </div>
+                          </div>
+
+                          <h2>Parameters</h2>
+
+                            <div class="methodsubtabletitle">Path parameters</div>
+                            <table id="methodsubtable">
+                                <tr>
+                                  <th width="150px">Name</th>
+                                  <th>Description</th>
+                                </tr>
+                                  <tr><td style="width:150px;">username*</td>
+                                  <td>
+                                  
+                                  
+                                      <div id="d2e199_findMemberInfoByUsername_username">
+                                          <div class="json-schema-view">
+                                              <div class="primitive">
+                                                  <span class="type">
+                                                      String
+                                                  </span>
+                                  
+                                              </div>
+                                                  <div class="inner required">
+                                                      Required
+                                                  </div>
+                                          </div>
+                                      </div>
+                                  </td>
+                                  </tr>
+                            </table>
+
+
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-findMemberInfoByUsername-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-findMemberInfoByUsername-200-schema">
+                                  <div id='responses-findMemberInfoByUsername-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/MemberResponseDto"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-findMemberInfoByUsername-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-findMemberInfoByUsername-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-findMemberInfoByUsername-200-schema-data' type='hidden' value=''></input>
                                 </div>
                             </div>
 
