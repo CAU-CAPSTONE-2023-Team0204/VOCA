@@ -24,4 +24,13 @@ public class MemberClass {
     @JoinColumn(name = "class_id")
     private UserClass userClass;
 
+    public void addMember (Member member){
+        this.member = member;
+        member.getMemberClassList().add(this);
+    }
+
+    public void addClass(UserClass userClass){
+        this.userClass = userClass;
+        userClass.getMemberClassList().add(this);
+    }
 }

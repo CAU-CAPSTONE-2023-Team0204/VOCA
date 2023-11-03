@@ -33,7 +33,7 @@ public class VocabList {
 
     @JsonBackReference
     @OneToMany(mappedBy = "vocabList")
-    private List<VocabListContent>  vocabListContents = new ArrayList<VocabListContent>();
+    private List<VocabListContent>  vocabListContents = new ArrayList<>();
 
 
 }

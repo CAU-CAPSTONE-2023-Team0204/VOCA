@@ -40,13 +40,13 @@ public class ClassService {
 
         // 학생들의 id 명단만큼 memberClass 생성, id로 member 검색 후 memberClass에 넣기.
         // 이후 userClass 도 넣고 DB에 memberClass 를 저장한다.
-        for(String member : request.getMembers()){
+        for(String username : request.getMembers()){
             MemberClass memberClass = new MemberClass();
-            Member member1= memberRepository.findByUsername(member)
-                    .orElseThrow(() -> new UsernameNotFoundException(member + " -> 데이터베이스에서 찾을 수 없습니다."));
+            Member member= memberRepository.findByUsername(username)
+                    .orElseThrow(() -> new UsernameNotFoundException(username + " -> 데이터베이스에서 찾을 수 없습니다."));
 
-            userclass.addMemberClass(memberClass);
-            member1.addMemberClass(memberClass);
+            memberClass.addClass(userclass);
+            memberClass.addMember(member);
             memberClassRepository.save(memberClass);
         }
 
@@ -116,8 +116,9 @@ public class ClassService {
         if(memberClassRepository.existsByMemberAndUserClass(member, userClass)) throw new RuntimeException("이미 유저가 해당 클래스에 존재합니다.");
 
         MemberClass memberClass = new MemberClass();
-        userClass.addMemberClass(memberClass);
-        member.addMemberClass(memberClass);
+
+        memberClass.addMember(member);
+        memberClass.addClass(userClass);
         memberClassRepository.save(memberClass);
         MemberResponseDto memberResponseDto = MemberResponseDto.of(member);
 
