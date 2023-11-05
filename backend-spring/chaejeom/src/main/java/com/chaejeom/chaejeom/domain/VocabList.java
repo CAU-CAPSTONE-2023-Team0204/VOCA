@@ -2,10 +2,7 @@ package com.chaejeom.chaejeom.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +12,7 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @AllArgsConstructor
+@Builder
 public class VocabList {
 
     @Id
@@ -22,7 +20,7 @@ public class VocabList {
     @Column(name = "voca_list_id")
     private Long id;
 
-    @Column(nullable = false, name = "voca_list_name")
+    @Column(nullable = false, name = "voca_list_name", unique = true)
     private String name;
 
     @Column(name = "description")

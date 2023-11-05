@@ -5,6 +5,7 @@ import com.chaejeom.chaejeom.dto.MemberResponseDto;
 import com.chaejeom.chaejeom.dto.TokenDto;
 import com.chaejeom.chaejeom.dto.TokenRequestDto;
 import com.chaejeom.chaejeom.service.AuthService;
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -30,6 +31,9 @@ public class AuthController {
         return ResponseEntity.ok(authService.login(memberRequestDto));
     }
 
+    @Operation(
+            summary = "엑세스 토큰 만료시 토큰 재발급"
+    )
     @PostMapping("/reissue")
     public ResponseEntity<TokenDto> reissue(@RequestBody TokenRequestDto tokenRequestDto) {
         return ResponseEntity.ok(authService.reissue(tokenRequestDto));

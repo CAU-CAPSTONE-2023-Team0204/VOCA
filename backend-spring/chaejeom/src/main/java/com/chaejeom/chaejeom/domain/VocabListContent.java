@@ -1,5 +1,7 @@
 package com.chaejeom.chaejeom.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -25,6 +27,8 @@ public class VocabListContent {
     @Column(name = "meaning_eng")
     private String meaning_eng;
 
+    @JsonIgnore
+    @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "voca_list_id")
     private VocabList vocabList;
