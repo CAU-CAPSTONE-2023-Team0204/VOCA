@@ -47,7 +47,7 @@ def plt_imshow(title='image', img=None, figsize=(8 ,5)):
 
 
 # 로컬 이미지 파일의 경로
-image_path = 'c:/Users/SH/Desktop/CAU-CAPSTONE/VOCA/English_OCR/handwriting5.jpeg'
+image_path = 'c:/Users/SH/Desktop/CAU-CAPSTONE/VOCA/English_OCR/data/handwriting5.jpeg'
 
 # 이미지 파일을 읽어옵니다.
 org_image = cv2.imread(image_path,cv2.IMREAD_COLOR)
