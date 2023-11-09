@@ -1,5 +1,6 @@
 package com.chaejeom.chaejeom.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -16,13 +17,20 @@ public class TestContent {
     private Long id;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "question_type",nullable = false, length = 30)
+    @Column(name = "question_type",nullable = false)
     private QuestionType type;
 
-    @Column
-    private int score;
+    private String question;
 
+    private String answer;
+
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "test_id")
     private Test test;
+
+    public void addTest (Test test){
+        this.test = test;
+        test.getTestContentList().add(this);
+    }
 }

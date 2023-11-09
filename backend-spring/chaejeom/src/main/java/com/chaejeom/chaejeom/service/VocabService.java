@@ -26,7 +26,6 @@ public class VocabService {
     private final VocabListRepository vocabListRepository;
     private final VocabListContentRepository vocabListContentRepository;
     private final ClassVocabListRepository classVocabListRepository;
-
     private final ClassRepository classRepository;
 
 
@@ -92,6 +91,7 @@ public class VocabService {
         return classVocabListResponseDto;
     }
 
+    // 단어장 수동 생성
     public VocabListResponseDto createVocabList(VocabListRequestDto vocabListRequestDto){
         VocabList vocabList = VocabList.builder().name(vocabListRequestDto.getName()).description(vocabListRequestDto.getDescription())
                 .image(vocabListRequestDto.getImg()).vocabListContents(new ArrayList<>()).build();
@@ -107,6 +107,7 @@ public class VocabService {
         return vocabListResponseDto;
     }
 
+    // 단어장에 단어 직접 추가
     public VocabContentDto addVocabListContent(Long voca_list_id, VocabContentDto vocabContentDto){
         VocabList vocabList = vocabListRepository.findById(voca_list_id).orElseThrow(()-> new RuntimeException("단어장 정보가 없습니다."));
         VocabContentDto response = new VocabContentDto();
@@ -120,6 +121,7 @@ public class VocabService {
         return response;
     }
 
+    // 특정 단어 삭제하기
     public VocabContentDto deleteVocabListContent(Long voca_content_id){
         VocabListContent vocabListContent = vocabListContentRepository.findById(voca_content_id).orElseThrow(()-> new RuntimeException("단어 정보가 없습니다."));
         VocabContentDto response = new VocabContentDto();

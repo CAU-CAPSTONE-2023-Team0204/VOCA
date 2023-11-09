@@ -1,9 +1,13 @@
 package com.chaejeom.chaejeom.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Table(name = "TEST")
 @Getter
@@ -20,14 +24,28 @@ public class Test {
     @Column(name = "test_name")
     private String name;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
     @Column(name = "test_time")
     private LocalDateTime time;
 
     @Column(name = "max_score")
     private int maxScore;
 
+    // 시험 시행 여부 true :시행된 시험, false : 시행 예정 시험
+    @ColumnDefault("false")
+    private boolean status;
+
+    @ManyToOne
+    @JoinColumn(name = "class_id")
+    private UserClass userclass;
+
+    // 단어장 기반으로 자동 출제된 시험의 경우 vocabList 값을 가진다.
     @ManyToOne
     @JoinColumn(name = "voca_list_id")
     private VocabList vocabList;
+
+
+    @OneToMany(mappedBy = "test")
+    private List<TestContent> testContentList = new ArrayList<>();
 
 }

@@ -26,9 +26,12 @@ public class VocabList {
     @Column(name = "description")
     private String description;
 
-    @Lob
     @Column(name = "image")
     private String image;
+
+    // ELEMENTARY, MIDDLE, HIGH
+    @Enumerated(EnumType.STRING)
+    private VocabCategory category;
 
     @JsonBackReference
     @OneToMany(mappedBy = "vocabList")

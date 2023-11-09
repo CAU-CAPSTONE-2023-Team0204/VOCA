@@ -37,12 +37,4 @@ public class UserClass {
         memberClassList = new ArrayList<>();
     }
 
-    // 클래스에 맴버 등록//
-    public void addMemberClass(MemberClass memberClass){
-        memberClassList.add(memberClass);
-        memberClass.setUserClass(this);
-    }
-
-
-
 }

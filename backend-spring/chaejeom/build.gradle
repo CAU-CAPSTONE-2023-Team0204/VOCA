@@ -40,6 +40,9 @@ dependencies {
 	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.1.0'
 	//p6spy 적용
 	implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.7.1'
+
+	//aws
+	implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE'
 }
 
 tasks.named('test') {
