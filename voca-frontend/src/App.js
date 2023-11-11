@@ -6,6 +6,7 @@ import React from "react";
 import MainPage from "./component/MainPage";
 import Signup from "./component/Signup";
 import Signin from "./component/Signin";
+import ClassSelect from "./component/ClassSelect";
 
 function App() {
   const [data, setData] = useState([]);
@@ -16,6 +17,7 @@ function App() {
           <Route path="/main" element={<MainPage />}></Route>
           <Route path="/signup" element={<Signup />}></Route>
           <Route path="/signin" element={<Signin />}></Route>
+          <Route path="/classes" element={<ClassSelect />}></Route>
         </Routes>
       </BrowserRouter>
     </div>

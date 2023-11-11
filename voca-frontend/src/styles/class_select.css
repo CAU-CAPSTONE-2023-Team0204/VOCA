@@ -1,0 +1,73 @@
+#classes_page_container{
+    justify-content: space-around;
+    height:100vh;
+}
+
+#classes_page_container #classes_wrapper{
+    display:flex;
+    flex-direction: column;
+    margin:auto;
+    height:100vh;
+    
+}
+
+#classes_page_container #contents_container{
+    margin:auto;
+    width: 800px;
+    height: 500px;
+    border-radius: 15px;
+    padding: 50px;
+    font-size: 30px;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-family:'Jalnan';
+    color: #3ab54a;
+}
+
+#classes_page_container #button_list{
+    display:flex;
+    font-size:18px;
+    margin: 20px 0;
+    text-align: center;
+    height: 400px;
+    width:auto;
+    justify-content: space-between;
+    border: 3px solid #3ab54a;
+    border-radius: 35px;
+}
+
+#classes_page_container #class_add_button{
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background-color:#eef6e3;
+    border:none;
+    color: #6fa125;
+    font-weight: 1000;
+    font-size: 100px;
+    margin:auto;
+}
+
+#classes_page_container #class_list_container{
+    font-size:28px;
+}
+
+#classes_page_container #class_list{
+    padding-left: 0px;
+}
+
+#classes_page_container .class_item{
+    list-style:none;
+    padding-left: 0px;
+    margin: 10px;
+}
+
+#classes_page_container .class_link{
+    text-decoration: none;
+    color:#6fa125;
+}
+
+#classes_page_container #class_list_container{
+    margin:auto;
+}
