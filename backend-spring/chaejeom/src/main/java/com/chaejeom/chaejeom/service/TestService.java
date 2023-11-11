@@ -1,10 +1,7 @@
 package com.chaejeom.chaejeom.service;
 
 import com.chaejeom.chaejeom.domain.*;
-import com.chaejeom.chaejeom.dto.AutoTestRequestDto;
-import com.chaejeom.chaejeom.dto.AutoTestResponseDto;
-import com.chaejeom.chaejeom.dto.ManualTestRequestDto;
-import com.chaejeom.chaejeom.dto.ManualTestResponseDto;
+import com.chaejeom.chaejeom.dto.*;
 import com.chaejeom.chaejeom.repository.*;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TestService {
 
+    private final MemberRepository memberRepository;
     private final VocabListRepository vocabListRepository;
     private final VocabListContentRepository vocabListContentRepository;
     private final ClassVocabListRepository classVocabListRepository;
@@ -33,7 +31,9 @@ public class TestService {
         int number = requestDto.getNumber();
 
         Test test = Test.builder().name(requestDto.getName()).time(requestDto.getTime()).maxScore(requestDto.getNumber())
-                .userclass(userClass).vocabList(vocabList).testContentList(new ArrayList<>()).build();
+                .vocabList(vocabList).type(TestType.AUTO).testContentList(new ArrayList<>()).build();
+
+        test.addUserClass(userClass);
 
         List<VocabListContent> vocabListContents = vocabList.getVocabListContents();
         for(int i=offset; i<offset+number && i<vocabListContents.size(); i++){
@@ -52,8 +52,9 @@ public class TestService {
     public ManualTestResponseDto createManualTest(ManualTestRequestDto requestDto){
         UserClass userClass = classRepository.findById(requestDto.getClassId()).orElseThrow(()->new RuntimeException("해당 클래스가 없습니다."));
 
-        Test test = Test.builder().name(requestDto.getName()).time(requestDto.getTime()).maxScore(requestDto.getContents().size())
-                .userclass(userClass).testContentList(new ArrayList<>()).build();
+        Test test = Test.builder().name(requestDto.getName()).time(requestDto.getTime()).maxScore(requestDto.getContents().size()).type(TestType.MANUAL)
+                .testContentList(new ArrayList<>()).build();
+        test.addUserClass(userClass);
 
 
         for(int i = 0 ; i<requestDto.getContents().size(); i++){
@@ -81,4 +82,77 @@ public class TestService {
         }
         return testContent;
     }
+
+    public TestListResponseDto findTestByUserId(Long id){
+        Member member = memberRepository.findById(id).orElseThrow(()-> new RuntimeException("해당 유저가 없습니다."));
+
+        List<MemberClass> memberClassList = member.getMemberClassList();
+        List<Test> testList = new ArrayList<>();
+        List<TestResponseDto> tests = new ArrayList<>();
+
+        for(MemberClass memberClass : memberClassList){
+            testList.addAll(memberClass.getUserClass().getTestList());
+        }
+
+        for (Test test : testList){
+            tests.add(TestResponseDto.of(test));
+        }
+
+        TestListResponseDto testListResponseDto = TestListResponseDto.builder().userId(id).userName(member.getUsername()).tests(tests).build();
+
+        return testListResponseDto;
+    }
+
+    public TestListResponseDto findTodoTestByUserId(Long id){
+        Member member = memberRepository.findById(id).orElseThrow(()-> new RuntimeException("해당 유저가 없습니다."));
+
+        List<MemberClass> memberClassList = member.getMemberClassList();
+        List<Test> testList = new ArrayList<>();
+        List<TestResponseDto> tests = new ArrayList<>();
+
+        for(MemberClass memberClass : memberClassList){
+            testList.addAll(memberClass.getUserClass().getTestList());
+        }
+
+        for (Test test : testList){
+            if(test.isStatus() == false)
+            tests.add(TestResponseDto.of(test));
+        }
+
+        TestListResponseDto testListResponseDto = TestListResponseDto.builder().userId(id).userName(member.getUsername()).tests(tests).build();
+
+        return testListResponseDto;
+    }
+
+    public TestListResponseDto findTestByClassId(Long id){
+        UserClass userClass = classRepository.findById(id).orElseThrow(()-> new RuntimeException("해당 클래스가 없습니다."));
+
+        List<TestResponseDto> tests = new ArrayList<>();
+
+        for (Test test : userClass.getTestList()){
+            tests.add(TestResponseDto.of(test));
+        }
+
+        TestListResponseDto testListResponseDto = TestListResponseDto.builder().classId(userClass.getId()).className(userClass.getName()).tests(tests).build();
+
+        return testListResponseDto;
+
+    }
+
+    public TestListResponseDto findTodoTestByClassId(Long id){
+        UserClass userClass = classRepository.findById(id).orElseThrow(()-> new RuntimeException("해당 클래스가 없습니다."));
+
+        List<TestResponseDto> tests = new ArrayList<>();
+
+        for (Test test : userClass.getTestList()){
+            if (test.isStatus() == false)
+            tests.add(TestResponseDto.of(test));
+        }
+
+        TestListResponseDto testListResponseDto = TestListResponseDto.builder().classId(userClass.getId()).className(userClass.getName()).tests(tests).build();
+
+        return testListResponseDto;
+
+    }
+
 }

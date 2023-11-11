@@ -19,6 +19,6 @@ public class ManualTestResponseDto {
     private List<TestContent> testContentList;
 
     public static ManualTestResponseDto of(Test test){
-        return new ManualTestResponseDto(test.getName(), test.getUserclass().getName(), test.getTime(), test.getTestContentList());
+        return new ManualTestResponseDto(test.getName(), test.getUserClass().getName(), test.getTime(), test.getTestContentList());
     }
 }

@@ -32,20 +32,29 @@ public class Test {
     private int maxScore;
 
     // 시험 시행 여부 true :시행된 시험, false : 시행 예정 시험
+    @Column(name = "test_status")
     @ColumnDefault("false")
     private boolean status;
 
+    @Column(name = "test_type")
+    @Enumerated(EnumType.STRING)
+    private TestType type;
+
     @ManyToOne
     @JoinColumn(name = "class_id")
-    private UserClass userclass;
+    private UserClass userClass;
 
     // 단어장 기반으로 자동 출제된 시험의 경우 vocabList 값을 가진다.
     @ManyToOne
     @JoinColumn(name = "voca_list_id")
     private VocabList vocabList;
 
-
     @OneToMany(mappedBy = "test")
     private List<TestContent> testContentList = new ArrayList<>();
+
+    public void addUserClass(UserClass userClass){
+        this.userClass =userClass;
+        userClass.getTestList().add(this);
+    }
 
 }

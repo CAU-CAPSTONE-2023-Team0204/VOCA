@@ -31,6 +31,10 @@ public class UserClass {
     @OneToMany(mappedBy = "userClass")
     private List<ClassVocabList> classVocabLists = new ArrayList<>();
 
+    @JsonBackReference
+    @OneToMany(mappedBy = "userClass")
+    private List<Test> testList  = new ArrayList<>();
+
     @Builder
     public UserClass(String name){
         this.name = name;

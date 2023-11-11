@@ -20,7 +20,7 @@ public class AutoTestResponseDto {
     private List<TestContent> testContentList;
 
     public static AutoTestResponseDto of(Test test){
-        return new AutoTestResponseDto(test.getName(), test.getUserclass().getName(), test.getVocabList().getName(), test.getTime(), test.getTestContentList());
+        return new AutoTestResponseDto(test.getName(), test.getUserClass().getName(), test.getVocabList().getName(), test.getTime(), test.getTestContentList());
     }
 
 }
