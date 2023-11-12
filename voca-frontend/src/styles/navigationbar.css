@@ -1,0 +1,31 @@
+#navbar_content_wrapper{
+    display:flex;
+    justify-content:space-between;
+    padding: 35px 80px 15px 80px;
+}
+
+#navbar_content_wrapper #navbar_content_left{
+    display:flex;
+}
+
+#navbar_content_wrapper #navbar_content_right{
+    margin:auto 0;
+    display:flex;   
+    vertical-align:middle;
+}
+#navbar_content_left #main_logo_text{
+    font-size: 36px;
+    color:#3ab54a;
+    font-family: "Jalnan";
+}
+#navbar_content_wrapper .navbar_a_text{
+    color: #444444;
+    font-size: 20px;
+    text-decoration: none;
+}
+#navbar .vertical_line{
+    border-left: 2px solid #666666;
+    margin: auto 60px;
+    height: 30px;
+    border-radius: 10%;
+}

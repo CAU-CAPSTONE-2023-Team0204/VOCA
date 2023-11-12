@@ -7,6 +7,7 @@ import MainPage from "./component/MainPage";
 import Signup from "./component/Signup";
 import Signin from "./component/Signin";
 import ClassSelect from "./component/ClassSelect";
+import ClassMemberEdit from "./component/ClassMemberEdit";
 
 function App() {
   const [data, setData] = useState([]);
@@ -18,6 +19,7 @@ function App() {
           <Route path="/signup" element={<Signup />}></Route>
           <Route path="/signin" element={<Signin />}></Route>
           <Route path="/classes" element={<ClassSelect />}></Route>
+          <Route path="/class/member" element={<ClassMemberEdit />}></Route>
         </Routes>
       </BrowserRouter>
     </div>

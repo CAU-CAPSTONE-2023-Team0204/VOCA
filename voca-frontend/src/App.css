@@ -33,6 +33,11 @@
   src: url("./../public/resource/font/Jalnan.ttf");
 }
 
+@font-face{
+  font-family:"Ones";
+  src: url("./../public/resource/font/ONE Mobile Title.ttf");
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
