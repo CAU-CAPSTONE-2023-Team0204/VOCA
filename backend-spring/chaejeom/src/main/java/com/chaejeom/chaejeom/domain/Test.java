@@ -57,4 +57,8 @@ public class Test {
         userClass.getTestList().add(this);
     }
 
+    public void endTest(){
+        this.status = true;
+    }
+
 }

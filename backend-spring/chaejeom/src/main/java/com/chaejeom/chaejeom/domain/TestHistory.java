@@ -15,21 +15,18 @@ public class TestHistory {
     @Column(name = "test_history_id")
     private Long id;
 
-    @Column(name = "pass")
-    private boolean pass;
-
-    @Column(name = "exam_paper_image")
+    @Column(name = "total_exam_paper_image")
     private String image;
-
-    @Column(name = "total_score")
-    private int score;
 
     @Column(name = "max_score")
     private int maxScore;
 
+    @Column(name = "average")
+    private double average;
+
     @ManyToOne
-    @JoinColumn(name = "member_id")
-    private Member member;
+    @JoinColumn(name = "class_id")
+    private UserClass userClass;
 
     @ManyToOne
     @JoinColumn(name = "test_id")

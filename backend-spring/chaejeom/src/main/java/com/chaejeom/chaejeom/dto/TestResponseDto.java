@@ -18,6 +18,7 @@ import java.util.List;
 public class TestResponseDto {
     private Long testId;
     private String name;
+    private Long classId;
     private String className;
     private String vocabListName;
     private LocalDateTime time;
@@ -25,10 +26,10 @@ public class TestResponseDto {
 
     public static TestResponseDto of(Test test){
         if(test.getType() == TestType.AUTO)
-            return TestResponseDto.builder().testId(test.getId()).name(test.getName()).className(test.getUserClass().getName()).vocabListName(test.getVocabList().getName())
+            return TestResponseDto.builder().testId(test.getId()).name(test.getName()).classId(test.getUserClass().getId()).className(test.getUserClass().getName()).vocabListName(test.getVocabList().getName())
                     .time(test.getTime()).testContentList(test.getTestContentList()).build();
         else
-            return TestResponseDto.builder().testId(test.getId()).name(test.getName()).className(test.getUserClass().getName())
+            return TestResponseDto.builder().testId(test.getId()).name(test.getName()).classId(test.getUserClass().getId()).className(test.getUserClass().getName())
                     .time(test.getTime()).testContentList(test.getTestContentList()).build();
     }
 

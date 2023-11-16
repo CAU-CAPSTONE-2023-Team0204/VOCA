@@ -13,7 +13,6 @@ public class VocabListRequestDto {
     private String name;
     private String description;
     private String img;
-
     private List<VocabListContent> contents;
 
 }

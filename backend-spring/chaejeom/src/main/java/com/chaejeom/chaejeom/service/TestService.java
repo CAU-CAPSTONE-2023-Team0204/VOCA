@@ -6,7 +6,10 @@ import com.chaejeom.chaejeom.repository.*;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +25,8 @@ public class TestService {
     private final ClassRepository classRepository;
     private final TestContentRepository testContentRepository;
     private final TestRepository testRepository;
+
+    private final S3UploadService s3UploadService;
 
     public AutoTestResponseDto createAutoTest(AutoTestRequestDto requestDto){
         UserClass userClass = classRepository.findById(requestDto.getClassId()).orElseThrow(()->new RuntimeException("해당 클래스가 없습니다."));
@@ -138,6 +143,11 @@ public class TestService {
         return testListResponseDto;
 
     }
+    public TestResponseDto findTestByTestId(long id){
+        Test test = testRepository.findById(id).orElseThrow(()-> new RuntimeException("해당 시험 정보가 없습니다."));
+
+        return TestResponseDto.of(test);
+    }
 
     public TestListResponseDto findTodoTestByClassId(Long id){
         UserClass userClass = classRepository.findById(id).orElseThrow(()-> new RuntimeException("해당 클래스가 없습니다."));
@@ -153,6 +163,52 @@ public class TestService {
 
         return testListResponseDto;
 
+    }
+
+// 클라이언트에서 시험 id 와 시험지 파일을 받아 저장하고, 파일과 시험문제 정보를 반환하는 테스트함수.
+    public ScoringRequestDto scoringTest(MultipartFile multipartFile, TestResultRequestDto request) throws IOException {
+        Test test = testRepository.findById(request.getTestId()).orElseThrow(()-> new RuntimeException("해당 시험 정보가 없습니다."));
+        String url = s3UploadService.saveFile(multipartFile, "test_content_"+test.getId().toString()+"_");
+
+        List<MemberClass> memberClassList = test.getUserClass().getMemberClassList();
+        List<Member> memberList = new ArrayList<>();
+
+        for(MemberClass memberClass : memberClassList){
+            memberList.add(memberClass.getMember());
+        }
+        ScoringRequestDto scoringRequestDto = ScoringRequestDto.builder().testID(test.getId()).classID(test.getUserClass().getId()).testContentList(test.getTestContentList())
+                .file(url).memberList(memberList).build();
+
+        return scoringRequestDto;
+    }
+
+    // 클라이언트에서 시험id와 시험지 파일을 받아 클라우드에 저장하고, 파일과 시험 정보를 장고 서버에 전달. 채점 완료된 정보를 json 형태로 반환받아 객체에 저장후 반환.
+    public TestResultResponseDto scoring(MultipartFile multipartFile, TestResultRequestDto request) throws IOException {
+        Test test = testRepository.findById(request.getTestId()).orElseThrow(()-> new RuntimeException("해당 시험 정보가 없습니다."));
+        String url = s3UploadService.saveFile(multipartFile, "test_content_"+test.getId().toString()+"_");
+
+        List<MemberClass> memberClassList = test.getUserClass().getMemberClassList();
+        List<Member> memberList = new ArrayList<>();
+
+        for(MemberClass memberClass : memberClassList){
+            memberList.add(memberClass.getMember());
+        }
+        ScoringRequestDto scoringRequestDto = ScoringRequestDto.builder().testID(test.getId()).classID(test.getUserClass().getId()).testContentList(test.getTestContentList())
+                .file(url).memberList(memberList).build();
+
+        //ai 파트와 협의 후 결정될 사안
+        final String djangoURL = "http://localhost:8000/score";
+
+        RestTemplate restTemplate = new RestTemplate();
+        TestResultResponseDto response= restTemplate.postForObject(djangoURL, scoringRequestDto, TestResultResponseDto.class);
+
+        ////////////////////////
+        // 시험 결과 데이터 처리 //
+        ///////////////////////
+
+        test.endTest();
+
+        return response;
     }
 
 }
