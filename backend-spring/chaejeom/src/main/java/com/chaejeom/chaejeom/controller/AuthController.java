@@ -45,8 +45,17 @@ public class AuthController {
             summary = "엑세스 토큰 만료시 토큰 재발급"
     )
     @PostMapping("/reissue")
-    public ResponseEntity<TokenDto> reissue(@RequestBody TokenRequestDto tokenRequestDto) {
-        return ResponseEntity.ok(authService.reissue(tokenRequestDto));
+    public ResponseEntity<TokenDto> reissue(@CookieValue("refreshToken") String refreshtoken, @RequestBody TokenRequestDto tokenRequestDto) {
+        TokenDto tokenDto = authService.reissue(tokenRequestDto, refreshtoken);
+        ResponseCookie responseCookie = ResponseCookie.from("refreshToken", tokenDto.getRefreshToken())
+                .httpOnly(true)
+                //.sameSite("None")
+                // secure 를 true로 설정하면 https 에서만 쿠키가 전달됨 추후 적용 후 수정필요.
+                .secure(false)
+                .path("/")
+                .maxAge( 60 * 60 * 24 * 7)
+                .build();
+        return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, responseCookie.toString()).body(tokenDto);
     }
     @GetMapping("/logout") // 로그아웃 시 토큰 처리 필요하다.
     public String logout(HttpServletRequest request, HttpServletResponse response){

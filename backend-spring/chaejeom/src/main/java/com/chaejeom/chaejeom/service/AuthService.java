@@ -61,9 +61,9 @@ public class AuthService {
     }
 
     @Transactional
-    public TokenDto reissue(TokenRequestDto tokenRequestDto) {
+    public TokenDto reissue(TokenRequestDto tokenRequestDto, String requestRefreshToken) {
         // 1. Refresh Token 검증
-        if (!tokenProvider.validateToken(tokenRequestDto.getRefreshToken())) {
+        if (!tokenProvider.validateToken(requestRefreshToken)) {
             throw new RuntimeException("Refresh Token 이 유효하지 않습니다.");
         }
 
@@ -75,7 +75,7 @@ public class AuthService {
                 .orElseThrow(() -> new RuntimeException("로그아웃 된 사용자입니다."));
 
         // 4. Refresh Token 일치하는지 검사
-        if (!refreshToken.getValue().equals(tokenRequestDto.getRefreshToken())) {
+        if (!refreshToken.getValue().equals(requestRefreshToken)) {
             throw new RuntimeException("토큰의 유저 정보가 일치하지 않습니다.");
         }
 
