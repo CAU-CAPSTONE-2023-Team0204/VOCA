@@ -2,13 +2,12 @@ package com.chaejeom.chaejeom.service;
 
 import com.chaejeom.chaejeom.domain.Member;
 import com.chaejeom.chaejeom.domain.RefreshToken;
-import com.chaejeom.chaejeom.dto.MemberRequestDto;
-import com.chaejeom.chaejeom.dto.MemberResponseDto;
-import com.chaejeom.chaejeom.dto.TokenDto;
-import com.chaejeom.chaejeom.dto.TokenRequestDto;
+import com.chaejeom.chaejeom.domain.Role;
+import com.chaejeom.chaejeom.dto.*;
 import com.chaejeom.chaejeom.jwt.TokenProvider;
 import com.chaejeom.chaejeom.repository.MemberRepository;
 import com.chaejeom.chaejeom.repository.RefreshTokenRepository;
+import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -55,7 +54,6 @@ public class AuthService {
                 .build();
 
         refreshTokenRepository.save(refreshToken);
-
         // 5. 토큰 발급
         return tokenDto;
     }

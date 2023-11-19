@@ -1,17 +1,16 @@
 package com.chaejeom.chaejeom.dto;
 
-import com.chaejeom.chaejeom.domain.Role;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
-public class TokenDto {
-
+public class ReissueResponseDto {
     private String grantType;
     private String accessToken;
-    private String refreshToken;
     private Long accessTokenExpiresIn;
-    private Role role;
 }

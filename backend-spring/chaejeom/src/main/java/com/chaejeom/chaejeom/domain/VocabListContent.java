@@ -28,7 +28,7 @@ public class VocabListContent {
     private String meaning_eng;
 
     @JsonIgnore
-    @JsonManagedReference
+    @JsonManagedReference(value="vocabList-contents")
     @ManyToOne
     @JoinColumn(name = "voca_list_id")
     private VocabList vocabList;

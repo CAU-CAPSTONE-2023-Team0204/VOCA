@@ -1,5 +1,6 @@
 package com.chaejeom.chaejeom.jwt;
 
+import com.chaejeom.chaejeom.domain.Role;
 import com.chaejeom.chaejeom.dto.TokenDto;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
@@ -58,11 +59,14 @@ public class TokenProvider {
                 .signWith(key, SignatureAlgorithm.HS512)
                 .compact();
 
+        Role role = Role.valueOf(authorities);
+
         return TokenDto.builder()
                 .grantType(BEARER_TYPE)
                 .accessToken(accessToken)
                 .accessTokenExpiresIn(accessTokenExpiresIn.getTime())
                 .refreshToken(refreshToken)
+                .role(role)
                 .build();
     }
 
@@ -102,6 +106,12 @@ public class TokenProvider {
         return false;
     }
 
+    public Role getRole(String accessToken){
+        Claims claims = parseClaims(accessToken);
+        Role value = claims.get("auth", Role.class);
+
+        return value;
+    }
     private Claims parseClaims(String accessToken) {
         try {
             return Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(accessToken).getBody();

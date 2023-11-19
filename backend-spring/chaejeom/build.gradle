@@ -26,6 +26,8 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-test'
+
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'com.h2database:h2'
 	annotationProcessor 'org.projectlombok:lombok'
@@ -43,6 +45,12 @@ dependencies {
 
 	//aws
 	implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE'
+	implementation 'com.amazonaws:aws-java-sdk-s3:1.12.429'
+	implementation 'javax.xml.bind:jaxb-api:2.4.0-b180830.0359'
+
+	// pdf to image
+	implementation 'org.apache.pdfbox:pdfbox:2.0.24'
+	implementation 'org.apache.pdfbox:pdfbox-tools:2.0.13'
 }
 
 tasks.named('test') {

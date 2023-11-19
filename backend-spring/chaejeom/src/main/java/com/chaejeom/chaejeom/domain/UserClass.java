@@ -23,15 +23,15 @@ public class UserClass {
     @Column(nullable = false, length = 30, unique = true)
     private String name;
 
-    @JsonBackReference
+    @JsonBackReference(value = "class-memberClass")
     @OneToMany(mappedBy = "userClass")
     private List<MemberClass> memberClassList = new ArrayList<>();
 
-    @JsonBackReference
+    @JsonBackReference(value = "class-classVocab")
     @OneToMany(mappedBy = "userClass")
     private List<ClassVocabList> classVocabLists = new ArrayList<>();
 
-    @JsonBackReference
+    @JsonBackReference(value = "class-testList")
     @OneToMany(mappedBy = "userClass")
     private List<Test> testList  = new ArrayList<>();
 

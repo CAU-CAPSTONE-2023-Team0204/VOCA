@@ -19,11 +19,8 @@ public class TestContent {
     @Enumerated(EnumType.STRING)
     @Column(name = "question_type",nullable = false)
     private QuestionType type;
-
     private String question;
-
     private String answer;
-
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "test_id")

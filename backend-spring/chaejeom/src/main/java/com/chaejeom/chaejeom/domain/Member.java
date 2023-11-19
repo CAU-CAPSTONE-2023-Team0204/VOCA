@@ -36,7 +36,7 @@ public class Member{
     @Column(nullable = false, length = 30)
     private Role role; // 권한 -> ROLE_STUDENT, ROLE_TEACHER
 
-    @JsonBackReference
+    @JsonBackReference(value = "member-memberClass")
     @OneToMany(mappedBy = "member")
     private List<MemberClass> memberClassList = new ArrayList<MemberClass>();
 

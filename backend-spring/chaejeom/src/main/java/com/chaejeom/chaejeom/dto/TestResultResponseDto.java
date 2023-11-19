@@ -19,7 +19,9 @@ public class TestResultResponseDto {
     @AllArgsConstructor
     @NoArgsConstructor
     class PersonalResult{
+        private String url;
         private String username;
+        private String name;
         private int totalScore;
         private List<Content> contentList = new ArrayList<>();
 

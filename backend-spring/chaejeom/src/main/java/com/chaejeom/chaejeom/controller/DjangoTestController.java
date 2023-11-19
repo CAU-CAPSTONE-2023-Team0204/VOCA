@@ -1,5 +1,6 @@
 package com.chaejeom.chaejeom.controller;
 
+import com.chaejeom.chaejeom.dto.ScoringRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -9,14 +10,14 @@ import org.springframework.web.client.RestTemplate;
 @RestController
 @RequiredArgsConstructor
 public class DjangoTestController {
-    @PostMapping("/send-data-to-django")
-    public String sendDataToDjango(@RequestBody String dataToSend){
-        final String djangoURL = "http://localhost:8000/received-data";
+    @PostMapping("/api/django")
+    public ScoringRequestDto sendDataToDjango(@RequestBody ScoringRequestDto request){
+        final String djangoURL = "http://localhost:8000/VOCA/";
 
         RestTemplate restTemplate = new RestTemplate();
-        String response = restTemplate.postForObject(djangoURL, dataToSend, String.class);
+        ScoringRequestDto response = restTemplate.postForObject(djangoURL, request, ScoringRequestDto.class);
 
-        System.out.println("Response form Django : "+ response);
+        System.out.println("Response form Django : ");
 
         return response;
     }

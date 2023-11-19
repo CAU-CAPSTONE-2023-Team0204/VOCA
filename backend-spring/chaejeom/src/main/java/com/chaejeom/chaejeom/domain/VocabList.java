@@ -33,7 +33,7 @@ public class VocabList {
     @Enumerated(EnumType.STRING)
     private VocabCategory category;
 
-    @JsonBackReference
+    @JsonBackReference(value = "vocabList-contents")
     @OneToMany(mappedBy = "vocabList")
     private List<VocabListContent>  vocabListContents = new ArrayList<>();
 
