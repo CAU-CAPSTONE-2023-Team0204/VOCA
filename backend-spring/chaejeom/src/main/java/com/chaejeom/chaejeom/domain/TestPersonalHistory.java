@@ -3,6 +3,9 @@ package com.chaejeom.chaejeom.domain;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Table(name = "TEST_PERSONAL_HISTORY")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -34,4 +37,12 @@ public class TestPersonalHistory {
     @ManyToOne
     @JoinColumn(name = "test_history_id")
     private TestHistory testHistory;
+
+    @OneToMany(mappedBy = "testPersonalHistory")
+    private List<TestHistoryContent> testHistoryContentList = new ArrayList<>();
+
+    public void addTestHistory(TestHistory testHistory){
+        this.testHistory = testHistory;
+        testHistory.getTestPersonalHistoryList().add(this);
+    }
 }

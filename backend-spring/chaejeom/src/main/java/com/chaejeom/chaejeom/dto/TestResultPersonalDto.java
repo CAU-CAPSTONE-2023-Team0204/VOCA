@@ -10,9 +10,11 @@ import java.util.List;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class TestResultResponseDto {
-    private Long testId;
-    private List<TestResultPersonalDto> personalResultList = new ArrayList<>();
-
+public class TestResultPersonalDto {
+    private String url;
+    private String username;
+    private String name;
+    private int totalScore;
+    private List<TestResultContentDto> contentList = new ArrayList<>();
 
 }

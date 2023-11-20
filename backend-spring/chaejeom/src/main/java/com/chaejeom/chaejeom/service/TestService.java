@@ -29,11 +29,13 @@ public class TestService {
 
     private final MemberRepository memberRepository;
     private final VocabListRepository vocabListRepository;
-    private final VocabListContentRepository vocabListContentRepository;
-    private final ClassVocabListRepository classVocabListRepository;
     private final ClassRepository classRepository;
     private final TestContentRepository testContentRepository;
     private final TestRepository testRepository;
+    private final TestHistoryRepository testHistoryRepository;
+    private final TestPersonalHistoryRepository testPersonalHistoryRepository;
+
+    private final TestHistoryContentRepository testHistoryContentRepository;
 
     private final S3UploadService s3UploadService;
 
@@ -174,7 +176,71 @@ public class TestService {
 
     }
 
-// 클라이언트에서 시험 id 와 시험지 파일을 받아 저장하고, 파일과 시험문제 정보를 반환하는 테스트함수.
+
+    // 클라이언트에서 시험id와 시험지 파일을 받아 클라우드에 저장하고, 파일과 시험 정보를 장고 서버에 전달. 채점 완료된 정보를 json 형태로 반환받아 객체에 저장후 반환.
+    public TestResultResponseDto scoring(MultipartFile multipartFile, TestResultRequestDto request) throws IOException {
+        Test test = testRepository.findById(request.getTestId()).orElseThrow(()-> new RuntimeException("해당 시험 정보가 없습니다."));
+        // 시험지 pdf파일 저장
+        String originalPdfUrl = s3UploadService.saveFile(multipartFile, "test_content_"+test.getId().toString()+"_");
+
+        // pdf to png list
+        InputStream is = multipartFile.getInputStream();
+        List<String> contentList = conversionPdf2Img(is, "test_content_"+test.getId().toString()+"_");
+
+        //시험치는 클래스의 학생 리스트
+        List<MemberClass> memberClassList = test.getUserClass().getMemberClassList();
+        List<Member> memberList = new ArrayList<>();
+        for(MemberClass memberClass : memberClassList){
+            memberList.add(memberClass.getMember());
+        }
+
+        //request dto 생성
+        ScoringRequestDto scoringRequestDto = ScoringRequestDto.builder().testID(test.getId()).classID(test.getUserClass().getId()).testContentList(test.getTestContentList())
+                .file(contentList).memberList(new ArrayList<>())
+                .build();
+        scoringRequestDto.setMemberList(memberList);
+
+        //ai 파트와 통신 후 채점 결과 받기
+        final String djangoURL = "http://localhost:8000/score";
+
+        RestTemplate restTemplate = new RestTemplate();
+        TestResultResponseDto resultResponse= restTemplate.postForObject(djangoURL, scoringRequestDto, TestResultResponseDto.class);
+
+
+        // 시험 결과 데이터 처리 //
+        if(resultResponse.getTestId() != test.getId()) throw new RuntimeException("채점 결과의 시험 id가 올바르지 않습니다.");
+        TestHistory testHistory = TestHistory.builder().test(test).image(originalPdfUrl).userClass(test.getUserClass()).testPersonalHistoryList(new ArrayList<>()).build();
+
+        testHistoryRepository.save(testHistory);
+
+        // ****시험 pass/fail 추가 필요.
+        // 시험 결과를 db에 저장한다.
+        for(TestResultPersonalDto personalDto : resultResponse.getPersonalResultList()){
+            Member member = memberRepository.findByUsername(personalDto.getUsername()).orElseThrow(()-> new RuntimeException("채점 결과의 학생을 찾을 수 없습니다."));
+            TestPersonalHistory testPersonalHistory = TestPersonalHistory.builder().score(personalDto.getTotalScore())
+                    .image(personalDto.getUrl()).member(member).testHistoryContentList(new ArrayList<>()).build();
+            testPersonalHistory.addTestHistory(testHistory);
+            testPersonalHistoryRepository.save(testPersonalHistory);
+
+            for(TestResultContentDto contentDto : personalDto.getContentList()){
+                TestHistoryContent content = TestHistoryContent.builder()
+                        .answer(contentDto.getAnswer())
+                        .result(contentDto.isResult())
+                        .submit(contentDto.getUserAnswer()).question(contentDto.getQuestion()).build();
+                content.addPersonalHistory(testPersonalHistory);
+                testHistoryContentRepository.save(content);
+            }
+        }
+        //결과 -> 평균 계산
+        testHistory.setAverage();
+        // 테스트 종료
+        test.endTest();
+
+        return resultResponse;
+    }
+
+
+    // 클라이언트에서 시험 id 와 시험지 파일을 받아 저장하고, 파일과 시험문제 정보를 반환하는 테스트함수.
     public ScoringRequestDto scoringTest(MultipartFile multipartFile, TestResultRequestDto request) throws IOException {
         Test test = testRepository.findById(request.getTestId()).orElseThrow(()-> new RuntimeException("해당 시험 정보가 없습니다."));
         // 시험지 pdf파일 저장
@@ -200,44 +266,37 @@ public class TestService {
         return scoringRequestDto;
     }
 
-    // 클라이언트에서 시험id와 시험지 파일을 받아 클라우드에 저장하고, 파일과 시험 정보를 장고 서버에 전달. 채점 완료된 정보를 json 형태로 반환받아 객체에 저장후 반환.
-    public TestResultResponseDto scoring(MultipartFile multipartFile, TestResultRequestDto request) throws IOException {
-        Test test = testRepository.findById(request.getTestId()).orElseThrow(()-> new RuntimeException("해당 시험 정보가 없습니다."));
-        // 시험지 pdf파일 저장
-        String originalPdfUrl = s3UploadService.saveFile(multipartFile, "test_content_"+test.getId().toString()+"_");
-
-        // pdf to png list
-        InputStream is = multipartFile.getInputStream();
-        List<String> contentList = conversionPdf2Img(is, "test_content_"+test.getId().toString()+"_");
-
-        //시험치는 클래스의 학생 리스트
-        List<MemberClass> memberClassList = test.getUserClass().getMemberClassList();
-        List<Member> memberList = new ArrayList<>();
-        for(MemberClass memberClass : memberClassList){
-            memberList.add(memberClass.getMember());
-        }
-
-        //request dto 생성
-        ScoringRequestDto scoringRequestDto = ScoringRequestDto.builder().testID(test.getId()).classID(test.getUserClass().getId()).testContentList(test.getTestContentList())
-                .file(contentList).memberList(new ArrayList<>())
-                .build();
-        scoringRequestDto.setMemberList(memberList);
-
-        //ai 파트와 협의 후 결정될 사안
-        final String djangoURL = "http://localhost:8000/score";
-
-        RestTemplate restTemplate = new RestTemplate();
-        TestResultResponseDto response= restTemplate.postForObject(djangoURL, scoringRequestDto, TestResultResponseDto.class);
-
-        ////////////////////////
+    public TestResultResponseDto getResultTest(TestResultResponseDto resultResponse){
         // 시험 결과 데이터 처리 //
+        Test test = testRepository.findById(1L).orElseThrow(()-> new RuntimeException("1번없다."));
+        TestHistory testHistory = TestHistory.builder().test(test).image("originalPdfUrl").userClass(test.getUserClass()).testPersonalHistoryList(new ArrayList<>()).build();
 
+        testHistoryRepository.save(testHistory);
+
+        // ****시험 pass/fail 추가 필요.
+        // 시험 결과를 db에 저장한다.
+        for(TestResultPersonalDto personalDto : resultResponse.getPersonalResultList()){
+            Member member = memberRepository.findByUsername(personalDto.getUsername()).orElseThrow(()-> new RuntimeException("채점 결과의 학생을 찾을 수 없습니다."));
+            TestPersonalHistory testPersonalHistory = TestPersonalHistory.builder().score(personalDto.getTotalScore())
+                    .image(personalDto.getUrl()).member(member).testHistoryContentList(new ArrayList<>()).build();
+            testPersonalHistory.addTestHistory(testHistory);
+            testPersonalHistoryRepository.save(testPersonalHistory);
+
+            for(TestResultContentDto contentDto : personalDto.getContentList()){
+                TestHistoryContent content = TestHistoryContent.builder()
+                        .answer(contentDto.getAnswer())
+                        .result(contentDto.isResult())
+                        .submit(contentDto.getUserAnswer()).question(contentDto.getQuestion()).build();
+                content.addPersonalHistory(testPersonalHistory);
+                testHistoryContentRepository.save(content);
+            }
+
+        }
         test.endTest();
-
-        return response;
+        return resultResponse;
     }
 
-    // pdf to image List
+    // pdf를 이미지로 바꾸어 s3 버킷에 저장하고 url List 를 반환한다.
     private List<String> conversionPdf2Img(InputStream is, String uniqueId) {
         List<String> savedImgList = new ArrayList<>(); //저장된 이미지 경로 list
         try {

@@ -10,7 +10,7 @@ import lombok.Setter;
 @Table(name = "class_vocablist")
 public class ClassVocabList {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "class_vocab_id")
     private Long id;
 

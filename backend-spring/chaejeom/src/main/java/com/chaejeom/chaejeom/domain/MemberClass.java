@@ -12,7 +12,7 @@ import lombok.Setter;
 @Table(name = "MEMBER_CLASS")
 public class MemberClass {
 
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "member_class_id")
     private Long id;
 

@@ -15,6 +15,8 @@ public class TestHistoryContent {
     @Column(name = "test_history_content_id")
     private Long id;
 
+    @Column
+    private String question;
     // 제출한 답
     @Column
     private String submit;
@@ -27,6 +29,11 @@ public class TestHistoryContent {
     private boolean result;
 
     @ManyToOne
-    @JoinColumn(name = "test_history_id")
-    private TestHistory testHistory;
+    @JoinColumn(name = "personal_history_id")
+    private TestPersonalHistory testPersonalHistory;
+
+    public void addPersonalHistory(TestPersonalHistory testPersonalHistory){
+        this.testPersonalHistory = testPersonalHistory;
+        testPersonalHistory.getTestHistoryContentList().add(this);
+    }
 }

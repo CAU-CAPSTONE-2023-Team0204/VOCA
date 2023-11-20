@@ -86,6 +86,13 @@ public class TestController {
                                                            @RequestPart(value = "request") TestResultRequestDto request) throws IOException {
         return ResponseEntity.ok(testService.scoringTest(multipartFile, request));
     }
+    @Operation(
+            summary = "시험 결과 받기 테스트중"
+    )
+    @PostMapping("/apitest/result/{test_id}")
+    public ResponseEntity<TestResultResponseDto> getResultTest(@RequestBody TestResultResponseDto request){
+        return ResponseEntity.ok(testService.getResultTest(request));
+    }
 
     @Operation(
             summary = "시험 답안 파일 제출"
