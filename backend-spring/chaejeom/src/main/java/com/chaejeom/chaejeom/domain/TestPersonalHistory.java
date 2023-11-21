@@ -45,4 +45,12 @@ public class TestPersonalHistory {
         this.testHistory = testHistory;
         testHistory.getTestPersonalHistoryList().add(this);
     }
+
+    public void setScore(){
+        int sum = 0;
+        for(TestHistoryContent content : testHistoryContentList){
+            if(content.isResult()) sum++;
+        }
+        this.score = sum;
+    }
 }

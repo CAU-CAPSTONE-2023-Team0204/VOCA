@@ -101,8 +101,24 @@ public class TestController {
         return ResponseEntity.ok(testService.scoring(file, test_id));
     }
 
-
-    // 내 시험 결과 조회
+    // 시험 결과 조회
+    @Operation(
+            summary = "test id 와 member id 로 해당 시험 결과 조회하기"
+    )
+    @GetMapping("/result/{test_id}/{user_id}")
+    public ResponseEntity<TestResultPersonalDto> getTestResultByTestAndMember(@PathVariable("test_id")Long testId, @PathVariable("user_id")Long userId){
+        return ResponseEntity.ok(testService.findTestHistoryByTestAndMember(testId, userId));
+    }
 
     // 클래스 시험 결과 조회
+
+
+    // 시험 결과 수정
+    @Operation(
+            summary = "testHistoryContent id 로 해당 문항 채점결과 수정하기"
+    )
+    @PutMapping("/result/update")
+    public ResponseEntity<TestHistoryContentUpdateDto> updateTestResult(@RequestBody TestHistoryContentUpdateDto request){
+        return ResponseEntity.ok(testService.updateTestHistoryContent(request));
+    }
 }

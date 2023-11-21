@@ -1,5 +1,6 @@
 package com.chaejeom.chaejeom.domain;
 
+import com.chaejeom.chaejeom.dto.TestHistoryContentUpdateDto;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -35,5 +36,15 @@ public class TestHistoryContent {
     public void addPersonalHistory(TestPersonalHistory testPersonalHistory){
         this.testPersonalHistory = testPersonalHistory;
         testPersonalHistory.getTestHistoryContentList().add(this);
+    }
+
+    public void update(TestHistoryContentUpdateDto request){
+        this.question = request.getQuestion();
+        this.submit = request.getUserAnswer();
+        this.answer = request.getAnswer();
+        this.result = request.isResult();
+
+        testPersonalHistory.setScore();
+        testPersonalHistory.getTestHistory().setAverage();
     }
 }

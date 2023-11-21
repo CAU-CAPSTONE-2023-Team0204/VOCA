@@ -333,4 +333,25 @@ public class TestService {
         }
         return savedImgList;
     }
+
+    public TestResultPersonalDto findTestHistoryByTestAndMember (Long testId, Long userId){
+        Member member = memberRepository.findById(userId).orElseThrow(()->new RuntimeException("해당 유저 정보가 없습니다."));
+        Test test = testRepository.findById(testId).orElseThrow(()-> new RuntimeException("해당 시험 정보가 없습니다."));
+        TestHistory testHistory = testHistoryRepository.findByTest(test).orElseThrow(()-> new RuntimeException("해당 시험 결과 정보가 없습니다."));
+
+        TestPersonalHistory testPersonalHistory = testPersonalHistoryRepository.findByMemberAndTestHistory(member, testHistory).
+                orElseThrow(()->new RuntimeException("시험 결과에 해당 유저의 결과가 없습니다."));
+
+        TestResultPersonalDto response = TestResultPersonalDto.of(testPersonalHistory);
+
+        return response;
+    }
+
+    public TestHistoryContentUpdateDto updateTestHistoryContent(TestHistoryContentUpdateDto request){
+        TestHistoryContent testHistoryContent =testHistoryContentRepository.findById(request.getContentId())
+                .orElseThrow(()-> new RuntimeException("해당 문제의 채점 기록이 없습니다."));
+
+        testHistoryContent.update(request);
+        return request;
+    }
 }
