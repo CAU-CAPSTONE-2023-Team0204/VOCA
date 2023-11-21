@@ -119,8 +119,7 @@ const Signup = () => {
         }
       );
       console.log(JSON.stringify(response));
-
-      navigate("/signin");
+      navigate("/login");
     } catch (err) {
       console.log("UNEXPECTED ERROR");
     }
@@ -130,7 +129,7 @@ const Signup = () => {
     <div id="signup_page_container">
       <div id="inner_wrapper">
         <a herf="/main" className="title">
-          채점해드림
+          채점해VOCA
         </a>
         <div className="description">
           <b>채점해드림</b>에 오신 것을 환영합니다

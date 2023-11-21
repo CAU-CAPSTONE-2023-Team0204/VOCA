@@ -37,8 +37,8 @@ const ClassMemberEdit = () => {
 
   const deleteButtonHandler = (index) => {
     const element = document.getElementById("modal_window");
-    element.style.display = "flex";
     setDeleteMember(index);
+    element.style.display = "flex";
   };
 
   const closeButtonHandler = () => {
@@ -68,8 +68,7 @@ const ClassMemberEdit = () => {
               추가코드
               <div id="class_code"> a0vduwm9dkmvc </div>
               <button id="copy_button" onClick={() => copyButtonHandler()}>
-                {" "}
-                복사{" "}
+                복사
               </button>
             </div>
             <div id="member_container">

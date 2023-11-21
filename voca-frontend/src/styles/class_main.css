@@ -1,0 +1,38 @@
+#classmain_page_container{
+    height: 100vh;
+}
+
+#classmain_page_container #main_wrapper{
+    display:flex;
+}
+
+#classmain_page_container #contents_wrapper{
+    background-color: #eef6e3;
+    border-radius: 15px;
+    width: 1300px;
+    padding: 80px;
+}
+
+#classmain_page_container #contents_wrapper #result_title{
+    font-family: "Ones";
+    color:#3ab54a;
+    font-size: 40px;
+}
+#classmain_page_container #contents_wrapper #up_graph_container{
+    height: 400px;
+    display:flex;
+    justify-content: center;
+    margin: 50px;
+    overflow:hidden;
+}
+
+#classmain_page_container #contents_wrapper #down_graph_container{
+    display:flex;
+    justify-content: space-around;
+    height: 350px;
+    margin-top: 100px;
+    overflow:hidden;
+
+}
+
+

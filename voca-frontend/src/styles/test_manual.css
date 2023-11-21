@@ -1,0 +1,95 @@
+#manualtest_page_container{
+    height: 100vh;
+}
+
+#manualtest_page_container #main_wrapper{
+    display:flex;
+}
+
+#manualtest_page_container #contents_wrapper{
+    background-color: #eef6e3;
+    border-radius: 15px;
+    width: 1300px;
+}
+
+#manualtest_page_container #contents_title_container{
+    font-size: 40px;
+    border-bottom: 2px solid #6fa125;
+    margin: 20px;
+    padding: 20px;
+    color:#6fa125;
+    font-family: "Jalnan";
+    display:flex;
+    justify-content: space-between;
+}
+
+#manualtest_page_container #contents_title_container #submit_button{
+    border: 2px solid #6fa125;
+    border-radius:10px;
+    background-color: #6fa125;
+    font-family: "Jalnan";
+    font-size: 18px;
+    width: 80px;
+    height: 40px;
+    display:block;
+    padding:auto;
+    text-decoration: none;
+    text-align: center;
+    color:white;
+    margin: 0 5px;
+}
+
+#manualtest_page_container #title_input_container{
+    display:flex;
+    margin-top: 12px;
+    margin-bottom: 12px;
+    padding: 0 44px;
+    font-size: 34px;
+    font-family: "Jalnan";
+    color:#567d1c;
+}
+
+#manualtest_page_container #title_input{
+    font-size:26px;
+    height: 1.2em;
+    margin: 0 30px;
+    font-family: "Ones";
+}
+
+#manualtest_page_container .problem_input_container{
+    background-color: white;
+    margin: 30px;
+    font-size:18px;
+    font-family: "Ones";
+    color: #444444;
+    padding: 15px;
+    border-radius: 16px;
+    display:flex;
+    justify-content: space-between;
+}
+
+#manualtest_page_container .problem_input_container .problem_type{  
+    display:block;
+    margin-bottom: 8px;
+    font-size: 22px;
+}  
+
+#manualtest_page_container .problem_input_container .wordmean_input_container{
+    display:flex;
+    margin-top: 6px;
+    justify-content: space-between;
+}
+
+#manualtest_page_container .problem_input_container .problem_input_wrapper{
+    flex-basis: 90%;
+}
+
+#manualtest_page_container .problem_input_container .delete_input_button{
+    height: 30px;
+    margin: auto;
+    margin-right: 0;
+    font-size: 18px;
+    border: none;
+    background-color: white;
+}
+

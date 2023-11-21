@@ -2,14 +2,28 @@ import { useNavigate } from "react-router-dom";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import useAuth from "../hooks/useAuth";
 import "../styles/class_select.css";
+import { useEffect, useState } from "react";
 
 const ClassSelect = () => {
   const axiosPrivate = useAxiosPrivate();
-  //console.log(useAxiosPrivate());
-  //const response = axiosPrivate.get("/api/member/me");
-  //const classList = response.classes;
-  //console.log(response);
-  const classList = ["class1", "class2", "class2"];
+  const [classList, setCLassList] = useState();
+
+  useEffect(() => {
+    // Function to fetch data from the server
+    const fetchData = async () => {
+      try {
+        const response = await axiosPrivate.get("/api/classes/me"); // Update state with the data received from the server
+        setCLassList(response.data.userClassList);
+        console.log(response.data);
+      } catch (error) {
+        // Handle error if the request fails
+        console.error("Error fetching data:", error);
+      }
+    }; // Call the fetchData function when the component mounts
+    fetchData();
+  }, []); // Empty dependency array ensures this effect runs only once on mount
+
+  //const classList = ["class1", "class2", "class2"];
   const navigate = useNavigate();
   const createButtonHandler = () => {
     navigate("/create_class");
@@ -30,7 +44,7 @@ const ClassSelect = () => {
                   {classList.map((classname, i) => (
                     <li className="class_item" key={i}>
                       <a className="class_link" href="/class/main">
-                        {classname}
+                        {classname.name}
                       </a>
                     </li>
                   ))}
