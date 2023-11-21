@@ -41,7 +41,6 @@ public class TestHistory {
     public void setAverage(){
         double count = 0;
         double sum = 0;
-        double average = 0;
 
         for(TestPersonalHistory e : testPersonalHistoryList){
             count++;

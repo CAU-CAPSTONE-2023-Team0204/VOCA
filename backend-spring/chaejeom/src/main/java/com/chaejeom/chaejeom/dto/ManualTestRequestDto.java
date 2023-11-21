@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 public class ManualTestRequestDto {
     private String name;
-    private LocalDateTime time;
+    private LocalDate date;
     private Long classId;
     private QuestionType questionType;
     private List<TestContentRequestDto> contents = new ArrayList<>();

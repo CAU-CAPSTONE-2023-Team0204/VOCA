@@ -8,7 +8,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 @Getter
@@ -21,16 +21,16 @@ public class TestResponseDto {
     private Long classId;
     private String className;
     private String vocabListName;
-    private LocalDateTime time;
+    private LocalDate date;
     private List<TestContent> testContentList;
 
     public static TestResponseDto of(Test test){
         if(test.getType() == TestType.AUTO)
             return TestResponseDto.builder().testId(test.getId()).name(test.getName()).classId(test.getUserClass().getId()).className(test.getUserClass().getName()).vocabListName(test.getVocabList().getName())
-                    .time(test.getTime()).testContentList(test.getTestContentList()).build();
+                    .date(test.getDate()).testContentList(test.getTestContentList()).build();
         else
             return TestResponseDto.builder().testId(test.getId()).name(test.getName()).classId(test.getUserClass().getId()).className(test.getUserClass().getName())
-                    .time(test.getTime()).testContentList(test.getTestContentList()).build();
+                    .date(test.getDate()).testContentList(test.getTestContentList()).build();
     }
 
 }

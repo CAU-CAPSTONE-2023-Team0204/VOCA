@@ -5,14 +5,14 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
 public class AutoTestRequestDto {
     private String name;
-    private LocalDateTime time;
+    private LocalDate date;
     private Long vocabListId;
     private Long classId;
     private int number;

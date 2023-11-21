@@ -6,7 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 @Getter
@@ -16,11 +16,11 @@ public class AutoTestResponseDto {
     private String name;
     private String className;
     private String vocabListName;
-    private LocalDateTime time;
+    private LocalDate date;
     private List<TestContent> testContentList;
 
     public static AutoTestResponseDto of(Test test){
-        return new AutoTestResponseDto(test.getName(), test.getUserClass().getName(), test.getVocabList().getName(), test.getTime(), test.getTestContentList());
+        return new AutoTestResponseDto(test.getName(), test.getUserClass().getName(), test.getVocabList().getName(), test.getDate(), test.getTestContentList());
     }
 
 }

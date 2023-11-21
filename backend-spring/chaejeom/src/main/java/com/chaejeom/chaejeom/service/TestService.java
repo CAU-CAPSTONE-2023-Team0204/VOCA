@@ -46,7 +46,7 @@ public class TestService {
         int offset = 0;
         int number = requestDto.getNumber();
 
-        Test test = Test.builder().name(requestDto.getName()).time(requestDto.getTime()).maxScore(requestDto.getNumber())
+        Test test = Test.builder().name(requestDto.getName()).date(requestDto.getDate()).maxScore(requestDto.getNumber())
                 .vocabList(vocabList).type(TestType.AUTO).testContentList(new ArrayList<>()).build();
 
         test.addUserClass(userClass);
@@ -68,7 +68,7 @@ public class TestService {
     public ManualTestResponseDto createManualTest(ManualTestRequestDto requestDto){
         UserClass userClass = classRepository.findById(requestDto.getClassId()).orElseThrow(()->new RuntimeException("해당 클래스가 없습니다."));
 
-        Test test = Test.builder().name(requestDto.getName()).time(requestDto.getTime()).maxScore(requestDto.getContents().size()).type(TestType.MANUAL)
+        Test test = Test.builder().name(requestDto.getName()).date(requestDto.getDate()).maxScore(requestDto.getContents().size()).type(TestType.MANUAL)
                 .testContentList(new ArrayList<>()).build();
         test.addUserClass(userClass);
 
@@ -131,8 +131,9 @@ public class TestService {
         }
 
         for (Test test : testList){
-            if(test.isStatus() == false)
-            tests.add(TestResponseDto.of(test));
+            if(test.isStatus() == false) {
+                tests.add(TestResponseDto.of(test));
+            }
         }
 
         TestListResponseDto testListResponseDto = TestListResponseDto.builder().userId(id).userName(member.getUsername()).tests(tests).build();
@@ -166,8 +167,9 @@ public class TestService {
         List<TestResponseDto> tests = new ArrayList<>();
 
         for (Test test : userClass.getTestList()){
-            if (test.isStatus() == false)
-            tests.add(TestResponseDto.of(test));
+            if (test.isStatus() == false) {
+                tests.add(TestResponseDto.of(test));
+            }
         }
 
         TestListResponseDto testListResponseDto = TestListResponseDto.builder().classId(userClass.getId()).className(userClass.getName()).tests(tests).build();
@@ -178,8 +180,8 @@ public class TestService {
 
 
     // 클라이언트에서 시험id와 시험지 파일을 받아 클라우드에 저장하고, 파일과 시험 정보를 장고 서버에 전달. 채점 완료된 정보를 json 형태로 반환받아 객체에 저장후 반환.
-    public TestResultResponseDto scoring(MultipartFile multipartFile, TestResultRequestDto request) throws IOException {
-        Test test = testRepository.findById(request.getTestId()).orElseThrow(()-> new RuntimeException("해당 시험 정보가 없습니다."));
+    public TestResultResponseDto scoring(MultipartFile multipartFile, Long testId) throws IOException {
+        Test test = testRepository.findById(testId).orElseThrow(()-> new RuntimeException("해당 시험 정보가 없습니다."));
         // 시험지 pdf파일 저장
         String originalPdfUrl = s3UploadService.saveFile(multipartFile, "test_content_"+test.getId().toString()+"_");
 
@@ -209,7 +211,7 @@ public class TestService {
 
         // 시험 결과 데이터 처리 //
         if(resultResponse.getTestId() != test.getId()) throw new RuntimeException("채점 결과의 시험 id가 올바르지 않습니다.");
-        TestHistory testHistory = TestHistory.builder().test(test).image(originalPdfUrl).userClass(test.getUserClass()).testPersonalHistoryList(new ArrayList<>()).build();
+        TestHistory testHistory = TestHistory.builder().test(test).image(originalPdfUrl).userClass(test.getUserClass()).testPersonalHistoryList(new ArrayList<>()).maxScore(test.getMaxScore()).build();
 
         testHistoryRepository.save(testHistory);
 
@@ -241,10 +243,9 @@ public class TestService {
 
 
     // 클라이언트에서 시험 id 와 시험지 파일을 받아 저장하고, 파일과 시험문제 정보를 반환하는 테스트함수.
-    public ScoringRequestDto scoringTest(MultipartFile multipartFile, TestResultRequestDto request) throws IOException {
-        Test test = testRepository.findById(request.getTestId()).orElseThrow(()-> new RuntimeException("해당 시험 정보가 없습니다."));
+    public ScoringRequestDto scoringTest(MultipartFile multipartFile, Long testId) throws IOException {
+        Test test = testRepository.findById(testId).orElseThrow(()-> new RuntimeException("해당 시험 정보가 없습니다."));
         // 시험지 pdf파일 저장
-        String url = s3UploadService.saveFile(multipartFile, "test_content_"+test.getId().toString()+"_");
 
         // pdf to png list
         InputStream is = multipartFile.getInputStream();
@@ -269,7 +270,8 @@ public class TestService {
     public TestResultResponseDto getResultTest(TestResultResponseDto resultResponse){
         // 시험 결과 데이터 처리 //
         Test test = testRepository.findById(1L).orElseThrow(()-> new RuntimeException("1번없다."));
-        TestHistory testHistory = TestHistory.builder().test(test).image("originalPdfUrl").userClass(test.getUserClass()).testPersonalHistoryList(new ArrayList<>()).build();
+        TestHistory testHistory = TestHistory.builder().test(test).image("originalPdfUrl").userClass(test.getUserClass()).testPersonalHistoryList(new ArrayList<>())
+                .maxScore(test.getMaxScore()).build();
 
         testHistoryRepository.save(testHistory);
 
@@ -292,6 +294,7 @@ public class TestService {
             }
 
         }
+        testHistory.setAverage();
         test.endTest();
         return resultResponse;
     }

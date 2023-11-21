@@ -79,15 +79,14 @@ public class TestController {
 
     ////// api test/////
     @Operation(
-            summary = "시험 제출 테스트중"
+            summary = "시험 제출 테스트/ 프론트 -> 스프링"
     )
-    @PostMapping(value = "/apitest/start/{test_id}", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
-    public ResponseEntity<ScoringRequestDto> doScoringTest(@RequestPart(value = "file") MultipartFile multipartFile,
-                                                           @RequestPart(value = "request") TestResultRequestDto request) throws IOException {
-        return ResponseEntity.ok(testService.scoringTest(multipartFile, request));
+    @PostMapping(value = "/apitest/start/{test_id}")
+    public ResponseEntity<ScoringRequestDto> doScoringTest(@RequestParam("file") MultipartFile file, @PathVariable Long test_id) throws IOException {
+        return ResponseEntity.ok(testService.scoringTest(file, test_id));
     }
     @Operation(
-            summary = "시험 결과 받기 테스트중"
+            summary = "시험 결과 받기 테스트중 / 스프링 -> 장고"
     )
     @PostMapping("/apitest/result/{test_id}")
     public ResponseEntity<TestResultResponseDto> getResultTest(@RequestBody TestResultResponseDto request){
@@ -95,14 +94,12 @@ public class TestController {
     }
 
     @Operation(
-            summary = "시험 답안 파일 제출"
+            summary = "시험 답안 파일 제출 / 프론트 -> 스프링 -> 장고 -> 스프링"
     )
     @PostMapping(value = "/start/{test_id}", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
-    public ResponseEntity<TestResultResponseDto> doScoring(@RequestPart(value = "file") MultipartFile multipartFile,
-                                                           @RequestPart(value = "request") TestResultRequestDto request) throws IOException {
-        return ResponseEntity.ok(testService.scoring(multipartFile, request));
+    public ResponseEntity<TestResultResponseDto> doScoring(@RequestParam("file") MultipartFile file, @PathVariable Long test_id) throws IOException {
+        return ResponseEntity.ok(testService.scoring(file, test_id));
     }
-    // 채점 결과 받기//
 
 
     // 내 시험 결과 조회
