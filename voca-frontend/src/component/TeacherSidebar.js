@@ -1,6 +1,9 @@
 import "../styles/teacher_sidebar.css";
+import { useParams } from "react-router-dom";
 
 const TeacherSidebar = (props) => {
+  const { class_id } = useParams();
+
   return (
     <div id="sidebar_container">
       <div id="user_info_container">
@@ -32,23 +35,23 @@ const TeacherSidebar = (props) => {
               className={
                 props.selected === "main" ? "link_item_selected" : "link_item"
               }
-              href="/class/main"
+              href={`/class/${class_id}/main`}
             >
               Home
             </a>
           </li>
           <li className="list_item">
-            <a className="link_item" href="/class/member">
+            <a className="link_item" href={`/class/${class_id}/member`}>
               Class
             </a>
           </li>
           <li className="list_item">
-            <a className="link_item" href="/class/vocablist">
+            <a className="link_item" href={`/class/${class_id}/vocablist`}>
               단어장
             </a>
           </li>
           <li className="list_item">
-            <a className="link_item" href="/class/tests">
+            <a className="link_item" href={`/class/${class_id}/tests`}>
               시험
             </a>
           </li>

@@ -1,27 +1,43 @@
 import React from "react";
+import { useEffect, useState } from "react";
 import NavigationBar from "./NavigationBar";
 import TeacherSidebar from "./TeacherSidebar";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
-
 import "../styles/vocablist_select.css";
+import { useParams } from "react-router-dom";
 
-const VOCABLIST_SELECT_URL = "/api/vocablist/";
+const VOCABLIST_SELECT_URL = "/api/vocablist/class/";
 
 const VocablistSelect = () => {
-  const { axiosPrivate } = useAxiosPrivate();
-  {
-    /*const response = axiosPrivate.get(VOCABLIST_SELECT_URL);
-    const vocablistList = response.Vocab_list;
-     */
-  }
-  const default_img_path = "/resource/img/vocablist_img_default.png";
-  const vocablistList = [
-    default_img_path,
-    default_img_path,
-    default_img_path,
-    default_img_path,
-    default_img_path,
-  ];
+  const { class_id } = useParams();
+  const axiosPrivate = useAxiosPrivate();
+  const [vocablistList, setvocablistList] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  console.log(class_id);
+  useEffect(() => {
+    setIsLoading(true);
+    try {
+      axiosPrivate
+        .get(VOCABLIST_SELECT_URL + `${class_id}`)
+        .then((response) => {
+          setvocablistList(response.data.vocabLists);
+          setIsLoading(false);
+          console.log(response.data);
+        });
+    } catch (err) {
+      console.log("UNEXPECTED ERROR", err);
+    }
+  }, []);
+
+  //const default_img_path = "/resource/img/vocablist_img_default.png";
+  // const vocablistList = [
+  //   default_img_path,
+  //   default_img_path,
+  //   default_img_path,
+  //   default_img_path,
+  //   default_img_path,
+  // ];
   return (
     <div id="vocablist_select_page_container">
       <React.Fragment>
@@ -35,22 +51,36 @@ const VocablistSelect = () => {
         <div id="contents_wrapper">
           <p id="content_label">내 단어장</p>
           <div id="edit_link_container">
-            <a className="edit_vocab_link" title="새로운 단어장을 만듭니다!">
+            <a
+              className="edit_vocab_link"
+              title="새로운 단어장을 만듭니다!"
+              href="/vocablist/create"
+            >
               생성
             </a>
             <a
               className="edit_vocab_link"
               title="제공되는 단어장을 클래스에 추가합니다!"
+              href={`/class/${class_id}/vocablist/register`}
             >
               추가
             </a>
           </div>
           <div id="grid_wrapper">
-            {vocablistList.map((vocablist, i) => (
-              <a className="vocablist_link" href="/class/vocablist/view">
-                <img className="vocablist_img" src={vocablist}></img>
-              </a>
-            ))}
+            {isLoading ? (
+              <p>Loading...</p>
+            ) : (
+              <div>
+                {vocablistList?.map((vocablist, i) => (
+                  <a
+                    className="vocablist_link"
+                    href={`/class/${class_id}/vocablist/view`}
+                  >
+                    <img className="vocablist_img" src={vocablist}></img>
+                  </a>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </div>

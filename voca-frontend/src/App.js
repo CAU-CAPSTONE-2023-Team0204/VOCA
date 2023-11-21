@@ -31,33 +31,39 @@ function App() {
           <Route path="/signup" element={<Signup />}></Route>
           <Route path="/login" element={<Signin />}></Route>
 
-          <Route path="/class/vocablist" element={<VocablistSelect />}></Route>
           <Route
-            path="/class/vocablist/view"
+            path="/class/:class_id/vocablist"
+            element={<VocablistSelect />}
+          ></Route>
+          <Route
+            path="/class/:class_id/vocablist/view"
             element={<ViewVocabList />}
           ></Route>
-          <Route path="/class/member" element={<ClassMemberEdit />}></Route>
-          <Route path="/class/tests" element={<ClassTests />}></Route>
           <Route
-            path="/class/test/results/:key/"
+            path="/class/:class_id/member"
+            element={<ClassMemberEdit />}
+          ></Route>
+          <Route path="/class/:class_id/tests" element={<ClassTests />}></Route>
+          <Route
+            path="/class/:class_id/test/results/:key/"
             element={<ViewTestResults />}
           ></Route>
           <Route path="/vocablist/create" element={<CreateVocablist />}></Route>
           <Route
-            path="/class/test/create/manual"
+            path="/class/:class_id/test/create/manual"
             element={<TestManualCreate />}
           ></Route>
           <Route
-            path="/class/vocablist/register"
+            path="/class/:class_id/vocablist/register"
             element={<RegisterVocablist />}
           ></Route>
-          <Route path="/class/test/result/:student_key/"></Route>
+          <Route path="/class/:class_id/test/result/:student_key"></Route>
           {/* routes that require logins */}
           <Route element={<PersistLogin />}></Route>
           <Route element={<RequireAuth />}>
             <Route path="/create_class" element={<CreateClass />}></Route>
-            <Route path="/classes " element={<ClassSelect />}></Route>
-            <Route path="/class/main" element={<ClassMain />}></Route>
+            <Route path="/classes" element={<ClassSelect />}></Route>
+            <Route path="/class/:class_id/main" element={<ClassMain />}></Route>
           </Route>
         </Routes>
       </BrowserRouter>

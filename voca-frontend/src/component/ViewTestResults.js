@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, getParam, useEffect } from "react";
 import NavigationBar from "./NavigationBar";
 import TeacherSidebar from "./TeacherSidebar";
 
@@ -9,8 +9,10 @@ import { useParams } from "react-router-dom";
 import "../styles/view_test_results.css";
 
 const TEST_RESULT_URL = "/api/test/result/";
+const PAPER_SUBMIT_URL = "/api/test/start/";
 
 const ViewTestResult = () => {
+  const [file, setFile] = useState();
   const { key } = useParams();
   const axiosPrivate = useAxiosPrivate();
 
@@ -29,6 +31,32 @@ const ViewTestResult = () => {
     ],
   };
 
+  const handleSubmitClick = () => {
+    const element = document.getElementById("file_input");
+    element.click();
+  };
+
+  const handleFileChange = async (event) => {
+    await setFile(event.target.files[0]);
+    console.log(file);
+    if (file) {
+      const formData = new FormData();
+      formData.append("file", file);
+      const response = await axiosPrivate.post(
+        PAPER_SUBMIT_URL + `${key}})}`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      console.log(response);
+    } else {
+      alert("NO FILE SELECTED");
+    }
+  };
+
   return (
     <div id="testresults_page_container">
       <React.Fragment>
@@ -43,8 +71,18 @@ const ViewTestResult = () => {
           <div id="contents_title_container">
             <div>시험 결과</div>
             <div id="button_container">
-              <button className="answer_submit_button">답안제출</button>
-              <input type="file" style={{ display: "none" }}></input>
+              <button
+                className="answer_submit_button"
+                onClick={() => handleSubmitClick()}
+              >
+                답안제출
+              </button>
+              <input
+                id="file_input"
+                type="file"
+                style={{ display: "none" }}
+                onChange={(event) => handleFileChange(event)}
+              ></input>
             </div>
           </div>
           <div>

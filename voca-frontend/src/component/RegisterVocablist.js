@@ -1,58 +1,28 @@
 import React, { useEffect, useState } from "react";
 import NavigationBar from "./NavigationBar";
 import TeacherSidebar from "./TeacherSidebar";
-import axios from "../api/axios";
-
+import axios, { axiosPrivate } from "../api/axios";
+import { useParams } from "react-router-dom";
 import "../styles/register_vocablist.css";
 
 const GET_VOCABLIST_URL = "/api/vocablist";
+const GET_WORDS_URL = "/api/vocablist/";
 const REGISTER_VOCABLIST_URL = "/api/vocablist/";
 
 const RegisterVocablist = () => {
+  const { class_id } = useParams();
   const [isLoading, setIsLoading] = useState(true);
   const [vocabLists, setVocabLists] = useState([]);
   const [selectedVocabList, setSelectedVocabList] = useState(0);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [wordData, setWordData] = useState([]);
 
   useEffect(() => {
+    setIsLoading(true);
     const response = axios
       .get(GET_VOCABLIST_URL)
       .then((response) => {
-        //setVocabLists(response.vocablists);
-        setVocabLists([
-          {
-            name: "중학교 3학년 추천 단어장",
-            image: "/resource/img/vocablist_img_default.png",
-            description:
-              "중학교 3학년 학생을 위한 추천 단어장입니다. 중학교 3학년 교과서, 교육과정에 맞춰서 제작되었습니다.",
-            vocabListContents: [
-              { word: "elimination", meaning: "제거" },
-              { word: "Korea", meaning: "한국" },
-              { word: "legend", meaning: "전설" },
-              { word: "myth", meaning: "신화" },
-              { word: "crystal", meaning: "수정, 결정" },
-              { word: "nocturne", meaning: "야상곡" },
-              { word: "emperor", meaning: "황제" },
-              { word: "apocalypse", meaning: "멸망" },
-              { word: "frost", meaning: "서리" },
-            ],
-          },
-          {
-            name: "고등학교 2학년 추천 단어장",
-            image: "/resource/img/vocablist_img_default.png",
-          },
-          {
-            name: "토익 추천 단어장",
-            image: "/resource/img/vocablist_img_default.png",
-          },
-          {
-            name: "2023 수능 출제 단어장",
-            image: "/resource/img/vocablist_img_default.png",
-          },
-          {
-            name: "일상 회화 단어장",
-            image: "/resource/img/vocablist_img_default.png",
-          },
-        ]);
+        setVocabLists(response.data.vocabLists);
         setIsLoading(false);
       })
       .catch((err) => {
@@ -61,9 +31,13 @@ const RegisterVocablist = () => {
       });
   }, []);
 
-  const handleSelectVocablist = (i) => {
+  const handleSelectVocablist = async (i) => {
     setSelectedVocabList(i);
-    console.log(i);
+    const response = await axiosPrivate.get(
+      GET_WORDS_URL + `${vocabLists[selectedVocabList].id}`
+    );
+
+    setWordData(response.data.vocabListContents);
     const element = document.getElementById("modal_window");
     element.style.display = "block";
   };
@@ -74,7 +48,12 @@ const RegisterVocablist = () => {
   };
 
   const handleRegisterButton = () => {
-    axios.post(`/api/vocablist/${vocabLists[selectedVocabList].id}/`);
+    console.log(
+      `/api/vocablist/${class_id}/${vocabLists[selectedVocabList].id}/`
+    );
+    axios.post(
+      `/api/vocablist/${class_id}/${vocabLists[selectedVocabList].id}`
+    );
   };
 
   return (
@@ -97,6 +76,7 @@ const RegisterVocablist = () => {
               <div id="vocablists_container">
                 {vocabLists.map((vocablist, i) => (
                   <div
+                    key={i}
                     id="vocablist_container"
                     onClick={(e) => handleSelectVocablist(i)}
                   >
@@ -129,7 +109,7 @@ const RegisterVocablist = () => {
             </div>
           </div>
           <div id="word_preview_container">
-            {vocabLists[selectedVocabList]?.vocabListContents.map((word, i) => (
+            {wordData?.map((word, i) => (
               <div key={i} id="word_container">
                 <p className="word_p">{word.word}</p>
                 <p className="word_p">{word.meaning}</p>

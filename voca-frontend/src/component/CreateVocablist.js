@@ -1,10 +1,15 @@
 import React, { useState } from "react";
 import NavigationBar from "./NavigationBar";
 import TeacherSidebar from "./TeacherSidebar";
+import useAxiosPrivate from "../hooks/useAxiosPrivate";
 
 import "../styles/create_vocablist.css";
 
+const CREATE_VOCABLIST_URL = "/api/vocablist";
+
 const CreateVocablist = () => {
+  const axiosPrivate = useAxiosPrivate();
+
   const [file, setFile] = useState();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -28,6 +33,22 @@ const CreateVocablist = () => {
       img.setAttribute("style", "display: none");
       no_img.setAttribute("style", "display: default");
     }
+  };
+
+  const handleSubmit = () => {
+    axiosPrivate.post(
+      CREATE_VOCABLIST_URL,
+      JSON.stringify({
+        name: title,
+        description: description,
+        img: "HAVETODO",
+        contents: wordList,
+      }),
+      {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true,
+      }
+    );
   };
 
   const handleChangeInput = (e, i) => {
@@ -96,37 +117,45 @@ const CreateVocablist = () => {
             </div>
             <div id="control_input_container">
               <select id="add_input_number">
-                <option value="1">1개 추가</option>
-                <option value="5">5개 추가</option>
-                <option value="10">10개 추가</option>
+                <option value="1">1개</option>
+                <option value="5">5개</option>
+                <option value="10">10개</option>
               </select>
-              <button onClick={(e) => handleAddInput(e)}>칸 추가</button>
+              <button id="add_input_button" onClick={(e) => handleAddInput(e)}>
+                칸 추가
+              </button>
             </div>
             <div id="wordlist_container">
-              {wordList.map((word, i) => (
-                <div className="word_container">
-                  <label>단어</label>
+              {wordList.map((word, index) => (
+                <div key={index + 1} className="word_container">
+                  <label className="word_input_label">{index}</label>
+                  <label className="word_input_label">단어</label>
                   <input
                     type="text"
                     className="word_input"
                     name="word"
-                    onChange={(e, i) => handleChangeInput(e, i)}
+                    onChange={(e, i) => handleChangeInput(e, index)}
                   ></input>
-                  <label>뜻</label>
+                  <label className="word_input_label">뜻</label>
                   <input
                     type="text"
                     className="word_input"
                     name="meaning"
-                    onChange={(e, i) => handleChangeInput(e, i)}
+                    onChange={(e, i) => handleChangeInput(e, index)}
                   ></input>
                   <button
                     className="delete_input_button"
-                    onClick={(e, i) => handleDeleteInput(e, i)}
+                    onClick={(e, i) => handleDeleteInput(e, index)}
                   >
                     X
                   </button>
                 </div>
               ))}
+            </div>
+            <div id="submit_button_container">
+              <button id="submit_button" onClick={() => handleSubmit()}>
+                단어장 만들기!
+              </button>
             </div>
           </form>
         </div>

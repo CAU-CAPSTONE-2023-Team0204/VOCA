@@ -11,6 +11,7 @@
     border-radius: 15px;
     width: 75%;
     padding: 40px;
+    padding-bottom: 12px;
 }
 
 #createvocablist_page_container #title{
@@ -74,4 +75,62 @@
     width: 80%;
     border: none;
     border-bottom: 2px solid #666666;
+}
+
+#createvocablist_page_container #control_input_container{
+    display:flex;
+    justify-content: start;
+    margin: 12px;
+}
+
+#createvocablist_page_container #add_input_number{
+    width: 100px;
+    font-size: 18px;
+    border: 1px solid #333333;
+}
+
+#createvocablist_page_container .word_container{
+    background-color: white;
+    display:flex;
+    justify-content: space-around;
+    font-size: 24px;
+    font-family: "Ones";
+    padding: 8px;
+    border-radius: 10px;
+    color: #333333;
+    margin: 6px 0;
+}
+
+#createvocablist_page_container .delete_input_button{
+    border-radius: 5px;
+    border:1px solid #444444;
+}
+
+#createvocablist_page_container .word_input_label{
+    text-align:center;
+    width: 48px;
+}
+
+#createvocablist_page_container #add_input_button{
+    border-radius: 0;
+    font-size: 20px;
+    border:none;
+    background-color: #6fa125;
+    color:white;
+    font-family:"Ones";
+}
+
+#createvocablist_page_container #submit_button{
+    background-color: #6fa125;
+    border:none;
+    border-radius: 8px;
+    font-size: 24px;
+    font-family:"Ones";
+    color:white;
+}
+
+#createvocablist_page_container #submit_button_container{
+    display: flex;
+    justify-content: center;
+    margin: 12px;
 }

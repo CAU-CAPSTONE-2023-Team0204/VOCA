@@ -6,7 +6,7 @@ import { generatePDF } from "../api/pdf.js";
 
 import "../styles/view_vocablist.css";
 
-const AUTO_TEST_URL = "mola";
+const AUTO_TEST_URL = "/api/test/auto";
 
 const ViewVocabList = () => {
   const axiosPrivate = useAxiosPrivate();
@@ -16,16 +16,18 @@ const ViewVocabList = () => {
 
   const handleAutoTest = () => {
     const element = document.getElementById("modal_window");
-    console.log("hell");
-    generatePDF("11월 3주차 시험", [
-      "video",
-      "bass",
-      "cat",
-      "intelligence",
-      "content",
-      "food",
-      "university",
-    ]);
+    // generatePDF("11월 3주차 시험", [
+    //   "video",
+    //   "bass",
+    //   "cat",
+    //   "intelligence",
+    //   "content",
+    //   "food",
+    //   "university",
+    //   "바이러스",
+    //   "한계",
+    //   "중앙",
+    // ]);
     element.style.display = "flex";
   };
 
@@ -34,11 +36,17 @@ const ViewVocabList = () => {
     element.style.display = "none";
   };
 
-  const submitHandler = () => {
+  const submitHandler = (e) => {
+    e.preventDefault();
     axiosPrivate.post(
       AUTO_TEST_URL,
       JSON.stringify({
         name: test_name,
+        time: "2023-11-21T14:45:03.348Z",
+        vocabListId: 1,
+        classId: 1,
+        number: 10,
+        questionType: "KOR_TO_ENG",
       }),
       {
         headers: { "Content-Type": "application/json" },
@@ -84,7 +92,7 @@ const ViewVocabList = () => {
       <div id="auto_test_modal">
         <div id="modal_window">
           <div id="close_button_container">
-            <button id="close_button" onClick={() => closeButtonHandler()}>
+            <button id="close_button" onClick={(e) => closeButtonHandler(e)}>
               X
             </button>
           </div>
