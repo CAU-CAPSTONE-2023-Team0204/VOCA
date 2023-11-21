@@ -8,10 +8,12 @@ import lombok.RequiredArgsConstructor;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.rendering.ImageType;
 import org.apache.pdfbox.rendering.PDFRenderer;
+import org.springframework.http.HttpStatus;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.server.ResponseStatusException;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -354,4 +356,13 @@ public class TestService {
         testHistoryContent.update(request);
         return request;
     }
+
+    public List<TestHistory> findTestHistoryByClass (Long classId){
+        UserClass userClass = classRepository.findById(classId).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,"class not found"));
+        List<TestHistory> testHistoryList = testHistoryRepository.findAllByUserClass(userClass);
+
+        return testHistoryList;
+    }
+
+
 }

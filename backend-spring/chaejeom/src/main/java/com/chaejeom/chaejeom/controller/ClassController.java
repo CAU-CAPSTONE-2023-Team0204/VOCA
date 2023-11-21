@@ -4,6 +4,7 @@ import com.chaejeom.chaejeom.dto.*;
 import com.chaejeom.chaejeom.service.ClassService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -67,5 +68,10 @@ public class ClassController {
     @PostMapping("/classes/{class_id}/{user_id}")
     public ResponseEntity<MemberResponseDto> addStudent(@PathVariable("class_id")Long class_id, @PathVariable("user_id") Long user_id){
         return ResponseEntity.ok(classService.addStudentById(class_id,user_id));
+    }
+
+    @ExceptionHandler(RuntimeException.class)
+    public ResponseEntity<String> handleRunTimeException (RuntimeException exception){
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(exception.getMessage());
     }
 }

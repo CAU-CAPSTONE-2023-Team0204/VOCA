@@ -7,6 +7,7 @@ import com.chaejeom.chaejeom.dto.VocabListResponseDto;
 import com.chaejeom.chaejeom.service.VocabService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -80,7 +81,8 @@ public class VocabController {
         return ResponseEntity.ok(vocabService.createVocabList(vocabListRequestDto));
     }
 
-
-
-
+    @ExceptionHandler(RuntimeException.class)
+    public ResponseEntity<String> handleRunTimeException (RuntimeException exception){
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(exception.getMessage());
+    }
 }
