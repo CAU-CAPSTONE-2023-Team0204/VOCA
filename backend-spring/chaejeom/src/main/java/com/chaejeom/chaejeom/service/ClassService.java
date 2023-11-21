@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -38,6 +39,11 @@ public class ClassService {
         UserClass userclass = UserClass.builder().name(request.getName()).build();
         ClassResponseDto classResponseDto = ClassResponseDto.of(classRepository.save(userclass));
 
+        Member currentMember = memberRepository.findById(SecurityUtil.getCurrentMemberId()).orElseThrow(()->new RuntimeException("현재 유저의 정보가 없습니다."));
+        MemberClass memberClassCur = new MemberClass();
+        memberClassCur.addClass(userclass);
+        memberClassCur.addMember(currentMember);
+        memberClassRepository.save(memberClassCur);
         // 학생들의 id 명단만큼 memberClass 생성, id로 member 검색 후 memberClass에 넣기.
         // 이후 userClass 도 넣고 DB에 memberClass 를 저장한다.
         for(String username : request.getMembers()){
