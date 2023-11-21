@@ -1,0 +1,76 @@
+{
+    "testID": 1,
+    "classID": 1,
+    "testContentList": [
+        {
+            "id": 1,
+            "type": "ENG_TO_KOR",
+            "question": "video",
+            "answer": "영상"
+        },
+        {
+            "id": 2,
+            "type": "ENG_TO_KOR",
+            "question": "bass",
+            "answer": "베이스, 저음의"
+        },
+        {
+            "id": 3,
+            "type": "ENG_TO_KOR",
+            "question": "cat",
+            "answer": "고양이"
+        },
+        {
+            "id": 4,
+            "type": "ENG_TO_KOR",
+            "question": "intelligence",
+            "answer": "지능"
+        },
+        {
+            "id": 5,
+            "type": "ENG_TO_KOR",
+            "question": "content",
+            "answer": "내용"
+        },
+        {
+            "id": 6,
+            "type": "ENG_TO_KOR",
+            "question": "food",
+            "answer": "음식"
+        },
+        {
+            "id": 7,
+            "type": "ENG_TO_KOR",
+            "question": "university",
+            "answer": "대학교, 대학"
+        },
+        {
+            "id": 8,
+            "type": "KOR_TO_ENG",
+            "question": "바이러스",
+            "answer": "virus"
+        },
+        {
+            "id": 9,
+            "type": "KOR_TO_ENG",
+            "question": "한계",
+            "answer": "limit"
+        },
+        {
+            "id": 10,
+            "type": "KOR_TO_ENG",
+            "question": "중앙",
+            "answer": "center"
+        }
+    ],
+    "memberList": [
+        {
+            "id": 1,
+            "username": "287",
+            "name": "287"
+        }
+    ],
+    "file": [
+        "https://voca-capstone-test.s3.ap-northeast-2.amazonaws.com/test_content_1_-0test_content_1_-0.png"
+    ]
+}
