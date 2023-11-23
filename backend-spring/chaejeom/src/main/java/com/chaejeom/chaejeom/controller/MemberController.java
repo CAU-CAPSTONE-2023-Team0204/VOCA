@@ -29,8 +29,4 @@ public class MemberController {
         return ResponseEntity.ok(memberService.findMemberInfoByUsername(username));
 
     }
-    @ExceptionHandler(RuntimeException.class)
-    public ResponseEntity<String> handleRunTimeException (RuntimeException exception){
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(exception.getMessage());
-    }
 }

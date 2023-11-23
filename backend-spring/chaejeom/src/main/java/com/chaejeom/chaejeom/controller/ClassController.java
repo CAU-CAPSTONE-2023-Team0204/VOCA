@@ -70,8 +70,4 @@ public class ClassController {
         return ResponseEntity.ok(classService.addStudentById(class_id,user_id));
     }
 
-    @ExceptionHandler(RuntimeException.class)
-    public ResponseEntity<String> handleRunTimeException (RuntimeException exception){
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(exception.getMessage());
-    }
 }

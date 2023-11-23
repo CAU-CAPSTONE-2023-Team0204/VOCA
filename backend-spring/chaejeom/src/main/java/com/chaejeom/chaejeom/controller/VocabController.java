@@ -91,8 +91,5 @@ public class VocabController {
         return ResponseEntity.ok(vocabService.createVocabList(vocabListRequestDto, file));
     }
 
-    @ExceptionHandler(RuntimeException.class)
-    public ResponseEntity<String> handleRunTimeException (RuntimeException exception){
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(exception.getMessage());
-    }
+
 }
