@@ -121,4 +121,12 @@ public class TestController {
     public ResponseEntity<TestHistoryContentUpdateDto> updateTestResult(@RequestBody TestHistoryContentUpdateDto request){
         return ResponseEntity.ok(testService.updateTestHistoryContent(request));
     }
+
+    @Operation(
+            summary = "채점 to Django test"
+    )
+    @GetMapping("/apitest/result")
+    public ResponseEntity<TestResultResponseDto> toDjangoTest(@RequestBody ScoringRequestDto request){
+        return ResponseEntity.ok(testService.testToDjango(request));
+    }
 }

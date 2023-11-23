@@ -301,6 +301,16 @@ public class TestService {
         return resultResponse;
     }
 
+    public TestResultResponseDto testToDjango (ScoringRequestDto scoringRequestDto){
+        //ai 파트와 통신 후 채점 결과 받기
+        final String djangoURL = "http://localhost:8000/VOCA/";
+
+        RestTemplate restTemplate = new RestTemplate();
+        TestResultResponseDto resultResponse= restTemplate.postForObject(djangoURL, scoringRequestDto, TestResultResponseDto.class);
+
+        return resultResponse;
+    }
+
     // pdf를 이미지로 바꾸어 s3 버킷에 저장하고 url List 를 반환한다.
     private List<String> conversionPdf2Img(InputStream is, String uniqueId) {
         List<String> savedImgList = new ArrayList<>(); //저장된 이미지 경로 list

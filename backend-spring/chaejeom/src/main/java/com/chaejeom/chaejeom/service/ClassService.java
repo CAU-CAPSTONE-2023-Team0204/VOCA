@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Transactional
@@ -48,12 +47,16 @@ public class ClassService {
         // 이후 userClass 도 넣고 DB에 memberClass 를 저장한다.
         for(String username : request.getMembers()){
             MemberClass memberClass = new MemberClass();
-            Member member= memberRepository.findByUsername(username)
-                    .orElseThrow(() -> new UsernameNotFoundException(username + " -> 데이터베이스에서 찾을 수 없습니다."));
+            try {
+                Member member = memberRepository.findByUsername(username)
+                        .orElseThrow(() -> new UsernameNotFoundException(username + " -> 데이터베이스에서 찾을 수 없습니다."));
 
-            memberClass.addClass(userclass);
-            memberClass.addMember(member);
-            memberClassRepository.save(memberClass);
+                memberClass.addClass(userclass);
+                memberClass.addMember(member);
+                memberClassRepository.save(memberClass);
+            }catch (UsernameNotFoundException e){
+                continue;
+            }
         }
 
         return classResponseDto;
