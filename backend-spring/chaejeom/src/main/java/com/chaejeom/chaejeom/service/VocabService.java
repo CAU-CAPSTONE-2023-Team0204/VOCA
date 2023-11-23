@@ -4,10 +4,7 @@ import com.chaejeom.chaejeom.domain.ClassVocabList;
 import com.chaejeom.chaejeom.domain.UserClass;
 import com.chaejeom.chaejeom.domain.VocabList;
 import com.chaejeom.chaejeom.domain.VocabListContent;
-import com.chaejeom.chaejeom.dto.ClassVocabListResponseDto;
-import com.chaejeom.chaejeom.dto.VocabContentDto;
-import com.chaejeom.chaejeom.dto.VocabListRequestDto;
-import com.chaejeom.chaejeom.dto.VocabListResponseDto;
+import com.chaejeom.chaejeom.dto.*;
 import com.chaejeom.chaejeom.repository.ClassRepository;
 import com.chaejeom.chaejeom.repository.ClassVocabListRepository;
 import com.chaejeom.chaejeom.repository.VocabListContentRepository;
@@ -15,7 +12,9 @@ import com.chaejeom.chaejeom.repository.VocabListRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +26,8 @@ public class VocabService {
     private final VocabListContentRepository vocabListContentRepository;
     private final ClassVocabListRepository classVocabListRepository;
     private final ClassRepository classRepository;
+
+    private final S3UploadService s3UploadService;
 
 
     // db에 존재하는 모든 단어장 조회
@@ -48,6 +49,12 @@ public class VocabService {
        VocabListResponseDto vocabListResponseDto = new VocabListResponseDto(vocabLists);
 
         return vocabListResponseDto;
+    }
+
+    public VocabListInfoDto getVocabListInfoByClassId(Long voca_list_id){
+        VocabList vocabList = vocabListRepository.findById(voca_list_id).orElseThrow(()-> new RuntimeException("단어장 정보가 없습니다."));
+        VocabListInfoDto response = VocabListInfoDto.of(vocabList);
+        return response;
     }
 
     // 단어장 id 로 해당 단어장 단어 목록 조회
@@ -92,9 +99,11 @@ public class VocabService {
     }
 
     // 단어장 수동 생성
-    public VocabListResponseDto createVocabList(VocabListRequestDto vocabListRequestDto){
+    public VocabListResponseDto createVocabList(VocabListRequestDto vocabListRequestDto, MultipartFile file) throws IOException {
+        String url = s3UploadService.saveFile(file, vocabListRequestDto.getName());
+
         VocabList vocabList = VocabList.builder().name(vocabListRequestDto.getName()).description(vocabListRequestDto.getDescription())
-                .image(vocabListRequestDto.getImg()).vocabListContents(new ArrayList<>()).build();
+                .image(url).vocabListContents(new ArrayList<>()).build();
 
         for(VocabListContent vocabListContent : vocabListRequestDto.getContents()){
             vocabListContent.setVocabList(vocabList); // 외래키 설정

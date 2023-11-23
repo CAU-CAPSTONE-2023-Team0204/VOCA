@@ -37,5 +37,4 @@ public class VocabList {
     @OneToMany(mappedBy = "vocabList")
     private List<VocabListContent>  vocabListContents = new ArrayList<>();
 
-
 }

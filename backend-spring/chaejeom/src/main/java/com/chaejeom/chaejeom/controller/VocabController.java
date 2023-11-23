@@ -1,15 +1,16 @@
 package com.chaejeom.chaejeom.controller;
 
-import com.chaejeom.chaejeom.dto.ClassVocabListResponseDto;
-import com.chaejeom.chaejeom.dto.VocabContentDto;
-import com.chaejeom.chaejeom.dto.VocabListRequestDto;
-import com.chaejeom.chaejeom.dto.VocabListResponseDto;
+import com.chaejeom.chaejeom.dto.*;
 import com.chaejeom.chaejeom.service.VocabService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 @RestController
 @RequestMapping("/api/vocablist")
@@ -33,6 +34,14 @@ public class VocabController {
     public ResponseEntity<VocabContentDto> findVocabContent(@PathVariable Long voca_list_id){
         return ResponseEntity.ok(vocabService.getVocabContentByListID(voca_list_id));
     }
+    @Operation(
+            summary = "단어장 id로 단어장 정보 조회"
+    )
+    @GetMapping("/info/{voca_list_id}")
+    public ResponseEntity<VocabListInfoDto> findVocabListInfo(@PathVariable Long voca_list_id){
+        return ResponseEntity.ok(vocabService.getVocabListInfoByClassId(voca_list_id));
+    }
+
 
     @Operation(
             summary = "특정 단어장에 단어 추가"
@@ -76,9 +85,10 @@ public class VocabController {
     @Operation(
             summary = "단어장 직접 생성"
     )
-    @PostMapping
-    public ResponseEntity<VocabListResponseDto> createVocabList(@RequestBody VocabListRequestDto vocabListRequestDto){
-        return ResponseEntity.ok(vocabService.createVocabList(vocabListRequestDto));
+    @PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
+    public ResponseEntity<VocabListResponseDto> createVocabList(@RequestPart(value ="file") MultipartFile file,
+                                                                @RequestPart(value= "request") VocabListRequestDto vocabListRequestDto) throws IOException {
+        return ResponseEntity.ok(vocabService.createVocabList(vocabListRequestDto, file));
     }
 
     @ExceptionHandler(RuntimeException.class)
