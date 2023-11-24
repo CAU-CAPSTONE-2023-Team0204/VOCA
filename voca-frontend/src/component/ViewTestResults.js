@@ -3,7 +3,7 @@ import NavigationBar from "./NavigationBar";
 import TeacherSidebar from "./TeacherSidebar";
 
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 //page that represents each students' test result.
 import "../styles/view_test_results.css";
@@ -12,10 +12,11 @@ const TEST_RESULT_URL = "/api/test/result/";
 const PAPER_SUBMIT_URL = "/api/test/start/";
 
 const ViewTestResult = () => {
-  const { class_id } = useParams();
+  const { class_id, test_id } = useParams();
   const [file, setFile] = useState();
   const { key } = useParams();
   const axiosPrivate = useAxiosPrivate();
+  const navigate = useNavigate();
 
   // try {
   //   const response = axiosPrivate.get(TEST_RESULT_URL + { key });
@@ -35,6 +36,10 @@ const ViewTestResult = () => {
   const handleSubmitClick = () => {
     const element = document.getElementById("file_input");
     element.click();
+  };
+
+  const handleTestContent = (e) => {
+    navigate(`/class/${class_id}/test/content/${test_id}`);
   };
 
   const handleFileChange = async (event) => {
@@ -72,6 +77,12 @@ const ViewTestResult = () => {
           <div id="contents_title_container">
             <div>시험 결과</div>
             <div id="button_container">
+              <button
+                className="answer_submit_button"
+                onClick={(e) => handleTestContent(e)}
+              >
+                문제 확인
+              </button>
               <button
                 className="answer_submit_button"
                 onClick={() => handleSubmitClick()}

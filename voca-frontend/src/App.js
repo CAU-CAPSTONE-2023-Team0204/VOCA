@@ -20,6 +20,7 @@ import ViewTestResults from "./component/ViewTestResults";
 import CreateVocablist from "./component/CreateVocablist";
 import RegisterVocablist from "./component/RegisterVocablist";
 import StudentTestResult from "./component/StudentTestResult";
+import ViewTestContent from "./component/ViewTestContent";
 import { AuthProvider } from "./context/AuthProvider";
 
 function App() {
@@ -72,6 +73,10 @@ function App() {
             <Route
               path="/class/:class_id/test/result/:student_key"
               element={<StudentTestResult />}
+            ></Route>
+            <Route
+              path="/class/:class_id/test/content/:test_id"
+              element={<ViewTestContent />}
             ></Route>
           </Route>
           <Route path="*" element={<NotFound />}></Route>
