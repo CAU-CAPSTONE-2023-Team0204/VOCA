@@ -111,7 +111,7 @@ public class TestService {
         for(MemberClass memberClass : memberClassList){
             testList.addAll(memberClass.getUserClass().getTestList());
         }
-
+        
         for (Test test : testList){
             tests.add(TestResponseDto.of(test));
         }

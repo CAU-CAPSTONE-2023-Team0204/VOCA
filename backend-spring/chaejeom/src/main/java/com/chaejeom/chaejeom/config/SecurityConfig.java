@@ -91,7 +91,6 @@ public class SecurityConfig {
                 .requestMatchers("/api/**").permitAll() // api 요청 모두 가능(개발)
                 .anyRequest().authenticated()// 나머지는 전부 인증 필요
 
-
                 // JwtFilter 를 addFilterBefore 로 등록했던 JwtSecurityConfig 클래스를 적용
                 .and()
                 .apply(new JwtSecurityConfig(tokenProvider));

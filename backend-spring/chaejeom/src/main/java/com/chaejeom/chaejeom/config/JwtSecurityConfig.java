@@ -1,5 +1,6 @@
 package com.chaejeom.chaejeom.config;
 
+import com.chaejeom.chaejeom.jwt.JwtExceptionFilter;
 import com.chaejeom.chaejeom.jwt.TokenProvider;
 import com.chaejeom.chaejeom.jwt.JwtFilter;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +18,8 @@ public class JwtSecurityConfig extends SecurityConfigurerAdapter<DefaultSecurity
     @Override
     public void configure(HttpSecurity http) {
         JwtFilter customFilter = new JwtFilter(tokenProvider);
+        JwtExceptionFilter jwtExceptionFilter = new JwtExceptionFilter();
         http.addFilterBefore(customFilter, UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(jwtExceptionFilter, JwtFilter.class);
     }
 }

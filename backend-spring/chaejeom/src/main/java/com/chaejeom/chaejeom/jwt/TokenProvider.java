@@ -2,6 +2,8 @@ package com.chaejeom.chaejeom.jwt;
 
 import com.chaejeom.chaejeom.domain.Role;
 import com.chaejeom.chaejeom.dto.TokenDto;
+import com.chaejeom.chaejeom.exception.CustomJwtException;
+import com.chaejeom.chaejeom.exception.ErrorCode;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
@@ -96,14 +98,17 @@ public class TokenProvider {
             return true;
         } catch (io.jsonwebtoken.security.SecurityException | MalformedJwtException e) {
             log.info("잘못된 JWT 서명입니다.");
+            throw new CustomJwtException(ErrorCode.TOKEN_MALFORMED);
         } catch (ExpiredJwtException e) {
             log.info("만료된 JWT 토큰입니다.");
+            throw new CustomJwtException(ErrorCode.TOKEN_EXPIRED);
         } catch (UnsupportedJwtException e) {
             log.info("지원되지 않는 JWT 토큰입니다.");
+            throw new CustomJwtException(ErrorCode.TOKEN_UNSUPPORTED);
         } catch (IllegalArgumentException e) {
             log.info("JWT 토큰이 잘못되었습니다.");
+            throw new CustomJwtException(ErrorCode.TOKEN_ILLEGAL);
         }
-        return false;
     }
 
     public Role getRole(String accessToken){
