@@ -18,34 +18,10 @@ const ClassTests = () => {
     setIsLoading(true);
     axiosPrivate.get(TEST_LIST_URL + `${class_id}`).then((response) => {
       setTestList(response.data.tests);
-      console.log(response.data.tests);
+      console.log(response.data);
       setIsLoading(false);
     });
   }, []);
-  //const response = axiosPrivate.get(TEST_LIST_URL);
-  // const testList = [
-  //   {
-  //     name: "정기 테스트 1",
-  //     test_date: "2023/10/09",
-  //     total_student: 10,
-  //     submitted_student: 7,
-  //     key: "0",
-  //   },
-  //   {
-  //     name: "월간 시험 3",
-  //     test_date: "2023/10/10",
-  //     total_student: 12,
-  //     submitted_student: 10,
-  //     key: "0",
-  //   },
-  //   {
-  //     name: "10월 2주차",
-  //     test_date: "2023/10/11",
-  //     total_student: 14,
-  //     submitted_student: 14,
-  //     key: "0",
-  //   },
-  // ];
 
   const manualMakeButtonHandler = () => {};
 
@@ -57,16 +33,22 @@ const ClassTests = () => {
 
       <div id="main_wrapper">
         <React.Fragment>
-          <TeacherSidebar />
+          <TeacherSidebar class_id={class_id} selected="test" />
         </React.Fragment>
         <div id="contents_wrapper">
           <div id="contents_title_container">
             <div>내 시험</div>
             <div id="button_container">
-              <a href="/class/vocablist" className="make_test_button">
+              <a
+                href={`/class/${class_id}/vocablist`}
+                className="make_test_button"
+              >
                 자동출제
               </a>
-              <a href="/class/test/create/manual" className="make_test_button">
+              <a
+                href={`/class/${class_id}/test/create/manual`}
+                className="make_test_button"
+              >
                 수동출제
               </a>
             </div>
@@ -80,7 +62,7 @@ const ClassTests = () => {
             </div>
             {isLoading ? (
               <p>isLoading...</p>
-            ) : (
+            ) : testList.length > 0 ? (
               <div>
                 {testList.map((test, i) => (
                   <a
@@ -93,9 +75,13 @@ const ClassTests = () => {
                     <p className="test_data">
                       {test.submitted_student}/{test.total_student}
                     </p>
-                    <p className="test_data">{test.time.split("T")[0]}</p>
+                    <p className="test_data">{test.date?.split("T")[0]}</p>
                   </a>
                 ))}
+              </div>
+            ) : (
+              <div id="no_test_message">
+                테스트가 없습니다. 새 테스트를 생성해보세요.
               </div>
             )}
           </div>

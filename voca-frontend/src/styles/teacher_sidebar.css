@@ -3,6 +3,9 @@
     padding: 1px;
     background-color: white;
     height: 80vh;
+    position:sticky;
+    top: 10px;
+    right: 10px;
 }
 
 #sidebar_container #user_info_container{
@@ -18,6 +21,7 @@
     padding: 15px;
 }
 #sidebar_container #user_info{
+    font-family:"Ones";
     margin-left: 25px;
 }
 
@@ -56,6 +60,7 @@
     height: 50px;
     width: 250px;
     background-color:#CCCCCC;
+    font-family:"Ones";
     margin: 10px 10px;
     text-align:center;
     border-radius:15px;
@@ -68,16 +73,18 @@
     list-style:none;
     padding:0;
     height: 50px;
-    width: 250px;
+    width: 262px;
     background-color:#eef6e3;
-    margin: 10px 0 10px 20px;
+    margin: 10px 0 10px 10px;
     text-align:center;
     border-top-left-radius: 15px;
     border-bottom-left-radius: 15px;
+    border-right:none;
     display:flex;
     flex-direction: column;
     align-items: center;
     color:#3ab54a;
+    font-family:"Ones";
     font-size: 28px;
     font-weight:800;
 }
@@ -95,4 +102,3 @@
     font-size: 20px;
     margin:auto;
 }
-

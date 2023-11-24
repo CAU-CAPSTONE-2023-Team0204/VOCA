@@ -71,6 +71,9 @@
     background-color: white;
 }
 
-#classtests_page_container #test_list_container #table_label{
 
+#classtests_page_container #no_test_message{
+    text-align: center;
+    font-family: "Ones";
+    font-size: 24px;
 }

@@ -48,11 +48,8 @@ const RegisterVocablist = () => {
   };
 
   const handleRegisterButton = () => {
-    console.log(
-      `/api/vocablist/${class_id}/${vocabLists[selectedVocabList].id}/`
-    );
     axios.post(
-      `/api/vocablist/${class_id}/${vocabLists[selectedVocabList].id}`
+      `/api/vocablist/${vocabLists[selectedVocabList].id}/${class_id}`
     );
   };
 
@@ -64,7 +61,7 @@ const RegisterVocablist = () => {
 
       <div id="main_wrapper">
         <React.Fragment>
-          <TeacherSidebar />
+          <TeacherSidebar class_id={class_id} selected="vocablist" />
         </React.Fragment>
         <div id="contents_wrapper">
           <div id="title">단어장 등록</div>

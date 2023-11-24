@@ -72,7 +72,7 @@ const TestManualCreate = () => {
 
       <div id="main_wrapper">
         <React.Fragment>
-          <TeacherSidebar />
+          <TeacherSidebar selected="test" />
         </React.Fragment>
         <div id="contents_wrapper">
           <div id="contents_title_container">

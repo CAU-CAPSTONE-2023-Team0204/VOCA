@@ -14,7 +14,6 @@ const ClassSelect = () => {
       try {
         const response = await axiosPrivate.get("/api/classes/me"); // Update state with the data received from the server
         setCLassList(response.data.userClassList);
-        console.log(response.data);
       } catch (error) {
         // Handle error if the request fails
         console.error("Error fetching data:", error);
@@ -43,7 +42,10 @@ const ClassSelect = () => {
                 <ul id="class_list">
                   {classList.map((classname, i) => (
                     <li className="class_item" key={i}>
-                      <a className="class_link" href="/class/main">
+                      <a
+                        className="class_link"
+                        href={`/class/${classname.id}/main`}
+                      >
                         {classname.name}
                       </a>
                     </li>

@@ -25,7 +25,6 @@ const useAxiosPrivate = () => {
       (config) => {
         if (!config.headers["Authorization"]) {
           const accessToken = localStorage.getItem("accessToken");
-          console.log(accessToken);
           config.headers["Authorization"] = `Bearer ${accessToken}`;
         }
         return config;

@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 const ClassMain = () => {
-  const { class_id } = useParams;
+  const { class_id } = useParams();
 
   Chart.register(...registerables);
   var charts = [];
@@ -45,7 +45,7 @@ const ClassMain = () => {
 
       <div id="main_wrapper">
         <React.Fragment>
-          <TeacherSidebar class_id={class_id} />
+          <TeacherSidebar class_id={class_id} selected="main" />
         </React.Fragment>
         <div id="contents_wrapper">
           <div id="result_title"> &#x27A4; 10/23일 시험</div>

@@ -10,14 +10,13 @@ const RequireAuth = () => {
   } else {
     const id = localStorage.getItem("id");
     const accessToken = localStorage.getItem("accessToken");
-    setAuth({ id, accessToken });
-    return <Outlet />;
+    if (id) {
+      setAuth({ id, accessToken });
+      return <Outlet />;
+    } else {
+      return <Navigate to="/login" />;
+    }
   }
-  return auth?.id ? ( //if auth contains id (if user is logined)
-    <Outlet />
-  ) : (
-    <Navigate to="/login" />
-  );
 };
 
 export default RequireAuth;

@@ -1,7 +1,7 @@
 import logo from "./logo.svg";
 import "./App.css";
 import { useEffect, useState } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import React from "react";
 import RequireAuth from "./component/RequireAuth";
 import PersistLogin from "./component/PersistLogin";
@@ -31,40 +31,52 @@ function App() {
           <Route path="/signup" element={<Signup />}></Route>
           <Route path="/login" element={<Signin />}></Route>
 
-          <Route
-            path="/class/:class_id/vocablist"
-            element={<VocablistSelect />}
-          ></Route>
-          <Route
-            path="/class/:class_id/vocablist/view"
-            element={<ViewVocabList />}
-          ></Route>
-          <Route
-            path="/class/:class_id/member"
-            element={<ClassMemberEdit />}
-          ></Route>
-          <Route path="/class/:class_id/tests" element={<ClassTests />}></Route>
-          <Route
-            path="/class/:class_id/test/results/:key/"
-            element={<ViewTestResults />}
-          ></Route>
-          <Route path="/vocablist/create" element={<CreateVocablist />}></Route>
-          <Route
-            path="/class/:class_id/test/create/manual"
-            element={<TestManualCreate />}
-          ></Route>
-          <Route
-            path="/class/:class_id/vocablist/register"
-            element={<RegisterVocablist />}
-          ></Route>
-          <Route path="/class/:class_id/test/result/:student_key"></Route>
           {/* routes that require logins */}
           <Route element={<PersistLogin />}></Route>
           <Route element={<RequireAuth />}>
             <Route path="/create_class" element={<CreateClass />}></Route>
             <Route path="/classes" element={<ClassSelect />}></Route>
             <Route path="/class/:class_id/main" element={<ClassMain />}></Route>
+            <Route
+              path="/class/:class_id/vocablist"
+              element={<VocablistSelect />}
+            ></Route>
+            <Route
+              path="/class/:class_id/vocablist/:vocablist_id/view"
+              element={<ViewVocabList />}
+            ></Route>
+            <Route
+              path="/class/:class_id/member"
+              element={<ClassMemberEdit />}
+            ></Route>
+            <Route
+              path="/class/:class_id/tests"
+              element={<ClassTests />}
+            ></Route>
+            <Route
+              path="/class/:class_id/test/results/:key/"
+              element={<ViewTestResults />}
+            ></Route>
+            <Route
+              path="/class/:class_id/vocablist/create"
+              element={<CreateVocablist />}
+            ></Route>
+            <Route
+              path="/class/:class_id/test/create/manual"
+              element={<TestManualCreate />}
+            ></Route>
+            <Route
+              path="/class/:class_id/vocablist/register"
+              element={<RegisterVocablist />}
+            ></Route>
+            <Route
+              path="/class/:class_id/test/result/:student_key"
+              element={<StudentTestResult />}
+            ></Route>
           </Route>
+          <Route path="*" element={<NotFound />}></Route>
+          {/*<Route path="*" element={<MainPage />} />
+          REDIRECT if no appropriate page is found*/}
         </Routes>
       </BrowserRouter>
     </div>
@@ -72,3 +84,7 @@ function App() {
 }
 
 export default App;
+
+function NotFound() {
+  return <Navigate to="/main" />;
+}

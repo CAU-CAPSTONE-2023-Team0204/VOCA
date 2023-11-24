@@ -58,10 +58,11 @@
 
 #vocablist_page_container .voca_item{
     background-color:white;
-    height: 64px;
+    height: 40px;
     border-radius: 15px;
     font-size: 24px;
     padding-top: 15px;
+    font-family:"Ones"
 }
 
 #auto_test_modal{
@@ -115,4 +116,8 @@
 #auto_test_modal #submit_button_container{
     display:flex;
     justify-content: center;
+}
+
+#auto_test_modal #error_message{
+    color:red;
 }

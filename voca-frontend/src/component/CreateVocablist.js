@@ -4,11 +4,13 @@ import TeacherSidebar from "./TeacherSidebar";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 
 import "../styles/create_vocablist.css";
+import { useParams } from "react-router-dom";
 
 const CREATE_VOCABLIST_URL = "/api/vocablist";
 
 const CreateVocablist = () => {
   const axiosPrivate = useAxiosPrivate();
+  const { class_id } = useParams();
 
   const [file, setFile] = useState();
   const [title, setTitle] = useState("");
@@ -86,7 +88,7 @@ const CreateVocablist = () => {
 
       <div id="main_wrapper">
         <React.Fragment>
-          <TeacherSidebar />
+          <TeacherSidebar class_id={class_id} select="vocablist" />
         </React.Fragment>
         <div id="contents_wrapper">
           <div id="title">단어장 만들기</div>

@@ -14,7 +14,6 @@ const VocablistSelect = () => {
   const [vocablistList, setvocablistList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  console.log(class_id);
   useEffect(() => {
     setIsLoading(true);
     try {
@@ -25,19 +24,11 @@ const VocablistSelect = () => {
           setIsLoading(false);
           console.log(response.data);
         });
-    } catch (err) {
-      console.log("UNEXPECTED ERROR", err);
+    } catch (error) {
+      console.log("UNEXPECTED ERROR", error);
     }
   }, []);
 
-  //const default_img_path = "/resource/img/vocablist_img_default.png";
-  // const vocablistList = [
-  //   default_img_path,
-  //   default_img_path,
-  //   default_img_path,
-  //   default_img_path,
-  //   default_img_path,
-  // ];
   return (
     <div id="vocablist_select_page_container">
       <React.Fragment>
@@ -46,7 +37,7 @@ const VocablistSelect = () => {
 
       <div id="main_wrapper">
         <React.Fragment>
-          <TeacherSidebar />
+          <TeacherSidebar class_id={class_id} selected="vocablist" />
         </React.Fragment>
         <div id="contents_wrapper">
           <p id="content_label">내 단어장</p>
@@ -54,7 +45,7 @@ const VocablistSelect = () => {
             <a
               className="edit_vocab_link"
               title="새로운 단어장을 만듭니다!"
-              href="/vocablist/create"
+              href={`/class/${class_id}/vocablist/create`}
             >
               생성
             </a>
@@ -74,7 +65,7 @@ const VocablistSelect = () => {
                 {vocablistList?.map((vocablist, i) => (
                   <a
                     className="vocablist_link"
-                    href={`/class/${class_id}/vocablist/view`}
+                    href={`/class/${class_id}/vocablist/${vocablist.id}/view`}
                   >
                     <img className="vocablist_img" src={vocablist}></img>
                   </a>

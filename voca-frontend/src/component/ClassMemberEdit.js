@@ -2,30 +2,31 @@ import React from "react";
 import NavigationBar from "./NavigationBar";
 import TeacherSidebar from "./TeacherSidebar";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 
 import "../styles/class_member.css";
 
-const MEMBER_URL = "";
-const MEMBER_DELETE_URL = "";
+const MEMBER_URL = "/api/classes/user/";
+const MEMBER_DELETE_URL = "/api/classes";
 
 const ClassMemberEdit = () => {
+  const { class_id } = useParams();
   const axiosPrivate = useAxiosPrivate();
+  const [memberList, setMemberList] = useState([]);
   const [deleteMember, setDeleteMember] = useState();
 
+  useEffect(() => {
+    try {
+      axiosPrivate.get(MEMBER_URL + `${class_id}`).then((response) => {
+        setMemberList(response.data.memberList);
+      });
+    } catch (error) {
+      console.log("ERROR FETCHING CLASS USER DATA");
+    }
+  }, []);
   //   const response = axiosPrivate.get(MEMBER_URL);
   //   const memberList = response.members;
-  const memberList = [
-    { name: "문서", id: "id_1" },
-    { name: "장세환", id: "id_22" },
-    { name: "차선우우", id: "id_333" },
-    { name: "문서", id: "id_1" },
-    { name: "장세환", id: "id_22" },
-    { name: "차선우우", id: "id_333" },
-    { name: "문서", id: "id_1" },
-    { name: "장세환", id: "id_22" },
-    { name: "차선우우", id: "id_333" },
-  ];
 
   const copyButtonHandler = () => {
     const element = document.getElementById("class_code");
@@ -37,7 +38,7 @@ const ClassMemberEdit = () => {
 
   const deleteButtonHandler = (index) => {
     const element = document.getElementById("modal_window");
-    setDeleteMember(index);
+    setDeleteMember(memberList[index].id);
     element.style.display = "flex";
   };
 
@@ -47,7 +48,15 @@ const ClassMemberEdit = () => {
   };
 
   const confirmButtonHandler = () => {
-    axiosPrivate.delete(MEMBER_DELETE_URL);
+    try {
+      axiosPrivate
+        .delete(MEMBER_DELETE_URL + `/${class_id}/${deleteMember}`)
+        .then((response) => {
+          console.log(response);
+        });
+    } catch (error) {
+      console.log("SERVER ERROR", error);
+    }
   };
 
   return (
@@ -59,7 +68,7 @@ const ClassMemberEdit = () => {
 
         <div id="main_wrapper">
           <React.Fragment>
-            <TeacherSidebar />
+            <TeacherSidebar class_id={class_id} selected="class" />
           </React.Fragment>
           <div id="contents_wrapper">
             <div id="page_title">클래스 멤버</div>
@@ -75,7 +84,7 @@ const ClassMemberEdit = () => {
               {memberList.map((member, i) => (
                 <div key={i} className="member">
                   <p className="name">{member.name}</p>
-                  <p className="id">{member.id}</p>
+                  <p className="id">{member.email}</p>
                   <button
                     className="delete_button"
                     onClick={() => deleteButtonHandler(i)}

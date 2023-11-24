@@ -12,6 +12,7 @@ const TEST_RESULT_URL = "/api/test/result/";
 const PAPER_SUBMIT_URL = "/api/test/start/";
 
 const ViewTestResult = () => {
+  const { class_id } = useParams();
   const [file, setFile] = useState();
   const { key } = useParams();
   const axiosPrivate = useAxiosPrivate();
@@ -65,7 +66,7 @@ const ViewTestResult = () => {
 
       <div id="main_wrapper">
         <React.Fragment>
-          <TeacherSidebar />
+          <TeacherSidebar class_id={class_id} selected="test" />
         </React.Fragment>
         <div id="contents_wrapper">
           <div id="contents_title_container">
@@ -95,7 +96,7 @@ const ViewTestResult = () => {
                 <p className="pass_fail">합격/불합격</p>
               </div>
               {response.studentresults.map((student, i) => (
-                <a key={i} className="result_container">
+                <a key={i} className="result_container" href="">
                   <p className="num">{i}</p>
                   <p className="student_name">{student.name}</p>
                   <p className="score">{student.score}</p>
