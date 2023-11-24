@@ -1,0 +1,56 @@
+#student_result_page_container{
+    height: 100vh;
+}
+
+#student_result_page_container #main_wrapper{
+    display:flex;
+}
+
+#student_result_page_container #contents_wrapper{
+    background-color: #eef6e3;
+    border-radius: 15px;
+    width: 250vh;
+    padding: 40px;
+}
+
+#student_result_page_container #page_title{
+    font-family:"Jalnan";
+    font-size:36px;
+    color: #6fa125;
+}
+
+#student_result_page_container #test_info_container{
+    border-radius: 25px;
+    border: 2px solid #6fa125;
+    margin:12px;
+    display:flex;
+    justify-content: space-between;
+    font-size: 20px;
+    padding: 12px;
+    height:100px;
+    align-items: middle;
+    font-family:"Ones";
+    background-color: white;
+}
+
+#student_result_page_container .question_result{
+    display:flex;
+    background-color: white;
+    border-radius: 25px;
+    margin: 5px 0;
+    justify-content: space-between;
+    padding-right: 0px;
+    font-family:"Ones";
+}
+
+#student_result_page_container .result_content{
+    flex-basis: 16%;
+    text-align: center;
+}
+#student_result_page_container  .edit_result_button{
+    font-family: "Ones";
+    background-color: #6fa125;
+    color:white;
+    border-radius:25px;
+    border:none;
+}
