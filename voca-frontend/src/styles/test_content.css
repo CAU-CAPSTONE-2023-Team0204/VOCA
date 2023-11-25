@@ -9,6 +9,101 @@
 #test_content_page_container #contents_wrapper{
     background-color: #eef6e3;
     border-radius: 15px;
-    width: 1300px;
-    padding: 80px;
+    width: 260vh;
+    padding: 55px;
+}
+
+#test_content_page_container #title{
+    font-family: "Jalnan";
+    font-size: 40px;
+    color: #6fa125;
+}
+
+#test_content_page_container #test_info_container{
+    border: 2px solid #6fa125;
+    border-radius: 12px;
+    display: flex;
+        margin-top: 20px;
+    font-family:"Ones";
+    padding:  0px 50px;
+    box-sizing: border-box;
+    height: 10rem;
+    color: #333333;
+}
+
+#test_content_page_container #info_wrapper{
+    display: flex;
+    flex-basis: 25%;
+    justify-content: space-between;
+}
+
+#test_content_page_container #test_info_wrapper_left{
+    height:100%;
+}
+#test_content_page_container #test_info_wrapper_middle{ 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    font-size: 20px;
+    margin: 24px 0 ;
+}
+
+#test_content_page_container .info{
+    margin: 16px 0;
+}
+
+#test_content_page_container #test_info_wrapper_right{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+#test_content_page_container #info_wrapper_2{
+    display:flex;
+    justify-content: end;
+    flex-basis: 80%;
+}
+
+#test_content_page_container #test_info_name{
+    margin-top: 16px;
+    font-size: 26px;
+    font-weight:bold;
+}
+
+#test_content_page_container .test_info_button{
+    border: none;
+    border-radius:12px;
+    height: 2rem;
+    width: 10rem;
+    background-color: #6fa125;
+    font-family: "Ones";
+    color:white;
+    font-size: 20px;
+    
+}
+
+#test_content_page_container #test_label, #test_content_page_container .test_content{
+    display:flex;
+    justify-content: space-between;
+    font-family: "Ones";
+    font-size: 20px;
+    padding: 12px;
+    margin: 8px 0;
+}
+
+#test_content_page_container .test_content{
+    background-color:white;
+    border-radius: 12px;
+}
+
+#test_content_page_container .content{
+    text-align:center;
+    margin: auto;
+    flex-basis: 40%;
+}
+
+#test_content_page_container .content_num{
+    text-align:center;
+    margin: auto;
+    flex-basis: 10%;
 }
