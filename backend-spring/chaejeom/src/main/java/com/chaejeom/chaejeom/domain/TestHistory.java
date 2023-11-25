@@ -3,6 +3,7 @@ package com.chaejeom.chaejeom.domain;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +28,15 @@ public class TestHistory {
     @Column(name = "average")
     private double average;
 
+    @Column(name = "attend_count")
+    private int attendCount=0;
+
+    @Column(name = "pass_count")
+    private int passCount=0;
+
+    @Column(name = "datetime")
+    private LocalDateTime dateTime;
+
     @ManyToOne
     @JoinColumn(name = "class_id")
     private UserClass userClass;
@@ -37,6 +47,8 @@ public class TestHistory {
 
     @OneToMany(mappedBy = "testHistory")
     private List<TestPersonalHistory> testPersonalHistoryList = new ArrayList<>();
+    @OneToMany(mappedBy = "testHistory")
+    private List<TestHistoryContent> testHistoryContentList = new ArrayList<>();
 
     public void setAverage(){
         double count = 0;
@@ -44,8 +56,21 @@ public class TestHistory {
 
         for(TestPersonalHistory e : testPersonalHistoryList){
             count++;
-            sum += e.getScore();
+            sum += e.getHundredScore();
         }
         this.average = sum/count;
     }
+
+    public void addAttendCount(){
+        this.attendCount++;
+    }
+    public void addPassCount(){
+        this.passCount++;
+    }
+    public void setCorrectRate(){
+        for(TestHistoryContent testHistoryContent : testHistoryContentList){
+            testHistoryContent.setRate();
+        }
+    }
+
 }

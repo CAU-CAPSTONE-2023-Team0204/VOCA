@@ -110,6 +110,22 @@ public class TestController {
         return ResponseEntity.ok(testService.findTestHistoryByTestAndMember(testId, userId));
     }
 
+    // 유저의 가장 최근 시험 결과 조회
+    @Operation(
+            summary = "member id 로 가장 최근 시험 결과 조회하기"
+    )
+    @GetMapping("/result/latest/{member_id}")
+    public ResponseEntity<LatestTestInfoDto> getLatestTestInfoByMember(@PathVariable("member_id") Long memberId){
+        return ResponseEntity.ok(testService.getLatestTestInfo(memberId));
+    }
+
+    @Operation(
+            summary = "접속한 유저의 가장 최근 시험 결과 조회하기"
+    )
+    @GetMapping("/result/latest/me")
+    public ResponseEntity<LatestTestInfoDto> getLatestTestInfoByMember(){
+        return ResponseEntity.ok(testService.getLatestTestInfo(SecurityUtil.getCurrentMemberId()));
+    }
     // 클래스 시험 결과 조회
 
 
@@ -121,6 +137,7 @@ public class TestController {
     public ResponseEntity<TestHistoryContentUpdateDto> updateTestResult(@RequestBody TestHistoryContentUpdateDto request){
         return ResponseEntity.ok(testService.updateTestHistoryContent(request));
     }
+
 
     @Operation(
             summary = "채점 to Django test"

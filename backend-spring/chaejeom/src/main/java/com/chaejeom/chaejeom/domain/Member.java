@@ -38,7 +38,11 @@ public class Member{
 
     @JsonBackReference(value = "member-memberClass")
     @OneToMany(mappedBy = "member")
-    private List<MemberClass> memberClassList = new ArrayList<MemberClass>();
+    private List<MemberClass> memberClassList = new ArrayList<>();
+
+    @JsonBackReference
+    @OneToMany(mappedBy = "member")
+    private List<TestPersonalHistory> testPersonalHistoryList = new ArrayList<>();
 
 
     // 정보 수정 //

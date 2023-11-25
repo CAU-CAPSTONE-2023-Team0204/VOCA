@@ -1,6 +1,6 @@
 package com.chaejeom.chaejeom.dto;
 
-import com.chaejeom.chaejeom.domain.TestHistoryContent;
+import com.chaejeom.chaejeom.domain.TestPersonalHistoryContent;
 import com.chaejeom.chaejeom.domain.TestPersonalHistory;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,8 +24,8 @@ public class TestResultPersonalDto {
 
     public static TestResultPersonalDto of(TestPersonalHistory testPersonalHistory){
         List<TestResultContentDto> contentDtoList = new ArrayList<>();
-        for(TestHistoryContent testHistoryContent : testPersonalHistory.getTestHistoryContentList()){
-            contentDtoList.add(TestResultContentDto.of(testHistoryContent));
+        for(TestPersonalHistoryContent testPersonalHistoryContent : testPersonalHistory.getTestPersonalHistoryContentList()){
+            contentDtoList.add(TestResultContentDto.of(testPersonalHistoryContent));
         }
         return TestResultPersonalDto.builder().url(testPersonalHistory.getImage()).name(testPersonalHistory.getMember().getName())
                 .username(testPersonalHistory.getMember().getUsername()).totalScore(testPersonalHistory.getScore())

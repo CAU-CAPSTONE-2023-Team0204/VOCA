@@ -1,6 +1,6 @@
 package com.chaejeom.chaejeom.dto;
 
-import com.chaejeom.chaejeom.domain.TestHistoryContent;
+import com.chaejeom.chaejeom.domain.TestPersonalHistoryContent;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -17,12 +17,12 @@ public class TestResultContentDto {
     private String userAnswer;
     private boolean result;
 
-    public static TestResultContentDto of(TestHistoryContent testHistoryContent) {
+    public static TestResultContentDto of(TestPersonalHistoryContent testPersonalHistoryContent) {
         return TestResultContentDto.builder()
-                .contentId(testHistoryContent.getId())
-                .question(testHistoryContent.getQuestion())
-                .answer(testHistoryContent.getAnswer())
-                .userAnswer(testHistoryContent.getSubmit())
-                .result(testHistoryContent.isResult()).build();
+                .contentId(testPersonalHistoryContent.getId())
+                .question(testPersonalHistoryContent.getQuestion())
+                .answer(testPersonalHistoryContent.getAnswer())
+                .userAnswer(testPersonalHistoryContent.getSubmit())
+                .result(testPersonalHistoryContent.isResult()).build();
     }
 }

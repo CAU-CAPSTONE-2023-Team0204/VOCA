@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.rendering.ImageType;
 import org.apache.pdfbox.rendering.PDFRenderer;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.stereotype.Service;
@@ -21,8 +22,10 @@ import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -36,7 +39,7 @@ public class TestService {
     private final TestRepository testRepository;
     private final TestHistoryRepository testHistoryRepository;
     private final TestPersonalHistoryRepository testPersonalHistoryRepository;
-
+    private final TestPersonalHistoryContentRepository testPersonalHistoryContentRepository;
     private final TestHistoryContentRepository testHistoryContentRepository;
 
     private final S3UploadService s3UploadService;
@@ -205,7 +208,7 @@ public class TestService {
         scoringRequestDto.setMemberList(memberList);
 
         //ai 파트와 통신 후 채점 결과 받기
-        final String djangoURL = "http://localhost:8000/score";
+        final String djangoURL = "http://localhost:8000/VOCA/";
 
         RestTemplate restTemplate = new RestTemplate();
         TestResultResponseDto resultResponse= restTemplate.postForObject(djangoURL, scoringRequestDto, TestResultResponseDto.class);
@@ -213,30 +216,51 @@ public class TestService {
 
         // 시험 결과 데이터 처리 //
         if(resultResponse.getTestId() != test.getId()) throw new RuntimeException("채점 결과의 시험 id가 올바르지 않습니다.");
-        TestHistory testHistory = TestHistory.builder().test(test).image(originalPdfUrl).userClass(test.getUserClass()).testPersonalHistoryList(new ArrayList<>()).maxScore(test.getMaxScore()).build();
+        //test history 생성
+        TestHistory testHistory = TestHistory.builder().test(test).image(originalPdfUrl).userClass(test.getUserClass())
+                .testPersonalHistoryList(new ArrayList<>())
+                .testHistoryContentList(new ArrayList<>())
+                .dateTime(LocalDateTime.now())
+                .maxScore(test.getMaxScore()).build();
 
         testHistoryRepository.save(testHistory);
 
+        for(TestContent testContent :test.getTestContentList()){ // test content list 에 따라 test history content 테이블에 추가한다.
+            TestHistoryContent testHistoryContent = TestHistoryContent.builder().testContent(testContent).testPersonalHistoryContentList(new ArrayList<>()).build();
+            testHistoryContent.addTestHistory(testHistory);
+            testHistoryContentRepository.save(testHistoryContent);
+        }
         // ****시험 pass/fail 추가 필요.
         // 시험 결과를 db에 저장한다.
         for(TestResultPersonalDto personalDto : resultResponse.getPersonalResultList()){
+            // member 수 만큼 personal history 생성
             Member member = memberRepository.findByUsername(personalDto.getUsername()).orElseThrow(()-> new RuntimeException("채점 결과의 학생을 찾을 수 없습니다."));
-            TestPersonalHistory testPersonalHistory = TestPersonalHistory.builder().score(personalDto.getTotalScore())
-                    .image(personalDto.getUrl()).member(member).testHistoryContentList(new ArrayList<>()).build();
+            TestPersonalHistory testPersonalHistory = TestPersonalHistory.builder().score(personalDto.getTotalScore()).maxScore(test.getMaxScore())
+                    .image(personalDto.getUrl()).testPersonalHistoryContentList(new ArrayList<>()).build();
+            testPersonalHistory.addMember(member);
             testPersonalHistory.addTestHistory(testHistory);
             testPersonalHistoryRepository.save(testPersonalHistory);
 
+            // content list만큼 personal history content 생성
             for(TestResultContentDto contentDto : personalDto.getContentList()){
-                TestHistoryContent content = TestHistoryContent.builder()
+                TestContent testContent = testContentRepository.findById(contentDto.getContentId()).orElseThrow(()-> new RuntimeException("해당 testcontent가없음"));
+                TestHistoryContent historyContent = testHistoryContentRepository.findByTestContent(testContent).orElseThrow(()-> new RuntimeException("해당 test content history가 존재하지 않습니다."));
+                TestPersonalHistoryContent content = TestPersonalHistoryContent.builder()
                         .answer(contentDto.getAnswer())
                         .result(contentDto.isResult())
-                        .submit(contentDto.getUserAnswer()).question(contentDto.getQuestion()).build();
+                        .submit(contentDto.getUserAnswer())
+                        .question(contentDto.getQuestion())
+                        .build();
+                content.addContentHistory(historyContent);
                 content.addPersonalHistory(testPersonalHistory);
-                testHistoryContentRepository.save(content);
+                testPersonalHistoryContentRepository.save(content);
             }
+            testPersonalHistory.setHundredScore();
+            testPersonalHistory.setPass();
         }
         //결과 -> 평균 계산
         testHistory.setAverage();
+        testHistory.setCorrectRate();
         // 테스트 종료
         test.endTest();
 
@@ -271,33 +295,51 @@ public class TestService {
 
     public TestResultResponseDto getResultTest(TestResultResponseDto resultResponse){
         // 시험 결과 데이터 처리 //
-        Test test = testRepository.findById(1L).orElseThrow(()-> new RuntimeException("1번없다."));
-        TestHistory testHistory = TestHistory.builder().test(test).image("originalPdfUrl").userClass(test.getUserClass()).testPersonalHistoryList(new ArrayList<>())
-                .maxScore(test.getMaxScore()).build();
-
+        Test test = testRepository.findById(resultResponse.getTestId()).orElseThrow(()-> new RuntimeException("시험이 존재하지않음"));
+        TestHistory testHistory = TestHistory.builder().test(test).image("originalPdfUrl").userClass(test.getUserClass()).testPersonalHistoryList(new ArrayList<>()).testHistoryContentList(new ArrayList<>())
+                .dateTime(LocalDateTime.now()).maxScore(test.getMaxScore()).build();
         testHistoryRepository.save(testHistory);
+
+        for(TestContent testContent :test.getTestContentList()){ // test content list 에 따라 test history content 테이블에 추가한다.
+            TestHistoryContent testHistoryContent = TestHistoryContent.builder().testContent(testContent).testPersonalHistoryContentList(new ArrayList<>()).build();
+            testHistoryContent.addTestHistory(testHistory);
+            testHistoryContentRepository.save(testHistoryContent);
+        }
 
         // ****시험 pass/fail 추가 필요.
         // 시험 결과를 db에 저장한다.
         for(TestResultPersonalDto personalDto : resultResponse.getPersonalResultList()){
+            // member 수 만큼 personal history 생성
             Member member = memberRepository.findByUsername(personalDto.getUsername()).orElseThrow(()-> new RuntimeException("채점 결과의 학생을 찾을 수 없습니다."));
-            TestPersonalHistory testPersonalHistory = TestPersonalHistory.builder().score(personalDto.getTotalScore())
-                    .image(personalDto.getUrl()).member(member).testHistoryContentList(new ArrayList<>()).build();
+            TestPersonalHistory testPersonalHistory = TestPersonalHistory.builder().score(personalDto.getTotalScore()).maxScore(test.getMaxScore())
+                    .image(personalDto.getUrl()).testPersonalHistoryContentList(new ArrayList<>()).build();
+            testPersonalHistory.addMember(member);
             testPersonalHistory.addTestHistory(testHistory);
             testPersonalHistoryRepository.save(testPersonalHistory);
 
+            // content list만큼 personal history content 생성
             for(TestResultContentDto contentDto : personalDto.getContentList()){
-                TestHistoryContent content = TestHistoryContent.builder()
+                TestContent testContent = testContentRepository.findById(contentDto.getContentId()).orElseThrow(()-> new RuntimeException("해당 testcontent가없음"));
+                TestHistoryContent historyContent = testHistoryContentRepository.findByTestContent(testContent).orElseThrow(()-> new RuntimeException("해당 test content history가 존재하지 않습니다."));
+                TestPersonalHistoryContent content = TestPersonalHistoryContent.builder()
                         .answer(contentDto.getAnswer())
                         .result(contentDto.isResult())
-                        .submit(contentDto.getUserAnswer()).question(contentDto.getQuestion()).build();
+                        .submit(contentDto.getUserAnswer())
+                        .question(contentDto.getQuestion())
+                        .build();
+                content.addContentHistory(historyContent);
                 content.addPersonalHistory(testPersonalHistory);
-                testHistoryContentRepository.save(content);
+                testPersonalHistoryContentRepository.save(content);
             }
-
+            testPersonalHistory.setHundredScore();
+            testPersonalHistory.setPass();
         }
+        //결과 -> 평균 계산
         testHistory.setAverage();
+        testHistory.setCorrectRate();
+        // 테스트 종료
         test.endTest();
+
         return resultResponse;
     }
 
@@ -360,10 +402,10 @@ public class TestService {
     }
 
     public TestHistoryContentUpdateDto updateTestHistoryContent(TestHistoryContentUpdateDto request){
-        TestHistoryContent testHistoryContent =testHistoryContentRepository.findById(request.getContentId())
+        TestPersonalHistoryContent testPersonalHistoryContent = testPersonalHistoryContentRepository.findById(request.getContentId())
                 .orElseThrow(()-> new RuntimeException("해당 문제의 채점 기록이 없습니다."));
 
-        testHistoryContent.update(request);
+        testPersonalHistoryContent.update(request);
         return request;
     }
 
@@ -374,5 +416,27 @@ public class TestService {
         return testHistoryList;
     }
 
+    //가장 최근 시험의 날짜, 점수대별 분포, 평균 정답률, 통과자율, 응시율
+    public LatestTestInfoDto getLatestTestInfo(Long memberId) {
+        Member member = memberRepository.findById(memberId).orElseThrow(()-> new RuntimeException("해당 멤버가 없습니다."));
 
+        Optional<List<TestPersonalHistory>> historyList= testPersonalHistoryRepository.findAllByMember(member);
+        if(!historyList.isEmpty()) return new LatestTestInfoDto();
+
+        List<TestHistory> temp = testHistoryRepository.findLatestTestHitoryByMemberID(member.getId(), PageRequest.of(0,1));
+        if(temp.isEmpty()) return new LatestTestInfoDto();
+        TestHistory testHistory = temp.get(0);
+        int attend = testHistory.getAttendCount();
+        int totalmember = testHistory.getTest().getUserClass().getMemberClassList().size();
+        int passcount = testHistory.getPassCount();
+        int passRate = (int)((double)passcount/totalmember *100);
+        int attendRate = (int)((double)attend/totalmember *100);
+
+        ScoreDistribution scoreDistribution = ScoreDistribution.of(testHistory.getTestPersonalHistoryList());
+
+        LatestTestInfoDto response = LatestTestInfoDto.builder().date(testHistory.getTest().getDate()).average(testHistory.getAverage())
+                .attendRate(attendRate).passRate(passRate).scoreDistribution(scoreDistribution).build();
+
+        return response;
+    }
 }

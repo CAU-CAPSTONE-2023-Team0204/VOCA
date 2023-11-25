@@ -26,7 +26,6 @@ public class VocabService {
     private final VocabListContentRepository vocabListContentRepository;
     private final ClassVocabListRepository classVocabListRepository;
     private final ClassRepository classRepository;
-
     private final S3UploadService s3UploadService;
 
 

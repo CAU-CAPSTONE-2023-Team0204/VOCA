@@ -1,8 +1,10 @@
 package com.chaejeom.chaejeom.domain;
 
-import com.chaejeom.chaejeom.dto.TestHistoryContentUpdateDto;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Table(name = "TEST_HISTORY_CONTENT")
 @Getter
@@ -16,35 +18,31 @@ public class TestHistoryContent {
     @Column(name = "test_history_content_id")
     private Long id;
 
-    @Column
-    private String question;
-    // 제출한 답
-    @Column
-    private String submit;
-
-    // 정답
-    @Column(nullable = false)
-    private String answer;
-
-    @Column(nullable = false)
-    private boolean result;
+    @ManyToOne
+    @JoinColumn(name = "test_content_id")
+    private TestContent testContent;
 
     @ManyToOne
-    @JoinColumn(name = "personal_history_id")
-    private TestPersonalHistory testPersonalHistory;
+    @JoinColumn(name = "test_history_id")
+    private TestHistory testHistory;
 
-    public void addPersonalHistory(TestPersonalHistory testPersonalHistory){
-        this.testPersonalHistory = testPersonalHistory;
-        testPersonalHistory.getTestHistoryContentList().add(this);
+    @OneToMany(mappedBy = "testHistoryContent")
+    private List<TestPersonalHistoryContent> testPersonalHistoryContentList = new ArrayList<>();
+
+    @Column(name = "rate")
+    private double rate;
+
+    public void addTestHistory(TestHistory testHistory){
+        this.testHistory =testHistory;
+        testHistory.getTestHistoryContentList().add(this);
+    }
+    public void setRate(){
+        double total = testPersonalHistoryContentList.size();
+        double count = 0;
+        for(TestPersonalHistoryContent content : testPersonalHistoryContentList){
+            if(content.isResult()) count ++;
+        }
+        this.rate = count/total *100;
     }
 
-    public void update(TestHistoryContentUpdateDto request){
-        this.question = request.getQuestion();
-        this.submit = request.getUserAnswer();
-        this.answer = request.getAnswer();
-        this.result = request.isResult();
-
-        testPersonalHistory.setScore();
-        testPersonalHistory.getTestHistory().setAverage();
-    }
 }
