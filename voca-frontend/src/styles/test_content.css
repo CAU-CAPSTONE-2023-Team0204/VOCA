@@ -1,0 +1,14 @@
+#test_content_page_container{
+    height: 100vh;
+}
+
+#test_content_page_container #main_wrapper{
+    display:flex;
+}
+
+#test_content_page_container #contents_wrapper{
+    background-color: #eef6e3;
+    border-radius: 15px;
+    width: 1300px;
+    padding: 80px;
+}

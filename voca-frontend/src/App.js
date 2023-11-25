@@ -55,7 +55,7 @@ function App() {
               element={<ClassTests />}
             ></Route>
             <Route
-              path="/class/:class_id/test/results/:key/"
+              path="/class/:class_id/test/results/:test_id/"
               element={<ViewTestResults />}
             ></Route>
             <Route
