@@ -421,7 +421,7 @@ public class TestService {
         Member member = memberRepository.findById(memberId).orElseThrow(()-> new RuntimeException("해당 멤버가 없습니다."));
 
         Optional<List<TestPersonalHistory>> historyList= testPersonalHistoryRepository.findAllByMember(member);
-        if(!historyList.isEmpty()) return new LatestTestInfoDto();
+        if(!historyList.isPresent()) return new LatestTestInfoDto();
 
         List<TestHistory> temp = testHistoryRepository.findLatestTestHitoryByMemberID(member.getId(), PageRequest.of(0,1));
         if(temp.isEmpty()) return new LatestTestInfoDto();
