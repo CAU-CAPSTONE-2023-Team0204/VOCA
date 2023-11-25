@@ -20,6 +20,7 @@ public class TestResponseDto {
     private String name;
     private Long classId;
     private String className;
+    private Long vocabListId;
     private String vocabListName;
     private LocalDate date;
     private List<TestContent> testContentList;
@@ -27,7 +28,7 @@ public class TestResponseDto {
     public static TestResponseDto of(Test test){
         if(test.getType() == TestType.AUTO)
             return TestResponseDto.builder().testId(test.getId()).name(test.getName()).classId(test.getUserClass().getId()).className(test.getUserClass().getName()).vocabListName(test.getVocabList().getName())
-                    .date(test.getDate()).testContentList(test.getTestContentList()).build();
+                    .vocabListId(test.getVocabList().getId()).date(test.getDate()).testContentList(test.getTestContentList()).build();
         else
             return TestResponseDto.builder().testId(test.getId()).name(test.getName()).classId(test.getUserClass().getId()).className(test.getUserClass().getName())
                     .date(test.getDate()).testContentList(test.getTestContentList()).build();
