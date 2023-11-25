@@ -33,11 +33,21 @@
 #vocablist_select_page_container .vocablist_img{
     width: 120px;
     height: 180px;
+    margin:auto;
 }
 
 #vocablist_select_page_container .vocablist_link{
     display:flex;
+    flex-direction: column;
     justify-content: center;
+    text-decoration: none;
+    font-family: "Ones";
+    color:black;
+}
+
+#vocablist_select_page_container .vocablist_name{
+    text-align:center;
+    margin:auto;
 }
 
 #vocablist_select_page_container .edit_vocab_link{
