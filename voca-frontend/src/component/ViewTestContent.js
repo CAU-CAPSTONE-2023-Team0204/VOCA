@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 
 import "../styles/test_content.css";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
+import { generatePDF } from "../api/pdf";
 
 const TEST_CONTENT_URL = "/api/test/start/";
 
@@ -19,7 +20,6 @@ const ViewTestContent = () => {
     try {
       axiosPrivate.get(TEST_CONTENT_URL + test_id).then((response) => {
         setTestInfo(response.data);
-        console.log(response.data);
         setIsLoading(false);
       });
     } catch (error) {
@@ -29,7 +29,11 @@ const ViewTestContent = () => {
   }, []);
 
   const handleTestSheet = (e) => {
-    //
+    generatePDF(
+      "시험 325",
+      ["사장되다", "독성의", "knight"],
+      ["student1", "student2", "student3"]
+    );
   };
 
   const handleGoVocablist = (e) => {

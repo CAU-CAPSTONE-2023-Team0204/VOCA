@@ -1,35 +1,36 @@
-<div id="page_container">
-  <div id="test_title">타이틀</div>
-  <div class="student_code">jlisnlm1029</div>
-  <div id="problem_container">
-    <div id="left_column">
-      <div class="prob_answer"></div>
-    </div>
-    <div id="right_column">
-      <div class="prob_answer"></div>
+<div id="pages">
+  <div class="page_container">
+    <div class="test_title">타이틀</div>
+    <div class="student_code">jlisnlm1029</div>
+    <div class="problem_container">
+      <div class="left_column">
+        <div class="prob_answer"></div>
+      </div>
+      <div class="right_column">
+        <div class="prob_answer"></div>
+      </div>
     </div>
   </div>
-
   <style>
-    #test_title {
+    .test_title {
       margin: 2%;
     }
-    #page_container {
+    .page_container {
       width: 100%;
       height: 100%;
       padding: 5%;
       font-size: 18px;
     }
-    #test_title {
+    .test_title {
       text-align: center;
       width: 90%;
     }
-    #left_column,
-    #right_column {
+    .left_column,
+    .right_column {
       width: 45%;
       margin: 0;
     }
-    #problem_container {
+    .problem_container {
       display: flex;
       width: auto;
       height: 80%;
@@ -53,6 +54,9 @@
     }
     .student_code {
       padding: 5%;
+    }
+    .page_break {
+      page-break-after: always;
     }
   </style>
 </div>
