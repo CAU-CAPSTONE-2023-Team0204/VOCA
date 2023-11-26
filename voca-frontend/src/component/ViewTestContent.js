@@ -1,19 +1,22 @@
 import React, { useState } from "react";
 import NavigationBar from "./NavigationBar";
 import TeacherSidebar from "./TeacherSidebar";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import "../styles/test_content.css";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import { generatePDF } from "../api/pdf";
 
 const TEST_CONTENT_URL = "/api/test/start/";
+const CLASS_USER_URL = "/api/classes/user/";
 
 const ViewTestContent = () => {
   const { class_id, test_id } = useParams();
   const axiosPrivate = useAxiosPrivate();
   const [testInfo, setTestInfo] = useState();
   const [isLoading, setIsLoading] = useState(true);
+  const [userList, setUserList] = useState([]);
+  const navigate = useNavigate();
 
   useState(() => {
     setIsLoading(true);
@@ -28,16 +31,20 @@ const ViewTestContent = () => {
     }
   }, []);
 
-  const handleTestSheet = (e) => {
-    generatePDF(
-      "시험 325",
-      ["사장되다", "독성의", "knight"],
-      ["student1", "student2", "student3"]
-    );
+  const handleTestSheet = async (e) => {
+    try {
+      await axiosPrivate.get(CLASS_USER_URL + class_id).then((response) => {
+        setUserList(response.data.memberList);
+      });
+    } catch (error) {
+      console.log("ERROR FETCHING CLASS USERS", error);
+    }
+    generatePDF(testInfo?.name, testInfo?.testContentList, userList);
   };
 
   const handleGoVocablist = (e) => {
-    //
+    const VIEW_VOCABLIST_URL = `/class/${class_id}/vocablist/${testInfo?.vocabListId}/view`;
+    navigate(VIEW_VOCABLIST_URL);
   };
 
   return (
