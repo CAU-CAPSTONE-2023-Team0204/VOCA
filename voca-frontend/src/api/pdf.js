@@ -33,7 +33,7 @@ export const generatePDF = (test_title, test_data, user_ids) => {
       //create page for each user and append pagebreak
       user_ids.forEach((user) => {
         const cloned = page_container.cloneNode(true);
-        cloned.childNodes[3].textContent = user.username;
+        cloned.childNodes[3].textContent = user;
         pages.appendChild(cloned);
         const page_break = document.createElement("div");
         page_break.setAttribute("class", "page_break");
@@ -70,7 +70,7 @@ const appendProblem = (document, data) => {
 
     const prob = document.createElement("div");
     prob.setAttribute("class", "prob");
-    prob.textContent = word.question;
+    prob.textContent = word;
     prob_answer.appendChild(prob);
 
     const answer_blank = document.createElement("div");
