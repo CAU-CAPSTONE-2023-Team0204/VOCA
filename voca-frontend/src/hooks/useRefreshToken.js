@@ -1,4 +1,4 @@
-import axios from "../api/axios";
+import axios, { axiosPrivate } from "../api/axios";
 import useAuth from "./useAuth";
 
 const useRefreshToken = () => {
@@ -6,7 +6,7 @@ const useRefreshToken = () => {
 
   const refresh = async () => {
     try {
-      const response = await axios.post("/auth/reissue", {
+      const response = await axiosPrivate.post("/auth/reissue", {
         withCredentials: true,
       });
       setAuth((prev) => {
@@ -16,6 +16,7 @@ const useRefreshToken = () => {
       });
       return response.data.accessToken;
     } catch (err) {
+      //console.log(err);
       console.log("UNEXPECTED ERROR");
     }
   };
