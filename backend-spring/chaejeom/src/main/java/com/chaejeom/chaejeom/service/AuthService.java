@@ -2,12 +2,10 @@ package com.chaejeom.chaejeom.service;
 
 import com.chaejeom.chaejeom.domain.Member;
 import com.chaejeom.chaejeom.domain.RefreshToken;
-import com.chaejeom.chaejeom.domain.Role;
 import com.chaejeom.chaejeom.dto.*;
 import com.chaejeom.chaejeom.jwt.TokenProvider;
 import com.chaejeom.chaejeom.repository.MemberRepository;
 import com.chaejeom.chaejeom.repository.RefreshTokenRepository;
-import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -61,7 +59,7 @@ public class AuthService {
     @Transactional
     public TokenDto reissue(TokenRequestDto tokenRequestDto, String requestRefreshToken) {
         // 1. Refresh Token 검증
-        if (!tokenProvider.validateToken(requestRefreshToken)) {
+        if (!tokenProvider.validateTokenForReissue(requestRefreshToken)) {
             throw new RuntimeException("Refresh Token 이 유효하지 않습니다.");
         }
 
