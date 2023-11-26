@@ -49,7 +49,7 @@ const ViewTestResult = () => {
       const formData = new FormData();
       formData.append("file", file);
       const response = await axiosPrivate.post(
-        PAPER_SUBMIT_URL + `${key}})}`,
+        PAPER_SUBMIT_URL + test_id,
         formData,
         {
           headers: {
