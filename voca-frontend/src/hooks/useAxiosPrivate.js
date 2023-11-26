@@ -17,9 +17,12 @@ const useAxiosPrivate = () => {
           error?.response?.data.code === "TOKEN-002" &&
           !prevRequest?.sent
         ) {
-          console.log(error?.response?.data.code);
           prevRequest.sent = true;
-          const newAccessToken = await refresh();
+          const expired_token = prevRequest.headers.Authorization.slice(7);
+          var newAccessToken = await refresh(expired_token);
+          //.log("NEW_TOKEN FROM AXIOS PRIVATE", newAccessToken);
+          if (!newAccessToken)
+            newAccessToken = localStorage.getItem("accessToken");
           prevRequest.headers["Authorization"] = `Bearer ${newAccessToken}`;
           return axiosPrivate(prevRequest);
         }
@@ -44,7 +47,6 @@ const useAxiosPrivate = () => {
   axiosPrivate.interceptors.request.use((config) => {
     if (!config.headers["Authorization"]) {
       const accessToken = localStorage.getItem("accessToken");
-      console.log(accessToken);
       config.headers["Authorization"] = `Bearer ${accessToken}`;
     }
     return config;

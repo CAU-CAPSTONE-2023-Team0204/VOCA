@@ -1,17 +1,23 @@
-import axios, { axiosPrivate } from "../api/axios";
+import axios from "../api/axios";
 import useAuth from "./useAuth";
 
 const useRefreshToken = () => {
-  const { setAuth } = useAuth();
-
-  const refresh = async () => {
+  const { auth, setAuth } = useAuth();
+  const refresh = async (expired_token) => {
+    console.log(expired_token);
     try {
-      const response = await axiosPrivate.post("/auth/reissue", {
-        withCredentials: true,
-      });
+      const response = await axios.post(
+        "/auth/reissue",
+        JSON.stringify({ accessToken: expired_token }),
+        {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        }
+      );
       setAuth((prev) => {
-        console.log("PREVIOUS REQUEST?");
-        console.log(JSON.stringify(prev));
+        //.log("EXPIRED_TOKEN", expired_token);
+        //console.log("NEW TOKEN", response.data.accessToken);
+        localStorage.setItem("accessToken", response.data.accessToken);
         return { ...prev, accessToken: response.data.accessToken };
       });
       return response.data.accessToken;
