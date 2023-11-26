@@ -22,6 +22,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +35,7 @@ public class TestService {
 
     private final MemberRepository memberRepository;
     private final VocabListRepository vocabListRepository;
+    private final VocabListContentRepository vocabListContentRepository;
     private final ClassRepository classRepository;
     private final TestContentRepository testContentRepository;
     private final TestRepository testRepository;
@@ -47,9 +49,29 @@ public class TestService {
     public AutoTestResponseDto createAutoTest(AutoTestRequestDto requestDto){
         UserClass userClass = classRepository.findById(requestDto.getClassId()).orElseThrow(()->new RuntimeException("해당 클래스가 없습니다."));
         VocabList vocabList = vocabListRepository.findById(requestDto.getVocabListId()).orElseThrow(()->new RuntimeException("해당 단어장이 없습니다."));
-
         int offset = 0;
         int number = requestDto.getNumber();
+
+        List<Test> testList = testRepository.findAllByVocabListAndUserClassAndType(vocabList, userClass, TestType.AUTO);
+        if(!testList.isEmpty()) {
+            Test latestTest = testList.get(0);
+            LocalDate latestDate = LocalDate.MIN;
+            for (Test test : testList) {
+                if (test.getDate().isAfter(latestDate) ||test.getDate().isEqual(latestDate)){
+                    latestTest = test;
+                    latestDate = test.getDate();
+                }
+            }
+            TestContent latestContent = latestTest.getTestContentList().get(latestTest.getTestContentList().size()-1);
+            String word = "";
+            if(latestContent.getType() == QuestionType.KOR_TO_ENG){
+                word = latestContent.getAnswer();
+            }
+            else word = latestContent.getQuestion();
+
+            VocabListContent vocabListContent = vocabListContentRepository.findByWord(word).orElseThrow(()->new RuntimeException("auto test 마지막 문제 찾기 에러"));
+            offset = vocabListContent.getId().intValue() - vocabList.getVocabListContents().get(0).getId().intValue();
+        }
 
         Test test = Test.builder().name(requestDto.getName()).date(requestDto.getDate()).maxScore(requestDto.getNumber())
                 .vocabList(vocabList).type(TestType.AUTO).testContentList(new ArrayList<>()).build();
@@ -208,7 +230,7 @@ public class TestService {
         scoringRequestDto.setMemberList(memberList);
 
         //ai 파트와 통신 후 채점 결과 받기
-        final String djangoURL = "http://localhost:8000/VOCA/";
+        final String djangoURL = "https://sehwanii.pythonanywhere.com/main/";
 
         RestTemplate restTemplate = new RestTemplate();
         TestResultResponseDto resultResponse= restTemplate.postForObject(djangoURL, scoringRequestDto, TestResultResponseDto.class);
@@ -345,7 +367,7 @@ public class TestService {
 
     public TestResultResponseDto testToDjango (ScoringRequestDto scoringRequestDto){
         //ai 파트와 통신 후 채점 결과 받기
-        final String djangoURL = "http://localhost:8000/VOCA/";
+        final String djangoURL = "https://sehwanii.pythonanywhere.com/main/";
 
         RestTemplate restTemplate = new RestTemplate();
         TestResultResponseDto resultResponse= restTemplate.postForObject(djangoURL, scoringRequestDto, TestResultResponseDto.class);
