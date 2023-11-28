@@ -67,7 +67,8 @@ public class TestPersonalHistory {
         this.hundredScore = (int)((double)score/(double) maxScore *100);
     }
     public void setPass(){
-        if(hundredScore >= 90)
+        int passScore = this.testHistory.getTest().getPassScore();
+        if(score >= passScore)
         {
             this.pass = true;
             this.testHistory.addPassCount();

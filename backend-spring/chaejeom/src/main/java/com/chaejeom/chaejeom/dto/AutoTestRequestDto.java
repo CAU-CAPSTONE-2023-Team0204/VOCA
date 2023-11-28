@@ -15,6 +15,7 @@ public class AutoTestRequestDto {
     private LocalDate date;
     private Long vocabListId;
     private Long classId;
+    private int pass_score;
     private int number;
     private QuestionType questionType;
 

@@ -2,6 +2,7 @@ package com.chaejeom.chaejeom.service;
 
 import com.chaejeom.chaejeom.domain.Member;
 import com.chaejeom.chaejeom.domain.MemberClass;
+import com.chaejeom.chaejeom.domain.Role;
 import com.chaejeom.chaejeom.domain.UserClass;
 import com.chaejeom.chaejeom.dto.*;
 import com.chaejeom.chaejeom.repository.ClassRepository;
@@ -77,12 +78,17 @@ public class ClassService {
         return getClassesResponseDto;
     }
 
-    public GetStudentResponseDto getStudentInfoById(Long id){
+    public GetStudentResponseDto getMemberInfoById(Long id, boolean flag){
         UserClass userClass = classRepository.findById(id).orElseThrow(()-> new RuntimeException("클래스 정보가 없습니다."));
         List<MemberClass> memberClassList = userClass.getMemberClassList();
         List<Member> memberList = new ArrayList<>();
 
         for(MemberClass memberClass : memberClassList){
+            if(flag){
+                Member member = memberClass.getMember();
+                if(member.getRole()==Role.ROLE_STUDENT)
+                    memberList.add(member);
+            }else
             memberList.add(memberClass.getMember());
         }
         GetStudentResponseDto getStudentResponseDto = new GetStudentResponseDto(memberList);

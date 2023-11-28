@@ -73,7 +73,7 @@ public class TestService {
             offset = vocabListContent.getId().intValue() - vocabList.getVocabListContents().get(0).getId().intValue();
         }
 
-        Test test = Test.builder().name(requestDto.getName()).date(requestDto.getDate()).maxScore(requestDto.getNumber())
+        Test test = Test.builder().name(requestDto.getName()).date(requestDto.getDate()).maxScore(requestDto.getNumber()).passScore(requestDto.getPass_score())
                 .vocabList(vocabList).type(TestType.AUTO).testContentList(new ArrayList<>()).build();
 
         test.addUserClass(userClass);
@@ -387,7 +387,7 @@ public class TestService {
                 String imgFileName = uniqueId + "-" + i ;
 
                 //DPI 설정
-                BufferedImage bim = pdfRenderer.renderImageWithDPI(i, 72, ImageType.GRAY);
+                BufferedImage bim = pdfRenderer.renderImageWithDPI(i, 150, ImageType.GRAY);
 
                 ByteArrayOutputStream baos =  new ByteArrayOutputStream();
                 ImageIO.write(bim, "png", baos);

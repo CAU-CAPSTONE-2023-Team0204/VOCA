@@ -31,6 +31,9 @@ public class Test {
     @Column(name = "max_score")
     private int maxScore;
 
+    @Column(name = "pass_score")
+    private int passScore;
+
     // 시험 시행 여부 true :시행된 시험, false : 시행 예정 시험
     @Column(name = "test_status")
     @ColumnDefault("false")

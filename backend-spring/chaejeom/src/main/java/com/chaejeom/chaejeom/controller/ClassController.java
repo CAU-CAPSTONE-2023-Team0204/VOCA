@@ -34,10 +34,17 @@ public class ClassController {
             summary = "클래스 id로 클래스에 속한 사용자 정보 반환"
     )
     @GetMapping("/classes/user/{class_id}")
-    public ResponseEntity<GetStudentResponseDto> findStudentByClass(@PathVariable Long class_id){
-        return ResponseEntity.ok(classService.getStudentInfoById(class_id));
+    public ResponseEntity<GetStudentResponseDto> findMemberByClass(@PathVariable Long class_id){
+        return ResponseEntity.ok(classService.getMemberInfoById(class_id, false));
     }
 
+    @Operation(
+            summary = "클래스 id로 클래스에 속한 Student 정보 반환"
+    )
+    @GetMapping("/classes/user/student/{class_id}")
+    public ResponseEntity<GetStudentResponseDto> findStudentByClass(@PathVariable Long class_id){
+        return ResponseEntity.ok(classService.getMemberInfoById(class_id, true));
+    }
     @Operation(
             summary = "해당 유저를 클래스에서 삭제"
     )

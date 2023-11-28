@@ -1,6 +1,7 @@
 package com.chaejeom.chaejeom.dto;
 
 import com.chaejeom.chaejeom.domain.Member;
+import com.chaejeom.chaejeom.domain.Role;
 import com.chaejeom.chaejeom.domain.TestContent;
 import lombok.*;
 
@@ -21,8 +22,10 @@ public class ScoringRequestDto {
 
     public void setMemberList(List<Member> list) {
         for (Member member : list) {
-            ScoredMember scoredMember = new ScoredMember();
-            this.memberList.add(scoredMember.of(member));
+            if (member.getRole() == Role.ROLE_STUDENT) {
+                ScoredMember scoredMember = new ScoredMember();
+                this.memberList.add(scoredMember.of(member));
+            }
         }
     }
 }
