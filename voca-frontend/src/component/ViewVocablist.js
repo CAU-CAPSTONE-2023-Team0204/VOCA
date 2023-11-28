@@ -5,19 +5,24 @@ import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import { generatePDF } from "../api/pdf.js";
 
 import "../styles/view_vocablist.css";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const AUTO_TEST_URL = "/api/test/auto";
 const VOCABLIST_CONTENT_URL = "/api/vocablist/";
+const VOCABLIST_INFO_URL = "/api/vocablist/info/";
+const CLASS_VOCABLIST_URL = "/api/";
 
 const ViewVocabList = () => {
   const { class_id, vocablist_id } = useParams();
   const [vocabContent, setVocabContent] = useState([]);
+  const [vocablistInfo, setVocablistInfo] = useState({});
   const [test_name, setTestName] = useState("");
   const [test_date, setTestDate] = useState("");
   const [question_count, setQuestionCount] = useState(0);
   const [pass_score, setPassScore] = useState(0);
   const axiosPrivate = useAxiosPrivate();
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     try {
@@ -26,6 +31,9 @@ const ViewVocabList = () => {
         .then((response) => {
           setVocabContent(response.data.vocabListContents);
         });
+      axiosPrivate.get(VOCABLIST_INFO_URL + vocablist_id).then((response) => {
+        setVocablistInfo(response.data);
+      });
     } catch (error) {
       console.log("ERROR FETCHING VOCABLIST CONTENT");
     }
@@ -50,6 +58,7 @@ const ViewVocabList = () => {
   };
 
   const validateInput = () => {
+    console.log(question_count);
     if (test_name.length < 1) {
       return false;
     }
@@ -58,14 +67,22 @@ const ViewVocabList = () => {
     } catch (error) {
       return false;
     }
+    if (question_count && pass_score) {
+      if (question_count > vocabContent.length) {
+        return false;
+      }
+      if (pass_score > question_count) {
+        return false;
+      }
+    } else {
+      return false;
+    }
 
-    if (question_count > vocabContent.length) {
-      return false;
-    }
-    if (pass_score > question_count) {
-      return false;
-    }
     return true;
+  };
+
+  const handleBackButton = () => {
+    navigate(`/class/${class_id}/vocablist`);
   };
 
   const handleAutoTest = () => {
@@ -120,11 +137,15 @@ const ViewVocabList = () => {
         <div id="contents_wrapper">
           <div id="vocablist_info_container">
             <div>
-              <p id="vocablist_name">단어장 이름 | 단어장 차시</p>
-              <p>단어장 설명</p>
+              <p id="vocablist_name">
+                {vocablistInfo ? vocablistInfo?.name : "단어장 이름"}
+              </p>
+              <p>
+                {vocablistInfo ? vocablistInfo?.description : "단어장 설명"}
+              </p>
             </div>
             <div id="button_container">
-              <button> back </button>
+              <button onClick={handleBackButton}> back </button>
               <button onClick={handleAutoTest}> 자동 출제 </button>
             </div>
           </div>
@@ -158,24 +179,28 @@ const ViewVocabList = () => {
               <label> 시험 이름</label>
               <input
                 type="text"
+                className="config_input"
                 onChange={(e) => handleTestNameChange(e)}
                 placeholder="한글자 이상으로 입력해주세요"
               ></input>
               <label> 시험 날짜</label>
               <input
                 type="text"
+                className="config_input"
                 onChange={(e) => handleTestDateChange(e)}
                 placeholder="YYYY-MM-DD 형식으로 입력해주세요"
               ></input>
               <label> 시험 문항 수</label>
               <input
                 type="text"
+                className="config_input"
                 onChange={(e) => handleQuestionCountChange(e)}
                 placeholder="단어장 단어 수보다 작은 수를 입력해주세요"
               ></input>
               <label> 통과 최저 점수</label>
               <input
                 type="text"
+                className="config_input"
                 onChange={(e) => handPassScoreChange(e)}
                 placeholder="문항 수보다 작은 수를 입력해주세요"
               ></input>

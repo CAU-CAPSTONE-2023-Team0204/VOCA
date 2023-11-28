@@ -120,4 +120,9 @@
 
 #auto_test_modal #error_message{
     color:red;
+    text-align: center;
+}
+
+#auto_test_modal .config_input{
+    font-family: "Ones"
 }
