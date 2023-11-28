@@ -3,7 +3,7 @@ import NavigationBar from "./NavigationBar";
 import TeacherSidebar from "./TeacherSidebar";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import "../styles/class_member.css";
 
@@ -15,6 +15,8 @@ const ClassMemberEdit = () => {
   const axiosPrivate = useAxiosPrivate();
   const [memberList, setMemberList] = useState([]);
   const [deleteMember, setDeleteMember] = useState();
+  const [addUser, setAddUser] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     try {
@@ -47,6 +49,10 @@ const ClassMemberEdit = () => {
     element.style.display = "none";
   };
 
+  const handleAddUserchange = (e) => {
+    setAddUser(e.target.value);
+  };
+
   const confirmButtonHandler = () => {
     try {
       axiosPrivate
@@ -56,6 +62,16 @@ const ClassMemberEdit = () => {
         });
     } catch (error) {
       console.log("SERVER ERROR", error);
+    }
+  };
+
+  const handleUserAdd = () => {
+    try {
+      axiosPrivate(`/api/classes/${class_id}/${addUser}`).then((response) => {
+        navigate(0);
+      });
+    } catch (error) {
+      console.log("ERROR ADDING A USER", error);
     }
   };
 
@@ -71,13 +87,18 @@ const ClassMemberEdit = () => {
             <TeacherSidebar class_id={class_id} selected="class" />
           </React.Fragment>
           <div id="contents_wrapper">
-            <div id="page_title">클래스 멤버</div>
+            <div id="page_title">멤버 수정</div>
             <div id="divider" />
             <div id="class_code_container">
-              추가코드
-              <div id="class_code"> a0vduwm9dkmvc </div>
-              <button id="copy_button" onClick={() => copyButtonHandler()}>
-                복사
+              학생 추가
+              <input
+                type="text"
+                id="class_code"
+                placeholder="추가할 유저의 ID를 입력하세요"
+                onChange={(e) => handleAddUserchange(e)}
+              ></input>
+              <button id="copy_button" onClick={(e) => handleUserAdd(e)}>
+                추가
               </button>
             </div>
             <div id="member_container">
