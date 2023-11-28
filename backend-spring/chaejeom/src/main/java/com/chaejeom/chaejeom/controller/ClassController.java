@@ -65,9 +65,9 @@ public class ClassController {
     @Operation(
             summary = "클래스에 학생 추가"
     )
-    @PostMapping("/classes/{class_id}/{user_id}")
-    public ResponseEntity<MemberResponseDto> addStudent(@PathVariable("class_id")Long class_id, @PathVariable("user_id") Long user_id){
-        return ResponseEntity.ok(classService.addStudentById(class_id,user_id));
+    @PostMapping("/classes/{class_id}/{username}")
+    public ResponseEntity<MemberResponseDto> addStudent(@PathVariable("class_id")Long class_id, @PathVariable("username") String username){
+        return ResponseEntity.ok(classService.addStudentById(class_id,username));
     }
 
 }

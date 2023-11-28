@@ -43,6 +43,7 @@ public class ClassService {
         memberClassCur.addClass(userclass);
         memberClassCur.addMember(currentMember);
         memberClassRepository.save(memberClassCur);
+
         // 학생들의 id 명단만큼 memberClass 생성, id로 member 검색 후 memberClass에 넣기.
         // 이후 userClass 도 넣고 DB에 memberClass 를 저장한다.
         for(String username : request.getMembers()){
@@ -51,6 +52,9 @@ public class ClassService {
                 Member member = memberRepository.findByUsername(username)
                         .orElseThrow(() -> new UsernameNotFoundException(username + " -> 데이터베이스에서 찾을 수 없습니다."));
 
+                if(memberClassRepository.existsByMemberAndUserClass(member,userclass)){
+                    continue;
+                }
                 memberClass.addClass(userclass);
                 memberClass.addMember(member);
                 memberClassRepository.save(memberClass);
@@ -119,9 +123,9 @@ public class ClassService {
         return getOneClassResponseDto;
     }
 
-    public MemberResponseDto addStudentById(Long class_id, Long user_id){
+    public MemberResponseDto addStudentById(Long class_id, String username){
         UserClass userClass = classRepository.findById(class_id).orElseThrow(()-> new RuntimeException("클래스 정보가 없습니다."));
-        Member member = memberRepository.findById(user_id).orElseThrow(()-> new RuntimeException("유저 정보가 없습니다."));
+        Member member = memberRepository.findByUsername(username).orElseThrow(()-> new RuntimeException("유저 정보가 없습니다."));
         if(memberClassRepository.existsByMemberAndUserClass(member, userClass)) throw new RuntimeException("이미 유저가 해당 클래스에 존재합니다.");
 
         MemberClass memberClass = new MemberClass();
