@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/test")
@@ -77,21 +78,6 @@ public class TestController {
     }
     //시험 결과 제출 및 채점 실행 //
 
-    ////// api test/////
-    @Operation(
-            summary = "시험 제출 테스트/ 프론트 -> 스프링"
-    )
-    @PostMapping(value = "/apitest/start/{test_id}")
-    public ResponseEntity<ScoringRequestDto> doScoringTest(@RequestParam("file") MultipartFile file, @PathVariable Long test_id) throws IOException {
-        return ResponseEntity.ok(testService.scoringTest(file, test_id));
-    }
-    @Operation(
-            summary = "시험 결과 받기 테스트중 / 스프링 -> 장고"
-    )
-    @PostMapping("/apitest/result/{test_id}")
-    public ResponseEntity<TestResultResponseDto> getResultTest(@RequestBody TestResultResponseDto request){
-        return ResponseEntity.ok(testService.getResultTest(request));
-    }
 
     @Operation(
             summary = "시험 답안 파일 제출 / 프론트 -> 스프링 -> 장고 -> 스프링"
@@ -137,8 +123,31 @@ public class TestController {
     public ResponseEntity<TestHistoryContentUpdateDto> updateTestResult(@RequestBody TestHistoryContentUpdateDto request){
         return ResponseEntity.ok(testService.updateTestHistoryContent(request));
     }
+    // 오답 모음 조회
+    @Operation(
+            summary = "접속한 유저의 오답 모음"
+    )
+    @GetMapping("/result/incorrect/me")
+    public ResponseEntity<List<TestResultContentDto>> getIncorrectByMe(){
+        return ResponseEntity.ok(testService.getIncorrectById(SecurityUtil.getCurrentMemberId()));
+    }
 
 
+    ////// api test/////
+    @Operation(
+            summary = "시험 제출 테스트/ 프론트 -> 스프링"
+    )
+    @PostMapping(value = "/apitest/start/{test_id}")
+    public ResponseEntity<ScoringRequestDto> doScoringTest(@RequestParam("file") MultipartFile file, @PathVariable Long test_id) throws IOException {
+        return ResponseEntity.ok(testService.scoringTest(file, test_id));
+    }
+    @Operation(
+            summary = "시험 결과 받기 테스트중 / 스프링 -> 장고"
+    )
+    @PostMapping("/apitest/result/{test_id}")
+    public ResponseEntity<TestResultResponseDto> getResultTest(@RequestBody TestResultResponseDto request){
+        return ResponseEntity.ok(testService.getResultTest(request));
+    }
     @Operation(
             summary = "채점 to Django test"
     )
@@ -146,4 +155,6 @@ public class TestController {
     public ResponseEntity<TestResultResponseDto> toDjangoTest(@RequestBody ScoringRequestDto request){
         return ResponseEntity.ok(testService.testToDjango(request));
     }
+
+
 }

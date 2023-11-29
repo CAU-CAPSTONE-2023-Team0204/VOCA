@@ -80,7 +80,7 @@ public class TestService {
 
         List<VocabListContent> vocabListContents = vocabList.getVocabListContents();
         for(int i=offset; i<offset+number && i<vocabListContents.size(); i++){
-            TestContent testContent = createTestContents(requestDto.getQuestionType(), vocabListContents.get(i).getWord(), vocabListContents.get(i).getMeaning());
+            TestContent testContent = createTestContents(i%2 == 0? QuestionType.ENG_TO_KOR : QuestionType.KOR_TO_ENG, vocabListContents.get(i).getWord(), vocabListContents.get(i).getMeaning());
             testContent.addTest(test);
             testContentRepository.save(testContent);
         }
@@ -110,6 +110,12 @@ public class TestService {
         ManualTestResponseDto responseDto = ManualTestResponseDto.of(test);
 
         return responseDto;
+    }
+
+    public String createCustomTest(Long memberId){
+        Member member = memberRepository.findById(memberId).orElseThrow(()-> new RuntimeException("해당 유저가 없습니다."));
+
+        return " ";
     }
     private TestContent createTestContents(QuestionType type, String word, String meaning){
         TestContent testContent;
@@ -459,6 +465,23 @@ public class TestService {
         LatestTestInfoDto response = LatestTestInfoDto.builder().date(testHistory.getTest().getDate()).average(testHistory.getAverage())
                 .attendRate(attendRate).passRate(passRate).scoreDistribution(scoreDistribution).build();
 
+        return response;
+    }
+
+    // 유저의 오답 조회 후 반환
+    public List<TestResultContentDto> getIncorrectById(Long memberId){
+        Member member = memberRepository.findById(memberId).orElseThrow(()-> new RuntimeException("해당 멤버가 없습니다."));
+
+        List<TestPersonalHistory> testPersonalHistoryList = testPersonalHistoryRepository.findAllByMember(member).orElseThrow(()->new RuntimeException("해당 유저의 지난 결과가 없습니다."));
+        List<TestResultContentDto> response = new ArrayList<>();
+
+        for(TestPersonalHistory e : testPersonalHistoryList){
+            for(TestPersonalHistoryContent content : e.getTestPersonalHistoryContentList()){
+                if(!content.isResult()){
+                    response.add(TestResultContentDto.of(content));
+                }
+            }
+        }
         return response;
     }
 }
