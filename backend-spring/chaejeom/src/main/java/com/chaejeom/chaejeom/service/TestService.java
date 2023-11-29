@@ -112,10 +112,28 @@ public class TestService {
         return responseDto;
     }
 
-    public String createCustomTest(Long memberId){
+    // 오답 기반 출제
+    public CustomTestResponseDto createCustomTest(Long memberId){
         Member member = memberRepository.findById(memberId).orElseThrow(()-> new RuntimeException("해당 유저가 없습니다."));
 
-        return " ";
+        List<TestPersonalHistory> testPersonalHistoryList = testPersonalHistoryRepository.findAllByMember(member).orElseThrow(()->new RuntimeException("해당 유저의 지난 결과가 없습니다."));
+
+        Test test = Test.builder().name(LocalDate.now().toString() + member.getUsername()+"오답시험").type(TestType.CUSTOM).testContentList(new ArrayList<>()).build();
+
+        for(TestPersonalHistory e : testPersonalHistoryList){
+            for(TestPersonalHistoryContent content : e.getTestPersonalHistoryContentList()){
+                if(!content.isResult()){
+                    TestContent testContent = TestContent.builder().type(content.getTestHistoryContent().getTestContent().getType())
+                            .question(content.getQuestion()).answer(content.getAnswer()).build();
+                    testContent.addTest(test);
+                    testContentRepository.save(testContent);
+                }
+            }
+        }
+        test.setMaxScore();
+        test.setPassScore(test.getMaxScore());
+        testRepository.save(test);
+        return CustomTestResponseDto.of(test, member);
     }
     private TestContent createTestContents(QuestionType type, String word, String meaning){
         TestContent testContent;

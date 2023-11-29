@@ -64,4 +64,11 @@ public class Test {
         this.status = true;
     }
 
+    public void setMaxScore(){
+        this.maxScore = testContentList.size();
+    }
+    public void setPassScore(int passScore){
+        this.passScore = passScore;
+    }
+
 }

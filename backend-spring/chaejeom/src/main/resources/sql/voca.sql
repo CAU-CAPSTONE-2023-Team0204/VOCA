@@ -12,3 +12,15 @@ INSERT INTO class(name) values ('testclass');
 INSERT INTO class_vocablist(class_id, voca_list_id) values (1, 1);
 
 INSERT INTO member_class(member_id, class_id) values (1,1),(2,1),(3,1);
+
+INSERT INTO test(test_id, test_date, max_score, test_name, pass_score,test_status, test_type, class_id, voca_list_id) VALUES (1, '2023-11-25', 2, '11-25 시험', 1,true, 'AUTO', 1, 2);
+
+INSERT INTO test_content(test_content_id, answer, question, question_type, test_id) VALUES (1, '배위에,기내에,찻간에','aboard','ENG_TO_KOR',1),(2,'abroad','외국에,해외로','KOR_TO_ENG',1);
+
+INSERT INTO test_history(test_history_id, attend_count,average,datetime,total_exam_paper_image,max_score,pass_count,test_id,class_id) VALUES (1,3, 83.33, '2023-11-29 23:50:00','pdfurl',2,3,1,1);
+
+INSERT INTO test_history_content(test_history_content_id,rate,test_content_id,test_history_id)VALUES (1, 100.0, 1,1),(2,66.66,2,1);
+
+INSERT INTO test_personal_history(personal_history_id, score_hundred,exam_paper_image,max_score,pass,score,member_id,test_history_id)VALUES (1,100,'1',2,true,2,1,1),(2,50,'2',2,true,1,2,1),(3,100,'3',2,true,2,3,1);
+
+INSERT INTO test_personal_history_content(test_personal_history_content_id, answer,question, result,submit,test_history_content_id, personal_history_id) VALUES (1, '배위에,기내에,찻간에','aboard', true,'배위에',1,1),(2, '외국에,해외로','abroad', true,'외국에',2,1),(3, '배위에,기내에,찻간에','aboard', true,'배위에',1,2),(4, '외국에,해외로','abroad', false,'몰라요',2,2),(5, '배위에,기내에,찻간에','aboard', true,'배위에',1,3),(6, '외국에,해외로','abroad', true,'외국에',2,3);

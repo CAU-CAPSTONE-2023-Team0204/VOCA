@@ -36,6 +36,14 @@ public class TestController {
         return ResponseEntity.ok(testService.createManualTest(request));
     }
 
+    @Operation(
+            summary = "맞춤 시험 출제"
+    )
+    @PostMapping("/custom")
+    public ResponseEntity<CustomTestResponseDto> createCustomTest(@RequestBody Long userId){
+        return ResponseEntity.ok(testService.createCustomTest(userId));
+    }
+
     // 내 시험 조회
     @Operation(
             summary = "접속중인 유저 시험 모두 조회"
