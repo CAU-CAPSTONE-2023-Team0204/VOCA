@@ -19,6 +19,9 @@ public class TestResultPersonalDto {
     private String username;
     private String name;
     private int totalScore;
+    private String testName;
+    private int passScore;
+    private int totalNumber;
     private List<TestResultContentDto> contentList = new ArrayList<>();
 
 
@@ -29,6 +32,9 @@ public class TestResultPersonalDto {
         }
         return TestResultPersonalDto.builder().url(testPersonalHistory.getImage()).name(testPersonalHistory.getMember().getName())
                 .username(testPersonalHistory.getMember().getUsername()).totalScore(testPersonalHistory.getScore())
+                .testName(testPersonalHistory.getTestHistory().getTest().getName())
+                .passScore(testPersonalHistory.getTestHistory().getTest().getPassScore())
+                .totalNumber(testPersonalHistory.getMaxScore())
                 .contentList(contentDtoList).build();
     }
 }
