@@ -6,7 +6,8 @@ import useAxiosPrivate from "../hooks/useAxiosPrivate.js";
 
 const USER_ME_URL = "/api/member/me";
 const CLASS_INFO_URL = "/api/classes/";
-
+const USER_IMAGE_URL =
+  "https://voca-capstone-test.s3.ap-northeast-2.amazonaws.com/userimage.webp";
 const TeacherSidebar = (props) => {
   const class_id = props.class_id;
   const [userName, setUserName] = useState("");
@@ -44,11 +45,7 @@ const TeacherSidebar = (props) => {
     <div id="sidebar_container">
       <div id="user_info_container">
         <div id="user_info_wrapper">
-          <img
-            id="user_image"
-            src="../../resource/img/default_user_image.webp"
-            alt="USER_IMG"
-          ></img>
+          <img id="user_image" src={USER_IMAGE_URL} alt="USER_IMG"></img>
           <div id="user_info">
             <a href={props.userid}>{userName ? userName : "NO_USER_NAME"}</a>
             <p id="classname">{className ? className : "NO_CLASS_NAME"}</p>
