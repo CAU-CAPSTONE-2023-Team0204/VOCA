@@ -194,8 +194,7 @@ export const doughnutConfigWithCenter = (percentage, color, label) => {
           ctx.font = fontSize + "em Ones";
           ctx.fillStyle = color;
           ctx.textBaseline = "middle";
-
-          let text = percentage + "%",
+          let text = Math.round(percentage) + "%",
             textX = Math.round((width - ctx.measureText(text).width) / 2),
             textY = height / 2 + fontSize * 10;
           let text2 = label,
