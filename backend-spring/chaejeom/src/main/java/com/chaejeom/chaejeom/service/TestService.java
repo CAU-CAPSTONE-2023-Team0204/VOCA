@@ -451,7 +451,7 @@ public class TestService {
         TestPersonalHistoryContent testPersonalHistoryContent = testPersonalHistoryContentRepository.findById(request.getContentId())
                 .orElseThrow(()-> new RuntimeException("해당 문제의 채점 기록이 없습니다."));
 
-        testPersonalHistoryContent.update(request);
+        testPersonalHistoryContent.changeResult();
         return request;
     }
 

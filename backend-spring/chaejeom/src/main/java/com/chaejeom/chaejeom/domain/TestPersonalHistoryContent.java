@@ -47,13 +47,21 @@ public class TestPersonalHistoryContent {
         testHistoryContent.getTestPersonalHistoryContentList().add(this);
     }
 
-    public void update(TestHistoryContentUpdateDto request){
-        this.question = request.getQuestion();
-        this.submit = request.getUserAnswer();
-        this.answer = request.getAnswer();
-        this.result = request.isResult();
 
+    public void changeResult(){
+        if(result) result = false;
+        else result = true;
         testPersonalHistory.setScore();
         testPersonalHistory.getTestHistory().setAverage();
+        testHistoryContent.setRate();
     }
+
+    //public void update(TestHistoryContentUpdateDto request){
+    //     this.question = request.getQuestion();
+    //     this.submit = request.getUserAnswer();
+    //     this.answer = request.getAnswer();
+    //     this.result = request.isResult();
+    //     testPersonalHistory.setScore();
+    //     testPersonalHistory.getTestHistory().setAverage();
+    // }
 }
