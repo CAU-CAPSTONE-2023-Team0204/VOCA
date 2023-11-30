@@ -21,6 +21,6 @@ INSERT INTO test_history(test_history_id, attend_count,average,datetime,total_ex
 
 INSERT INTO test_history_content(test_history_content_id,rate,test_content_id,test_history_id)VALUES (1, 100.0, 1,1),(2,66.66,2,1);
 
-INSERT INTO test_personal_history(personal_history_id, score_hundred,exam_paper_image,max_score,pass,score,member_id,test_history_id)VALUES (1,100,'1',2,true,2,1,1),(2,50,'2',2,true,1,2,1),(3,100,'3',2,true,2,3,1);
+INSERT INTO test_personal_history(personal_history_id, score_hundred,exam_paper_image,max_score,pass,score,member_id,test_history_id)VALUES (1,100,'https://voca-capstone-test.s3.ap-northeast-2.amazonaws.com/test_content_1_-0test_content_1_-0.png',2,true,2,1,1),(2,50,'https://voca-capstone-test.s3.ap-northeast-2.amazonaws.com/test_content_1_-1test_content_1_-1.png',2,true,1,2,1),(3,100,'https://voca-capstone-test.s3.ap-northeast-2.amazonaws.com/test_content_1_-2test_content_1_-2.png',2,true,2,3,1);
 
 INSERT INTO test_personal_history_content(test_personal_history_content_id, answer,question, result,submit,test_history_content_id, personal_history_id) VALUES (1, '배위에,기내에,찻간에','aboard', true,'배위에',1,1),(2, '외국에,해외로','abroad', true,'외국에',2,1),(3, '배위에,기내에,찻간에','aboard', true,'배위에',1,2),(4, '외국에,해외로','abroad', false,'몰라요',2,2),(5, '배위에,기내에,찻간에','aboard', true,'배위에',1,3),(6, '외국에,해외로','abroad', true,'외국에',2,3);
