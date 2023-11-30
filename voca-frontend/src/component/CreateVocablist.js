@@ -13,12 +13,14 @@ const CreateVocablist = () => {
   const { class_id } = useParams();
   const navigate = useNavigate();
   const [file, setFile] = useState();
+  const [f, setF] = useState();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [wordList, setWordList] = useState([{ word: "", meaning: "" }]);
 
   const handleFileUpload = (e) => {
     const f = e.target.files[0];
+    setF(f);
     const reader = new FileReader();
     reader.readAsDataURL(f);
     reader.onloadend = () => {
@@ -45,9 +47,10 @@ const CreateVocablist = () => {
       description: description,
       contents: wordList,
     });
-    formData.append("file", file);
+    formData.append("file", f);
 
     formData.append("request", new Blob([json], { type: "application/json" }));
+    console.log(formData);
     try {
       axiosPrivate
         .post(CREATE_VOCABLIST_URL, formData, {
@@ -56,7 +59,7 @@ const CreateVocablist = () => {
           },
         })
         .then((response) => {
-          navigate(`class/${class_id}/vocablist`);
+          navigate(`/class/${class_id}/vocablist`);
         });
     } catch (error) {
       console.log("ERROR POSTING VOCABLIST DATA");
