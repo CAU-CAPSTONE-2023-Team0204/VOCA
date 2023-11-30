@@ -33,6 +33,15 @@
     background-color: white;
 }
 
+#student_result_page_container .result_label{
+    display:flex;
+    border-radius: 25px;
+    margin: 5px 0;
+    justify-content: space-between;
+    padding-right: 125px;
+    font-family:"Ones";
+}
+
 #student_result_page_container .question_result{
     display:flex;
     background-color: white;

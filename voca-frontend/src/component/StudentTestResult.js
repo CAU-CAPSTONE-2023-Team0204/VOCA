@@ -1,45 +1,52 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import NavigationBar from "./NavigationBar";
 import TeacherSidebar from "./TeacherSidebar";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 
 import "../styles/student_test_result.css";
 
-const EDIT_RESULT_URL = "";
+const EDIT_RESULT_URL = "/api/test/result/update";
 
 const StudentTestResult = () => {
-  const axiosPrivate = useAxiosPrivate();
-  const { class_id } = useParams();
-  const username = "문서형";
-  const testname = "정기시험 3";
-  const resultData = [
-    {
-      number: 1,
-      question: "dark",
-      correct: "어두운",
-      answer: "깊은",
-      right: false,
-    },
-    {
-      number: 2,
-      question: "donation",
-      correct: "기부",
-      answer: "고슴도치",
-      right: false,
-    },
-    {
-      number: 3,
-      question: "pressure",
-      correct: "압력",
-      answer: "압력",
-      right: true,
-    },
-  ];
+  const { test_id, user_id } = useParams();
+  const [username, setUsername] = useState("");
+  const [testName, setTestName] = useState("");
+  const [scores, setScores] = useState({});
+  const [resultData, setResultData] = useState([]);
+  const navigate = useNavigate();
 
-  const handleResultChange = (e, i) => {
-    resultData[i].right = !resultData[i].right;
-    axiosPrivate.post(EDIT_RESULT_URL, resultData);
+  const STUDENT_RESULT_URL = `/api/test/result/${test_id}/${user_id}`;
+  const axiosPrivate = useAxiosPrivate();
+
+  useEffect(() => {
+    try {
+      axiosPrivate.get(STUDENT_RESULT_URL).then((response) => {
+        setUsername(response.data.name);
+        setTestName(response.data.testName);
+        setScores({
+          totalNumber: response.data.totalNumber,
+          passScore: response.data.passScore,
+          totalScore: response.data.totalScore,
+        });
+        setResultData(response.data.contentList);
+      });
+    } catch (error) {
+      console.log("ERROR FETCHING TEST DATA", error);
+    }
+  }, []);
+  const { class_id } = useParams();
+
+  const handleResultChange = (e, contentId) => {
+    console.log(contentId);
+    axiosPrivate
+      .put(
+        EDIT_RESULT_URL,
+        JSON.stringify({
+          contentId: contentId,
+        })
+      )
+      .then(navigate(0));
   };
 
   return (
@@ -53,11 +60,14 @@ const StudentTestResult = () => {
           <TeacherSidebar class_id={class_id} selected="test" />
         </React.Fragment>
         <div id="contents_wrapper">
-          <div id="page_title">{username}의 시험결과</div>
+          <div id="page_title">{username} 의 시험결과</div>
           <div id="test_info_container">
             <div>
-              <p>시험이름 : {testname}</p>
-              <p>총 문제 수 : 10 | 통과 점수 : 5 | 내 점수 : 10</p>
+              <p>시험이름 : {testName}</p>
+              <p>
+                총 문제 수 : {scores.totalNumber} | 통과 점수 :
+                {scores.passScore} | 내 점수 : {scores.totalScore}
+              </p>
             </div>
             <div>
               <a> 시험지 다운로드 </a>
@@ -65,20 +75,27 @@ const StudentTestResult = () => {
           </div>
 
           <div>
+            <div className="result_label">
+              <p className="result_content">번호</p>
+              <p className="result_content">문제</p>
+              <p className="result_content">정답</p>
+              <p className="result_content">답안</p>
+              <p className="result_content">채점</p>
+            </div>
             {resultData.map((result, i) => (
               <div key={i} className="question_result">
-                <p className="result_content">{result.number}</p>
+                <p className="result_content">{i + 1}</p>
                 <p className="result_content">{result.question}</p>
-                <p className="result_content">{result.correct}</p>
                 <p className="result_content">{result.answer}</p>
-                <p className="result_content">{result.right ? "O" : "X"}</p>
+                <p className="result_content">{result.userAnswer}</p>
+                <p className="result_content">{result.result ? "O" : "X"}</p>
                 <button
                   className="edit_result_button"
                   onClick={(e, i) => {
-                    handleResultChange(e, i);
+                    handleResultChange(e, result.contentId);
                   }}
                 >
-                  {result.right ? "X" : "O"}로 변경
+                  {result.result ? "X" : "O"}로 변경
                 </button>
               </div>
             ))}

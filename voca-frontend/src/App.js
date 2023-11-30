@@ -71,7 +71,7 @@ function App() {
               element={<RegisterVocablist />}
             ></Route>
             <Route
-              path="/class/:class_id/test/result/:student_key"
+              path="/class/:class_id/test/:test_id/result/:user_id"
               element={<StudentTestResult />}
             ></Route>
             <Route

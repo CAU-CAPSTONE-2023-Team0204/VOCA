@@ -100,7 +100,7 @@ const ViewTestResult = () => {
             </div>
           </div>
           <div>
-            <div id="test_name">{"헬로"}</div>
+            <div id="test_name">{testName}</div>
             <div>
               <div id="table_label">
                 <p className="num">순번</p>
@@ -112,7 +112,7 @@ const ViewTestResult = () => {
                 <a
                   key={i}
                   className="result_container"
-                  href={`/class/${class_id}/test/result/${student.id}`}
+                  href={`/class/${class_id}/test/${test_id}/result/${student.memberId}`}
                 >
                   <p className="num">{i + 1}</p>
                   <p className="student_name">{student.name}</p>
