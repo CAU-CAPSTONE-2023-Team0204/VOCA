@@ -15,10 +15,10 @@ export const generatePDF = (test_title, test_data, user_ids) => {
   const parser = new DOMParser();
   fetch(TEMPLATE_URL)
     .then((response) => response.text())
-    .then((html) => {
+    .then(async (html) => {
       const element = document.createElement("div");
       // Use html2pdf to generate PDF from the loaded external content
-      const doc = parser.parseFromString(html, "text/html");
+      const doc = await parser.parseFromString(html, "text/html");
 
       appendProblem(doc, test_data);
 
@@ -33,7 +33,7 @@ export const generatePDF = (test_title, test_data, user_ids) => {
       //create page for each user and append pagebreak
       user_ids.forEach((user) => {
         const cloned = page_container.cloneNode(true);
-        cloned.childNodes[3].textContent = user.username;
+        cloned.childNodes[3].childNodes[1].textContent = user.username;
         pages.appendChild(cloned);
         const page_break = document.createElement("div");
         page_break.setAttribute("class", "page_break");
@@ -43,7 +43,7 @@ export const generatePDF = (test_title, test_data, user_ids) => {
       page_container.remove();
 
       const strhtml = doc.body.innerHTML;
-
+      console.log(strhtml);
       html2pdf().from(strhtml).set(default_option).save();
     })
     .catch((error) => {
