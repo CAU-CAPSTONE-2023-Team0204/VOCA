@@ -43,7 +43,6 @@ const CreateVocablist = () => {
     const json = JSON.stringify({
       name: title,
       description: description,
-      img: "HAVETODO",
       contents: wordList,
     });
     formData.append("file", file);
@@ -62,20 +61,6 @@ const CreateVocablist = () => {
     } catch (error) {
       console.log("ERROR POSTING VOCABLIST DATA");
     }
-
-    // axiosPrivate.post(
-    //   CREATE_VOCABLIST_URL,
-    //   JSON.stringify({
-    //     name: title,
-    //     description: description,
-    //     img: "HAVETODO",
-    //     contents: wordList,
-    //   }),
-    //   {
-    //     headers: { "Content-Type": "application/json" },
-    //     withCredentials: true,
-    //   }
-    // );
   };
 
   const handleChangeInput = (e, i) => {
@@ -103,6 +88,14 @@ const CreateVocablist = () => {
       list = [...list, { word: "", meaning: "" }];
     }
     setWordList(list);
+  };
+
+  const handleNameChange = (e) => {
+    setTitle(e.target.value);
+  };
+
+  const handleDescriptionChange = (e) => {
+    setDescription(e.target.value);
   };
 
   return (
@@ -134,11 +127,19 @@ const CreateVocablist = () => {
               <div id="info_input_container">
                 <div>
                   <label className="input_label">단어장 이름</label>
-                  <input type="text" id="title_input"></input>
+                  <input
+                    type="text"
+                    id="title_input"
+                    onChange={(e) => handleNameChange(e)}
+                  ></input>
                 </div>
                 <div>
                   <label className="input_label">단어장 설명</label>
-                  <input type="text" id="description_input"></input>
+                  <input
+                    type="text"
+                    id="description_input"
+                    onChange={(e) => handleDescriptionChange(e)}
+                  ></input>
                 </div>
               </div>
             </div>
