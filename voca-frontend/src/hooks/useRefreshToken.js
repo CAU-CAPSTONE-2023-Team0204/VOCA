@@ -4,7 +4,6 @@ import useAuth from "./useAuth";
 const useRefreshToken = () => {
   const { auth, setAuth } = useAuth();
   const refresh = async (expired_token) => {
-    console.log(expired_token);
     try {
       const response = await axios.post(
         "/auth/reissue",

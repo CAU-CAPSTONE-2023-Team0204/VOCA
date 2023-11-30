@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import NavigationBar from "./NavigationBar";
 import TeacherSidebar from "./TeacherSidebar";
 import axios, { axiosPrivate } from "../api/axios";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import "../styles/register_vocablist.css";
 
 const GET_VOCABLIST_URL = "/api/vocablist";
@@ -16,6 +16,7 @@ const RegisterVocablist = () => {
   const [selectedVocabList, setSelectedVocabList] = useState(0);
   const [modalOpen, setModalOpen] = useState(false);
   const [wordData, setWordData] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     setIsLoading(true);
@@ -47,10 +48,15 @@ const RegisterVocablist = () => {
     element.style.display = "none";
   };
 
-  const handleRegisterButton = () => {
-    axios.post(
-      `/api/vocablist/${vocabLists[selectedVocabList].id}/${class_id}`
-    );
+  const handleRegisterButton = async () => {
+    try {
+      await axios.post(
+        `/api/vocablist/${vocabLists[selectedVocabList].id}/${class_id}`
+      );
+      navigate(`/class/${class_id}/vocablist`);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

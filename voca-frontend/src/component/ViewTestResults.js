@@ -28,10 +28,9 @@ const ViewTestResult = () => {
       });
       axiosPrivate.get(`/api/test/result/${test_id}`).then((response) => {
         setStudentResults(response.data);
-        console.log(response.data);
       });
-    } catch (error) {
-      console.log("ERROR FETCHING STUDENT RESULTS", error);
+    } catch (e) {
+      console.log("ERROR FETCHING STUDENT RESULTS", e);
     }
   }, []);
 
@@ -56,7 +55,7 @@ const ViewTestResult = () => {
             },
           })
           .then((response) => {
-            console.log(response);
+            //console.log(response);
           });
       }
     } catch (error) {
