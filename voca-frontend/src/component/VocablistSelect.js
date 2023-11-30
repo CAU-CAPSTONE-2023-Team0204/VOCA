@@ -22,6 +22,7 @@ const VocablistSelect = () => {
         .then((response) => {
           setvocablistList(response.data.vocabLists);
           setIsLoading(false);
+          console.log(response.data);
         });
     } catch (error) {
       console.log("UNEXPECTED ERROR", error);
@@ -67,7 +68,7 @@ const VocablistSelect = () => {
                     className="vocablist_link"
                     href={`/class/${class_id}/vocablist/${vocablist.id}/view`}
                   >
-                    <img className="vocablist_img" src={vocablist}></img>
+                    <img className="vocablist_img" src={vocablist.image}></img>
                     <p className="vocablist_name">{vocablist.name}</p>
                   </a>
                 ))}

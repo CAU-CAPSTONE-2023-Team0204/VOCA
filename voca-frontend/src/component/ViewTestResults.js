@@ -10,28 +10,30 @@ import "../styles/view_test_results.css";
 
 const TEST_RESULT_URL = "/api/test/result/";
 const PAPER_SUBMIT_URL = "/api/test/start/";
+const TEST_CONTENT_URL = "/api/test/start/";
 
 const ViewTestResult = () => {
   const { class_id, test_id } = useParams();
   const [file, setFile] = useState();
+  const [studentResults, setStudentResults] = useState([]);
+  const [testName, setTestName] = useState("");
   const { key } = useParams();
   const axiosPrivate = useAxiosPrivate();
   const navigate = useNavigate();
 
-  // try {
-  //   const response = axiosPrivate.get(TEST_RESULT_URL + { key });
-  // } catch (err) {
-  //   console.log(err);
-  // }
-
-  const response = {
-    name: "정기 테스트 1",
-    studentresults: [
-      { name: "문서형", score: 10, pass: false },
-      { name: "장세환", score: 11, pass: true },
-      { name: "차선우", score: 12, pass: true },
-    ],
-  };
+  useEffect(() => {
+    try {
+      axiosPrivate.get(TEST_CONTENT_URL + test_id).then((response) => {
+        setTestName(response.data.name);
+      });
+      axiosPrivate.get(`/api/test/result/${test_id}`).then((response) => {
+        setStudentResults(response.data);
+        console.log(response.data);
+      });
+    } catch (error) {
+      console.log("ERROR FETCHING STUDENT RESULTS", error);
+    }
+  }, []);
 
   const handleSubmitClick = () => {
     const element = document.getElementById("file_input");
@@ -98,19 +100,23 @@ const ViewTestResult = () => {
             </div>
           </div>
           <div>
-            <div id="test_name">{response.name}</div>
+            <div id="test_name">{"헬로"}</div>
             <div>
               <div id="table_label">
-                <p className="num">번호</p>
+                <p className="num">순번</p>
                 <p className="student_name">이름</p>
                 <p className="score">점수</p>
                 <p className="pass_fail">합격/불합격</p>
               </div>
-              {response.studentresults.map((student, i) => (
-                <a key={i} className="result_container" href="">
-                  <p className="num">{i}</p>
+              {studentResults.map((student, i) => (
+                <a
+                  key={i}
+                  className="result_container"
+                  href={`/class/${class_id}/test/result/${student.id}`}
+                >
+                  <p className="num">{i + 1}</p>
                   <p className="student_name">{student.name}</p>
-                  <p className="score">{student.score}</p>
+                  <p className="score">{student.totalScore}</p>
                   <p className="pass_fail">
                     {student.pass ? "합격" : "불합격"}
                   </p>

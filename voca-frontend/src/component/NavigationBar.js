@@ -7,7 +7,7 @@ const NavigationBar = () => {
         <div id="main_logo_text">채점해VOCA</div>
       </div>
       <div id="navbar_content_right">
-        <a href="/" className="navbar_a_text">
+        <a href="/classes" className="navbar_a_text">
           클래스목록
         </a>
         <div className="vertical_line"></div>
