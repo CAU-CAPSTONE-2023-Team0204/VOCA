@@ -506,7 +506,12 @@ public class TestService {
 
     public List<TestResultListDto> getTestResultList(Long testId){
         Test test = testRepository.findById(testId).orElseThrow(()-> new RuntimeException("해당 시험이 없습니다."));
-        TestHistory testHistory = testHistoryRepository.findByTest(test).orElseThrow(()-> new RuntimeException("해당 시험결과가 없습니다."));
+        TestHistory testHistory;
+        try {
+            testHistory = testHistoryRepository.findByTest(test).orElseThrow(() -> new RuntimeException("해당 시험결과가 없습니다."));
+        }catch (RuntimeException e){
+            return new ArrayList<>();
+        }
 
         List<TestResultListDto> response = new ArrayList<>();
         for(TestPersonalHistory e : testHistory.getTestPersonalHistoryList()){
