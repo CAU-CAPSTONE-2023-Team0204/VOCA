@@ -44,6 +44,7 @@ const getGradient = (ctx, chartArea, start_color, stop_color, max, current) => {
 };
 
 export const barConfig = (data, labels) => {
+  console.log(data);
   return {
     type: "bar",
     data: {

@@ -7,9 +7,11 @@ import { Chart, registerables } from "chart.js";
 import { barConfig, doughnutConfigWithCenter } from "../api/chart";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { axiosPrivate } from "../api/axios";
 
 const ClassMain = () => {
   const { class_id } = useParams();
+  const [latestData, setLatestData] = useState({});
 
   Chart.register(...registerables);
   var charts = [];
@@ -21,20 +23,45 @@ const ClassMain = () => {
       document.getElementById("down_canvas_3"),
     ];
 
-    charts.forEach((chart) => {
-      chart.destroy();
+    axiosPrivate.get("/api/test/result/latest/me").then((response) => {
+      new Promise((resolve, reject) => {
+        setLatestData(response.data);
+        charts.forEach((chart) => {
+          chart.destroy();
+        });
+        resolve(response.data);
+      }).then((latestData) => {
+        const barConfig1 = barConfig([
+          latestData.scoreDistribution.belowForty,
+          latestData.scoreDistribution.fifties,
+          latestData.scoreDistribution.sixties,
+          latestData.scoreDistribution.seventies,
+          latestData.scoreDistribution.eighties,
+          latestData.scoreDistribution.nineties,
+          latestData.scoreDistribution.perfect,
+        ]);
+        charts[0] = new Chart(canvases[0], barConfig1);
+
+        const pieConfig1 = doughnutConfigWithCenter(
+          latestData.average,
+          "#8FC63E",
+          "정답률"
+        );
+        const pieConfig2 = doughnutConfigWithCenter(
+          latestData.passRate,
+          "#5DC5C6",
+          "통과자"
+        );
+        const pieConfig3 = doughnutConfigWithCenter(
+          latestData.attendRate,
+          "#3AB54A",
+          "응시자"
+        );
+        charts[1] = new Chart(canvases[1], pieConfig1);
+        charts[2] = new Chart(canvases[2], pieConfig2);
+        charts[3] = new Chart(canvases[3], pieConfig3);
+      });
     });
-
-    const barConfig1 = barConfig([5, 4, 6, 8, 5, 10, 6]);
-
-    charts[0] = new Chart(canvases[0], barConfig1);
-
-    const pieConfig1 = doughnutConfigWithCenter(90, "#8FC63E", "정답률");
-    const pieConfig2 = doughnutConfigWithCenter(70, "#5DC5C6", "통과자");
-    const pieConfig3 = doughnutConfigWithCenter(100, "#3AB54A", "응시자");
-    charts[1] = new Chart(canvases[1], pieConfig1);
-    charts[2] = new Chart(canvases[2], pieConfig2);
-    charts[3] = new Chart(canvases[3], pieConfig3);
   }, []);
 
   return (
@@ -48,7 +75,7 @@ const ClassMain = () => {
           <TeacherSidebar class_id={class_id} selected="main" />
         </React.Fragment>
         <div id="contents_wrapper">
-          <div id="result_title"> &#x27A4; 10/23일 시험</div>
+          <div id="result_title"> &#x27A4; {latestData.date} 시험</div>
 
           <div id="up_graph_container">
             <canvas id="up_canvas" width="800" height="400"></canvas>
