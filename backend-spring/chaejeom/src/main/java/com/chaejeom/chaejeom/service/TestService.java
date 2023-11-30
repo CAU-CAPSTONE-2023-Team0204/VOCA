@@ -502,4 +502,20 @@ public class TestService {
         }
         return response;
     }
+
+    public List<TestResultListDto> getTestResultList(Long testId){
+        Test test = testRepository.findById(testId).orElseThrow(()-> new RuntimeException("해당 시험이 없습니다."));
+        TestHistory testHistory = testHistoryRepository.findByTest(test).orElseThrow(()-> new RuntimeException("해당 시험결과가 없습니다."));
+
+        List<TestResultListDto> response = new ArrayList<>();
+        for(TestPersonalHistory e : testHistory.getTestPersonalHistoryList()){
+            TestResultListDto testResultListDto = TestResultListDto.builder().url(e.getImage()).hundredScore(e.getHundredScore())
+                    .maxScore(e.getMaxScore()).totalScore(e.getScore()).memberId(e.getMember().getId()).username(e.getMember().getUsername()).name(e.getMember().getName())
+                    .pass(e.isPass()).build();
+            response.add(testResultListDto);
+        }
+
+        return response;
+    }
+
 }

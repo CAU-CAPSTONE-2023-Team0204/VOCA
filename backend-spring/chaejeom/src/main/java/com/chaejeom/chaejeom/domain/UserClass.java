@@ -41,4 +41,12 @@ public class UserClass {
         memberClassList = new ArrayList<>();
     }
 
+    public int getStudentNum(){
+        int count =0;
+        for(MemberClass e : memberClassList){
+            if(e.getMember().getRole() == Role.ROLE_STUDENT)
+                count++;
+        }
+        return count;
+    }
 }

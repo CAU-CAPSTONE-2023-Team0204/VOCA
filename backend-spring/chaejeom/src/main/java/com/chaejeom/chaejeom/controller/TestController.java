@@ -104,6 +104,14 @@ public class TestController {
         return ResponseEntity.ok(testService.findTestHistoryByTestAndMember(testId, userId));
     }
 
+    @Operation(
+            summary = "test id 로 해당 시험 결과 조회"
+    )
+    @GetMapping("/result/{test_id}")
+    public ResponseEntity<List<TestResultListDto>> getTestResultByTestId(@PathVariable("test_id")Long testId){
+        return ResponseEntity.ok(testService.getTestResultList(testId));
+    }
+
     // 유저의 가장 최근 시험 결과 조회
     @Operation(
             summary = "member id 로 가장 최근 시험 결과 조회하기"

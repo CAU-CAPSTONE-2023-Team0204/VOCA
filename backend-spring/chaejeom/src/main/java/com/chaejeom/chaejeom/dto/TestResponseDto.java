@@ -23,15 +23,19 @@ public class TestResponseDto {
     private Long vocabListId;
     private String vocabListName;
     private LocalDate date;
+    private int totalMember;
+    //private int attendMember;
+    private boolean status;
     private List<TestContent> testContentList;
 
     public static TestResponseDto of(Test test){
         if(test.getType() == TestType.AUTO)
             return TestResponseDto.builder().testId(test.getId()).name(test.getName()).classId(test.getUserClass().getId()).className(test.getUserClass().getName()).vocabListName(test.getVocabList().getName())
-                    .vocabListId(test.getVocabList().getId()).date(test.getDate()).testContentList(test.getTestContentList()).build();
+                    .vocabListId(test.getVocabList().getId()).date(test.getDate()).testContentList(test.getTestContentList())
+                    .totalMember(test.getUserClass().getStudentNum()).status(test.isStatus()).build();
         else
             return TestResponseDto.builder().testId(test.getId()).name(test.getName()).classId(test.getUserClass().getId()).className(test.getUserClass().getName())
-                    .date(test.getDate()).testContentList(test.getTestContentList()).build();
+                    .totalMember(test.getUserClass().getStudentNum()).date(test.getDate()).testContentList(test.getTestContentList()).status(test.isStatus()).build();
     }
 
 }

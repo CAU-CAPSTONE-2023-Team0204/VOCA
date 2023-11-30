@@ -16,6 +16,5 @@ public class TestListResponseDto {
     private String userName;
     private Long classId;
     private String className;
-
     private List<TestResponseDto> tests;
 }
