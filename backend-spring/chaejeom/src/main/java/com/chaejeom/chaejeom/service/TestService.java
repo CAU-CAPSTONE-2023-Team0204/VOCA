@@ -43,8 +43,10 @@ public class TestService {
     private final TestPersonalHistoryRepository testPersonalHistoryRepository;
     private final TestPersonalHistoryContentRepository testPersonalHistoryContentRepository;
     private final TestHistoryContentRepository testHistoryContentRepository;
-
     private final S3UploadService s3UploadService;
+
+    private final RestTemplate restTemplate;
+
 
     public AutoTestResponseDto createAutoTest(AutoTestRequestDto requestDto){
         UserClass userClass = classRepository.findById(requestDto.getClassId()).orElseThrow(()->new RuntimeException("해당 클래스가 없습니다."));
@@ -256,7 +258,7 @@ public class TestService {
         //ai 파트와 통신 후 채점 결과 받기
         final String djangoURL = "https://sehwanii.pythonanywhere.com/main/";
 
-        RestTemplate restTemplate = new RestTemplate();
+        //RestTemplate restTemplate = new RestTemplate();
         TestResultResponseDto resultResponse= restTemplate.postForObject(djangoURL, scoringRequestDto, TestResultResponseDto.class);
 
 
@@ -393,7 +395,6 @@ public class TestService {
         //ai 파트와 통신 후 채점 결과 받기
         final String djangoURL = "https://sehwanii.pythonanywhere.com/main/";
 
-        RestTemplate restTemplate = new RestTemplate();
         TestResultResponseDto resultResponse= restTemplate.postForObject(djangoURL, scoringRequestDto, TestResultResponseDto.class);
 
         return resultResponse;

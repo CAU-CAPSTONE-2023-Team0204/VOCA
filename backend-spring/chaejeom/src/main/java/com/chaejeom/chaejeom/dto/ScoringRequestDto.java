@@ -19,7 +19,6 @@ public class ScoringRequestDto {
     private List<ScoredMember> memberList = new ArrayList<>();
     private List<String> file = new ArrayList<>();
 
-
     public void setMemberList(List<Member> list) {
         for (Member member : list) {
             if (member.getRole() == Role.ROLE_STUDENT) {
@@ -29,19 +28,3 @@ public class ScoringRequestDto {
         }
     }
 }
-    @Getter
-    @Setter
-    @AllArgsConstructor
-    @NoArgsConstructor
-    class ScoredMember{
-        Long id;
-        String username;
-        String name;
-        public ScoredMember of(Member member){
-            ScoredMember smember = new ScoredMember();
-            smember.setId(member.getId());
-            smember.setUsername(member.getUsername());
-            smember.setName(member.getName());
-            return smember;
-        }
-    }

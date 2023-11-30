@@ -52,6 +52,7 @@ public class TestPersonalHistoryContent {
         if(result) result = false;
         else result = true;
         testPersonalHistory.setScore();
+        testPersonalHistory.setPass();
         testPersonalHistory.getTestHistory().setAverage();
         testHistoryContent.setRate();
     }

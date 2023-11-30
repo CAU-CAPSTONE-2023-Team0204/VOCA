@@ -167,7 +167,7 @@ public class TestController {
     @Operation(
             summary = "채점 to Django test"
     )
-    @GetMapping("/apitest/result")
+    @PostMapping("/apitest/result/test")
     public ResponseEntity<TestResultResponseDto> toDjangoTest(@RequestBody ScoringRequestDto request){
         return ResponseEntity.ok(testService.testToDjango(request));
     }
