@@ -58,13 +58,11 @@ const ViewVocabList = () => {
   };
 
   const validateInput = () => {
-    console.log(question_count);
     if (test_name.length < 1) {
       return false;
     }
     try {
       const parsedDate = new Date(test_date);
-      console.log(parsedDate);
     } catch (error) {
       return false;
     }
@@ -110,12 +108,11 @@ const ViewVocabList = () => {
           AUTO_TEST_URL,
           JSON.stringify({
             name: test_name,
-            time: new Date(test_date).toISOString(),
+            date: new Date(test_date).toISOString().substring(0, 10),
             vocabListId: vocablist_id,
             classId: class_id,
             number: question_count,
             pass_score: pass_score,
-            questionType: "KOR_TO_ENG",
           }),
           {
             headers: { "Content-Type": "application/json" },
