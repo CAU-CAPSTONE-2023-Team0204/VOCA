@@ -15,7 +15,7 @@ INSERT INTO class_vocablist(class_id, voca_list_id) values (1, 1);
 
 INSERT INTO member_class(member_id, class_id) values (1,1),(2,1),(3,1);
 
-INSERT INTO test(test_id, test_date, max_score, test_name, pass_score,test_status, test_type, class_id, voca_list_id) VALUES (1, '2023-11-25', 2, '11-25 시험', 1,true, 'AUTO', 1, 2);
+INSERT INTO test(test_id, test_date, max_score, test_name, pass_score,test_status, test_type, class_id, voca_list_id, created_date) VALUES (1, '2023-11-25', 2, '11-25 시험', 1,true, 'AUTO', 1, 2, NOW());
 
 INSERT INTO test_content(test_content_id, answer, question, question_type, test_id) VALUES (1, '배위에,기내에,찻간에','aboard','ENG_TO_KOR',1),(2,'abroad','외국에,해외로','KOR_TO_ENG',1);
 
