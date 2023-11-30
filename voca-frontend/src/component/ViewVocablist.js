@@ -64,6 +64,7 @@ const ViewVocabList = () => {
     }
     try {
       const parsedDate = new Date(test_date);
+      console.log(parsedDate);
     } catch (error) {
       return false;
     }
@@ -104,21 +105,25 @@ const ViewVocabList = () => {
       return;
     }
     try {
-      axiosPrivate.post(
-        AUTO_TEST_URL,
-        JSON.stringify({
-          name: test_name,
-          time: new Date(test_date).toISOString(),
-          vocabListId: vocablist_id,
-          classId: class_id,
-          number: question_count,
-          pass_score: pass_score,
-          questionType: "KOR_TO_ENG",
-        }),
-        {
-          headers: { "Content-Type": "application/json" },
-        }
-      );
+      axiosPrivate
+        .post(
+          AUTO_TEST_URL,
+          JSON.stringify({
+            name: test_name,
+            time: new Date(test_date).toISOString(),
+            vocabListId: vocablist_id,
+            classId: class_id,
+            number: question_count,
+            pass_score: pass_score,
+            questionType: "KOR_TO_ENG",
+          }),
+          {
+            headers: { "Content-Type": "application/json" },
+          }
+        )
+        .then((response) => {
+          navigate(`class/${class_id}/tests`);
+        });
     } catch (error) {
       console.log("ERROR SUBMITTING AUTO TEST");
     }

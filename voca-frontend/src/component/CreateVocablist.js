@@ -4,14 +4,14 @@ import TeacherSidebar from "./TeacherSidebar";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 
 import "../styles/create_vocablist.css";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const CREATE_VOCABLIST_URL = "/api/vocablist";
 
 const CreateVocablist = () => {
   const axiosPrivate = useAxiosPrivate();
   const { class_id } = useParams();
-
+  const navigate = useNavigate();
   const [file, setFile] = useState();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -37,20 +37,45 @@ const CreateVocablist = () => {
     }
   };
 
-  const handleSubmit = () => {
-    axiosPrivate.post(
-      CREATE_VOCABLIST_URL,
-      JSON.stringify({
-        name: title,
-        description: description,
-        img: "HAVETODO",
-        contents: wordList,
-      }),
-      {
-        headers: { "Content-Type": "application/json" },
-        withCredentials: true,
-      }
-    );
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    var formData = new FormData();
+    const json = JSON.stringify({
+      name: title,
+      description: description,
+      img: "HAVETODO",
+      contents: wordList,
+    });
+    formData.append("file", file);
+
+    formData.append("request", new Blob([json], { type: "application/json" }));
+    try {
+      axiosPrivate
+        .post(CREATE_VOCABLIST_URL, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        })
+        .then((response) => {
+          navigate(`class/${class_id}/vocablist`);
+        });
+    } catch (error) {
+      console.log("ERROR POSTING VOCABLIST DATA");
+    }
+
+    // axiosPrivate.post(
+    //   CREATE_VOCABLIST_URL,
+    //   JSON.stringify({
+    //     name: title,
+    //     description: description,
+    //     img: "HAVETODO",
+    //     contents: wordList,
+    //   }),
+    //   {
+    //     headers: { "Content-Type": "application/json" },
+    //     withCredentials: true,
+    //   }
+    // );
   };
 
   const handleChangeInput = (e, i) => {
@@ -155,7 +180,7 @@ const CreateVocablist = () => {
               ))}
             </div>
             <div id="submit_button_container">
-              <button id="submit_button" onClick={() => handleSubmit()}>
+              <button id="submit_button" onClick={(e) => handleSubmit(e)}>
                 단어장 만들기!
               </button>
             </div>

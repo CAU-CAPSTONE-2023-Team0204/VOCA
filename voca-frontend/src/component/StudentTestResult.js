@@ -42,7 +42,6 @@ const StudentTestResult = () => {
   const { class_id } = useParams();
 
   const handleResultChange = (e, contentId) => {
-    console.log(contentId);
     axiosPrivate
       .put(
         EDIT_RESULT_URL,
