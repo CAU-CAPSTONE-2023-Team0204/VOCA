@@ -19,6 +19,15 @@
     color: #6fa125;
 }
 
+#student_result_page_container #retest_button{
+    font-family: "Ones";
+    font-size: 18px;
+    color: white;
+    background-color: #6fa125;
+    border:none;
+    border-radius: 5px;
+}
+
 #student_result_page_container #test_info_container{
     border-radius: 25px;
     border: 2px solid #6fa125;
@@ -35,6 +44,7 @@
 
 #student_result_page_container #image_link{
     text-decoration: none;
+    margin: 0 auto;
     color:#333333;
 }
 
@@ -45,6 +55,13 @@
     justify-content: space-between;
     padding-right: 125px;
     font-family:"Ones";
+}
+
+#student_result_page_container #test_info_right_container{
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 12px 0;
 }
 
 #student_result_page_container .question_result{

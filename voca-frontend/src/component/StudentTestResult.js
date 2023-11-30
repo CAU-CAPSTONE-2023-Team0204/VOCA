@@ -3,10 +3,12 @@ import NavigationBar from "./NavigationBar";
 import TeacherSidebar from "./TeacherSidebar";
 import { useNavigate, useParams } from "react-router-dom";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
+import { generatePDF } from "../api/pdf";
 
 import "../styles/student_test_result.css";
 
 const EDIT_RESULT_URL = "/api/test/result/update";
+const RETEST_URL = "/api/test/custom";
 
 const StudentTestResult = () => {
   const { test_id, user_id } = useParams();
@@ -51,6 +53,20 @@ const StudentTestResult = () => {
       .then(navigate(0));
   };
 
+  const handleRetest = (e) => {
+    try {
+      axiosPrivate
+        .post(RETEST_URL, JSON.stringify(user_id))
+        .then((response) => {
+          generatePDF(response.data.name, response.data.testContentList, [
+            { username: username },
+          ]);
+        });
+    } catch (error) {
+      console.log("ERROR FETCHING CUSTOM TEST DATA", error);
+    }
+  };
+
   return (
     <div id="student_result_page_container">
       <React.Fragment>
@@ -71,10 +87,13 @@ const StudentTestResult = () => {
                 {scores.passScore} | 내 점수 : {scores.totalScore}
               </p>
             </div>
-            <div>
+            <div id="test_info_right_container">
               <a id="image_link" href={imageLink}>
                 시험지 확인
               </a>
+              <button id="retest_button" onClick={(e) => handleRetest(e)}>
+                오답 맞춤 출제
+              </button>
             </div>
           </div>
 
