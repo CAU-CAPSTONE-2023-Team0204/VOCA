@@ -12,6 +12,7 @@ const StudentTestResult = () => {
   const { test_id, user_id } = useParams();
   const [username, setUsername] = useState("");
   const [testName, setTestName] = useState("");
+  const [imageLink, setIamageLink] = useState("");
   const [scores, setScores] = useState({});
   const [resultData, setResultData] = useState([]);
   const navigate = useNavigate();
@@ -30,6 +31,7 @@ const StudentTestResult = () => {
           totalScore: response.data.totalScore,
         });
         setResultData(response.data.contentList);
+        setIamageLink(response.data.url);
       });
     } catch (error) {
       console.log("ERROR FETCHING TEST DATA", error);
@@ -70,7 +72,9 @@ const StudentTestResult = () => {
               </p>
             </div>
             <div>
-              <a> 시험지 다운로드 </a>
+              <a id="image_link" href={imageLink}>
+                시험지 확인
+              </a>
             </div>
           </div>
 

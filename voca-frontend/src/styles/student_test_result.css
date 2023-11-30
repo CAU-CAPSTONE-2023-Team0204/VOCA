@@ -33,6 +33,11 @@
     background-color: white;
 }
 
+#student_result_page_container #image_link{
+    text-decoration: none;
+    color:#333333;
+}
+
 #student_result_page_container .result_label{
     display:flex;
     border-radius: 25px;
