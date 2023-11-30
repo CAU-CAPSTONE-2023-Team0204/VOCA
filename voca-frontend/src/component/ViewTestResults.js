@@ -44,24 +44,23 @@ const ViewTestResult = () => {
     navigate(`/class/${class_id}/test/content/${test_id}`);
   };
 
-  const handleFileChange = async (event) => {
-    await setFile(event.target.files[0]);
-    console.log(file);
-    if (file) {
+  const handleFileChange = (event) => {
+    try {
       const formData = new FormData();
-      formData.append("file", file);
-      const response = await axiosPrivate.post(
-        PAPER_SUBMIT_URL + test_id,
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
-      console.log(response);
-    } else {
-      alert("NO FILE SELECTED");
+      if (event.target.files[0]) {
+        formData.append("file", event.target.files[0]);
+        const response = axiosPrivate
+          .post(PAPER_SUBMIT_URL + test_id, formData, {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          })
+          .then((response) => {
+            console.log(response);
+          });
+      }
+    } catch (error) {
+      console.log("ERROR POSTING TEST SHEET", error);
     }
   };
 

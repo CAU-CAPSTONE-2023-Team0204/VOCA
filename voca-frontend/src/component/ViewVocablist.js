@@ -119,7 +119,7 @@ const ViewVocabList = () => {
           }
         )
         .then((response) => {
-          navigate(`class/${class_id}/tests`);
+          navigate(`/class/${class_id}/tests`);
         });
     } catch (error) {
       console.log("ERROR SUBMITTING AUTO TEST");
