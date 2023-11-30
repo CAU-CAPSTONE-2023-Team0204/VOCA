@@ -33,13 +33,13 @@ const RegisterVocablist = () => {
 
   const handleSelectVocablist = async (i) => {
     setSelectedVocabList(i);
-    const response = await axiosPrivate.get(
-      GET_WORDS_URL + `${vocabLists[selectedVocabList].id}`
-    );
-
-    setWordData(response.data.vocabListContents);
-    const element = document.getElementById("modal_window");
-    element.style.display = "block";
+    const response = axiosPrivate
+      .get(GET_WORDS_URL + `${vocabLists[i].id}`)
+      .then((response) => {
+        setWordData(response.data.vocabListContents);
+        const element = document.getElementById("modal_window");
+        element.style.display = "block";
+      });
   };
 
   const handleCloseModal = () => {
