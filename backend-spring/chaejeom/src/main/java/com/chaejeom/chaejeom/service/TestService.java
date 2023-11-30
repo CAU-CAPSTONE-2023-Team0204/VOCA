@@ -57,11 +57,11 @@ public class TestService {
         List<Test> testList = testRepository.findAllByVocabListAndUserClassAndType(vocabList, userClass, TestType.AUTO);
         if(!testList.isEmpty()) {
             Test latestTest = testList.get(0);
-            LocalDate latestDate = LocalDate.MIN;
+            LocalDateTime latestDate = LocalDateTime.MIN;
             for (Test test : testList) {
-                if (test.getDate().isAfter(latestDate) ||test.getDate().isEqual(latestDate)){
+                if (test.getCreatedDate().isAfter(latestDate) ||test.getCreatedDate().isEqual(latestDate)){
                     latestTest = test;
-                    latestDate = test.getDate();
+                    latestDate = test.getCreatedDate();
                 }
             }
             TestContent latestContent = latestTest.getTestContentList().get(latestTest.getTestContentList().size()-1);
