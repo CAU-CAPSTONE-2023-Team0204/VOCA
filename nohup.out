@@ -1,0 +1,1587 @@
+Watching for file changes with StatReloader
+/home/ubuntu/voca-django/VOCA/views.py:194: RuntimeWarning: More than 20 figures have been opened. Figures created through the pyplot interface (`matplotlib.pyplot.figure`) are retained until explicitly closed and may consume too much memory. (To control this warning, see the rcParam `figure.max_open_warning`). Consider using `matplotlib.pyplot.close()`.
+  plt.figure(figsize=figsize)
+[01/Dec/2023 03:18:47] "POST /VOCA/ HTTP/1.1" 200 4567
+Not Found: /
+[01/Dec/2023 03:23:46] "GET / HTTP/1.1" 404 2167
+Not Found: /favicon.ico
+[01/Dec/2023 03:23:55] "GET /favicon.ico HTTP/1.1" 404 2218
+Not Found: /http:/api.ipify.org/
+[01/Dec/2023 03:24:00] "GET http://api.ipify.org/?format=json HTTP/1.1" 404 1818
+Not Found: /www.shadowserver.org:443
+[01/Dec/2023 03:24:03] "CONNECT www.shadowserver.org:443 HTTP/1.1" 404 1827
+Performing system checks...
+
+System check identified no issues (0 silenced).
+December 01, 2023 - 03:16:36
+Django version 4.2.7, using settings 'config.settings'
+Starting development server at http://0.0.0.0:8000/
+Quit the server with CONTROL-C.
+
+{'testID': 1, 'classID': 1, 'testContentList': [{'id': 3, 'type': 'ENG_TO_KOR', 'question': 'video', 'answer': '영상,비디오,녹화하다'}, {'id': 4, 'type': 'KOR_TO_ENG', 'question': '베이스,저음의,저음', 'answer': 'bass'}, {'id': 5, 'type': 'ENG_TO_KOR', 'question': 'cat', 'answer': '고양이'}, {'id': 6, 'type': 'KOR_TO_ENG', 'question': '지능,기밀', 'answer': 'intelligence'}, {'id': 7, 'type': 'ENG_TO_KOR', 'question': 'content', 'answer': '내용,목차,내용물'}, {'id': 8, 'type': 'KOR_TO_ENG', 'question': '음식,식량,식품', 'answer': 'food'}, {'id': 9, 'type': 'ENG_TO_KOR', 'question': 'university', 'answer': '대학'}, {'id': 10, 'type': 'KOR_TO_ENG', 'question': '바이러스', 'answer': 'virus'}, {'id': 11, 'type': 'ENG_TO_KOR', 'question': 'limit', 'answer': '한계,한도,제한'}, {'id': 12, 'type': 'KOR_TO_ENG', 'question': '중앙,중심,한가운데', 'answer': 'center'}], 'memberList': [{'id': 1, 'username': 'student1', 'name': 'student1'}, {'id': 2, 'username': 'student2', 'name': 'student2'}, {'id': 3, 'username': 'student3', 'name': 'student3'}], 'file': ['https://voca-capstone-test.s3.ap-northeast-2.amazonaws.com/demotest_1.png', 'https://voca-capstone-test.s3.ap-northeast-2.amazonaws.com/demotest_2.png', 'https://voca-capstone-test.s3.ap-northeast-2.amazonaws.com/demotest_3.png']}
+1 1 ['https://voca-capstone-test.s3.ap-northeast-2.amazonaws.com/demotest_1.png', 'https://voca-capstone-test.s3.ap-northeast-2.amazonaws.com/demotest_2.png', 'https://voca-capstone-test.s3.ap-northeast-2.amazonaws.com/demotest_3.png']
+3 ENG_TO_KOR video 영상,비디오,녹화하다
+4 KOR_TO_ENG 베이스,저음의,저음 bass
+5 ENG_TO_KOR cat 고양이
+6 KOR_TO_ENG 지능,기밀 intelligence
+7 ENG_TO_KOR content 내용,목차,내용물
+8 KOR_TO_ENG 음식,식량,식품 food
+9 ENG_TO_KOR university 대학
+10 KOR_TO_ENG 바이러스 virus
+11 ENG_TO_KOR limit 한계,한도,제한
+12 KOR_TO_ENG 중앙,중심,한가운데 center
+1 student1 student1
+2 student2 student2
+3 student3 student3
+student1
+영상
+bass
+intelligent
+고양이
+food
+내용
+대학
+virus
+한계
+center
+student1 ['영상', 'bass', '고양이', 'intelligent', '내용', 'food', '대학', 'virus', '한계', 'center']
+student2
+비디오
+bass
+고양이
+몰라
+food
+컨텐츠
+тивд
+virus
+한계
+Center
+student2 ['비디오', 'bass', '고양이', '몰라', '컨텐츠', 'food', 'тивд', 'virus', '한계', 'Center']
+student3
+영상
+bas
+고양이
+intell
+
+poof
+대학교
+virus
+한계
+CAU
+student3 ['영상', 'bas', '고양이', 'intell', '', 'poof', '대학교', 'virus', '한계', 'CAU']
+{'testID': 2, 'classID': 1, 'testContentList': [{'id': 3, 'type': 'ENG_TO_KOR', 'question': 'video', 'answer': '영상,비디오,녹화하다'}, {'id': 4, 'type': 'KOR_TO_ENG', 'question': '베이스,저음의,저음', 'answer': 'bass'}, {'id': 5, 'type': 'ENG_TO_KOR', 'question': 'cat', 'answer': '고양이'}, {'id': 6, 'type': 'KOR_TO_ENG', 'question': '지능,기밀', 'answer': 'intelligence'}, {'id': 7, 'type': 'ENG_TO_KOR', 'question': 'content', 'answer': '내용,목차,내용물'}, {'id': 8, 'type': 'KOR_TO_ENG', 'question': '음식,식량,식품', 'answer': 'food'}, {'id': 9, 'type': 'ENG_TO_KOR', 'question': 'university', 'answer': '대학'}, {'id': 10, 'type': 'KOR_TO_ENG', 'question': '바이러스', 'answer': 'virus'}, {'id': 11, 'type': 'ENG_TO_KOR', 'question': 'limit', 'answer': '한계,한도,제한'}, {'id': 12, 'type': 'KOR_TO_ENG', 'question': '중앙,중심,한가운데', 'answer': 'center'}], 'memberList': [{'id': 1, 'username': 'student1', 'name': 'student1'}, {'id': 2, 'username': 'student2', 'name': 'student2'}, {'id': 3, 'username': 'student3', 'name': 'student3'}], 'file': ['https://voca-capstone-test.s3.ap-northeast-2.amazonaws.com/test_content_2_-120103273660.png', 'https://voca-capstone-test.s3.ap-northeast-2.amazonaws.com/test_content_2_-120103274081.png', 'https://voca-capstone-test.s3.ap-northeast-2.amazonaws.com/test_content_2_-120103274372.png']}
+2 1 ['https://voca-capstone-test.s3.ap-northeast-2.amazonaws.com/test_content_2_-120103273660.png', 'https://voca-capstone-test.s3.ap-northeast-2.amazonaws.com/test_content_2_-120103274081.png', 'https://voca-capstone-test.s3.ap-northeast-2.amazonaws.com/test_content_2_-120103274372.png']
+3 ENG_TO_KOR video 영상,비디오,녹화하다
+4 KOR_TO_ENG 베이스,저음의,저음 bass
+5 ENG_TO_KOR cat 고양이
+6 KOR_TO_ENG 지능,기밀 intelligence
+7 ENG_TO_KOR content 내용,목차,내용물
+8 KOR_TO_ENG 음식,식량,식품 food
+9 ENG_TO_KOR university 대학
+10 KOR_TO_ENG 바이러스 virus
+11 ENG_TO_KOR limit 한계,한도,제한
+12 KOR_TO_ENG 중앙,중심,한가운데 center
+1 student1 student1
+2 student2 student2
+3 student3 student3
+student1
+영상
+bass
+intelligent
+고양이
+food
+내용
+대학
+virus
+한계
+center
+student1 ['영상', 'bass', '고양이', 'intelligent', '내용', 'food', '대학', 'virus', '한계', 'center']
+student2
+비디오
+bass
+고양이
+몰라
+food
+컨텐츠
+тивд
+virus
+한계
+Center
+student2 ['비디오', 'bass', '고양이', '몰라', '컨텐츠', 'food', 'тивд', 'virus', '한계', 'Center']
+student3
+영상
+bas
+고양이
+intell
+
+poof
+대학교
+virus
+한계
+CAU
+student3 ['영상', 'bas', '고양이', 'intell', '', 'poof', '대학교', 'virus', '한계', 'CAU']
+{'testID': 2, 'classID': 1, 'testContentList': [{'id': 3, 'type': 'ENG_TO_KOR', 'question': 'video', 'answer': '영상,비디오,녹화하다'}, {'id': 4, 'type': 'KOR_TO_ENG', 'question': '베이스,저음의,저음', 'answer': 'bass'}, {'id': 5, 'type': 'ENG_TO_KOR', 'question': 'cat', 'answer': '고양이'}, {'id': 6, 'type': 'KOR_TO_ENG', 'question': '지능,기밀', 'answer': 'intelligence'}, {'id': 7, 'type': 'ENG_TO_KOR', 'question': 'content', 'answer': '내용,목차,내용물'}, {'id': 8, 'type': 'KOR_TO_ENG', 'question': '음식,식량,식품', 'answer': 'food'}, {'id': 9, 'type': 'ENG_TO_KOR', 'question': 'university', 'answer': '대학'}, {'id': 10, 'type': 'KOR_TO_ENG', 'question': '바이러스', 'answer': 'virus'}, {'id': 11, 'type': 'ENG_TO_KOR', 'question': 'limit', 'answer': '한계,한도,제한'}, {'id': 12, 'type': 'KOR_TO_ENG', 'question': '중앙,중심,한가운데', 'answer': 'center'}], 'memberList': [{'id': 1, 'username': 'student1', 'name': 'student1'}, {'id': 2, 'username': 'student2', 'name': 'student2'}, {'id': 3, 'username': 'student3', 'name': 'student3'}], 'file': ['https://voca-capstone-test.s3.ap-northeast-2.amazonaws.com/test_content_2_-120103365130.png', 'https://voca-capstone-test.s3.ap-northeast-2.amazonaws.com/test_content_2_-120103365511.png', 'https://voca-capstone-test.s3.ap-northeast-2.amazonaws.com/test_content_2_-120103365912.png']}
+2 1 ['https://voca-capstone-test.s3.ap-northeast-2.amazonaws.com/test_content_2_-120103365130.png', 'https://voca-capstone-test.s3.ap-northeast-2.amazonaws.com/test_content_2_-120103365511.png', 'https://voca-capstone-test.s3.ap-northeast-2.amazonaws.com/test_content_2_-120103365912.png']
+3 ENG_TO_KOR video 영상,비디오,녹화하다
+4 KOR_TO_ENG 베이스,저음의,저음 bass
+5 ENG_TO_KOR cat 고양이
+6 KOR_TO_ENG 지능,기밀 intelligence
+7 ENG_TO_KOR content 내용,목차,내용물
+8 KOR_TO_ENG 음식,식량,식품 food
+9 ENG_TO_KOR university 대학
+10 KOR_TO_ENG 바이러스 virus
+11 ENG_TO_KOR limit 한계,한도,제한
+12 KOR_TO_ENG 중앙,중심,한가운데 center
+1 student1 student1
+2 student2 student2
+3 student3 student3
+student1
+영상
+bass
+intelligent
+고양이
+food
+내용
+대학
+virus
+한계
+center
+student1 ['영상', 'bass', '고양이', 'intelligent', '내용', 'food', '대학', 'virus', '한계', 'center']
+student2
+비디오
+bass
+고양이
+몰라
+food
+컨텐츠
+тивд
+virus
+한계
+Center
+student2 ['비디오', 'bass', '고양이', '몰라', '컨텐츠', 'food', 'тивд', 'virus', '한계', 'Center']
+student3
+영상
+bas
+고양이
+intell
+
+poof
+대학교
+virus
+한계
+CAU
+[01/Dec/2023 03:38:05] "POST /VOCA/ HTTP/1.1" 200 4621
+[01/Dec/2023 04:02:25] code 400, message Bad request version ('À\x14À')
+[01/Dec/2023 04:02:26] You're accessing the development server over HTTPS, but it only supports HTTP.
+Watching for file changes with StatReloader
+/home/ubuntu/voca-django/VOCA/views.py:194: RuntimeWarning: More than 20 figures have been opened. Figures created through the pyplot interface (`matplotlib.pyplot.figure`) are retained until explicitly closed and may consume too much memory. (To control this warning, see the rcParam `figure.max_open_warning`). Consider using `matplotlib.pyplot.close()`.
+  plt.figure(figsize=figsize)
+[01/Dec/2023 06:03:14] "POST /VOCA/ HTTP/1.1" 200 53
+[01/Dec/2023 06:04:59] "POST /VOCA/ HTTP/1.1" 200 53
+[01/Dec/2023 06:06:59] "POST /VOCA/ HTTP/1.1" 200 53
+Performing system checks...
+
+System check identified no issues (0 silenced).
+December 01, 2023 - 05:54:55
+Django version 4.2.7, using settings 'config.settings'
+Starting development server at http://0.0.0.0:8000/
+Quit the server with CONTROL-C.
+
+{'testID': 2, 'classID': 2, 'testContentList': [{'id': 3, 'type': 'ENG_TO_KOR', 'question': 'aboard', 'answer': '배위에, 기내에, 찻간에'}, {'id': 4, 'type': 'KOR_TO_ENG', 'question': '외국에, 해외로', 'answer': 'abroad'}, {'id': 5, 'type': 'ENG_TO_KOR', 'question': 'akin', 'answer': '동족의, 동종의, 유사한'}, {'id': 6, 'type': 'KOR_TO_ENG', 'question': '서로같은, 비슷한', 'answer': 'alike'}, {'id': 7, 'type': 'ENG_TO_KOR', 'question': 'annual', 'answer': '해마다의'}, {'id': 8, 'type': 'KOR_TO_ENG', 'question': '해변에, 기슭에', 'answer': 'ashore'}, {'id': 9, 'type': 'ENG_TO_KOR', 'question': 'aside', 'answer': '옆(곁)에, 떨어져서'}, {'id': 10, 'type': 'KOR_TO_ENG', 'question': '감정, 정서', 'answer': 'emotion'}, {'id': 11, 'type': 'ENG_TO_KOR', 'question': 'exaggerate', 'answer': '과장하다'}, {'id': 12, 'type': 'KOR_TO_ENG', 'question': '과장', 'answer': 'exaggeration'}], 'memberList': [], 'file': ['https://voca-capstone-test.s3.ap-northeast-2.amazonaws.com/test_content_2_-120106022890.png', 'https://voca-capstone-test.s3.ap-northeast-2.amazonaws.com/test_content_2_-120106023401.png']}
+2 2 ['https://voca-capstone-test.s3.ap-northeast-2.amazonaws.com/test_content_2_-120106022890.png', 'https://voca-capstone-test.s3.ap-northeast-2.amazonaws.com/test_content_2_-120106023401.png']
+3 ENG_TO_KOR aboard 배위에, 기내에, 찻간에
+4 KOR_TO_ENG 외국에, 해외로 abroad
+5 ENG_TO_KOR akin 동족의, 동종의, 유사한
+6 KOR_TO_ENG 서로같은, 비슷한 alike
+7 ENG_TO_KOR annual 해마다의
+8 KOR_TO_ENG 해변에, 기슭에 ashore
+9 ENG_TO_KOR aside 옆(곁)에, 떨어져서
+10 KOR_TO_ENG 감정, 정서 emotion
+11 ENG_TO_KOR exaggerate 과장하다
+12 KOR_TO_ENG 과장 exaggeration
+student11
+기내에
+aboard
+유사한
+alike.
+해마다의
+ashore
+옆에
+emotion
+exaggeration
+과장하다
+student11 ['기내에', 'aboard', '유사한', 'alike.', '해마다의', 'ashore', '옆에', 'emotion', '과장하다', 'exaggeration']
+student12
+a
+기내
+с
+b
+
+e
+
+
+
+
+student12 ['기내', 'a', 'b', 'с', '', 'e', '', '', '', '']
+{'testID': 2, 'classID': 2, 'testContentList': [{'id': 3, 'type': 'ENG_TO_KOR', 'question': 'aboard', 'answer': '배위에, 기내에, 찻간에'}, {'id': 4, 'type': 'KOR_TO_ENG', 'question': '외국에, 해외로', 'answer': 'abroad'}, {'id': 5, 'type': 'ENG_TO_KOR', 'question': 'akin', 'answer': '동족의, 동종의, 유사한'}, {'id': 6, 'type': 'KOR_TO_ENG', 'question': '서로같은, 비슷한', 'answer': 'alike'}, {'id': 7, 'type': 'ENG_TO_KOR', 'question': 'annual', 'answer': '해마다의'}, {'id': 8, 'type': 'KOR_TO_ENG', 'question': '해변에, 기슭에', 'answer': 'ashore'}, {'id': 9, 'type': 'ENG_TO_KOR', 'question': 'aside', 'answer': '옆(곁)에, 떨어져서'}, {'id': 10, 'type': 'KOR_TO_ENG', 'question': '감정, 정서', 'answer': 'emotion'}, {'id': 11, 'type': 'ENG_TO_KOR', 'question': 'exaggerate', 'answer': '과장하다'}, {'id': 12, 'type': 'KOR_TO_ENG', 'question': '과장', 'answer': 'exaggeration'}], 'memberList': [], 'file': ['https://voca-capstone-test.s3.ap-northeast-2.amazonaws.com/test_content_2_-120106042130.png', 'https://voca-capstone-test.s3.ap-northeast-2.amazonaws.com/test_content_2_-120106042291.png']}
+2 2 ['https://voca-capstone-test.s3.ap-northeast-2.amazonaws.com/test_content_2_-120106042130.png', 'https://voca-capstone-test.s3.ap-northeast-2.amazonaws.com/test_content_2_-120106042291.png']
+3 ENG_TO_KOR aboard 배위에, 기내에, 찻간에
+4 KOR_TO_ENG 외국에, 해외로 abroad
+5 ENG_TO_KOR akin 동족의, 동종의, 유사한
+6 KOR_TO_ENG 서로같은, 비슷한 alike
+7 ENG_TO_KOR annual 해마다의
+8 KOR_TO_ENG 해변에, 기슭에 ashore
+9 ENG_TO_KOR aside 옆(곁)에, 떨어져서
+10 KOR_TO_ENG 감정, 정서 emotion
+11 ENG_TO_KOR exaggerate 과장하다
+12 KOR_TO_ENG 과장 exaggeration
+student11
+기내에
+aboard
+유사한
+alike.
+해마다의
+ashore
+옆에
+emotion
+exaggeration
+과장하다
+student11 ['기내에', 'aboard', '유사한', 'alike.', '해마다의', 'ashore', '옆에', 'emotion', '과장하다', 'exaggeration']
+student12
+a
+기내
+с
+b
+
+e
+
+
+
+
+student12 ['기내', 'a', 'b', 'с', '', 'e', '', '', '', '']
+{'testID': 2, 'classID': 2, 'testContentList': [{'id': 3, 'type': 'ENG_TO_KOR', 'question': 'aboard', 'answer': '배위에, 기내에, 찻간에'}, {'id': 4, 'type': 'KOR_TO_ENG', 'question': '외국에, 해외로', 'answer': 'abroad'}, {'id': 5, 'type': 'ENG_TO_KOR', 'question': 'akin', 'answer': '동족의, 동종의, 유사한'}, {'id': 6, 'type': 'KOR_TO_ENG', 'question': '서로같은, 비슷한', 'answer': 'alike'}, {'id': 7, 'type': 'ENG_TO_KOR', 'question': 'annual', 'answer': '해마다의'}, {'id': 8, 'type': 'KOR_TO_ENG', 'question': '해변에, 기슭에', 'answer': 'ashore'}, {'id': 9, 'type': 'ENG_TO_KOR', 'question': 'aside', 'answer': '옆(곁)에, 떨어져서'}, {'id': 10, 'type': 'KOR_TO_ENG', 'question': '감정, 정서', 'answer': 'emotion'}, {'id': 11, 'type': 'ENG_TO_KOR', 'question': 'exaggerate', 'answer': '과장하다'}, {'id': 12, 'type': 'KOR_TO_ENG', 'question': '과장', 'answer': 'exaggeration'}], 'memberList': [], 'file': ['https://voca-capstone-test.s3.ap-northeast-2.amazonaws.com/test_content_2_-120106062070.png', 'https://voca-capstone-test.s3.ap-northeast-2.amazonaws.com/test_content_2_-120106062141.png']}
+2 2 ['https://voca-capstone-test.s3.ap-northeast-2.amazonaws.com/test_content_2_-120106062070.png', 'https://voca-capstone-test.s3.ap-northeast-2.amazonaws.com/test_content_2_-120106062141.png']
+3 ENG_TO_KOR aboard 배위에, 기내에, 찻간에
+4 KOR_TO_ENG 외국에, 해외로 abroad
+5 ENG_TO_KOR akin 동족의, 동종의, 유사한
+6 KOR_TO_ENG 서로같은, 비슷한 alike
+7 ENG_TO_KOR annual 해마다의
+8 KOR_TO_ENG 해변에, 기슭에 ashore
+9 ENG_TO_KOR aside 옆(곁)에, 떨어져서
+10 KOR_TO_ENG 감정, 정서 emotion
+11 ENG_TO_KOR exaggerate 과장하다
+12 KOR_TO_ENG 과장 exaggeration
+student11
+기내에
+aboard
+유사한
+alike.
+해마다의
+ashore
+옆에
+emotion
+exaggeration
+과장하다
+student11 ['기내에', 'aboard', '유사한', 'alike.', '해마다의', 'ashore', '옆에', 'emotion', '과장하다', 'exaggeration']
+student12
+a
+기내
+с
+b
+
+e
+
+
+
+
+student12 ['기내', 'a', 'b', 'с', '', 'e', '', '', '', '']
+{'testID': 1, 'classID': 1, 'testContentList': [{'id': 3, 'type': 'ENG_TO_KOR', 'question': 'video', 'answer': '영상,비디오,녹화하다'}, {'id': 4, 'type': 'KOR_TO_ENG', 'question': '베이스,저음의,저음', 'answer': 'bass'}, {'id': 5, 'type': 'ENG_TO_KOR', 'question': 'cat', 'answer': '고양이'}, {'id': 6, 'type': 'KOR_TO_ENG', 'question': '지능,기밀', 'answer': 'intelligence'}, {'id': 7, 'type': 'ENG_TO_KOR', 'question': 'content', 'answer': '내용,목차,내용물'}, {'id': 8, 'type': 'KOR_TO_ENG', 'question': '음식,식량,식품', 'answer': 'food'}, {'id': 9, 'type': 'ENG_TO_KOR', 'question': 'university', 'answer': '대학'}, {'id': 10, 'type': 'KOR_TO_ENG', 'question': '바이러스', 'answer': 'virus'}, {'id': 11, 'type': 'ENG_TO_KOR', 'question': 'limit', 'answer': '한계,한도,제한'}, {'id': 12, 'type': 'KOR_TO_ENG', 'question': '중앙,중심,한가운데', 'answer': 'center'}], 'memberList': [{'id': 1, 'username': 'student1', 'name': 'student1'}, {'id': 2, 'username': 'student2', 'name': 'student2'}, {'id': 3, 'username': 'student3', 'name': 'student3'}], 'file': ['https://voca-capstone-test.s3.ap-northeast-2.amazonaws.com/demotest_1.png', 'https://voca-capstone-test.s3.ap-northeast-2.amazonaws.com/demotest_2.png', 'https://voca-capstone-test.s3.ap-northeast-2.amazonaws.com/demotest_3.png']}
+1 1 ['https://voca-capstone-test.s3.ap-northeast-2.amazonaws.com/demotest_1.png', 'https://voca-capstone-test.s3.ap-northeast-2.amazonaws.com/demotest_2.png', 'https://voca-capstone-test.s3.ap-northeast-2.amazonaws.com/demotest_3.png']
+3 ENG_TO_KOR video 영상,비디오,녹화하다
+[01/Dec/2023 06:09:17] "POST /VOCA/ HTTP/1.1" 200 4567
+[01/Dec/2023 06:15:35] "POST /VOCA/ HTTP/1.1" 200 53
+[01/Dec/2023 06:17:41] "POST /VOCA/ HTTP/1.1" 200 4567
+4 KOR_TO_ENG 베이스,저음의,저음 bass
+5 ENG_TO_KOR cat 고양이
+6 KOR_TO_ENG 지능,기밀 intelligence
+7 ENG_TO_KOR content 내용,목차,내용물
+8 KOR_TO_ENG 음식,식량,식품 food
+9 ENG_TO_KOR university 대학
+10 KOR_TO_ENG 바이러스 virus
+11 ENG_TO_KOR limit 한계,한도,제한
+12 KOR_TO_ENG 중앙,중심,한가운데 center
+1 student1 student1
+2 student2 student2
+3 student3 student3
+student1
+영상
+bass
+intelligent
+고양이
+food
+내용
+대학
+virus
+한계
+center
+student1 ['영상', 'bass', '고양이', 'intelligent', '내용', 'food', '대학', 'virus', '한계', 'center']
+student2
+비디오
+bass
+고양이
+몰라
+food
+컨텐츠
+тивд
+virus
+한계
+Center
+student2 ['비디오', 'bass', '고양이', '몰라', '컨텐츠', 'food', 'тивд', 'virus', '한계', 'Center']
+student3
+영상
+bas
+고양이
+intell
+
+poof
+대학교
+virus
+한계
+CAU
+student3 ['영상', 'bas', '고양이', 'intell', '', 'poof', '대학교', 'virus', '한계', 'CAU']
+{'testID': 2, 'classID': 2, 'testContentList': [{'id': 3, 'type': 'ENG_TO_KOR', 'question': 'aboard', 'answer': '배위에, 기내에, 찻간에'}, {'id': 4, 'type': 'KOR_TO_ENG', 'question': '외국에, 해외로', 'answer': 'abroad'}, {'id': 5, 'type': 'ENG_TO_KOR', 'question': 'akin', 'answer': '동족의, 동종의, 유사한'}, {'id': 6, 'type': 'KOR_TO_ENG', 'question': '서로같은, 비슷한', 'answer': 'alike'}, {'id': 7, 'type': 'ENG_TO_KOR', 'question': 'annual', 'answer': '해마다의'}, {'id': 8, 'type': 'KOR_TO_ENG', 'question': '해변에, 기슭에', 'answer': 'ashore'}, {'id': 9, 'type': 'ENG_TO_KOR', 'question': 'aside', 'answer': '옆(곁)에, 떨어져서'}, {'id': 10, 'type': 'KOR_TO_ENG', 'question': '감정, 정서', 'answer': 'emotion'}, {'id': 11, 'type': 'ENG_TO_KOR', 'question': 'exaggerate', 'answer': '과장하다'}, {'id': 12, 'type': 'KOR_TO_ENG', 'question': '과장', 'answer': 'exaggeration'}], 'memberList': [], 'file': ['https://voca-capstone-test.s3.ap-northeast-2.amazonaws.com/test_content_2_-120106145430.png', 'https://voca-capstone-test.s3.ap-northeast-2.amazonaws.com/test_content_2_-120106145591.png']}
+2 2 ['https://voca-capstone-test.s3.ap-northeast-2.amazonaws.com/test_content_2_-120106145430.png', 'https://voca-capstone-test.s3.ap-northeast-2.amazonaws.com/test_content_2_-120106145591.png']
+3 ENG_TO_KOR aboard 배위에, 기내에, 찻간에
+4 KOR_TO_ENG 외국에, 해외로 abroad
+5 ENG_TO_KOR akin 동족의, 동종의, 유사한
+6 KOR_TO_ENG 서로같은, 비슷한 alike
+7 ENG_TO_KOR annual 해마다의
+8 KOR_TO_ENG 해변에, 기슭에 ashore
+9 ENG_TO_KOR aside 옆(곁)에, 떨어져서
+10 KOR_TO_ENG 감정, 정서 emotion
+11 ENG_TO_KOR exaggerate 과장하다
+12 KOR_TO_ENG 과장 exaggeration
+student11
+기내에
+aboard
+유사한
+alike.
+해마다의
+ashore
+옆에
+emotion
+exaggeration
+과장하다
+student11 ['기내에', 'aboard', '유사한', 'alike.', '해마다의', 'ashore', '옆에', 'emotion', '과장하다', 'exaggeration']
+student12
+a
+기내
+с
+b
+
+e
+
+
+
+
+student12 ['기내', 'a', 'b', 'с', '', 'e', '', '', '', '']
+{'testID': 1, 'classID': 1, 'testContentList': [{'id': 3, 'type': 'ENG_TO_KOR', 'question': 'video', 'answer': '영상,비디오,녹화하다'}, {'id': 4, 'type': 'KOR_TO_ENG', 'question': '베이스,저음의,저음', 'answer': 'bass'}, {'id': 5, 'type': 'ENG_TO_KOR', 'question': 'cat', 'answer': '고양이'}, {'id': 6, 'type': 'KOR_TO_ENG', 'question': '지능,기밀', 'answer': 'intelligence'}, {'id': 7, 'type': 'ENG_TO_KOR', 'question': 'content', 'answer': '내용,목차,내용물'}, {'id': 8, 'type': 'KOR_TO_ENG', 'question': '음식,식량,식품', 'answer': 'food'}, {'id': 9, 'type': 'ENG_TO_KOR', 'question': 'university', 'answer': '대학'}, {'id': 10, 'type': 'KOR_TO_ENG', 'question': '바이러스', 'answer': 'virus'}, {'id': 11, 'type': 'ENG_TO_KOR', 'question': 'limit', 'answer': '한계,한도,제한'}, {'id': 12, 'type': 'KOR_TO_ENG', 'question': '중앙,중심,한가운데', 'answer': 'center'}], 'memberList': [{'id': 1, 'username': 'student1', 'name': 'student1'}, {'id': 2, 'username': 'student2', 'name': 'student2'}, {'id': 3, 'username': 'student3', 'name': 'student3'}], 'file': ['https://voca-capstone-test.s3.ap-northeast-2.amazonaws.com/demotest_1.png', 'https://voca-capstone-test.s3.ap-northeast-2.amazonaws.com/demotest_2.png', 'https://voca-capstone-test.s3.ap-northeast-2.amazonaws.com/demotest_3.png']}
+1 1 ['https://voca-capstone-test.s3.ap-northeast-2.amazonaws.com/demotest_1.png', 'https://voca-capstone-test.s3.ap-northeast-2.amazonaws.com/demotest_2.png', 'https://voca-capstone-test.s3.ap-northeast-2.amazonaws.com/demotest_3.png']
+3 ENG_TO_KOR video 영상,비디오,녹화하다
+4 KOR_TO_ENG 베이스,저음의,저음 bass
+5 ENG_TO_KOR cat 고양이
+6 KOR_TO_ENG 지능,기밀 intelligence
+7 ENG_TO_KOR content 내용,목차,내용물
+8 KOR_TO_ENG 음식,식량,식품 food
+9 ENG_TO_KOR university 대학
+10 KOR_TO_ENG 바이러스 virus
+11 ENG_TO_KOR limit 한계,한도,제한
+12 KOR_TO_ENG 중앙,중심,한가운데 center
+1 student1 student1
+2 student2 student2
+3 student3 student3
+student1
+영상
+bass
+intelligent
+고양이
+food
+내용
+대학
+virus
+한계
+center
+student1 ['영상', 'bass', '고양이', 'intelligent', '내용', 'food', '대학', 'virus', '한계', 'center']
+student2
+비디오
+bass
+고양이
+몰라
+food
+컨텐츠
+тивд
+virus
+한계
+Center
+student2 ['비디오', 'bass', '고양이', '몰라', '컨텐츠', 'food', 'тивд', 'virus', '한계', 'Center']
+student3
+영상
+bas
+고양이
+intell
+
+poof
+대학교
+virus
+한계
+CAU
+student3 ['영상', 'bas', '고양이', 'intell', '', 'poof', '대학교', 'virus', '한계', 'CAU']
+{'testID': 2, 'classID': 1, 'testContentList': [{'id': 3, 'type': 'ENG_TO_KOR', 'question': 'video', 'answer': '영상,비디오,녹화하다'}, {'id': 4, 'type': 'KOR_TO_ENG', 'question': '베이스,저음의,저음', 'answer': 'bass'}, {'id': 5, 'type': 'ENG_TO_KOR', 'question': 'cat', 'answer': '고양이'}, {'id': 6, 'type': 'KOR_TO_ENG', 'question': '지능,기밀', 'answer': 'intelligence'}, {'id': 7, 'type': 'ENG_TO_KOR', 'question': 'content', 'answer': '내용,목차,내용물'}, {'id': 8, 'type': 'KOR_TO_ENG', 'question': '음식,식량,식품', 'answer': 'food'}, {'id': 9, 'type': 'ENG_TO_KOR', 'question': 'university', 'answer': '대학'}, {'id': 10, 'type': 'KOR_TO_ENG', 'question': '바이러스', 'answer': 'virus'}, {'id': 11, 'type': 'ENG_TO_KOR', 'question': 'limit', 'answer': '한계,한도,제한'}, {'id': 12, 'type': 'KOR_TO_ENG', 'question': '중앙,중심,한가운데', 'answer': 'center'}], 'memberList': [{'id': 1, 'username': 'student1', 'name': 'student1'}, {'id': 2, 'username': 'student2', 'name': 'student2'}, {'id': 3, 'username': 'student3', 'name': 'student3'}], 'file': ['https://voca-capstone-test.s3.ap-northeast-2.amazonaws.com/test_content_2_-120115263080.png', 'https://voca-capstone-test.s3.ap-northeast-2.amazonaws.com/test_content_2_-120115263451.png', 'https://voca-capstone-test.s3.ap-northeast-2.amazonaws.com/test_content_2_-120115263742.png']}
+2 1 ['https://voca-capstone-test.s3.ap-northeast-2.amazonaws.com/test_content_2_-120115263080.png', 'https://voca-capstone-test.s3.ap-northeast-2.amazonaws.com/test_content_2_-120115263451.png', 'https://voca-capstone-test.s3.ap-northeast-2.amazonaws.com/test_content_2_-120115263742.png']
+3 ENG_TO_KOR video 영상,비디오,녹화하다
+4 KOR_TO_ENG 베이스,저음의,저음 bass
+5 ENG_TO_KOR cat 고양이
+6 KOR_TO_ENG 지능,기밀 intelligence
+7 ENG_TO_KOR content 내용,목차,내용물
+8 KOR_TO_ENG 음식,식량,식품 food
+9 ENG_TO_KOR university 대학
+10 KOR_TO_ENG 바이러스 virus
+11 ENG_TO_KOR limit 한계,한도,제한
+12 KOR_TO_ENG 중앙,중심,한가운데 center
+1 student1 student1
+2 student2 student2
+3 student3 student3
+student1
+영상
+bass
+intelligent
+고양이
+food
+내용
+대학
+virus
+한계
+center
+student1 ['영상', 'bass', '고양이', 'intelligent', '내용', 'food', '대학', 'virus', '한계', 'center']
+student2
+비디오
+bass
+고양이
+몰라
+food
+컨텐츠
+тивд
+virus
+한계
+Center
+student2 [01/Dec/2023 06:27:35] "POST /VOCA/ HTTP/1.1" 200 4621
+[01/Dec/2023 06:38:42] "POST /VOCA/ HTTP/1.1" 200 4621
+[01/Dec/2023 09:50:04] code 400, message Bad request syntax ('nil')
+[01/Dec/2023 09:50:04] "nil" 400 -
+Not Found: /
+[01/Dec/2023 09:50:12] "GET / HTTP/1.0" 404 2162
+Not Found: /http:/3.38.125.252:8000/phpmyadmin/scripts/setup.php
+[01/Dec/2023 11:28:00] "GET http://3.38.125.252:8000/phpmyadmin/scripts/setup.php HTTP/1.0" 404 1942
+Not Found: /http:/3.38.125.252:8000/phpMyAdmin-2.11.4/scripts/setup.php
+[01/Dec/2023 11:28:00] "GET http://3.38.125.252:8000/phpMyAdmin-2.11.4/scripts/setup.php HTTP/1.0" 404 1963
+Not Found: /http:/3.38.125.252:8000/phpMyAdmin-2.11.3/scripts/setup.php
+[01/Dec/2023 11:28:01] "GET http://3.38.125.252:8000/phpMyAdmin-2.11.3/scripts/setup.php HTTP/1.0" 404 1963
+Not Found: /http:/3.38.125.252:8000/phpMyAdmin-2.10.0.2/scripts/setup.php
+[01/Dec/2023 11:28:01] "GET http://3.38.125.252:8000/phpMyAdmin-2.10.0.2/scripts/setup.php HTTP/1.0" 404 1969
+Not Found: /http:/3.38.125.252:8000/phpMyAdmin-2.10.3/scripts/setup.php
+[01/Dec/2023 11:28:02] "GET http://3.38.125.252:8000/phpMyAdmin-2.10.3/scripts/setup.php HTTP/1.0" 404 1963
+Not Found: /http:/3.38.125.252:8000/phpMyAdmin-2.8.0.2/scripts/setup.php
+[01/Dec/2023 11:28:02] "GET http://3.38.125.252:8000/phpMyAdmin-2.8.0.2/scripts/setup.php HTTP/1.0" 404 1966
+Not Found: /http:/3.38.125.252:8000/phpMyAdmin-2.10.2/scripts/setup.php
+[01/Dec/2023 11:28:03] "GET http://3.38.125.252:8000/phpMyAdmin-2.10.2/scripts/setup.php HTTP/1.0" 404 1963
+Not Found: /http:/3.38.125.252:8000/phpMyAdmin-2.11.9.2/scripts/setup.php
+[01/Dec/2023 11:28:03] "GET http://3.38.125.252:8000/phpMyAdmin-2.11.9.2/scripts/setup.php HTTP/1.0" 404 1969
+Not Found: /http:/3.38.125.252:8000/phpMyAdmin-2.11.0/scripts/setup.php
+[01/Dec/2023 11:28:04] "GET http://3.38.125.252:8000/phpMyAdmin-2.11.0/scripts/setup.php HTTP/1.0" 404 1963
+Not Found: /http:/3.38.125.252:8000/phpMyAdmin-2.11.7/scripts/setup.php
+[01/Dec/2023 11:28:04] "GET http://3.38.125.252:8000/phpMyAdmin-2.11.7/scripts/setup.php HTTP/1.0" 404 1963
+Not Found: /http:/3.38.125.252:8000/phpMyAdmin-2.11.1.2/scripts/setup.php
+[01/Dec/2023 11:28:05] "GET http://3.38.125.252:8000/phpMyAdmin-2.11.1.2/scripts/setup.php HTTP/1.0" 404 1969
+Not Found: /http:/3.38.125.252:8000/pma/scripts/setup.php
+[01/Dec/2023 11:28:05] "GET http://3.38.125.252:8000/pma/scripts/setup.php HTTP/1.0" 404 1921
+Not Found: /http:/3.38.125.252:8000/phpMyAdmin3/scripts/setup.php
+[01/Dec/2023 11:28:06] "GET http://3.38.125.252:8000/phpMyAdmin3/scripts/setup.php HTTP/1.0" 404 1945
+Not Found: /http:/3.38.125.252:8000/myadmin/scripts/setup.php
+[01/Dec/2023 11:28:06] "GET http://3.38.125.252:8000/myadmin/scripts/setup.php HTTP/1.0" 404 1933
+Not Found: /http:/3.38.125.252:8000/MyAdmin/scripts/setup.php
+[01/Dec/2023 11:28:07] "GET http://3.38.125.252:8000/MyAdmin/scripts/setup.php HTTP/1.0" 404 1933
+Not Found: /http:/3.38.125.252:8000/PHPMYADMIN/scripts/setup.php
+[01/Dec/2023 11:28:07] "GET http://3.38.125.252:8000/PHPMYADMIN/scripts/setup.php HTTP/1.0" 404 1942
+Not Found: /http:/3.38.125.252:8000/mysqladmin/scripts/setup.php
+[01/Dec/2023 11:28:08] "GET http://3.38.125.252:8000/mysqladmin/scripts/setup.php HTTP/1.0" 404 1942
+Not Found: /http:/3.38.125.252:8000/SQL/scripts/setup.php
+[01/Dec/2023 11:28:08] "GET http://3.38.125.252:8000/SQL/scripts/setup.php HTTP/1.0" 404 1921
+Not Found: /http:/3.38.125.252:8000/phpMyAdmin-2.5.5-pl1/scripts/setup.php
+[01/Dec/2023 11:28:08] "GET http://3.38.125.252:8000/phpMyAdmin-2.5.5-pl1/scripts/setup.php HTTP/1.0" 404 1972
+Not Found: /http:/3.38.125.252:8000/phpMyAdmin-2.5.5/scripts/setup.php
+[01/Dec/2023 11:28:09] "GET http://3.38.125.252:8000/phpMyAdmin-2.5.5/scripts/setup.php HTTP/1.0" 404 1960
+Not Found: /http:/3.38.125.252:8000/phpMyAdmin-2.5.4/scripts/setup.php
+[01/Dec/2023 11:28:10] "GET http://3.38.125.252:8000/phpMyAdmin-2.5.4/scripts/setup.php HTTP/1.0" 404 1960
+Not Found: /http:/3.38.125.252:8000/phpMyAdmin-2.5.7-pl1/scripts/setup.php
+[01/Dec/2023 11:28:10] "GET http://3.38.125.252:8000/phpMyAdmin-2.5.7-pl1/scripts/setup.php HTTP/1.0" 404 1972
+Not Found: /http:/3.38.125.252:8000/admin/pma/scripts/setup.php
+[01/Dec/2023 11:28:10] "GET http://3.38.125.252:8000/admin/pma/scripts/setup.php HTTP/1.0" 404 1939
+Not Found: /http:/3.38.125.252:8000/phpMyAdmin-2/scripts/setup.php
+[01/Dec/2023 11:28:11] "GET http://3.38.125.252:8000/phpMyAdmin-2/scripts/setup.php HTTP/1.0" 404 1948
+Not Found: /http:/3.38.125.252:8000/web/phpMyAdmin/scripts/setup.php
+[01/Dec/2023 11:28:12] "GET http://3.38.125.252:8000/web/phpMyAdmin/scripts/setup.php HTTP/1.0" 404 1954
+Not Found: /http:/3.38.125.252:8000/webadmin/scripts/setup.php
+[01/Dec/2023 11:28:12] "GET http://3.38.125.252:8000/webadmin/scripts/setup.php HTTP/1.0" 404 1936
+Not Found: /http:/3.38.125.252:8000/admin/scripts/setup.php
+[01/Dec/2023 11:28:13] "GET http://3.38.125.252:8000/admin/scripts/setup.php HTTP/1.0" 404 1927
+Not Found: /http:/3.38.125.252:8000/dbadmin/scripts/setup.php
+[01/Dec/2023 11:28:13] "GET http://3.38.125.252:8000/dbadmin/scripts/setup.php HTTP/1.0" 404 1933
+Not Found: /http:/3.38.125.252:8000/mysql/scripts/setup.php
+[01/Dec/2023 11:28:14] "GET http://3.38.125.252:8000/mysql/scripts/setup.php HTTP/1.0" 404 1927
+Not Found: /http:/3.38.125.252:8000/phpMyAdmin2/scripts/setup.php
+[01/Dec/2023 11:28:14] "GET http://3.38.125.252:8000/phpMyAdmin2/scripts/setup.php HTTP/1.0" 404 1945
+Not Found: /http:/3.38.125.252:8000/phpma/scripts/setup.php
+[01/Dec/2023 11:28:14] "GET http://3.38.125.252:8000/phpma/scripts/setup.php HTTP/1.0" 404 1927
+Not Found: /http:/3.38.125.252:8000/sqlweb/scripts/setup.php
+[01/Dec/2023 11:28:15] "GET http://3.38.125.252:8000/sqlweb/scripts/setup.php HTTP/1.0" 404 1930
+Not Found: /http:/3.38.125.252:8000/webdb/scripts/setup.php
+[01/Dec/2023 11:28:16] "GET http://3.38.125.252:8000/webdb/scripts/setup.php HTTP/1.0" 404 1927
+Not Found: /http:/3.38.125.252:8000/websql/scripts/setup.php
+[01/Dec/2023 11:28:16] "GET http://3.38.125.252:8000/websql/scripts/setup.php HTTP/1.0" 404 1930
+Not Found: /http:/3.38.125.252:8000/_phpMyAdmin/scripts/setup.php
+[01/Dec/2023 11:28:16] "GET http://3.38.125.252:8000/_phpMyAdmin/scripts/setup.php HTTP/1.0" 404 1945
+Not Found: /http:/3.38.125.252:8000/php/scripts/setup.php
+[01/Dec/2023 11:28:17] "GET http://3.38.125.252:8000/php/scripts/setup.php HTTP/1.0" 404 1921
+Not Found: /http:/3.38.125.252:8000/admin/phpmyadmin/scripts/setup.txt
+[01/Dec/2023 11:28:17] "GET http://3.38.125.252:8000/admin/phpmyadmin/scripts/setup.txt HTTP/1.0" 404 1960
+Not Found: /http:/3.38.125.252:8000/db/scripts/setup.php
+[01/Dec/2023 11:28:18] "GET http://3.38.125.252:8000/db/scripts/setup.php HTTP/1.0" 404 1918
+Not Found: /http:/3.38.125.252:8000/sqlmanager/scripts/setup.php
+[01/Dec/2023 11:28:19] "GET http://3.38.125.252:8000/sqlmanager/scripts/setup.php HTTP/1.0" 404 1942
+Not Found: /http:/3.38.125.252:8000/mysqlmanager/scripts/setup.php
+[01/Dec/2023 11:28:19] "GET http://3.38.125.252:8000/mysqlmanager/scripts/setup.php HTTP/1.0" 404 1948
+Not Found: /http:/3.38.125.252:8000/phpmanager/scripts/setup.php
+[01/Dec/2023 11:28:19] "GET http://3.38.125.252:8000/phpmanager/scripts/setup.php HTTP/1.0" 404 1942
+Not Found: /http:/3.38.125.252:8000/php-myadmin/scripts/setup.php
+[01/Dec/2023 11:28:20] "GET http://3.38.125.252:8000/php-myadmin/scripts/setup.php HTTP/1.0" 404 1945
+Not Found: /http:/3.38.125.252:8000/phpmy-admin/scripts/setup.php
+[01/Dec/2023 11:28:20] "GET http://3.38.125.252:8000/phpmy-admin/scripts/setup.php HTTP/1.0" 404 1945
+Not Found: /http:/3.38.125.252:8000/mysql-admin/scripts/setup.php
+[01/Dec/2023 11:28:21] "GET http://3.38.125.252:8000/mysql-admin/scripts/setup.php HTTP/1.0" 404 1945
+Not Found: /aaa9
+[01/Dec/2023 11:36:30] "GET /aaa9 HTTP/1.1" 404 2197
+Not Found: /aab8
+[01/Dec/2023 11:36:31] "GET /aab8 HTTP/1.1" 404 2197
+Not Found: /
+[01/Dec/2023 11:36:32] "GET / HTTP/1.1" 404 2167
+[01/Dec/2023 13:31:29] code 400, message Bad request version ('À\x14À')
+[01/Dec/2023 13:31:29] You're accessing the development server over HTTPS, but it only supports HTTP.
+[01/Dec/2023 13:31:30] code 400, message Bad HTTP/0.9 request type ('\x16\x03\x01\x00{\x01\x00\x00w\x03\x03D\x88ÅuT¸\x91$À\x8dÜIh³jðwh\x17ºb\x83áH\x04Íîe¨\x84mõ\x00\x00\x1aÀ/À+À\x11À\x07À\x13À')
+[01/Dec/2023 13:31:30] You're accessing the development server over HTTPS, but it only supports HTTP.
+Not Found: /
+[01/Dec/2023 13:31:30] "GET / HTTP/1.1" 404 2167
+[01/Dec/2023 13:31:30] code 400, message Bad HTTP/0.9 request type ("\x16\x03\x01\x00{\x01\x00\x00w\x03\x03¼\x81¸Í÷LéÅÄc8o\x8bÓ\x03\x96&'\x9c\x1a2\x8bý°±\x18¿BEu/\x9e\x00\x00\x1aÀ/À+À\x11À\x07À\x13À")
+[01/Dec/2023 13:31:30] You're accessing the development server over HTTPS, but it only supports HTTP.
+Not Found: /
+[01/Dec/2023 13:59:31] "GET / HTTP/1.1" 404 2167
+[01/Dec/2023 15:16:39] code 400, message Bad request version ('À\x14À')
+[01/Dec/2023 15:16:39] You're accessing the development server over HTTPS, but it only supports HTTP.
+Not Found: /
+[01/Dec/2023 17:12:08] "GET / HTTP/1.0" 404 2203
+Not Found: /
+[01/Dec/2023 17:46:01] "GET / HTTP/1.1" 404 2167
+Not Found: /favicon.ico
+[01/Dec/2023 17:46:02] "GET /favicon.ico HTTP/1.1" 404 2218
+Not Found: /
+[01/Dec/2023 20:18:57] "GET / HTTP/1.1" 404 2167
+Not Found: /
+[01/Dec/2023 21:20:16] "GET / HTTP/1.1" 404 2167
+Not Found: /
+[01/Dec/2023 22:24:55] "GET / HTTP/1.1" 404 2167
+[02/Dec/2023 01:04:19] code 400, message Bad request syntax ('MGLNDD_3.38.125.252_8000')
+[02/Dec/2023 01:04:19] "MGLNDD_3.38.125.252_8000" 400 -
+[02/Dec/2023 02:40:54] code 400, message Bad request version ('À\x13À')
+[02/Dec/2023 02:40:54] You're accessing the development server over HTTPS, but it only supports HTTP.
+[02/Dec/2023 02:40:54] code 400, message Bad HTTP/0.9 request type ("\x16\x03\x01\x00Ê\x01\x00\x00Æ\x03\x03°\x9be(xÐ@ö\x84ò\x11Ë1À\x10¤XIÉ÷è¾ù\x97,\x83é\x91O\x06¦f\x00\x00hÌ\x14Ì\x13À/À+À0À,À\x11À\x07À'À#À\x13À")
+[02/Dec/2023 02:40:54] You're accessing the development server over HTTPS, but it only supports HTTP.
+Not Found: /
+[02/Dec/2023 02:48:40] "GET / HTTP/1.1" 404 2167
+[02/Dec/2023 03:59:55,856] - Broken pipe from ('167.94.146.52', 56614)
+Not Found: /
+[02/Dec/2023 03:59:59] "GET / HTTP/1.1" 404 2167
+[02/Dec/2023 03:59:59,387] - Broken pipe from ('167.94.146.52', 34792)
+Not Found: /
+[02/Dec/2023 04:00:02] "GET / HTTP/1.1" 404 2167
+[02/Dec/2023 04:00:03] code 505, message Invalid HTTP version (2.0)
+[02/Dec/2023 04:00:03] "PRI * HTTP/2.0" 505 -
+Not Found: /http:/uplo.ad/
+[02/Dec/2023 04:28:47] "GET http://uplo.ad/?v=1&ip=3.38.125.252&port=8000 HTTP/1.1" 404 1820
+[02/Dec/2023 04:52:44,853] - Broken pipe from ('167.248.133.127', 48840)
+Not Found: /
+[02/Dec/2023 04:52:48] "GET / HTTP/1.1" 404 2167
+[02/Dec/2023 04:52:48,263] - Broken pipe from ('167.248.133.127', 34616)
+Not Found: /
+[02/Dec/2023 04:52:51] "GET / HTTP/1.1" 404 2167
+[02/Dec/2023 04:52:52] code 505, message Invalid HTTP version (2.0)
+[02/Dec/2023 04:52:52] "PRI * HTTP/2.0" 505 -
+[02/Dec/2023 05:08:34,890] - Broken pipe from ('167.248.133.39', 44750)
+Not Found: /
+[02/Dec/2023 05:08:38] "GET / HTTP/1.1" 404 2167
+[02/Dec/2023 05:08:38,904] - Broken pipe from ('167.248.133.39', 37376)
+Not Found: /
+[02/Dec/2023 05:08:42] "GET / HTTP/1.1" 404 2167
+[02/Dec/2023 05:08:43] code 505, message Invalid HTTP version (2.0)
+[02/Dec/2023 05:08:43] "PRI * HTTP/2.0" 505 -
+[02/Dec/2023 06:11:10] code 400, message Bad request version ('À\x14À')
+[02/Dec/2023 06:11:10] You're accessing the development server over HTTPS, but it only supports HTTP.
+[02/Dec/2023 06:11:11] code 400, message Bad request version ('À\x14À')
+[02/Dec/2023 06:11:11] You're accessing the development server over HTTPS, but it only supports HTTP.
+Not Found: /
+[02/Dec/2023 06:11:11] "GET / HTTP/1.1" 404 2167
+[02/Dec/2023 06:11:12] code 400, message Bad request version ('À\x14À')
+[02/Dec/2023 06:11:12] You're accessing the development server over HTTPS, but it only supports HTTP.
+Not Found: /http:/uplo.ad/
+[02/Dec/2023 07:35:17] "GET http://uplo.ad/?v=1&ip=3.38.125.252&port=8000 HTTP/1.1" 404 1820
+Not Found: /
+[02/Dec/2023 07:35:34] "GET / HTTP/1.1" 404 2167
+Not Found: /
+[02/Dec/2023 08:55:45] "GET / HTTP/1.1" 404 2167
+Not Found: /favicon.ico
+[02/Dec/2023 08:55:59] "GET /favicon.ico HTTP/1.1" 404 2218
+Not Found: /http:/api.ipify.org/
+[02/Dec/2023 08:56:04] "GET http://api.ipify.org/?format=json HTTP/1.1" 404 1818
+Not Found: /www.shadowserver.org:443
+[02/Dec/2023 08:56:07] "CONNECT www.shadowserver.org:443 HTTP/1.1" 404 1827
+Not Found: /
+[02/Dec/2023 10:23:28] "GET / HTTP/1.1" 404 2167
+[02/Dec/2023 11:38:46] code 400, message Bad request version ('F\x07\x00tsXrcsXYs9\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00bbXcsXctst\x00\x00\x00\x00\x00\x00')
+[02/Dec/2023 11:38:46] "   TZ          0I    ¨À )t F tsXrcsXYs9                      bbXcsXctst      " 400 -
+[02/Dec/2023 12:26:36] code 400, message Bad request version ('À\x13À')
+[02/Dec/2023 12:26:36] You're accessing the development server over HTTPS, but it only supports HTTP.
+Not Found: /
+[02/Dec/2023 12:26:39] "GET / HTTP/1.1" 404 2167
+[02/Dec/2023 15:58:50] code 400, message Bad HTTP/0.9 request type ('\x16\x03\x01\x00u\x01\x00\x00q\x03\x03é\x81ôö"\x960Ð\x17aÖ\x8bpy¨K\x05`\x91öþªfÌô\x7fA\x05³ø,©\x00\x00\x1aÀ/À+À\x11À\x07À\x13À')
+[02/Dec/2023 15:58:50] You're accessing the development server over HTTPS, but it only supports HTTP.
+Not Found: /
+[02/Dec/2023 16:07:17] "GET / HTTP/1.1" 404 2167
+[02/Dec/2023 18:41:48] code 400, message Bad request version ('À\x13À')
+[02/Dec/2023 18:41:48] You're accessing the development server over HTTPS, but it only supports HTTP.
+[02/Dec/2023 18:41:49] code 400, message Bad request version ('À(À$À\x14À')
+[02/Dec/2023 18:41:49] You're accessing the development server over HTTPS, but it only supports HTTP.
+[02/Dec/2023 18:52:37] code 400, message Bad request version ('À\x14À')
+[02/Dec/2023 18:52:37] You're accessing the development server over HTTPS, but it only supports HTTP.
+[02/Dec/2023 19:58:50,449] - Broken pipe from ('167.94.138.33', 56460)
+Not Found: /
+[02/Dec/2023 19:58:53] "GET / HTTP/1.1" 404 2167
+[02/Dec/2023 19:58:53,810] - Broken pipe from ('167.94.138.33', 46170)
+Not Found: /
+[02/Dec/2023 19:58:56] "GET / HTTP/1.1" 404 2167
+[02/Dec/2023 19:58:57] code 505, message Invalid HTTP version (2.0)
+[02/Dec/2023 19:58:57] "PRI * HTTP/2.0" 505 -
+[02/Dec/2023 20:59:58,510] - Broken pipe from ('167.248.133.35', 47188)
+Not Found: /
+[02/Dec/2023 21:00:01] "GET / HTTP/1.1" 404 2167
+[02/Dec/2023 21:00:01,880] - Broken pipe from ('167.248.133.35', 41238)
+Not Found: /
+[02/Dec/2023 21:00:05] "GET / HTTP/1.1" 404 2167
+[02/Dec/2023 21:00:05] code 505, message Invalid HTTP version (2.0)
+[02/Dec/2023 21:00:05] "PRI * HTTP/2.0" 505 -
+[02/Dec/2023 22:58:56] code 400, message Bad HTTP/0.9 request type ('\x16\x03\x01\x00{\x01\x00\x00w\x03\x03±\x8f/x°µE·»í_%ë\x14©ÇÚÃ\x8ethW=k\x9dâÕ|\x0eC.ì\x00\x00\x1aÀ/À+À\x11À\x07À\x13À')
+[02/Dec/2023 22:58:56] You're accessing the development server over HTTPS, but it only supports HTTP.
+[02/Dec/2023 22:58:57] code 400, message Bad HTTP/0.9 request type ('\x16\x03\x01\x00{\x01\x00\x00w\x03\x03£6ÈêíòìÅ?@\x80=Z\x86Äkz\x81ÚÎ\x9aÃG&Í\x04aE³êþ±\x00\x00\x1aÀ/À+À\x11À\x07À\x13À')
+[02/Dec/2023 22:58:57] You're accessing the development server over HTTPS, but it only supports HTTP.
+Not Found: /
+[02/Dec/2023 22:58:57] "GET / HTTP/1.1" 404 2167
+[02/Dec/2023 22:58:58] code 400, message Bad request version ('À\x14À')
+[02/Dec/2023 22:58:58] You're accessing the development server over HTTPS, but it only supports HTTP.
+[02/Dec/2023 23:39:16] code 400, message Bad request version ('À\x14À')
+[02/Dec/2023 23:39:16] You're accessing the development server over HTTPS, but it only supports HTTP.
+[03/Dec/2023 00:45:32,024] - Broken pipe from ('167.248.133.182', 47120)
+Not Found: /
+[03/Dec/2023 00:45:35] "GET / HTTP/1.1" 404 2167
+[03/Dec/2023 00:45:35,585] - Broken pipe from ('167.248.133.182', 51632)
+Not Found: /
+[03/Dec/2023 00:45:38] "GET / HTTP/1.1" 404 2167
+[03/Dec/2023 00:45:39] code 505, message Invalid HTTP version (2.0)
+[03/Dec/2023 00:45:39] "PRI * HTTP/2.0" 505 -
+Not Found: /
+[03/Dec/2023 03:15:42] "GET / HTTP/1.1" 404 2167
+[03/Dec/2023 06:17:01,971] - Broken pipe from ('167.94.145.55', 54364)
+Not Found: /
+[03/Dec/2023 06:17:06] "GET / HTTP/1.1" 404 2167
+[03/Dec/2023 06:17:06,486] - Broken pipe from ('167.94.145.55', 47252)
+Not Found: /
+[03/Dec/2023 06:17:09] "GET / HTTP/1.1" 404 2167
+[03/Dec/2023 06:17:10] code 505, message Invalid HTTP version (2.0)
+[03/Dec/2023 06:17:10] "PRI * HTTP/2.0" 505 -
+[03/Dec/2023 06:44:42,325] - Broken pipe from ('167.248.133.39', 46342)
+Not Found: /
+[03/Dec/2023 06:44:46] "GET / HTTP/1.1" 404 2167
+[03/Dec/2023 06:44:46,386] - Broken pipe from ('167.248.133.39', 38134)
+Not Found: /
+[03/Dec/2023 06:44:49] "GET / HTTP/1.1" 404 2167
+[03/Dec/2023 06:44:50] code 505, message Invalid HTTP version (2.0)
+[03/Dec/2023 06:44:50] "PRI * HTTP/2.0" 505 -
+[03/Dec/2023 07:07:35] code 400, message Bad request version ('\x00\x9eÌ¨Ìª\x003\x00=\x00\x16À')
+[03/Dec/2023 07:07:35] You're accessing the development server over HTTPS, but it only supports HTTP.
+Not Found: /
+[03/Dec/2023 07:07:46] "GET / HTTP/1.1" 404 2167
+Not Found: /favicon.ico
+[03/Dec/2023 07:08:05] "GET /favicon.ico HTTP/1.1" 404 2218
+Not Found: /robots.txt
+[03/Dec/2023 07:08:06] "GET /robots.txt HTTP/1.1" 404 2215
+Not Found: /sitemap.xml
+[03/Dec/2023 07:08:07] "GET /sitemap.xml HTTP/1.1" 404 2218
+[03/Dec/2023 07:49:33] code 400, message Bad request syntax ('JDWP-Handshake')
+[03/Dec/2023 07:49:33] "JDWP-Handshake" 400 -
+Not Found: /
+[03/Dec/2023 09:04:23] "GET / HTTP/1.1" 404 2167
+Not Found: /favicon.ico
+[03/Dec/2023 09:04:59] "GET /favicon.ico HTTP/1.1" 404 2218
+Not Found: /http:/api.ipify.org/
+[03/Dec/2023 09:05:21] "GET http://api.ipify.org/?format=json HTTP/1.1" 404 1818
+Not Found: /www.shadowserver.org:443
+[03/Dec/2023 09:05:44] "CONNECT www.shadowserver.org:443 HTTP/1.1" 404 1827
+Not Found: /
+[03/Dec/2023 11:10:51] "GET / HTTP/1.1" 404 2167
+Not Found: /aaa9
+[03/Dec/2023 12:48:43] "GET /aaa9 HTTP/1.1" 404 2197
+Not Found: /aab8
+[03/Dec/2023 12:48:43] "GET /aab8 HTTP/1.1" 404 2197
+Not Found: /
+[03/Dec/2023 12:48:44] "GET / HTTP/1.1" 404 2167
+[03/Dec/2023 15:22:15,938] - Broken pipe from ('162.142.125.220', 56772)
+Not Found: /
+[03/Dec/2023 15:22:19] "GET / HTTP/1.1" 404 2167
+[03/Dec/2023 15:22:19,322] - Broken pipe from ('162.142.125.220', 37716)
+Not Found: /
+[03/Dec/2023 15:22:22] "GET / HTTP/1.1" 404 2167
+[03/Dec/2023 15:22:23] code 505, message Invalid HTTP version (2.0)
+[03/Dec/2023 15:22:23] "PRI * HTTP/2.0" 505 -
+[03/Dec/2023 15:36:53] code 400, message Bad request syntax ('MGLNDD_3.38.125.252_8000')
+[03/Dec/2023 15:36:53] "MGLNDD_3.38.125.252_8000" 400 -
+[03/Dec/2023 17:03:50] code 400, message Bad request syntax ('\x01\x01æ')
+[03/Dec/2023 17:03:50] "æ" 400 -
+Not Found: /
+[03/Dec/2023 17:04:24] "GET / HTTP/1.1" 404 2167
+[03/Dec/2023 17:45:06,914] - Broken pipe from ('162.142.125.221', 33178)
+Not Found: /
+[03/Dec/2023 17:45:10] "GET / HTTP/1.1" 404 2167
+[03/Dec/2023 17:45:10,300] - Broken pipe from ('162.142.125.221', 53478)
+Not Found: /
+[03/Dec/2023 17:45:13] "GET / HTTP/1.1" 404 2167
+[03/Dec/2023 17:45:14] code 505, message Invalid HTTP version (2.0)
+[03/Dec/2023 17:45:14] "PRI * HTTP/2.0" 505 -
+Not Found: /
+[03/Dec/2023 22:23:18] "GET / HTTP/1.1" 404 2167
+[03/Dec/2023 22:54:23] code 400, message Bad request version ('áçUÁ¤®ùþørÉ')
+[03/Dec/2023 22:54:23] You're accessing the development server over HTTPS, but it only supports HTTP.
+[03/Dec/2023 22:54:23] code 400, message Bad request version ('À(À$À\x14À')
+[03/Dec/2023 22:54:23] You're accessing the development server over HTTPS, but it only supports HTTP.
+[03/Dec/2023 23:24:34] code 400, message Bad request syntax ('\x16\x03\x01\x00î\x01\x00\x00ê\x03\x03|\x91B\x83ÞÛ\x8f\x97þ\x19.2Ìt\x04¼3Å5r\x01È±Mcl')
+[03/Dec/2023 23:24:34] You're accessing the development server over HTTPS, but it only supports HTTP.
+[03/Dec/2023 23:24:34] code 400, message Bad request version ('À(À$À\x14À')
+[03/Dec/2023 23:24:34] You're accessing the development server over HTTPS, but it only supports HTTP.
+Not Found: /
+[04/Dec/2023 01:51:34] "GET / HTTP/1.1" 404 2167
+Not Found: /
+[04/Dec/2023 01:51:35] "GET / HTTP/1.1" 404 2167
+Not Found: /favicon.ico
+[04/Dec/2023 01:51:35] "GET /favicon.ico HTTP/1.1" 404 2218
+[04/Dec/2023 01:56:59] code 400, message Bad request version ('À\x13À')
+[04/Dec/2023 01:56:59] You're accessing the development server over HTTPS, but it only supports HTTP.
+[04/Dec/2023 01:57:01] code 400, message Bad request version ('À\x13À')
+[04/Dec/2023 01:57:01] You're accessing the development server over HTTPS, but it only supports HTTP.
+[04/Dec/2023 01:57:01] code 400, message Bad request version ('À\x13À')
+[04/Dec/2023 01:57:01] You're accessing the development server over HTTPS, but it only supports HTTP.
+[04/Dec/2023 03:05:43,973] - Broken pipe from ('167.248.133.184', 54976)
+Not Found: /
+[04/Dec/2023 03:05:47] "GET / HTTP/1.1" 404 2167
+[04/Dec/2023 03:05:47,304] - Broken pipe from ('167.248.133.184', 55614)
+Not Found: /
+[04/Dec/2023 03:05:50] "GET / HTTP/1.1" 404 2167
+[04/Dec/2023 03:05:51] code 505, message Invalid HTTP version (2.0)
+[04/Dec/2023 03:05:51] "PRI * HTTP/2.0" 505 -
+Not Found: /
+[04/Dec/2023 03:16:53] "GET / HTTP/1.1" 404 2167
+Not Found: /favicon.ico
+[04/Dec/2023 03:17:10] "GET /favicon.ico HTTP/1.1" 404 2218
+Not Found: /http:/api.ipify.org/
+[04/Dec/2023 03:17:14] "GET http://api.ipify.org/?format=json HTTP/1.1" 404 1818
+Not Found: /www.shadowserver.org:443
+[04/Dec/2023 03:17:17] "CONNECT www.shadowserver.org:443 HTTP/1.1" 404 1827
+[04/Dec/2023 03:38:32] code 400, message Bad HTTP/0.9 request type ('\x00\x00\x00TZ\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x00\x04\x010I\x00\x00\x00\x00d\x00¨À\x80\x9b')
+[04/Dec/2023 03:38:32] "   TZ          0I    d ¨À å1Ð                                                 " 400 -
+[04/Dec/2023 04:01:38] code 400, message Bad HTTP/0.9 request type ('\x16\x03\x01\x00{\x01\x00\x00w\x03\x03yùès\x9d\x7f¡6\x13\x96\x9f\x82Yªbä\x1bõ&ëV\x92öAF\x88H¥JÉ\x86Ò\x00\x00\x1aÀ/À+À\x11À\x07À\x13À')
+[04/Dec/2023 04:01:38] You're accessing the development server over HTTPS, but it only supports HTTP.
+[04/Dec/2023 04:01:38] code 400, message Bad HTTP/0.9 request type ("\x16\x03\x01\x00{\x01\x00\x00w\x03\x03e÷å\x19©G6'=d\x7fOZ\xadFûi´\x17ÖIã³è\x00£(yÎ°Ûs\x00\x00\x1aÀ/À+À\x11À\x07À\x13À")
+[04/Dec/2023 04:01:38] You're accessing the development server over HTTPS, but it only supports HTTP.
+Not Found: /
+[04/Dec/2023 04:01:38] "GET / HTTP/1.1" 404 2167
+[04/Dec/2023 04:01:39] code 400, message Bad HTTP/0.9 request type ('\x16\x03\x01\x00{\x01\x00\x00w\x03\x03`*¸\x0eÔ\x93ê\x9aôp]\x93õïxÏÔf¦rëQ7gô\x9dY\x88\x9dø©ò\x00\x00\x1aÀ/À+À\x11À\x07À\x13À')
+[04/Dec/2023 04:01:39] You're accessing the development server over HTTPS, but it only supports HTTP.
+[04/Dec/2023 05:00:29] code 400, message Bad request version ('À\x14À')
+[04/Dec/2023 05:00:29] You're accessing the development server over HTTPS, but it only supports HTTP.
+[04/Dec/2023 05:00:30] code 400, message Bad HTTP/0.9 request type ('\x16\x03\x01\x00{\x01\x00\x00w\x03\x03K\x9b]\x0eAðbd8\x86\x9e=70ßs\x1aå\x1b\x084ã¿Pj\x17\x06NçNÜ¸\x00\x00\x1aÀ/À+À\x11À\x07À\x13À')
+[04/Dec/2023 05:00:30] You're accessing the development server over HTTPS, but it only supports HTTP.
+Not Found: /
+[04/Dec/2023 05:00:30] "GET / HTTP/1.1" 404 2167
+[04/Dec/2023 05:00:31] code 400, message Bad HTTP/0.9 request type ('\x16\x03\x01\x00{\x01\x00\x00w\x03\x03\x96WgFd$\x07ñ\x14\x9f\x18wkº\x9c¢\x10¹\x91\x98þè\x13×À\x987\x98\x9fX\x08+\x00\x00\x1aÀ/À+À\x11À\x07À\x13À')
+[04/Dec/2023 05:00:31] You're accessing the development server over HTTPS, but it only supports HTTP.
+Not Found: /
+[04/Dec/2023 05:13:40] "GET / HTTP/1.1" 404 2167
+Not Found: /
+[04/Dec/2023 08:41:32] "GET / HTTP/1.1" 404 2167
+[04/Dec/2023 09:05:45] code 400, message Bad HTTP/0.9 request type ('\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie:')
+[04/Dec/2023 09:05:45] "  /*à     Cookie: mstshash=Administr" 400 -
+[04/Dec/2023 10:12:25] code 400, message Bad HTTP/0.9 request type ('\x00\x00\x00')
+[04/Dec/2023 10:12:25] "    c                           " 400 -
+[04/Dec/2023 10:20:37] code 400, message Bad HTTP/0.9 request type ('\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie:')
+[04/Dec/2023 10:20:37] "  /*à     Cookie: mstshash=Administr" 400 -
+[04/Dec/2023 10:46:21] code 400, message Bad HTTP/0.9 request type ('\x00\x00\x00')
+[04/Dec/2023 10:46:21] "    c                           " 400 -
+[04/Dec/2023 10:53:30] code 400, message Bad HTTP/0.9 request type ('\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie:')
+[04/Dec/2023 10:53:30] "  /*à     Cookie: mstshash=Administr" 400 -
+[04/Dec/2023 11:50:14] code 400, message Bad HTTP/0.9 request type ('\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie:')
+[04/Dec/2023 11:50:14] "  /*à     Cookie: mstshash=Administr" 400 -
+[04/Dec/2023 12:03:13] code 400, message Bad HTTP/0.9 request type ('\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie:')
+[04/Dec/2023 12:03:13] "  /*à     Cookie: mstshash=Administr" 400 -
+[04/Dec/2023 12:46:04] code 400, message Bad request version ('À\x14À')
+[04/Dec/2023 12:46:04] You're accessing the development server over HTTPS, but it only supports HTTP.
+[04/Dec/2023 14:18:16] code 400, message Bad request version ('À\x14À')
+[04/Dec/2023 14:18:16] You're accessing the development server over HTTPS, but it only supports HTTP.
+[04/Dec/2023 15:50:07] code 400, message Bad HTTP/0.9 request type ('\x00\x00\x00TZ\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x00\x04\x010I\x00\x00\x00\x00t\x00¨À\x80\x9b')
+[04/Dec/2023 15:50:07] "   TZ          0I    t ¨À å1Ð                                                 " 400 -
+Not Found: /
+[04/Dec/2023 19:22:18] "GET / HTTP/1.1" 404 2167
+Not Found: /
+[04/Dec/2023 20:02:29] "GET / HTTP/1.1" 404 2167
+[04/Dec/2023 20:08:36] code 400, message Bad request version ('p¥#\x00\x18\x00\x00\x00\x14\x00\x01\x00\x00\x0fwww.twitter.com')
+[04/Dec/2023 20:08:36] You're accessing the development server over HTTPS, but it only supports HTTP.
+[04/Dec/2023 20:25:21] code 400, message Bad request version ('À\x13À')
+[04/Dec/2023 20:25:21] You're accessing the development server over HTTPS, but it only supports HTTP.
+[04/Dec/2023 20:25:21] code 400, message Bad HTTP/0.9 request type ("\x16\x03\x01\x00Ê\x01\x00\x00Æ\x03\x03NËoÝÂÛû×\x1b\x0f\x8f\x89/\x88ÝÈê}¬GËà2}#\x84Xn÷di7\x00\x00hÌ\x14Ì\x13À/À+À0À,À\x11À\x07À'À#À\x13À")
+[04/Dec/2023 20:25:21] You're accessing the development server over HTTPS, but it only supports HTTP.
+Not Found: /http:/112.124.42.80:63435/
+[04/Dec/2023 21:43:11] "HEAD http://112.124.42.80:63435/ HTTP/1.1" 404 0
+[04/Dec/2023 21:43:37] code 400, message Bad request version ('À\x14À')
+[04/Dec/2023 21:43:37] You're accessing the development server over HTTPS, but it only supports HTTP.
+[04/Dec/2023 21:43:37] code 400, message Bad request version ('À\x14À')
+[04/Dec/2023 21:43:37] You're accessing the development server over HTTPS, but it only supports HTTP.
+Not Found: /
+[04/Dec/2023 21:43:38] "GET / HTTP/1.1" 404 2167
+[04/Dec/2023 21:43:38] code 400, message Bad request version ('À\x14À')
+[04/Dec/2023 21:43:38] You're accessing the development server over HTTPS, but it only supports HTTP.
+Not Found: /
+[04/Dec/2023 23:08:15] "GET / HTTP/1.1" 404 2167
+Not Found: /
+[05/Dec/2023 00:42:15] "GET / HTTP/1.1" 404 2167
+[05/Dec/2023 01:08:59] code 400, message Bad HTTP/0.9 request type ('\x00\x00\x00TZ\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x00\x04\x010I\x00\x00\x00\x00t\x00¨À\x80\x9b')
+[05/Dec/2023 01:08:59] "   TZ          0I    t ¨À å1Ð                                                 " 400 -
+Not Found: /
+[05/Dec/2023 01:18:26] "GET / HTTP/1.1" 404 2167
+Not Found: /
+[05/Dec/2023 01:23:32] "GET / HTTP/1.1" 404 2167
+Not Found: /
+[05/Dec/2023 01:23:49] "GET / HTTP/1.1" 404 2167
+[05/Dec/2023 01:23:49] code 400, message Bad HTTP/0.9 request type ('\x16\x03\x01\x00{\x01\x00\x00w\x03\x03\x14qõK\x88*Ë¶hfZUVþ^\x00\x19^Ló®Û&T/Ç%0\x9f«\x8a7\x00\x00\x1aÀ/À+À\x11À\x07À\x13À')
+[05/Dec/2023 01:23:49] You're accessing the development server over HTTPS, but it only supports HTTP.
+Not Found: /is-bin
+[05/Dec/2023 01:23:50] "GET /is-bin HTTP/1.1" 404 2219
+Not Found: /jquery-3.3.1.min.js
+[05/Dec/2023 01:23:50] "GET /jquery-3.3.1.min.js HTTP/1.1" 404 2242
+Not Found: /categories/Yud
+[05/Dec/2023 01:23:51] "POST /categories/Yud HTTP/1.1" 404 2228
+Not Found: /wp-content/themes/twentytwentyone/inc/block-css.php
+[05/Dec/2023 01:23:51] "POST /wp-content/themes/twentytwentyone/inc/block-css.php HTTP/1.1" 404 2339
+Not Found: /nation.php
+[05/Dec/2023 01:23:52] "POST /nation.php HTTP/1.1" 404 2216
+Not Found: /
+[05/Dec/2023 01:23:53] "POST / HTTP/1.1" 404 2168
+Not Found: /is-bin
+[05/Dec/2023 01:23:53] "GET /is-bin HTTP/1.1" 404 2203
+Not Found: /is-bin
+[05/Dec/2023 01:23:54] "GET /is-bin HTTP/1.1" 404 2203
+Not Found: /news.php
+[05/Dec/2023 01:23:55] "GET /news.php HTTP/1.1" 404 2209
+Not Found: /8.bin
+[05/Dec/2023 01:23:55] "GET /8.bin HTTP/1.1" 404 2200
+Not Found: /hrsgdsb7386wknzms.jpg
+[05/Dec/2023 01:23:55] "GET /hrsgdsb7386wknzms.jpg HTTP/1.1" 404 2248
+Not Found: /UnityPlayer.dll
+[05/Dec/2023 01:23:56] "GET /UnityPlayer.dll HTTP/1.1" 404 2230
+Not Found: /ttd.exe
+[05/Dec/2023 01:23:56] "GET /ttd.exe HTTP/1.1" 404 2206
+Not Found: /qd.CHM
+[05/Dec/2023 01:23:56] "GET /qd.CHM HTTP/1.1" 404 2203
+Not Found: /zMLUH93A
+[05/Dec/2023 01:23:57] "GET /zMLUH93A HTTP/1.1" 404 2209
+Not Found: /Display/chan/IB61I7MYA
+[05/Dec/2023 01:23:57] "GET /Display/chan/IB61I7MYA HTTP/1.1" 404 2251
+Not Found: /jquery-3.3.1.min.js
+[05/Dec/2023 01:23:58] "GET /jquery-3.3.1.min.js HTTP/1.1" 404 2242
+Not Found: /Gmail/UnityPlayer.txt
+[05/Dec/2023 01:23:58] "GET /Gmail/UnityPlayer.txt HTTP/1.1" 404 2248
+Not Found: /new/login
+[05/Dec/2023 01:23:59] "GET /new/login HTTP/1.1" 404 2212
+Not Found: /viwwwsogou
+[05/Dec/2023 01:24:00] "GET /viwwwsogou?op=8&query=%E7%A8%8F%E5%BB%BA%09%E9%BE%90%E1%B7%A2 HTTP/1.1" 404 2266
+Not Found: /e3e7e71a0b28b5e96cc492e636722f73/4sVKAOvu3D/BDyot0NxyG.php
+[05/Dec/2023 01:24:00] "GET /e3e7e71a0b28b5e96cc492e636722f73/4sVKAOvu3D/BDyot0NxyG.php HTTP/1.1" 404 2359
+Not Found: /jquery.js
+[05/Dec/2023 01:24:01] "GET /jquery.js HTTP/1.1" 404 2212
+Not Found: /wh/glass.php
+[05/Dec/2023 01:24:01] "GET /wh/glass.php HTTP/1.1" 404 2221
+Not Found: /login
+[05/Dec/2023 01:24:02] "GET /login HTTP/1.1" 404 2200
+Not Found: /c/msdownload/update/software/update/2021/11/6632de33-967441-x86.cab
+[05/Dec/2023 01:24:03] "GET /c/msdownload/update/software/update/2021/11/6632de33-967441-x86.cab HTTP/1.1" 404 2387
+Not Found: /c/msdownload/update/software/update/2021/11/6632de33-967441-x86.cab
+[05/Dec/2023 01:24:03] "GET /c/msdownload/update/software/update/2021/11/6632de33-967441-x86.cab HTTP/1.1" 404 2387
+Not Found: /fw6I
+[05/Dec/2023 01:24:03] "GET /fw6I HTTP/1.1" 404 2197
+Not Found: /fw6I
+[05/Dec/2023 01:24:04] "GET /fw6I HTTP/1.1" 404 2197
+Not Found: /8tw9
+[05/Dec/2023 01:24:04] "GET /8tw9 HTTP/1.1" 404 2197
+Not Found: /PuCT
+[05/Dec/2023 01:24:05] "GET /PuCT HTTP/1.1" 404 2197
+Not Found: /Visu/ens/events
+[05/Dec/2023 01:24:05] "GET /Visu/ens/events HTTP/1.1" 404 2230
+Not Found: /Visu/ens/events
+[05/Dec/2023 01:24:06] "GET /Visu/ens/events HTTP/1.1" 404 2230
+[05/Dec/2023 04:20:49] code 400, message Bad request syntax ('MGLNDD_3.38.125.252_8000')
+[05/Dec/2023 04:20:49] "MGLNDD_3.38.125.252_8000" 400 -
+Not Found: /
+[05/Dec/2023 08:43:30] "GET / HTTP/1.1" 404 2167
+[05/Dec/2023 08:44:47] code 400, message Bad request syntax ('\x01\x01æ')
+[05/Dec/2023 08:44:47] "æ" 400 -
+Not Found: /http:/uplo.ad/
+[05/Dec/2023 10:53:20] "GET http://uplo.ad/?v=1&ip=3.38.125.252&port=8000 HTTP/1.1" 404 1820
+[05/Dec/2023 14:28:21] code 400, message Bad request version ('À\x14À')
+[05/Dec/2023 14:28:21] You're accessing the development server over HTTPS, but it only supports HTTP.
+[05/Dec/2023 14:36:41] code 400, message Bad request version ('À\x14À')
+[05/Dec/2023 14:36:41] You're accessing the development server over HTTPS, but it only supports HTTP.
+[05/Dec/2023 15:10:09] code 400, message Bad request version ('À\x14À')
+[05/Dec/2023 15:10:09] You're accessing the development server over HTTPS, but it only supports HTTP.
+[05/Dec/2023 15:10:09] code 400, message Bad request version ('À\x14À')
+[05/Dec/2023 15:10:09] You're accessing the development server over HTTPS, but it only supports HTTP.
+Not Found: /
+[05/Dec/2023 15:10:09] "GET / HTTP/1.1" 404 2167
+[05/Dec/2023 15:10:10] code 400, message Bad request version ('ü¼á\xadC\x80\x13&')
+[05/Dec/2023 15:10:10] You're accessing the development server over HTTPS, but it only supports HTTP.
+[05/Dec/2023 17:48:28] code 400, message Bad request version ('À\x13À')
+[05/Dec/2023 17:48:28] You're accessing the development server over HTTPS, but it only supports HTTP.
+[05/Dec/2023 17:48:28] code 400, message Bad request version ('À(À$À\x14À')
+[05/Dec/2023 17:48:28] You're accessing the development server over HTTPS, but it only supports HTTP.
+Not Found: /my.account.sony.com:443
+[05/Dec/2023 18:02:26] "CONNECT my.account.sony.com:443 HTTP/1.1" 404 1857
+Not Found: /
+[05/Dec/2023 19:32:37] "GET / HTTP/1.1" 404 2167
+Not Found: /
+[05/Dec/2023 19:57:12] "GET / HTTP/1.1" 404 2167
+[05/Dec/2023 20:40:40] code 400, message Bad HTTP/0.9 request type ('Z¥\x01')
+[05/Dec/2023 20:40:40] "Z¥     " 400 -
+Not Found: /
+[06/Dec/2023 01:13:47] "GET / HTTP/1.1" 404 2167
+Not Found: /
+[06/Dec/2023 01:14:25] "GET / HTTP/1.1" 404 2167
+Not Found: /
+[06/Dec/2023 02:06:01] "GET / HTTP/1.1" 404 2167
+Not Found: /
+[06/Dec/2023 03:17:50] "GET / HTTP/1.1" 404 2167
+Not Found: /
+[06/Dec/2023 06:12:44] "GET / HTTP/1.1" 404 2167
+Not Found: /favicon.ico
+[06/Dec/2023 06:12:56] "GET /favicon.ico HTTP/1.1" 404 2218
+Not Found: /http:/api.ipify.org/
+[06/Dec/2023 06:13:01] "GET http://api.ipify.org/?format=json HTTP/1.1" 404 1818
+Not Found: /www.shadowserver.org:443
+[06/Dec/2023 06:13:05] "CONNECT www.shadowserver.org:443 HTTP/1.1" 404 1827
+[06/Dec/2023 09:02:54] code 400, message Bad request version ('À\x14À')
+[06/Dec/2023 09:02:54] You're accessing the development server over HTTPS, but it only supports HTTP.
+[06/Dec/2023 09:02:54] code 400, message Bad HTTP/0.9 request type ('\x16\x03\x01\x00{\x01\x00\x00w\x03\x03¸åÿkòg\x03§\x9añÓ:ÎêN\x97(\x89\x8e»=\x98!±ô\\n.¹§\x0f§\x00\x00\x1aÀ/À+À\x11À\x07À\x13À')
+[06/Dec/2023 09:02:54] You're accessing the development server over HTTPS, but it only supports HTTP.
+Not Found: /
+[06/Dec/2023 09:02:55] "GET / HTTP/1.1" 404 2167
+[06/Dec/2023 09:02:55] code 400, message Bad HTTP/0.9 request type ('\x16\x03\x01\x00{\x01\x00\x00w\x03\x03ñ°P\x16+BDOÐ\x84\x8dl&óÂ\x959¿Ó±¥\x1aëÎ\x8f\x9f¬ÒÅB¡s\x00\x00\x1aÀ/À+À\x11À\x07À\x13À')
+[06/Dec/2023 09:02:55] You're accessing the development server over HTTPS, but it only supports HTTP.
+[06/Dec/2023 10:40:09] code 400, message Bad request version ('À\x14À')
+[06/Dec/2023 10:40:09] You're accessing the development server over HTTPS, but it only supports HTTP.
+[06/Dec/2023 12:09:25,126] - Broken pipe from ('104.152.52.241', 44521)
+[06/Dec/2023 13:45:02] code 400, message Bad request syntax ('MGLNDD_3.38.125.252_8000')
+[06/Dec/2023 13:45:02] "MGLNDD_3.38.125.252_8000" 400 -
+[06/Dec/2023 18:14:13,006] - Broken pipe from ('162.142.125.212', 34300)
+Not Found: /
+[06/Dec/2023 18:14:16] "GET / HTTP/1.1" 404 2167
+[06/Dec/2023 18:14:16,380] - Broken pipe from ('162.142.125.212', 47930)
+Not Found: /
+[06/Dec/2023 18:14:19] "GET / HTTP/1.1" 404 2167
+[06/Dec/2023 18:14:20] code 505, message Invalid HTTP version (2.0)
+[06/Dec/2023 18:14:20] "PRI * HTTP/2.0" 505 -
+Not Found: /
+[06/Dec/2023 20:29:41] "GET / HTTP/1.1" 404 2167
+[06/Dec/2023 21:23:29] code 400, message Bad HTTP/0.9 request type ('\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie:')
+[06/Dec/2023 21:23:29] "  /*à     Cookie: mstshash=Administr" 400 -
+Not Found: /
+[07/Dec/2023 00:31:24] "GET / HTTP/1.1" 404 2167
+Not Found: /favicon.ico
+[07/Dec/2023 00:31:42] "GET /favicon.ico HTTP/1.1" 404 2218
+Not Found: /http:/api.ipify.org/
+[07/Dec/2023 00:31:45] "GET http://api.ipify.org/?format=json HTTP/1.1" 404 1818
+Not Found: /www.shadowserver.org:443
+[07/Dec/2023 00:31:48] "CONNECT www.shadowserver.org:443 HTTP/1.1" 404 1827
+[07/Dec/2023 00:48:43] code 400, message Bad request version ('À\x14À')
+[07/Dec/2023 00:48:43] You're accessing the development server over HTTPS, but it only supports HTTP.
+[07/Dec/2023 01:37:12] code 400, message Bad HTTP/0.9 request type ('\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie:')
+[07/Dec/2023 01:37:12] "  /*à     Cookie: mstshash=Administr" 400 -
+[07/Dec/2023 01:40:49] code 400, message Bad request version ('À\x14À')
+[07/Dec/2023 01:40:49] You're accessing the development server over HTTPS, but it only supports HTTP.
+[07/Dec/2023 01:40:50] code 400, message Bad request version ('À\x14À')
+[07/Dec/2023 01:40:50] You're accessing the development server over HTTPS, but it only supports HTTP.
+Not Found: /
+[07/Dec/2023 01:40:50] "GET / HTTP/1.1" 404 2167
+[07/Dec/2023 01:40:51] code 400, message Bad request version ('À\x14À')
+[07/Dec/2023 01:40:51] You're accessing the development server over HTTPS, but it only supports HTTP.
+Not Found: /
+[07/Dec/2023 06:50:56] "GET / HTTP/1.1" 404 2167
+[07/Dec/2023 08:12:31] code 400, message Bad request version ('À\x13À')
+[07/Dec/2023 08:12:31] You're accessing the development server over HTTPS, but it only supports HTTP.
+[07/Dec/2023 08:12:31] code 400, message Bad HTTP/0.9 request type ("\x16\x03\x01\x00Ê\x01\x00\x00Æ\x03\x03ÂpÊ|\x88Ðõk°ÇMÇa\x1aÇ>vÔ\x0eG\x82!.ò\x9f\x95/EÓáy¥\x00\x00hÌ\x14Ì\x13À/À+À0À,À\x11À\x07À'À#À\x13À")
+[07/Dec/2023 08:12:31] You're accessing the development server over HTTPS, but it only supports HTTP.
+[07/Dec/2023 12:08:21,987] - Broken pipe from ('167.94.138.125', 60438)
+Not Found: /
+[07/Dec/2023 12:08:25] "GET / HTTP/1.1" 404 2167
+[07/Dec/2023 12:08:25,631] - Broken pipe from ('167.94.138.125', 33918)
+Not Found: /
+[07/Dec/2023 12:08:28] "GET / HTTP/1.1" 404 2167
+[07/Dec/2023 12:08:29] code 505, message Invalid HTTP version (2.0)
+[07/Dec/2023 12:08:29] "PRI * HTTP/2.0" 505 -
+[07/Dec/2023 13:01:57] code 400, message Bad request version ('À\x14À')
+[07/Dec/2023 13:01:57] You're accessing the development server over HTTPS, but it only supports HTTP.
+[07/Dec/2023 14:43:37] "POST /VOCA/ HTTP/1.1" 200 2878
+['비디오', 'bass', '고양이', '몰라', '컨텐츠', 'food', 'тивд', 'virus', '한계', 'Center']
+student3
+영상
+bas
+고양이
+intell
+
+poof
+대학교
+virus
+한계
+CAU
+student3 ['영상', 'bas', '고양이', 'intell', '', 'poof', '대학교', 'virus', '한계', 'CAU']
+{'testID': 2, 'classID': 1, 'testContentList': [{'id': 3, 'type': 'ENG_TO_KOR', 'question': 'video', 'answer': '영상,비디오,녹화하다'}, {'id': 4, 'type': 'KOR_TO_ENG', 'question': '베이스,저음의,저음', 'answer': 'bass'}, {'id': 5, 'type': 'ENG_TO_KOR', 'question': 'cat', 'answer': '고양이'}, {'id': 6, 'type': 'KOR_TO_ENG', 'question': '지능,기밀', 'answer': 'intelligence'}, {'id': 7, 'type': 'ENG_TO_KOR', 'question': 'content', 'answer': '내용,목차,내용물'}, {'id': 8, 'type': 'KOR_TO_ENG', 'question': '음식,식량,식품', 'answer': 'food'}, {'id': 9, 'type': 'ENG_TO_KOR', 'question': 'university', 'answer': '대학'}, {'id': 10, 'type': 'KOR_TO_ENG', 'question': '바이러스', 'answer': 'virus'}, {'id': 11, 'type': 'ENG_TO_KOR', 'question': 'limit', 'answer': '한계,한도,제한'}, {'id': 12, 'type': 'KOR_TO_ENG', 'question': '중앙,중심,한가운데', 'answer': 'center'}], 'memberList': [{'id': 1, 'username': 'student1', 'name': 'student1'}, {'id': 2, 'username': 'student2', 'name': 'student2'}, {'id': 3, 'username': 'student3', 'name': 'student3'}], 'file': ['https://voca-capstone-test.s3.ap-northeast-2.amazonaws.com/test_content_2_-120115374130.png', 'https://voca-capstone-test.s3.ap-northeast-2.amazonaws.com/test_content_2_-120115374331.png', 'https://voca-capstone-test.s3.ap-northeast-2.amazonaws.com/test_content_2_-120115374522.png']}
+2 1 ['https://voca-capstone-test.s3.ap-northeast-2.amazonaws.com/test_content_2_-120115374130.png', 'https://voca-capstone-test.s3.ap-northeast-2.amazonaws.com/test_content_2_-120115374331.png', 'https://voca-capstone-test.s3.ap-northeast-2.amazonaws.com/test_content_2_-120115374522.png']
+3 ENG_TO_KOR video 영상,비디오,녹화하다
+4 KOR_TO_ENG 베이스,저음의,저음 bass
+5 ENG_TO_KOR cat 고양이
+6 KOR_TO_ENG 지능,기밀 intelligence
+7 ENG_TO_KOR content 내용,목차,내용물
+8 KOR_TO_ENG 음식,식량,식품 food
+9 ENG_TO_KOR university 대학
+10 KOR_TO_ENG 바이러스 virus
+11 ENG_TO_KOR limit 한계,한도,제한
+12 KOR_TO_ENG 중앙,중심,한가운데 center
+1 student1 student1
+2 student2 student2
+3 student3 student3
+student1
+영상
+bass
+intelligent
+고양이
+food
+내용
+대학
+virus
+한계
+center
+student1 ['영상', 'bass', '고양이', 'intelligent', '내용', 'food', '대학', 'virus', '한계', 'center']
+student2
+비디오
+bass
+고양이
+몰라
+food
+컨텐츠
+тивд
+virus
+한계
+Center
+student2 ['비디오', 'bass', '고양이', '몰라', '컨텐츠', 'food', 'тивд', 'virus', '한계', 'Center']
+student3
+영상
+bas
+고양이
+intell
+
+poof
+대학교
+virus
+한계
+CAU
+student3 ['영상', 'bas', '고양이', 'intell', '', 'poof', '대학교', 'virus', '한계', 'CAU']
+{'testID': 4, 'classID': 4, 'testContentList': [{'id': 23, 'type': 'ENG_TO_KOR', 'question': 'Hello', 'answer': '안녕하세요'}, {'id': 24, 'type': 'KOR_TO_ENG', 'question': '안녕히 가세요', 'answer': 'Goodbye'}, {'id': 25, 'type': 'ENG_TO_KOR', 'question': 'Please', 'answer': '부탁합니다'}, {'id': 26, 'type': 'KOR_TO_ENG', 'question': '감사합니다', 'answer': 'Thank you'}, {'id': 27, 'type': 'ENG_TO_KOR', 'question': 'Sorry', 'answer': '미안합니다'}, {'id': 28, 'type': 'KOR_TO_ENG', 'question': '실례합니다', 'answer': 'Excuse me'}, {'id': 29, 'type': 'ENG_TO_KOR', 'question': 'Yes', 'answer': '예'}, {'id': 30, 'type': 'KOR_TO_ENG', 'question': '아니오', 'answer': 'No'}, {'id': 31, 'type': 'ENG_TO_KOR', 'question': 'Friend', 'answer': '친구'}, {'id': 32, 'type': 'KOR_TO_ENG', 'question': '가족', 'answer': 'Family'}], 'memberList': [{'id': 1, 'username': 'student1', 'name': 'student1'}, {'id': 2, 'username': 'student2', 'name': 'student2'}, {'id': 3, 'username': 'student3', 'name': 'student3'}], 'file': ['https://voca-capstone-test.s3.ap-northeast-2.amazonaws.com/test_content_4_-120714421840.png', 'https://voca-capstone-test.s3.ap-northeast-2.amazonaws.com/test_content_4_-120714422661.png', 'https://voca-capstone-test.s3.ap-northeast-2.amazonaws.com/test_content_4_-120714422782.png']}
+4 4 ['https://voca-capstone-test.s3.ap-northeast-2.amazonaws.com/test_content_4_-120714421840.png', 'https://voca-capstone-test.s3.ap-northeast-2.amazonaws.com/test_content_4_-120714422661.png', 'https://voca-capstone-test.s3.ap-northeast-2.amazonaws.com/test_content_4_-120714422782.png']
+23 ENG_TO_KOR Hello 안녕하세요
+24 KOR_TO_ENG 안녕히 가세요 Goodbye
+25 ENG_TO_KOR Please 부탁합니다
+26 KOR_TO_ENG 감사합니다 Thank you
+27 ENG_TO_KOR Sorry 미안합니다
+28 KOR_TO_ENG 실례합니다 Excuse me
+29 ENG_TO_KOR Yes 예
+30 KOR_TO_ENG 아니오 No
+31 ENG_TO_KOR Friend 친구
+32 KOR_TO_ENG 가족 Family
+1 student1 student1
+2 student2 student2
+3 student3 student3
+student 1
+안녕하세요
+Goodbye
+Thank you
+부탁합니다
+Excuse me
+미안합니다
+
+No
+family
+친구
+student 1 ['안녕하세요', 'Goodbye', '부탁합니다', 'Thank you', '미안합니다', 'Excuse me', '', 'No', '친구', 'family']
+student2
+Good bye
+안녕하세요
+Thankyou
+부탁합니다
+
+미안합니다.
+No
+
+친구
+family
+student2 ['안녕하세요', 'Good bye', '부탁합니다', 'Thankyou', '미안합니다.', '', '', 'No', '친구', 'family']
+student3
+bye
+영어
+bye
+영어
+영어
+bye
+bye
+영어
+bye
+영어
+student3 ['영어', 'bye', '영어', 'bye', '영어', 'bye', '영어', 'bye', '영어', 'bye']
+{'testID': 1, 'classID': 1, 'testContentList': [{'id': 3, 'type': 'ENG_TO_KOR', 'question': 'video', 'answer': '영상,비디오,녹화하다'}, {'id': 4, 'type': 'KOR_TO_ENG', 'question': '베이스,저음의,저음', 'answer': 'bass'}, {'id': 5, 'type': 'ENG_TO_KOR', 'question': 'cat', 'answer': '고양이'}, {'id': 6, 'type': 'KOR_TO_ENG', 'question': '지능,기밀', 'answer': 'intelligence'}, {'id': 7, 'type': 'ENG_TO_KOR', 'question': 'content', 'answer': '내용,목차,내용물'}, {'id': 8, 'type': 'KOR_TO_ENG', 'question': '음식,식량,식품', 'answer': 'food'}, {'id': 9, 'type': 'ENG_TO_KOR', 'question': 'university', 'answer': '대학'}, {'id': 10, 'type': 'KOR_TO_ENG', 'question': '바이러스', 'answer': 'virus'}, {'id': 11, 'type': 'ENG_TO_KOR', 'question': 'limit', 'answer': '한계,한도,제한'}, {'id': 12, 'type': 'KOR_TO_ENG', 'question': '중앙,중심,한가운데', 'answer': 'center'}], 'memberList': [{'id': 1, 'username': 'student1', 'name': 'student1'}, {'id': 2, 'username': 'student2', 'name': 'student2'}, {'id': 3, 'username': 'student3', 'name': 'student3'}], 'file': ['https://voca-capstone-test.s3.ap-northeast-2.amazonaws.com/demotest_1.png', 'https://voca-capstone-test.s3.ap-northeast-2.amazonaws.com/demotest_2.png', 'https://voca-capstone-test.s3.ap-northeast-2.amazonaws.com/demotest_3.png']}
+1 1 ['https://voca-capstone-test.s3.ap-northeast-2.amazonaws.com/demotest_1.png', 'https://voca-capstone-test.s3.ap-northeast-2.amazonaws.com/demotest_2.png', 'https://voca-capstone-test.s3.ap-northeast-2.amazonaws.com/demotest_3.png']
+3 ENG_TO_KOR video 영상,비디오,녹화하다
+4 KOR_TO_ENG 베이스,저음의,저음 bass
+5 ENG_TO_KOR cat 고양이
+6 KOR_TO_ENG 지능,기밀 intelligence
+7 ENG_TO_KOR content 내용,목차,내용물
+8 KOR_TO_ENG 음식,식량,식품 food
+9 ENG_TO_KOR university 대학
+10 KOR_TO_ENG 바이러스 virus
+11 ENG_TO_KOR limit 한계,한도,제한
+12 KOR_TO_ENG 중앙,중심,한가운데 center
+1 student1 student1
+2 student2 student2
+3 student3 student3
+student1
+영상
+bass
+intelligent
+고양이
+food
+내용
+대학
+virus
+한계
+center
+student1 ['영상', 'bass', '고양이', 'intelligent', '내용', 'food', '대학', 'virus', '한계', 'center']
+student2
+비디오
+bass
+고양이
+몰라
+food
+컨텐츠
+тивд
+virus
+한계
+Center
+student2 ['비디오', 'bass', '고양이', '몰라', '컨텐츠', 'food', 'тивд', 'virus', '한계', 'Center']
+student3
+영상
+bas
+고양이
+intell
+
+poof
+대학교
+virus
+한계
+CAU
+student3 [07/Dec/2023 14:46:05] "POST /VOCA/ HTTP/1.1" 200 4567
+[07/Dec/2023 15:14:12] "POST /VOCA/ HTTP/1.1" 200 2864
+[07/Dec/2023 15:38:54] "POST /VOCA/ HTTP/1.1" 200 4722
+[07/Dec/2023 16:03:05] "POST /VOCA/ HTTP/1.1" 200 2423
+Not Found: /
+[07/Dec/2023 16:37:43] "GET / HTTP/1.1" 404 2167
+[07/Dec/2023 18:30:14] code 400, message Bad request version ('À\x14À')
+[07/Dec/2023 18:30:14] You're accessing the development server over HTTPS, but it only supports HTTP.
+[07/Dec/2023 18:30:15] code 400, message Bad request version ('À\x14À')
+[07/Dec/2023 18:30:15] You're accessing the development server over HTTPS, but it only supports HTTP.
+Not Found: /
+[07/Dec/2023 18:30:15] "GET / HTTP/1.1" 404 2167
+[07/Dec/2023 18:30:16] code 400, message Bad HTTP/0.9 request type ('\x16\x03\x01\x00{\x01\x00\x00w\x03\x03)>eÔG_/ò\x95ë¦Sx÷ÚF9Ã\x93Ä¼\x06qÑv?¸\x93)o\x87Ã\x00\x00\x1aÀ/À+À\x11À\x07À\x13À')
+[07/Dec/2023 18:30:16] You're accessing the development server over HTTPS, but it only supports HTTP.
+[07/Dec/2023 21:08:13] code 400, message Bad request syntax ('MGLNDD_3.38.125.252_8000')
+[07/Dec/2023 21:08:13] "MGLNDD_3.38.125.252_8000" 400 -
+Not Found: /aaa9
+[08/Dec/2023 00:18:04] "GET /aaa9 HTTP/1.1" 404 2197
+Not Found: /aab8
+[08/Dec/2023 00:18:05] "GET /aab8 HTTP/1.1" 404 2197
+Not Found: /
+[08/Dec/2023 00:18:05] "GET / HTTP/1.1" 404 2167
+Not Found: /
+[08/Dec/2023 02:16:35] "GET / HTTP/1.1" 404 2167
+Not Found: /
+[08/Dec/2023 03:12:13] "GET / HTTP/1.1" 404 2167
+['영상', 'bas', '고양이', 'intell', '', 'poof', '대학교', 'virus', '한계', 'CAU']
+{'testID': 2, 'classID': 1, 'testContentList': [{'id': 3, 'type': 'ENG_TO_KOR', 'question': 'Hello', 'answer': '안녕하세요'}, {'id': 4, 'type': 'KOR_TO_ENG', 'question': '안녕히 가세요', 'answer': 'Goodbye'}, {'id': 5, 'type': 'ENG_TO_KOR', 'question': 'Please', 'answer': '부탁합니다'}, {'id': 6, 'type': 'KOR_TO_ENG', 'question': '감사합니다', 'answer': 'Thank you'}, {'id': 7, 'type': 'ENG_TO_KOR', 'question': 'Sorry', 'answer': '미안합니다'}, {'id': 8, 'type': 'KOR_TO_ENG', 'question': '실례합니다', 'answer': 'Excuse me'}, {'id': 9, 'type': 'ENG_TO_KOR', 'question': 'Yes', 'answer': '예'}, {'id': 10, 'type': 'KOR_TO_ENG', 'question': '아니오', 'answer': 'No'}, {'id': 11, 'type': 'ENG_TO_KOR', 'question': 'Friend', 'answer': '친구'}, {'id': 12, 'type': 'KOR_TO_ENG', 'question': '가족', 'answer': 'Family'}], 'memberList': [{'id': 1, 'username': 'student1', 'name': 'student1'}, {'id': 2, 'username': 'student2', 'name': 'student2'}, {'id': 3, 'username': 'student3', 'name': 'student3'}], 'file': ['https://voca-capstone-test.s3.ap-northeast-2.amazonaws.com/test_content_2_-120715130650.png', 'https://voca-capstone-test.s3.ap-northeast-2.amazonaws.com/test_content_2_-120715130871.png', 'https://voca-capstone-test.s3.ap-northeast-2.amazonaws.com/test_content_2_-120715131012.png']}
+2 1 ['https://voca-capstone-test.s3.ap-northeast-2.amazonaws.com/test_content_2_-120715130650.png', 'https://voca-capstone-test.s3.ap-northeast-2.amazonaws.com/test_content_2_-120715130871.png', 'https://voca-capstone-test.s3.ap-northeast-2.amazonaws.com/test_content_2_-120715131012.png']
+3 ENG_TO_KOR Hello 안녕하세요
+4 KOR_TO_ENG 안녕히 가세요 Goodbye
+5 ENG_TO_KOR Please 부탁합니다
+6 KOR_TO_ENG 감사합니다 Thank you
+7 ENG_TO_KOR Sorry 미안합니다
+8 KOR_TO_ENG 실례합니다 Excuse me
+9 ENG_TO_KOR Yes 예
+10 KOR_TO_ENG 아니오 No
+11 ENG_TO_KOR Friend 친구
+12 KOR_TO_ENG 가족 Family
+1 student1 student1
+2 student2 student2
+3 student3 student3
+student 1
+안녕하세요
+Goodbye
+Thank you
+부탁합니다
+Excuse me
+미안합니다
+
+No
+family
+친구
+student 1 ['안녕하세요', 'Goodbye', '부탁합니다', 'Thank you', '미안합니다', 'Excuse me', '', 'No', '친구', 'family']
+student2
+Good bye
+안녕하세요
+Thankyou
+부탁합니다
+
+미안합니다.
+No
+
+친구
+family
+student2 ['안녕하세요', 'Good bye', '부탁합니다', 'Thankyou', '미안합니다.', '', '', 'No', '친구', 'family']
+student3
+bye
+영어
+bye
+영어
+영어
+bye
+bye
+영어
+bye
+영어
+student3 ['영어', 'bye', '영어', 'bye', '영어', 'bye', '영어', 'bye', '영어', 'bye']
+{'testID': 3, 'classID': 1, 'testContentList': [{'id': 13, 'type': 'ENG_TO_KOR', 'question': 'turbulent ', 'answer': '소란스러운, 교란된'}, {'id': 14, 'type': 'KOR_TO_ENG', 'question': '소란, 소동, 소요', 'answer': 'tumult '}, {'id': 15, 'type': 'ENG_TO_KOR', 'question': 'turmoil ', 'answer': '소란, 혼란, 소동'}, {'id': 16, 'type': 'KOR_TO_ENG', 'question': '소란, 소동, 법석', 'answer': 'uproar '}, {'id': 17, 'type': 'ENG_TO_KOR', 'question': 'bustle ', 'answer': '야단법석, 소란'}, {'id': 18, 'type': 'KOR_TO_ENG', 'question': '메스꺼운, 역겨운', 'answer': 'disgusting '}, {'id': 19, 'type': 'ENG_TO_KOR', 'question': 'sickening ', 'answer': '구역질나는, 메스꺼운'}, {'id': 20, 'type': 'KOR_TO_ENG', 'question': '불쾌한, 비위 거슬리는', 'answer': 'disagreeable '}, {'id': 21, 'type': 'ENG_TO_KOR', 'question': 'nasty ', 'answer': '구역질나는, 역겨운'}, {'id': 22, 'type': 'KOR_TO_ENG', 'question': '욕지기나는', 'answer': 'nauseating '}], 'memberList': [{'id': 1, 'username': 'student1', 'name': 'student1'}, {'id': 2, 'username': 'student2', 'name': 'student2'}, {'id': 3, 'username': 'student3', 'name': 'student3'}], 'file': ['https://voca-capstone-test.s3.ap-northeast-2.amazonaws.com/test_content_3_-120715373700.png', 'https://voca-capstone-test.s3.ap-northeast-2.amazonaws.com/test_content_3_-120715373771.png', 'https://voca-capstone-test.s3.ap-northeast-2.amazonaws.com/test_content_3_-120715373932.png']}
+3 1 ['https://voca-capstone-test.s3.ap-northeast-2.amazonaws.com/test_content_3_-120715373700.png', 'https://voca-capstone-test.s3.ap-northeast-2.amazonaws.com/test_content_3_-120715373771.png', 'https://voca-capstone-test.s3.ap-northeast-2.amazonaws.com/test_content_3_-120715373932.png']
+13 ENG_TO_KOR turbulent  소란스러운, 교란된
+14 KOR_TO_ENG 소란, 소동, 소요 tumult 
+15 ENG_TO_KOR turmoil  소란, 혼란, 소동
+16 KOR_TO_ENG 소란, 소동, 법석 uproar 
+17 ENG_TO_KOR bustle  야단법석, 소란
+18 KOR_TO_ENG 메스꺼운, 역겨운 disgusting 
+19 ENG_TO_KOR sickening  구역질나는, 메스꺼운
+20 KOR_TO_ENG 불쾌한, 비위 거슬리는 disagreeable 
+21 ENG_TO_KOR nasty  구역질나는, 역겨운
+22 KOR_TO_ENG 욕지기나는 nauseating 
+1 student1 student1
+2 student2 student2
+3 student3 student3
+student1
+
+
+
+
+
+
+
+
+
+
+student1 ['', '', '', '', '', '', '', '', '', '']
+student2
+
+
+
+
+
+
+
+
+
+
+student2 ['', '', '', '', '', '', '', '', '', '']
+student3
+
+
+
+
+
+
+
+
+
+
+student3 ['', '', '', '', '', '', '', '', '', '']
+{'testID': 4, 'classID': 1, 'testContentList': [{'id': 23, 'type': 'ENG_TO_KOR', 'question': 'School', 'answer': '학교'}, {'id': 24, 'type': 'KOR_TO_ENG', 'question': '선생님', 'answer': 'Teacher'}, {'id': 25, 'type': 'ENG_TO_KOR', 'question': 'Student', 'answer': '학생'}, {'id': 26, 'type': 'KOR_TO_ENG', 'question': '책', 'answer': 'Book'}, {'id': 27, 'type': 'ENG_TO_KOR', 'question': 'Pen', 'answer': '펜'}, {'id': 28, 'type': 'KOR_TO_ENG', 'question': '연필', 'answer': 'Pencil'}, {'id': 29, 'type': 'ENG_TO_KOR', 'question': 'Desk', 'answer': '책상'}, {'id': 30, 'type': 'KOR_TO_ENG', 'question': '의자', 'answer': 'Chair'}, {'id': 31, 'type': 'ENG_TO_KOR', 'question': 'Bag', 'answer': '가방'}, {'id': 32, 'type': 'KOR_TO_ENG', 'question': '점심', 'answer': 'Lunch'}], 'memberList': [{'id': 1, 'username': 'student1', 'name': 'student1'}, {'id': 2, 'username': 'student2', 'name': 'student2'}, {'id': 3, 'username': 'student3', 'name': 'student3'}], 'file': ['https://voca-capstone-test.s3.ap-northeast-2.amazonaws.com/test_content_4_-120716020190.png', 'https://voca-capstone-test.s3.ap-northeast-2.amazonaws.com/test_content_4_-120716020291.png', 'https://voca-capstone-test.s3.ap-northeast-2.amazonaws.com/test_content_4_-120716020402.png']}
+4 1 ['https://voca-capstone-test.s3.ap-northeast-2.amazonaws.com/test_content_4_-120716020190.png', 'https://voca-capstone-test.s3.ap-northeast-2.amazonaws.com/test_content_4_-120716020291.png', 'https://voca-capstone-test.s3.ap-northeast-2.amazonaws.com/test_content_4_-120716020402.png']
+23 ENG_TO_KOR School 학교
+24 KOR_TO_ENG 선생님 Teacher
+25 ENG_TO_KOR Student 학생
+26 KOR_TO_ENG 책 Book
+27 ENG_TO_KOR Pen 펜
+28 KOR_TO_ENG 연필 Pencil
+29 ENG_TO_KOR Desk 책상
+30 KOR_TO_ENG 의자 Chair
+31 ENG_TO_KOR Bag 가방
+32 KOR_TO_ENG 점심 Lunch
+1 student1 student1
+2 student2 student2
+3 student3 student3
+student 1
+
+
+
+
+
+
+
+
+
+
+student 1 ['', '', '', '', '', '', '', '', '', '']
+student2
+
+
+
+
+
+
+
+
+
+
+student2 ['', '', '', '', '', '', '', '', '', '']
+student3
+
+
+
+
+
+
+
+
+
+
+student3 ['', '', '', '', '', '', '', '', '', '']
+[08/Dec/2023 04:11:01] "POST /VOCA/ HTTP/1.1" 200 3975
+[08/Dec/2023 08:05:46] code 400, message Bad request version ('À\x13À')
+[08/Dec/2023 08:05:46] You're accessing the development server over HTTPS, but it only supports HTTP.
+[08/Dec/2023 08:05:47] code 400, message Bad HTTP/0.9 request type ('\x16\x03\x01\x00Ê\x01\x00\x00Æ\x03\x03é\x86')
+[08/Dec/2023 08:05:47] You're accessing the development server over HTTPS, but it only supports HTTP.
+Not Found: /
+[08/Dec/2023 08:49:53] "GET / HTTP/1.1" 404 2167
+[08/Dec/2023 09:06:31] code 400, message Bad request version ('À\x14À')
+[08/Dec/2023 09:06:31] You're accessing the development server over HTTPS, but it only supports HTTP.
+Not Found: /
+[08/Dec/2023 11:58:57] "GET / HTTP/1.1" 404 2167
+Not Found: /favicon.ico
+[08/Dec/2023 11:59:11] "GET /favicon.ico HTTP/1.1" 404 2218
+Not Found: /http:/api.ipify.org/
+[08/Dec/2023 11:59:20] "GET http://api.ipify.org/?format=json HTTP/1.1" 404 1818
+Not Found: /www.shadowserver.org:443
+[08/Dec/2023 11:59:23] "CONNECT www.shadowserver.org:443 HTTP/1.1" 404 1827
+Not Found: /
+[08/Dec/2023 17:48:13] "GET / HTTP/1.1" 404 2167
+Not Found: /
+[08/Dec/2023 20:08:16] "GET / HTTP/1.1" 404 2167
+[08/Dec/2023 22:50:21,774] - Broken pipe from ('167.94.145.59', 58396)
+Not Found: /
+[08/Dec/2023 22:50:25] "GET / HTTP/1.1" 404 2167
+[08/Dec/2023 22:50:25,298] - Broken pipe from ('167.94.145.59', 49502)
+Not Found: /
+[08/Dec/2023 22:50:28] "GET / HTTP/1.1" 404 2167
+[08/Dec/2023 22:50:29] code 505, message Invalid HTTP version (2.0)
+[08/Dec/2023 22:50:29] "PRI * HTTP/2.0" 505 -
+Not Found: /
+[08/Dec/2023 23:26:46] "GET / HTTP/1.1" 404 2167
+Not Found: /
+[09/Dec/2023 00:50:56] "GET / HTTP/1.1" 404 2167
+[09/Dec/2023 03:54:53] code 400, message Bad request version ('À\x14À')
+[09/Dec/2023 03:54:53] You're accessing the development server over HTTPS, but it only supports HTTP.
+[09/Dec/2023 03:54:53] code 400, message Bad request syntax ('\x16\x03\x01\x00{\x01\x00\x00w\x03\x03ëèGº°^øé`ö\x8c¼g9Me,½»{\x0c')
+[09/Dec/2023 03:54:53] You're accessing the development server over HTTPS, but it only supports HTTP.
+Not Found: /
+[09/Dec/2023 03:54:54] "GET / HTTP/1.1" 404 2167
+[09/Dec/2023 03:54:55] code 400, message Bad HTTP/0.9 request type ('\x16\x03\x01\x00{\x01\x00\x00w\x03\x03')
+[09/Dec/2023 03:54:55] You're accessing the development server over HTTPS, but it only supports HTTP.
+[09/Dec/2023 05:25:27] code 400, message Bad request version ('À\x13À')
+[09/Dec/2023 05:25:27] You're accessing the development server over HTTPS, but it only supports HTTP.
+[09/Dec/2023 05:25:27] code 400, message Bad request version ('À(À$À\x14À')
+[09/Dec/2023 05:25:27] You're accessing the development server over HTTPS, but it only supports HTTP.
+Not Found: /
+[09/Dec/2023 05:41:36] "GET / HTTP/1.1" 404 2167
+Not Found: /
+[09/Dec/2023 08:37:27] "GET / HTTP/1.1" 404 2167
+[09/Dec/2023 10:16:13,935] - Broken pipe from ('167.94.138.124', 58686)
+Not Found: /
+[09/Dec/2023 10:16:17] "GET / HTTP/1.1" 404 2167
+[09/Dec/2023 10:16:17,463] - Broken pipe from ('167.94.138.124', 33412)
+Not Found: /
+[09/Dec/2023 10:16:21] "GET / HTTP/1.1" 404 2167
+[09/Dec/2023 10:16:22] code 505, message Invalid HTTP version (2.0)
+[09/Dec/2023 10:16:22] "PRI * HTTP/2.0" 505 -
+Not Found: /
+[09/Dec/2023 11:30:44] "GET / HTTP/1.1" 404 2167
+Not Found: /
+[09/Dec/2023 11:42:08] "GET / HTTP/1.1" 404 2167
+Not Found: /favicon.ico
+[09/Dec/2023 11:42:23] "GET /favicon.ico HTTP/1.1" 404 2218
+Not Found: /http:/api.ipify.org/
+[09/Dec/2023 11:42:27] "GET http://api.ipify.org/?format=json HTTP/1.1" 404 1818
+Not Found: /www.shadowserver.org:443
+[09/Dec/2023 11:42:30] "CONNECT www.shadowserver.org:443 HTTP/1.1" 404 1827
+[09/Dec/2023 13:24:27] code 400, message Bad request syntax ('MGLNDD_3.38.125.252_8000')
+[09/Dec/2023 13:24:27] "MGLNDD_3.38.125.252_8000" 400 -
+Not Found: /
+[09/Dec/2023 16:40:51] "GET / HTTP/1.1" 404 2167
+[09/Dec/2023 17:32:17] code 400, message Bad request syntax ('JDWP-Handshake')
+[09/Dec/2023 17:32:17] "JDWP-Handshake" 400 -
+Not Found: /
+[09/Dec/2023 18:30:30] "GET / HTTP/1.1" 404 2167
+[09/Dec/2023 19:23:36] code 400, message Bad request version ('À\x14À')
+[09/Dec/2023 19:23:36] You're accessing the development server over HTTPS, but it only supports HTTP.
+[09/Dec/2023 20:28:03] code 400, message Bad request version ('À\x14À')
+[09/Dec/2023 20:28:03] You're accessing the development server over HTTPS, but it only supports HTTP.
+[09/Dec/2023 20:28:03] code 400, message Bad HTTP/0.9 request type ('\x16\x03\x01\x00{\x01\x00\x00w\x03\x03Ã!8£¤ÏM\x8a¶\\ÃÖ¼°\x8a¢\x01\x94\x1aèÔu¾¦%¥N\x7fÏ;?3\x00\x00\x1aÀ/À+À\x11À\x07À\x13À')
+[09/Dec/2023 20:28:03] You're accessing the development server over HTTPS, but it only supports HTTP.
+Not Found: /
+[09/Dec/2023 20:28:03] "GET / HTTP/1.1" 404 2167
+[09/Dec/2023 20:28:03] code 400, message Bad request version ('À\x14À')
+[09/Dec/2023 20:28:03] You're accessing the development server over HTTPS, but it only supports HTTP.
+[10/Dec/2023 00:41:20,545] - Broken pipe from ('162.142.125.12', 39662)
+Not Found: /
+[10/Dec/2023 00:41:24] "GET / HTTP/1.1" 404 2167
+[10/Dec/2023 00:41:24,811] - Broken pipe from ('162.142.125.12', 53486)
+Not Found: /
+[10/Dec/2023 00:41:28] "GET / HTTP/1.1" 404 2167
+[10/Dec/2023 00:41:28] code 505, message Invalid HTTP version (2.0)
+[10/Dec/2023 00:41:28] "PRI * HTTP/2.0" 505 -
+Not Found: /
+[10/Dec/2023 04:15:21] "GET / HTTP/1.1" 404 2162
+Not Found: /favicon.ico
+[10/Dec/2023 04:15:22] "GET /favicon.ico HTTP/1.1" 404 2218
+[10/Dec/2023 06:42:13] code 400, message Bad request version ('À\x13À')
+[10/Dec/2023 06:42:13] You're accessing the development server over HTTPS, but it only supports HTTP.
+[10/Dec/2023 06:42:14] code 400, message Bad HTTP/0.9 request type ('\x16\x03\x01\x00Ê\x01\x00\x00Æ\x03\x03Iñ\x98\x83Ðî')
+[10/Dec/2023 06:42:14] You're accessing the development server over HTTPS, but it only supports HTTP.
+[10/Dec/2023 08:51:57] code 400, message Bad request syntax ('\x16\x03\x01\x01\x17\x01\x00\x01\x13\x03\x03\x95\x8e\x96Ó½7bO\xad')
+[10/Dec/2023 08:51:57] You're accessing the development server over HTTPS, but it only supports HTTP.
+Not Found: /
+[10/Dec/2023 08:52:07] "GET / HTTP/1.1" 404 2167
+Not Found: /favicon.ico
+[10/Dec/2023 08:52:26] "GET /favicon.ico HTTP/1.1" 404 2218
+Not Found: /robots.txt
+[10/Dec/2023 08:52:27] "GET /robots.txt HTTP/1.1" 404 2215
+Not Found: /sitemap.xml
+[10/Dec/2023 08:52:28] "GET /sitemap.xml HTTP/1.1" 404 2218
+Not Found: /
+[10/Dec/2023 09:04:29] "GET / HTTP/1.1" 404 2167
+Not Found: /favicon.ico
+[10/Dec/2023 09:04:39] "GET /favicon.ico HTTP/1.1" 404 2218
+Not Found: /http:/api.ipify.org/
+[10/Dec/2023 09:04:43] "GET http://api.ipify.org/?format=json HTTP/1.1" 404 1818
+Not Found: /www.shadowserver.org:443
+[10/Dec/2023 09:04:46] "CONNECT www.shadowserver.org:443 HTTP/1.1" 404 1827
+Not Found: /
+[10/Dec/2023 10:44:00] "GET / HTTP/1.1" 404 2167
+Not Found: /
+[10/Dec/2023 11:04:24] "GET / HTTP/1.1" 404 2167
+[10/Dec/2023 13:05:50] code 400, message Bad HTTP/0.9 request type ('\x16\x03\x01\x00{\x01\x00\x00w\x03\x03ÔOÿU¨¬¨NX«[\x87£\x98#ý}÷uP©Ú°\x83Ò²h;|ÇÚV\x00\x00\x1aÀ/À+À\x11À\x07À\x13À')
+[10/Dec/2023 13:05:50] You're accessing the development server over HTTPS, but it only supports HTTP.
+[10/Dec/2023 13:05:51] code 400, message Bad request version ('À\x14À')
+[10/Dec/2023 13:05:51] You're accessing the development server over HTTPS, but it only supports HTTP.
+Not Found: /
+[10/Dec/2023 13:05:51] "GET / HTTP/1.1" 404 2167
+[10/Dec/2023 13:05:52] code 400, message Bad request version ('À\x14À')
+[10/Dec/2023 13:05:52] You're accessing the development server over HTTPS, but it only supports HTTP.
+[10/Dec/2023 13:36:52] code 400, message Bad request version ('À\x14À')
+[10/Dec/2023 13:36:52] You're accessing the development server over HTTPS, but it only supports HTTP.
+[10/Dec/2023 13:36:52] code 400, message Bad request version ('À\x14À')
+[10/Dec/2023 13:36:52] You're accessing the development server over HTTPS, but it only supports HTTP.
+Not Found: /
+[10/Dec/2023 13:36:53] "GET / HTTP/1.1" 404 2167
+[10/Dec/2023 13:36:53] code 400, message Bad request version ('À\x14À')
+[10/Dec/2023 13:36:53] You're accessing the development server over HTTPS, but it only supports HTTP.
+[10/Dec/2023 21:04:57] code 400, message Bad request syntax ('MGLNDD_3.38.125.252_8000')
+[10/Dec/2023 21:04:57] "MGLNDD_3.38.125.252_8000" 400 -
+[10/Dec/2023 22:24:09] code 400, message Bad request version ('À\x14À')
+[10/Dec/2023 22:24:09] You're accessing the development server over HTTPS, but it only supports HTTP.
+[10/Dec/2023 22:24:09] code 400, message Bad request version ('À\x14À')
+[10/Dec/2023 22:24:09] You're accessing the development server over HTTPS, but it only supports HTTP.
+Not Found: /
+[10/Dec/2023 22:24:10] "GET / HTTP/1.1" 404 2167
+[10/Dec/2023 22:24:10] code 400, message Bad HTTP/0.9 request type ('\x16\x03\x01\x00{\x01\x00\x00w\x03\x03tÁð[cØ×X3ÔÛðÃÌLÒJD?Ø\x82Ïp\x80\x0e\x98\x84ÔaWp1\x00\x00\x1aÀ/À+À\x11À\x07À\x13À')
+[10/Dec/2023 22:24:10] You're accessing the development server over HTTPS, but it only supports HTTP.
+Not Found: /
+[10/Dec/2023 22:29:47] "GET / HTTP/1.1" 404 2167
+Not Found: /
+[11/Dec/2023 01:20:09] "GET / HTTP/1.1" 404 2167
+[11/Dec/2023 04:36:38] code 400, message Bad request version ('s\x0fÏN·ÇÛ\x0f\x99æ[')
+[11/Dec/2023 04:36:38] You're accessing the development server over HTTPS, but it only supports HTTP.
+[11/Dec/2023 04:36:38] code 400, message Bad request version ('À(À$À\x14À')
+[11/Dec/2023 04:36:38] You're accessing the development server over HTTPS, but it only supports HTTP.
+Not Found: /aaa9
+[11/Dec/2023 07:04:49] "GET /aaa9 HTTP/1.1" 404 2197
+Not Found: /aab8
+[11/Dec/2023 07:04:49] "GET /aab8 HTTP/1.1" 404 2197
+Not Found: /
+[11/Dec/2023 07:04:49] "GET / HTTP/1.1" 404 2167
+[11/Dec/2023 07:49:27] code 400, message Bad request version ('ÆR»dRëí%Í|.ÓÁ')
+[11/Dec/2023 07:49:27] You're accessing the development server over HTTPS, but it only supports HTTP.
+[11/Dec/2023 07:49:27] code 400, message Bad request syntax ('\x16\x03\x01\x00Ê\x01\x00\x00Æ\x03\x03¡=i\xad\x8bï¤X\x93O\x08j¾\x007úgÅü2')
+[11/Dec/2023 07:49:27] You're accessing the development server over HTTPS, but it only supports HTTP.
+[11/Dec/2023 09:26:07] code 400, message Bad request version ('À\x14À')
+[11/Dec/2023 09:26:07] You're accessing the development server over HTTPS, but it only supports HTTP.
+Not Found: /
+[11/Dec/2023 10:40:28] "GET / HTTP/1.1" 404 2167
+Not Found: /
+[11/Dec/2023 11:55:04] "GET / HTTP/1.1" 404 2167
+Not Found: /favicon.ico
+[11/Dec/2023 11:55:34] "GET /favicon.ico HTTP/1.1" 404 2218
+Not Found: /http:/api.ipify.org/
+[11/Dec/2023 11:55:57] "GET http://api.ipify.org/?format=json HTTP/1.1" 404 1818
+Not Found: /www.shadowserver.org:443
+[11/Dec/2023 11:56:19] "CONNECT www.shadowserver.org:443 HTTP/1.1" 404 1827
+[11/Dec/2023 12:14:52,402] - Broken pipe from ('104.152.52.196', 56860)

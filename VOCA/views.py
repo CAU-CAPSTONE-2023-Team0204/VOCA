@@ -3,7 +3,6 @@ import io
 import numpy as np
 import platform
 from PIL import ImageFont, ImageDraw, Image
-from utils import plt_imshow
 from google.protobuf.json_format import ParseDict
 import cv2
 from google.cloud import vision
@@ -24,7 +23,7 @@ import numpy as np
 def receive_data(request):
     if request.method == 'POST':
         received_json = json.loads(request.body)
-
+        print(received_json)
         # 여기서부터는 파싱된 JSON 데이터를 활용하여 원하는 작업 수행
         testId = received_json['testID']
         classId = received_json['classID']
@@ -33,26 +32,43 @@ def receive_data(request):
         memberList = received_json['memberList']
         typeList = []
 
-        #print(testId, classId, fileList)
+        print(testId, classId, fileList)
         for content in testContentList:
             typeList.append(content['type'])
-            #print(content['id'], content['type'], content['question'], content['answer'])
-        #for member in memberList:
-            #print(member['id'], member['username'], member['name'])
-            
+            print(content['id'], content['type'], content['question'], content['answer'])
+        for member in memberList:
+            print(member['id'], member['username'], member['name'])
+
         return_data = create_json_file(testId, classId, fileList, testContentList, memberList, typeList)
         # JSON 파일 처리
         # 예시로 받은 JSON 파일을 수정하여 응답으로 전송
-        
+
         #modified_data = {'message': 'Received and modified JSON data'}
         return JsonResponse(return_data)
     elif request.method == 'GET':
-        # GET 요청에 대한 응답
-        return JsonResponse({'message': 'GET method received'})
+        testId = request.GET.get('testID')
+        classId = request.GET.get('classID')
+        fileList = request.GET.getlist('file')
+        testContentList = request.GET.getlist('testContentList')
+        memberList = request.GET.getlist('memberList')
+        typeList = []
+
+        print(testId, classId, fileList)
+        for content in testContentList:
+            typeList.append(content['type'])
+            print(content['id'], content['type'], content['question'], content['answer'])
+        for member in memberList:
+            print(member['id'], member['username'], member['name'])
+        # 받아온 데이터를 처리하고 원하는 작업을 수행합니다.
+        # ...
+
+        # 처리된 데이터를 JSON 형태로 응답합니다.
+        return_data = create_json_file(testId, classId, fileList, testContentList, memberList, typeList)
+        return JsonResponse(return_data)
 
     else:
-        return JsonResponse({'message': 'POST method required'})
-    
+        return JsonResponse({'message': '??? method required'})
+
 def parse_json_from_file(file_path):
     with open(file_path, 'r',encoding='utf-8') as file:
         received_json = json.load(file)
@@ -401,7 +417,7 @@ def putText(image, text, x, y, color=(0, 255, 0), font_size=22):
 
 def google_ocr(url):
     user_ans = []
-    os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'C:/Users/SH/Desktop/VOCA_django/google/service-acount-file.json'
+    os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = '/home/ubuntu/voca-django/VOCA/service-acount-file.json'
     
     client_options = {'api_endpoint': 'eu-vision.googleapis.com'}
     client = vision.ImageAnnotatorClient(client_options=client_options)
@@ -459,8 +475,7 @@ def google_ocr(url):
             continue
 
         cropped_image = image[y + border: y + h - border , x + border: x + w - border]
-        if(idx != 0):
-            xtemp.append(x)
+            
         plt_imshow("cropped_image",cropped_image)
         image_bytes = cv2.imencode('.jpg', cropped_image)[1].tobytes()
         g_image = vision.Image(content=image_bytes)
@@ -477,8 +492,9 @@ def google_ocr(url):
             ocr_text = texts[0].description
         else:
             ocr_text = ""
-        temp.append(ocr_text)
-        xtemp.append(x)
+        if(idx != 0):
+            xtemp.append(x)
+            temp.append(ocr_text)
         print(ocr_text)
         #for ans in ocr_text:
         #print(ocr_text)
@@ -502,7 +518,7 @@ def google_ocr(url):
             #image = vision.Image(content=org_image)
     print(user_id,user_ans)
     return user_id, user_ans
-    
+
 
     #plt_imshow("orignal image", org_image)
 
@@ -548,4 +564,4 @@ def google_ocr(url):
         
     # plt_imshow(["Original", "ROI"], [img, roi_img], figsize=(16, 10))
 
-print(parse_json_from_file("C:/Users/SH/Desktop/VOCA_django/django_test/request_test/test.json"))
+
