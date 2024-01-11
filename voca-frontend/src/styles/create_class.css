@@ -1,0 +1,71 @@
+#create_class_page_container{
+    justify-content: space-around;
+    height:100vh;
+}
+
+#create_class_page_container #classes_wrapper{
+    display:flex;
+    flex-direction: column;
+    margin:auto;
+    height:100vh;
+    
+}
+
+#create_class_page_container #contents_container{
+    margin:auto;
+    width: 800px;
+    height: 500px;
+    border-radius: 15px;
+    padding: 50px;
+    font-size: 30px;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-family:'Jalnan';
+    color: #3ab54a;
+}
+
+#create_class_page_container #form_container{
+    display:flex;
+    font-size:18px;
+    margin: 20px 0;
+    text-align: center;
+    height: 350px;
+    width: 750px;
+    justify-content: space-around;
+    border: 3px solid #3ab54a;
+    border-radius: 35px;
+    padding: 25px;
+}
+
+#create_class_page_container #form_container form{
+    display:flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+#create_class_page_container .input_container{
+    margin: 10px 0;
+}
+
+#create_class_page_container #form_container input, textarea{
+    background-color: #eef6e3;
+    border: 0px;
+    border-radius: 15px;
+    padding-left: 25px;
+    font-size: 24px;
+    color:#6fa125;
+    width: 400px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#create_class_page_container #form_container #submit_button{
+    width: 150px;
+    height: 70px;
+    font-size: 26px;
+    border:solid 2px #6fa125;
+    border-radius: 35px;
+    background-color: white;
+    color:#6fa125;
+    font-family: "Jalnan";
+}

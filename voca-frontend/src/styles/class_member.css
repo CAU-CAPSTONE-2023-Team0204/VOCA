@@ -1,0 +1,144 @@
+#member_edit_page_container{
+    height: 100vh;
+}
+
+#member_edit_page_container #main_wrapper{
+    display:flex;
+}
+
+#member_edit_page_container #contents_wrapper{
+    background-color: #eef6e3;
+    border-radius: 15px;
+    width: 1300px;
+    padding: 32px;
+}
+
+#member_edit_page_container #page_title{
+    font-size:40px;
+    font-family: "Jalnan";
+    color:#3ab54a;
+    padding: 4px;
+}
+
+
+#member_edit_page_container #divider{
+    border-top: 2px solid #6fa125;
+    margin: 12px 24px;
+}
+
+#member_edit_page_container #class_code_container{
+    display:flex;
+    margin-top: 12px;
+    margin-bottom: 12px;
+    justify-content: center;
+    font-size: 34px;
+    font-family: "Jalnan";
+    color:#6fa125;
+}
+
+#member_edit_page_container #class_code_container #class_code{
+    border: 1px solid grey;
+    width: 420px;
+    text-align: center;
+    background-color: white;
+    color:#444444;
+    margin: 0 12px;
+    font-family: "Ones";
+    border-radius: 5px;
+}
+
+#member_edit_page_container #class_code_container #copy_button{
+    border-radius: 0px;
+    border:none;
+    font-family: "Ones";
+    background-color: #6fa125;
+    color:white;
+    width: 52px;
+    font-size: 18px;
+    border-radius: 5px;
+}
+
+#member_edit_page_container .member{
+    display:flex;
+    background-color:white;
+    height: 48px;
+    font-size: 18px;
+    padding: 0 0 0 60px;
+    margin: 8px 0;
+    border-radius: 24px;
+    justify-content: space-between;
+    font-family:"Ones"; 
+    color: #444444;
+}
+
+#member_edit_page_container .member .name, .id{
+    margin: auto;
+    width: 140px;
+    text-align:center;
+}
+
+#member_edit_page_container #member_container{
+    margin-top: 20px;
+}
+
+
+#member_edit_page_container .member .delete_button{
+    height: 40px;
+    width: 40px;
+    margin: auto 14px auto auto;
+    font-size: 24px;
+    background-color: white;
+    border:none;
+}
+
+ #confirm_modal{
+    width: 100%;
+    position: absolute;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    left: 0;
+    top: 0;
+}
+
+#confirm_modal #modal_window{
+    background-color: white;
+    border: 2px solid #6fa125;
+    border-radius: 10px;
+    margin-top: 12%;
+    height: 200px;
+    width: 300px;
+    display:none;
+    flex-direction: column;
+    justify-content: space-between;
+    font-family: "Ones";
+}
+
+#confirm_modal #modal_window #close_button_container{
+    display:flex;
+    justify-content: flex-end;
+    padding: 0 2px;
+}
+
+#confirm_modal #modal_window #close_button_container #close_button{
+    border-top-right-radius: 6px;
+    height: 25px;
+    width: 25px;
+    border:none;
+    background-color: white;
+    font-size: 18px;
+ }
+
+
+#confirm_modal #modal_window #message_area{
+    text-align: center;
+}
+#confirm_modal #modal_window #confirm_button_container{
+    display:flex;
+    justify-content: center;
+}
+#confirm_modal #modal_window #confirm_button_container #confirm_button{
+    font-family: "Ones";
+    width: 60px;
+    heighT: 30px;
+}

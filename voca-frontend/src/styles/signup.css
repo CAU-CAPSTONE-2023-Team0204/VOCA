@@ -1,0 +1,144 @@
+#signup_page_container{
+    margin: 0 auto;
+    display:flex;
+    justify-content: center;
+}
+#signup_page_container #inner_wrapper{
+    width: 800px;
+    height: auto;
+    padding: 72px 10px;
+    align-items: center;
+}
+#signup_page_container .title{
+    display:flex;
+    margin: 12px auto 50px auto;
+    width: auto;
+    font-size:52px;
+    color:#3ab54a;
+    font-family:"Jalnan";
+}
+#signup_page_container .description{
+    margin: 0 auto;
+    color: #666666;
+    font-size:28px;
+    margin: 10px 0;
+}
+
+#signup_page_container .input_container{
+    margin: 30px 0;
+    height: 60px;
+    display:flex;
+}
+
+#signup_page_container .input_container  .input_label{
+    border-top: solid 5px;
+    border-color:#3ab54a;
+    border-radius: 1px;
+    padding: 10px 0;
+    flex-basis: 25%;
+    color:#3ab54a;
+    font-weight: 800;
+    font-size: 24px;
+    margin: 0 25px 0 0;
+}
+
+#signup_page_container .input_container input::placeholder{
+    color:#c4dd9f;
+    opacity:1;
+}
+
+#signup_page_container .input_container .text_input{
+    flex-basis: 75%;
+    background-color: #eef6e3;
+    border: 0px;
+    border-radius: 15px;
+    padding-left: 25px;
+    font-size: 24px;
+    color:#6fa125;
+}
+
+#signup_page_container #submit_container{
+    width: auto;
+    border-top-color: #333333 !important;
+    margin: 100px 15px;
+    border-top: solid 1px;
+    border-radius: 1px;
+    padding: 50px;
+    display:flex;
+    justify-content: space-around;
+}
+
+#signup_page_container #submit_container #submit_button{
+    background-color: white;
+    border: none;
+    font-size: 32px;
+    color: #3ab54a;
+}
+
+#signup_page_container #id_error_msg, #password_error_msg, #password_confirm_error_msg, #email_error_msg{
+    width: auto;
+    height: 40px;
+    font-size: 16px;
+    color: red;
+    padding: 0 0 0 215px;
+}
+
+#signup_page_container #radio_container{
+    display:flex;
+    justify-content: center;
+}
+
+#signup_page_container #radio_container{
+    margin:auto;
+    background-color: #eef6e3;
+    border-radius:50px;
+    width: 300px;
+    height: 150px;
+}
+
+#signup_page_container .role_radio{
+    appearance: none;
+    position: absolute;
+    left: -9999px;
+}
+
+#signup_page_container .role_label{
+    display:flex;
+}
+
+#signup_page_container .role_input_container{
+    height: 200px;
+    display:flex;
+    flex-direction: column;
+}
+
+#signup_page_container .role_span_wrapper{
+    margin: auto;
+    width: 120px;
+    height: 120px;
+    border: 2px solid #3ab54a;
+    background-color: white;
+    display:flex;
+    flex-direction: column;
+    border-radius : 50%;
+    text-align: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: 600;
+    color: #3ab54a;
+    margin: auto 10px;
+}
+
+#signup_page_container .role_span{
+    margin:auto;
+}
+
+#signup_page_container .role_radio:checked + .role_span_wrapper{
+    background-color: #3ab54a !important;
+    color:white !important;
+}
+
+#signup_page_container #overall_err_msg{
+    color:red;
+    text-align: center;
+}

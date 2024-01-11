@@ -1,4 +1,4 @@
-#wrapper{
+#main_page_container{
     padding: 20px 80px;
 }
 
@@ -10,50 +10,50 @@
     padding: 0 50px;
 }
 
-#navbar_content_wrapper{
+#main_page_container #navbar_content_wrapper{
     display:flex;
     justify-content:space-between;
 }
 
-#navbar_content_wrapper #navbar_content_left{
+#main_page_container #navbar_content_wrapper #navbar_content_left{
     display:flex;
 }
 
-#navbar_content_wrapper #navbar_content_right{
+#main_page_container #navbar_content_wrapper #navbar_content_right{
     margin:auto 0;
     display:flex;   
     vertical-align:middle;
 }
-#navbar_content_left #main_logo_text{
+#main_page_container #navbar_content_left #main_logo_text{
     font-size: 50px;
     color:#3ab54a;
     font-family: "Jalnan";
 }
-#navbar_content_wrapper .navbar_a_text{
+#main_page_container #navbar_content_wrapper .navbar_a_text{
     color: #666666;
     font-size: 28px;
     text-decoration: none;
     font-weight:900;
 }
-#navbar .vertical_line{
+#main_page_container #navbar .vertical_line{
     border-left: 2px solid #666666;
     margin: auto 60px;
     height: 30px;
     border-radius: 10%;
 }
 
-#slide_wrapper{
+#main_page_container #slide_wrapper{
     padding: 40px;
 }
 
-#slide_wrapper .slide{
+#main_page_container #slide_wrapper .slide{
     display:flex;
     justify-content: center;
     width: 1300px;
     border-radius: 50px;
 }
 
-#slide_wrapper .slide_img{
+#main_page_container #slide_wrapper .slide_img{
     margin: 0 auto;
     width: 1300px;
     border-radius: 50px;

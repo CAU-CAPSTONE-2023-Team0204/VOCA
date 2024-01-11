@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./styles/main_page.css";
+import "../styles/main_page.css";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectCoverflow, Navigation, Pagination } from "swiper/modules";
 
@@ -11,18 +11,18 @@ import "swiper/css/effect-coverflow";
 
 const MainPage = () => {
   return (
-    <div id="wrapper">
+    <div id="main_page_container">
       <div id="navbar">
         <div id="navbar_content_wrapper">
           <div id="navbar_content_left">
-            <div id="main_logo_text">채점해드림</div>
+            <div id="main_logo_text">채점해VOCA</div>
           </div>
           <div id="navbar_content_right">
-            <a href="" className="navbar_a_text">
+            <a href="/signup" className="navbar_a_text">
               회원가입
             </a>
             <div className="vertical_line"></div>
-            <a href="" className="navbar_a_text">
+            <a href="/login" className="navbar_a_text">
               로그인
             </a>
           </div>

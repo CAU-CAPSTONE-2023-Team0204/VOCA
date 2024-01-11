@@ -1,0 +1,128 @@
+#vocablist_page_container{
+    height: 100vh;
+}
+
+#vocablist_page_container #main_wrapper{
+    display:flex;
+}
+
+#vocablist_page_container #contents_wrapper{
+    background-color: #eef6e3;
+    width: 1200px;
+    border-radius: 15px;
+}
+
+#vocablist_page_container #vocablist_info_container{
+    margin:  35px 60px;
+    width: 90%;
+    height: 120px;
+    background-color: #3ab54a;
+    border-radius: 25px;
+    padding: 20px;
+    color:white;
+    display:flex;
+    justify-content: space-between;
+    font-size: 18px;
+}
+#vocablist_page_container #vocablist_name{
+    font-size:32px !important;
+    margin: 0;
+    font-weight: 800;
+}
+
+#vocablist_page_container #vocablist_info_container #button_container{
+    display:flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+#vocablist_page_container #vocablist_info_container #button_container button{
+    border:none;
+    width: 70px;
+    height:40px;
+    background-color: white;
+    border-radius: 20px;
+    color:#3ab54a;
+    font-weight: 800;
+    font-family: "Jalnan";
+}
+
+#vocablist_page_container #vocablist_container{
+    display:flex;
+    justify-content: space-around;
+}
+
+#vocablist_page_container .vocablist_item{
+    width: 500px;
+    text-align: center;
+}
+
+#vocablist_page_container .voca_item{
+    background-color:white;
+    height: 40px;
+    border-radius: 15px;
+    font-size: 24px;
+    padding-top: 15px;
+    font-family:"Ones"
+}
+
+#auto_test_modal{
+    width: 100%;
+    position: absolute;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    left: 0;
+    top: 0;
+}
+
+#auto_test_modal #modal_window{
+    background-color: white;
+    border: 2px solid #6fa125;
+    border-radius: 10px;
+    margin-top: 12%;
+    height: 400px;
+    width: 600px;
+    display:none;
+    flex-direction: column;
+    font-family: "Ones";
+}
+
+#auto_test_modal #modal_window #close_button_container{
+    display:flex;
+    justify-content: flex-end;
+    padding: 0 2px;
+}
+
+#auto_test_modal #modal_window #close_button_container #close_button{
+    border-top-right-radius: 6px;
+    height: 25px;
+    width: 25px;
+    border:none;
+    background-color: white;
+    font-size: 18px;
+}
+ 
+#auto_test_modal #form_container{
+    height: 80%;
+}
+#auto_test_modal #test_info_form{
+    display:flex; 
+    margin-top: 20px;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px;
+    height: 100%;
+}
+#auto_test_modal #submit_button_container{
+    display:flex;
+    justify-content: center;
+}
+
+#auto_test_modal #error_message{
+    color:red;
+    text-align: center;
+}
+
+#auto_test_modal .config_input{
+    font-family: "Ones"
+}
